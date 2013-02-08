@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogCreatCoordSystemRadial</class>
+ <widget class="QDialog" name="DialogCreatCoordSystemRadial">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>916</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="dsbAngleStart">
+         <property name="singleStep">
+          <double>0.050000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="lblStart">
+         <property name="text">
+          <string>Start distance</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblCenter">
+         <property name="text">
+          <string>Center</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QDoubleSpinBox" name="dsbCenterY">
+         <property name="maximum">
+          <double>1024.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QDoubleSpinBox" name="dsbAngleEnd">
+         <property name="minimum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.050000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="dsbCenterX">
+         <property name="maximum">
+          <double>1024.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QDoubleSpinBox" name="dsbDistanceStart">
+         <property name="maximum">
+          <double>1024.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="lblDistanceEnd">
+         <property name="text">
+          <string>End distance</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblAngleStart">
+         <property name="text">
+          <string>Start angle</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="lblAngleEnd">
+         <property name="text">
+          <string>End angle</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QDoubleSpinBox" name="dsbDistanceEnd">
+         <property name="minimum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>1024.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="lblRows">
+         <property name="text">
+          <string>Result rows</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QSpinBox" name="sbResultRows">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>1024</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="lblResultCols">
+         <property name="text">
+          <string>Result Columns</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3">
+        <widget class="QSpinBox" name="sbResultCols">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>1024</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QGraphicsView" name="gvOriginal">
+       <property name="minimumSize">
+        <size>
+         <width>640</width>
+         <height>480</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGraphicsView" name="gvTransformed">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>480</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>dsbCenterX</tabstop>
+  <tabstop>dsbCenterY</tabstop>
+  <tabstop>dsbAngleStart</tabstop>
+  <tabstop>dsbAngleEnd</tabstop>
+  <tabstop>dsbDistanceStart</tabstop>
+  <tabstop>dsbDistanceEnd</tabstop>
+  <tabstop>sbResultRows</tabstop>
+  <tabstop>sbResultCols</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>gvOriginal</tabstop>
+  <tabstop>gvTransformed</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>DialogCreatCoordSystemRadial</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>777</x>
+     <y>689</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dsbCenterX</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DialogCreatCoordSystemRadial</receiver>
+   <slot>doubleValueChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>131</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dsbCenterY</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DialogCreatCoordSystemRadial</receiver>
+   <slot>doubleValueChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>220</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dsbAngleStart</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DialogCreatCoordSystemRadial</receiver>
+   <slot>doubleValueChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>131</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dsbAngleEnd</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DialogCreatCoordSystemRadial</receiver>
+   <slot>doubleValueChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>308</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dsbDistanceStart</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DialogCreatCoordSystemRadial</receiver>
+   <slot>doubleValueChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>131</x>
+     <y>95</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dsbDistanceEnd</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DialogCreatCoordSystemRadial</receiver>
+   <slot>doubleValueChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>308</x>
+     <y>95</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sbResultRows</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>DialogCreatCoordSystemRadial</receiver>
+   <slot>intValueChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>131</x>
+     <y>130</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sbResultCols</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>DialogCreatCoordSystemRadial</receiver>
+   <slot>intValueChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>308</x>
+     <y>130</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>doubleValueChanged(double)</slot>
+  <slot>intValueChanged(int)</slot>
+ </slots>
+</ui>

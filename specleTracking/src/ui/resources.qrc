@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/arrow_left.png</file>
+        <file>icons/arrow_right.png</file>
+        <file>icons/eye.png</file>
+        <file>icons/vector_add.png</file>
+        <file>icons/vector_delete.png</file>
+        <file>icons/chart_curve.png</file>
+        <file>icons/resultset_next.png</file>
+        <file>icons/resultset_previous.png</file>
+        <file>icons/arrow_in.png</file>
+        <file>icons/arrow_out.png</file>
+        <file>icons/pencil.png</file>
+    </qresource>
+</RCC>
