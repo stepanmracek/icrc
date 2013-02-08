@@ -3,6 +3,7 @@ release/
 
 *.pro.user
 *.pro.user*
+*~
 
 
 # Compiled Object files
