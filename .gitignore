@@ -1,6 +1,5 @@
 debug/
 release/
-test/
 
 *.pro.user
 *.pro.user*
