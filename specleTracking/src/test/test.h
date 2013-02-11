@@ -277,7 +277,7 @@ public:
 
     static int testQtManager(int argc, char *argv[])
     {
-        PCA pca("test/pca-shape");
+        PCA pca("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
         CoordSystemRadial coord(P(263,0), P(632,258), P(10,360), 50, 200, 400);
         StatisticalShapeModel model(pca);
         ShapeNormalizerIterativeStatisticalShape normalizer(model);
@@ -291,7 +291,7 @@ public:
 
         // create GUI
         QApplication app(argc, argv);
-        WidgetAnotationManager w("../test", &tracker);
+        WidgetAnotationManager w("/home/stepo/SparkleShare/private/icrc/test/", &tracker);
         w.show();
         return app.exec();
     }
