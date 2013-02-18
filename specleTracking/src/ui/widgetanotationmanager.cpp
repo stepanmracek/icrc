@@ -96,7 +96,8 @@ void WidgetAnotationManager::on_btnTrack_clicked()
 
     if (!ui->widgetStrainVideo->shapes.contains(currentIndex))
     {
-        qDebug() << "Current frame is not anotated!";
+        QMessageBox msg(QMessageBox::Information, "Information", "Current frame is not anotated.");
+        msg.exec();
         return;
     }
 
@@ -107,7 +108,7 @@ void WidgetAnotationManager::on_btnTrack_clicked()
     for (int i = 0; i < frames; i++)
     {
         progress.setValue(i);
-        qDebug() << "Tracking" << i << "/" << frames;
+        //qDebug() << "Tracking" << i << "/" << frames;
 
         if (progress.wasCanceled()) break;
 
@@ -118,33 +119,33 @@ void WidgetAnotationManager::on_btnTrack_clicked()
         for (unsigned int j = 0; j < tracker->weights.size(); j++)
         {
             int prevIndex = currentIndex+i-j;
-            qDebug() << "  j:" << j << "prevIndex:" << prevIndex;
+            //qDebug() << "  j:" << j << "prevIndex:" << prevIndex;
             if (prevIndex < currentIndex)
             {
-                qDebug() << "  prevIndex < currentIndex";
+                //qDebug() << "  prevIndex < currentIndex";
                 break;
             }
             if (prevIndex == limit)
             {
-                qDebug() << "  prevIndex == limit";
+                //qDebug() << "  prevIndex == limit";
                 break;
             }
 
             prevShapes.push_back(ui->widgetStrainVideo->shapes[prevIndex]);
             prevFrames.push_back(ui->widgetStrainVideo->getClip().frames[prevIndex]);
         }
-        qDebug() << "  prevShape/prevFrames size:" << prevShapes.size() << prevFrames.size();
+        //qDebug() << "  prevShape/prevFrames size:" << prevShapes.size() << prevFrames.size();
         if (prevShapes.size() == 0) break;
 
         int nextIndex = currentIndex+i+1;
-        qDebug() << "  nextIndex:" << nextIndex;
+        //qDebug() << "  nextIndex:" << nextIndex;
         if (nextIndex == limit) break;
         Mat8 nextFrame = ui->widgetStrainVideo->getClip().frames[nextIndex];
 
-        qDebug() << "  reversing prevShapes and prevFrames";
+        //qDebug() << "  reversing prevShapes and prevFrames";
         std::reverse(prevShapes.begin(), prevShapes.end());
         std::reverse(prevFrames.begin(), prevFrames.end());
-        qDebug() << "  tracking";
+        //qDebug() << "  tracking";
         Points nextShape = tracker->track(prevFrames, prevShapes, nextFrame);
         ui->widgetStrainVideo->shapes[nextIndex] = nextShape;
     }
@@ -166,46 +167,19 @@ void WidgetAnotationManager::on_widgetResult_noImage()
 
 void WidgetAnotationManager::on_btnStats_clicked()
 {
-    // determine current beat
-    const VideoDataClip &clip = ui->widgetStrainVideo->getClip();
+    VideoDataClip &clip = ui->widgetStrainVideo->getClip();
     QMap<int, Points> &shapes = ui->widgetStrainVideo->shapes;
-    if (clip.metadata.beatIndicies.size() == 0)
-    {
-        qDebug() << "Clip metadata not set";
-        return;
-    }
-    int beatStart;
-    int beatEnd;
     int currentIndex = ui->widgetStrainVideo->currentIndex;
-    clip.getBeatRange(currentIndex, beatStart, beatEnd);
-    qDebug() << "beat range:" << beatStart << beatEnd;
 
-    // check if all shapes within current beat are present
-    bool canProceed = true;
-    for (int i = beatStart; i < beatEnd; i++)
-    {
-        if (!shapes.contains(i))
-        {
-            canProceed = false;
-            break;
-        }
-    }
-
-    if (!canProceed)
-    {
-        QMessageBox msg(QMessageBox::Information, "Information", "Not all shapes within beat are defined.");
-        msg.exec();
-        return;
-    }
-
-    VideoDataClip subClip = clip.getRange(beatStart, beatEnd);
-    qDebug() << "subClip.size()" << subClip.size();
     VectorOfShapes subShapes;
     QMap<int, Points> subShapesMap;
-    for (int i = beatStart; i < beatEnd; i++)
+    VideoDataClip subClip;
+    char *error = clip.getSubClip(currentIndex, shapes, subClip, subShapes, subShapesMap);
+    if (error != 0)
     {
-        subShapes.push_back(shapes[i]);
-        subShapesMap[i-beatStart] = shapes[i];
+        QMessageBox msg(QMessageBox::Information, "Information", error);
+        msg.exec();
+        return;
     }
 
     StrainStatistics stats(tracker->strain, subShapes);

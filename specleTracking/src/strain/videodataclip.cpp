@@ -56,14 +56,15 @@ void VideoDataClip::setIndex(int index)
     currentIndex = index;
 }
 
-VideoDataClip VideoDataClip::getRange(int start, int end) const
+void VideoDataClip::getRange(int start, int end, VideoDataClip &outClip) const
 {
-    VideoDataClip clip;
+    outClip.frames.clear();
+
     for (int i = 0; i < frames.size(); i++)
     {
         if (i >= start && i < end)
         {
-            clip.frames.push_back(frames[i]);
+            outClip.frames.push_back(frames[i]);
         }
     }
     for (int i = 0; i < metadata.beatIndicies.size(); i++)
@@ -71,9 +72,15 @@ VideoDataClip VideoDataClip::getRange(int start, int end) const
         int beat = metadata.beatIndicies[i];
         if (beat >= start && beat < end)
         {
-            clip.metadata.beatIndicies.push_back(beat);
+            outClip.metadata.beatIndicies.push_back(beat);
         }
     }
+}
+
+VideoDataClip VideoDataClip::getRange(int start, int end) const
+{
+    VideoDataClip clip;
+    getRange(start, end, clip);
     return clip;
 }
 
@@ -94,6 +101,39 @@ void VideoDataClip::getBeatRange(int currentIndex, int &beatStart, int &beatEnd)
             beatEnd = beatIndex;
         }
     }
+}
+
+char *VideoDataClip::getSubClip(int index, QMap<int, Points> &shapes,
+                                VideoDataClip &outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap)
+{
+    // determine current beat
+    if (metadata.beatIndicies.size() == 0)
+    {
+        return "Clip metadata are not set.";
+    }
+    int beatStart;
+    int beatEnd;
+    getBeatRange(index, beatStart, beatEnd);
+
+    // check if all shapes within current beat are present
+    for (int i = beatStart; i < beatEnd; i++)
+    {
+        if (!shapes.contains(i))
+        {
+            return "Not all shapes within beat are defined.";
+        }
+    }
+
+    getRange(beatStart, beatEnd, outSubCLip);
+    outSubShapes.clear();
+    outSubShapesMap.clear();
+    for (int i = beatStart; i < beatEnd; i++)
+    {
+        outSubShapes.push_back(shapes[i]);
+        outSubShapesMap[i-beatStart] = shapes[i];
+    }
+
+    return 0;
 }
 
 void VideoDataClipMetadata::deserialize(const QString &path)

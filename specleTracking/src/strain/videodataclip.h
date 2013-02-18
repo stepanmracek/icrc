@@ -3,6 +3,7 @@
 
 #include <opencv2/opencv.hpp>
 #include <QVector>
+#include <QMap>
 
 #include "videodatabase.h"
 #include "linalg/common.h"
@@ -28,7 +29,11 @@ public:
     VideoDataClip(const QString &path, const QString &metadataPath);
 
     VideoDataClip getRange(int start, int end) const;
+    void getRange(int start, int end, VideoDataClip &outClip) const;
     void getBeatRange(int currentIndex, int &beatStart, int &beatEnd) const;
+
+    char *getSubClip(int index, QMap<int, Points> &shapes,
+                     VideoDataClip &outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap);
 
     VectorOfImages frames;
     VideoDataClipMetadata metadata;

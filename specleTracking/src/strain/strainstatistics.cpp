@@ -1,6 +1,9 @@
 #include "strainstatistics.h"
 
+#include <QDebug>
 #include <cassert>
+
+#include "linalg/vecf.h"
 
 StrainStatistics::StrainStatistics(Strain &strainModel, VectorOfShapes &shapes)
 {
@@ -42,29 +45,15 @@ StrainStatistics::StrainStatistics(Strain &strainModel, VectorOfShapes &shapes)
     }
 }
 
-VectorF StrainStatistics::beatToBeatVariance(std::vector<StrainStatistics> &statisticsVector, int samplesCount)
+float StrainStatistics::beatToBeatVariance(StrainStatistics &firstBeat, StrainStatistics &secondBeat, int samplesCount)
 {
-    std::vector<VectorF> samplesStats;
+    VectorF firstSampled = VecF::resample(firstBeat.strain, samplesCount);
+    VectorF secondSampled = VecF::resample(secondBeat.strain, samplesCount);
 
-    for (std::vector<StrainStatistics>::iterator it = statisticsVector.begin(); it != statisticsVector.end(); ++it)
-    {
-        StrainStatistics &beatStats = *it;
-
-        samplesStats.push_back(VectorF());
-
-        for (int i = 0; i < samplesCount; i++)
-        {
-            float indexF = beatStats.strain.size() * i / ((float)(samplesCount));
-            int indexI = floor(indexF);
-            float delta = indexF - indexI;
-
-            float first = beatStats.strain[indexI];
-            float second = beatStats.strain[indexI + 1];
-            float interpolated = first + delta * (second - first);
-
-            samplesStats.back().push_back(interpolated);
-        }
-    }
+    MatF firstMat = VecF::fromVector(firstSampled);
+    MatF secondMat = VecF::fromVector(secondSampled);
+    MatF delta = firstMat - secondMat;
+    return VecF::stdDeviation(delta);
 }
 
 /*{

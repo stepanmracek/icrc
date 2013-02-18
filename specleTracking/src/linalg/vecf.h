@@ -28,9 +28,9 @@ public:
 
     static bool isZero(MatF &vector);
 
-    /*static void toFile(MatF &vector, const QString &path, bool append = false);
+    static void toFile(VectorF &vector, const QString &path, bool append = false);
 
-    static void toFileWithIndicies(MatF &vector, const QString &path, bool append = false);
+    /*static void toFileWithIndicies(MatF &vector, const QString &path, bool append = false);
 
     static void toFileTwoCols(MatF &vector,const QString &path, bool append = false);
 
@@ -69,6 +69,8 @@ public:
     static MatF meanVector(std::vector<MatF> &vectors);
 
     static double stdDeviation(VectorF &vector);
+
+    static VectorF resample(VectorF &vector, int samplesCount);
 };
 
 #endif // VECF_H

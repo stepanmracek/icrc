@@ -1,5 +1,7 @@
 #include "vecf.h"
 
+#include <QFile>
+#include <QTextStream>
 #include <vector>
 #include <cassert>
 
@@ -118,7 +120,7 @@ bool VecF::isZero(MatF &vector)
     return true;
 }
 
-/*void VecF::toFile(MatF &vector, const QString &path, bool append)
+void VecF::toFile(VectorF &vector, const QString &path, bool append)
 {
     QFile f(path);
     if (append)
@@ -127,17 +129,17 @@ bool VecF::isZero(MatF &vector)
         f.open(QIODevice::WriteOnly);
     QTextStream out(&f);
 
-    int n = vector.rows;
+    int n = vector.size();
     for (int i = 0; i < n; i++)
     {
-        out << vector(i);
+        out << vector[i];
         out << '\n';
     }
     out << '\n';
 
     out.flush();
     f.close();
-}*/
+}
 
 /*void VecF::toFileWithIndicies(MatF &vector, const QString &path, bool append)
 {
@@ -440,5 +442,28 @@ MatF VecF::meanVector(std::vector<MatF> &vectors)
         result += vectors[i];
 
     result = result / ((double)n);
+    return result;
+}
+
+VectorF VecF::resample(VectorF &vector, int samplesCount)
+{
+    VectorF result;
+
+    for (int i = 0; i < samplesCount; i++)
+    {
+        float indexF = (vector.size()-1) * i / ((float)(samplesCount));
+        int indexI = floor(indexF);
+        float delta = indexF - indexI;
+
+        if ((indexI + 1) == vector.size()) break;
+        //qDebug() << statIndex << indexF << indexI;
+
+        float first = vector[indexI];
+        float second = vector[indexI + 1];
+        float interpolated = first + delta * (second - first);
+
+        result.push_back(interpolated);
+    }
+
     return result;
 }

@@ -2,7 +2,7 @@
 #define TEST_H
 
 #include <QApplication>
-
+#include <QDebug>
 #include <list>
 #include <vector>
 #include <iostream>
@@ -275,27 +275,6 @@ public:
         return app.exec();
     }
 
-    static int testQtManager(int argc, char *argv[])
-    {
-        PCA pca("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
-        CoordSystemRadial coord(P(263,0), P(632,258), P(10,360), 50, 200, 400);
-        StatisticalShapeModel model(pca);
-        ShapeNormalizerIterativeStatisticalShape normalizer(model);
-        ListOfImageProcessing processing;
-        StrainResProcFloatingAvg postProcessing(1);
-        PointTrackerOpticalFlow pointTracker(20);
-        LongitudinalStrain ls(normalizer);
-        float weightValues[] = {10.0, 5.0, 3.0, 2.0, 1.0};
-        VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
-        ShapeTracker tracker(ls, &coord, processing, pointTracker, postProcessing, weights);
-
-        // create GUI
-        QApplication app(argc, argv);
-        WidgetAnotationManager w("/home/stepo/SparkleShare/private/icrc/test/", &tracker);
-        w.show();
-        return app.exec();
-    }
-
     static void testLongitudinalStrain()
     {
         ShapeNormalizerPass shapeNorm(30);
@@ -321,6 +300,49 @@ public:
         w.show();
 
         return app.exec();
+    }
+
+    static int testQtManager(int argc, char *argv[])
+    {
+        PCA pca("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
+        CoordSystemRadial coord(P(263,0), P(632,258), P(10,360), 50, 200, 400);
+        StatisticalShapeModel model(pca);
+        ShapeNormalizerIterativeStatisticalShape normalizer(model);
+        ListOfImageProcessing processing;
+        StrainResProcFloatingAvg postProcessing(1);
+        PointTrackerOpticalFlow pointTracker(20);
+        LongitudinalStrain ls(normalizer);
+        float weightValues[] = {10.0, 5.0, 3.0, 2.0, 1.0};
+        VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
+        ShapeTracker tracker(ls, &coord, processing, pointTracker, postProcessing, weights);
+
+        // create GUI
+        QApplication app(argc, argv);
+        WidgetAnotationManager w("/home/stepo/SparkleShare/private/icrc/test/", &tracker);
+        w.show();
+        return app.exec();
+    }
+
+    static void testBeatToBeatVariance()
+    {
+        VideoDataClip clip("/home/stepo/SparkleShare/private/icrc/test/test.wmv",
+                           "/home/stepo/SparkleShare/private/icrc/test/test.wmv_metadata");
+        ShapeMap shapeMap = Serialization::readShapeMap("/home/stepo/SparkleShare/private/icrc/test/test.wmv_shapemap");
+
+        PCA pca("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
+        StatisticalShapeModel model(pca);
+        ShapeNormalizerIterativeStatisticalShape normalizer(model);
+        LongitudinalStrain strain(normalizer);
+
+        VideoDataClip firstClip; VectorOfShapes firstShapes; ShapeMap firstMap;
+        clip.getSubClip(clip.metadata.beatIndicies[0], shapeMap, firstClip, firstShapes, firstMap);
+        StrainStatistics firstStats(strain, firstShapes);
+
+        VideoDataClip secondClip; VectorOfShapes secondShapes; ShapeMap secondMap;
+        clip.getSubClip(clip.metadata.beatIndicies[1], shapeMap, secondClip, secondShapes, secondMap);
+        StrainStatistics secondStats(strain, secondShapes);
+
+        qDebug() << StrainStatistics::beatToBeatVariance(firstStats, secondStats, 100);
     }
 };
 

@@ -17,4 +17,5 @@ int main(int argc, char *argv[])
     Test::testQtManager(argc, argv);
     //Test::testLongitudinalStrain();
     //Test::testQtAnotationAndDisplay(argc, argv);
+    //Test::testBeatToBeatVariance();
 }

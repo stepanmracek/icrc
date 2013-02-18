@@ -19,7 +19,7 @@ public:
 
     P getCenter(Points &points);
 
-    static VectorF beatToBeatVariance(std::vector<StrainStatistics> &statisticsVector, int samplesCount);
+    static float beatToBeatVariance(StrainStatistics &firstBeat, StrainStatistics &secondBeat, int samplesCount);
 };
 
 #endif // STRAINSTATISTICS_H
