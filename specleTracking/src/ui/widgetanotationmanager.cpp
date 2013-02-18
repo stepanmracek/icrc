@@ -212,11 +212,12 @@ void WidgetAnotationManager::on_btnStats_clicked()
     WidgetStrainStatistics *statsWidget = new WidgetStrainStatistics();
     statsWidget->SetData(&stats, tracker, subClip, subShapesMap);
 
-    QDialog dlg(this);
+    QDialog *dlg = new QDialog(this);
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(statsWidget);
-    dlg.setLayout(layout);
-    dlg.exec();
+    dlg->setLayout(layout);
+    //dlg.exec();
+    dlg->show();
 }
 
 void WidgetAnotationManager::on_btnAnotate_clicked()
