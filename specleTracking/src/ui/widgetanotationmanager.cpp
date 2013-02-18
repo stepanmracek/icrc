@@ -12,7 +12,7 @@
 #include <algorithm>
 
 #include "ui/uiutils.h"
-#include "ui/widgetstrainstatistics.h"
+#include "ui/dialogstrainstatistics.h"
 #include "linalg/serialization.h"
 #include "strain/shapeprocessing.h"
 #include "ui/dialoganotation.h"
@@ -209,14 +209,9 @@ void WidgetAnotationManager::on_btnStats_clicked()
     }
 
     StrainStatistics stats(tracker->strain, vectorOfShapes);
-    WidgetStrainStatistics *statsWidget = new WidgetStrainStatistics();
-    statsWidget->SetData(&stats, tracker, subClip, subShapesMap);
-
-    QDialog dlg(this);
-    QVBoxLayout *layout = new QVBoxLayout();
-    layout->addWidget(statsWidget);
-    dlg.setLayout(layout);
-    dlg.exec();
+    DialogStrainStatistics dlgStats;
+    dlgStats.SetData(&stats, tracker, ui->widgetStrainVideo->clip, ui->widgetStrainVideo->shapes);
+    dlgStats.exec();
 }
 
 void WidgetAnotationManager::on_btnAnotate_clicked()
