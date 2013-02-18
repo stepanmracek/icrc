@@ -42,6 +42,31 @@ StrainStatistics::StrainStatistics(Strain &strainModel, VectorOfShapes &shapes)
     }
 }
 
+VectorF StrainStatistics::beatToBeatVariance(std::vector<StrainStatistics> &statisticsVector, int samplesCount)
+{
+    std::vector<VectorF> samplesStats;
+
+    for (std::vector<StrainStatistics>::iterator it = statisticsVector.begin(); it != statisticsVector.end(); ++it)
+    {
+        StrainStatistics &beatStats = *it;
+
+        samplesStats.push_back(VectorF);
+
+        for (int i = 0; i < samplesCount; i++)
+        {
+            float indexF = beatStats.strain.size() * i / ((float)(samplecount));
+            int indexI = floor(indexF);
+            float delta = indexF - indexI;
+
+            float first = beatStats.strain[indexI];
+            float second = beatStats.strain[indexI + 1];
+            float interpolated = first + delta * (second - first);
+
+            samplesStats.back().push_back(interpolated);
+        }
+    }
+}
+
 /*{
     unsigned int shapesCount = shapes.size();
     assert(shapesCount > 0);
