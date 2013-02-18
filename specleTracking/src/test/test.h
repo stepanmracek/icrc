@@ -18,7 +18,7 @@
 #include "strain/shapenormalizer.h"
 #include "strain/statisticalshapechanges.h"
 #include "strain/strainstatistics.h"
-#include "ui/widgetstrainstatistics.h"
+#include "ui/dialogstrainstatistics.h"
 #include "strain/videodataclip.h"
 #include "strain/pointtrackerneighbouropticalflow.h"
 #include "strain/imagefilter.h"
