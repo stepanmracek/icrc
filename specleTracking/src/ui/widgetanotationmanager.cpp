@@ -200,15 +200,15 @@ void WidgetAnotationManager::on_btnStats_clicked()
 
     VideoDataClip subClip = clip.getRange(beatStart, beatEnd);
     qDebug() << "subClip.size()" << subClip.size();
-    VectorOfShapes vectorOfShapes;
+    VectorOfShapes subShapes;
     QMap<int, Points> subShapesMap;
     for (int i = beatStart; i < beatEnd; i++)
     {
-        vectorOfShapes.push_back(shapes[i]);
+        subShapes.push_back(shapes[i]);
         subShapesMap[i-beatStart] = shapes[i];
     }
 
-    StrainStatistics stats(tracker->strain, vectorOfShapes);
+    StrainStatistics stats(tracker->strain, subShapes);
     DialogStrainStatistics dlgStats;
     dlgStats.SetData(&stats, tracker, subClip, subShapesMap);
     dlgStats.exec();
