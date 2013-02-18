@@ -50,7 +50,7 @@ VectorF StrainStatistics::beatToBeatVariance(std::vector<StrainStatistics> &stat
     {
         StrainStatistics &beatStats = *it;
 
-        samplesStats.push_back(VectorF);
+        samplesStats.push_back(VectorF());
 
         for (int i = 0; i < samplesCount; i++)
         {
