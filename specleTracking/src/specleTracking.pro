@@ -26,7 +26,6 @@ HEADERS += \
     test/test.h \
     strain/statisticalshapechanges.h \
     strain/strainstatistics.h \
-    ui/widgetstrainstatistics.h \
     ui/widgetplot.h \
     ui/widgetspectrogram.h \
     strain/videodatabase.h \
@@ -65,7 +64,6 @@ SOURCES += \
     strain/anotation.cpp \
     strain/statisticalshapechanges.cpp \
     strain/strainstatistics.cpp \
-    ui/widgetstrainstatistics.cpp \
     ui/widgetplot.cpp \
     ui/widgetspectrogram.cpp \
     strain/videodatabase.cpp \
@@ -108,7 +106,6 @@ unix {
 }
 
 FORMS += \
-    ui/widgetstrainstatistics.ui \
     ui/widgetstrainvideo.ui \
     ui/widgetanotationmanager.ui \
     ui/dialoganotation.ui \

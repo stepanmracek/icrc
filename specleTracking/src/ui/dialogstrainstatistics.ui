@@ -67,6 +67,13 @@
      </item>
     </layout>
    </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Close</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -99,5 +106,22 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>clicked(QAbstractButton*)</signal>
+   <receiver>DialogStrainStatistics</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>756</x>
+     <y>600</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>690</x>
+     <y>616</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -210,7 +210,7 @@ void WidgetAnotationManager::on_btnStats_clicked()
 
     StrainStatistics stats(tracker->strain, vectorOfShapes);
     DialogStrainStatistics dlgStats;
-    dlgStats.SetData(&stats, tracker, ui->widgetStrainVideo->clip, ui->widgetStrainVideo->shapes);
+    dlgStats.SetData(&stats, tracker, ui->widgetStrainVideo->getClip(), ui->widgetStrainVideo->shapes);
     dlgStats.exec();
 }
 
