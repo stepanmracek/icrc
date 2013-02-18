@@ -54,7 +54,7 @@ VectorF StrainStatistics::beatToBeatVariance(std::vector<StrainStatistics> &stat
 
         for (int i = 0; i < samplesCount; i++)
         {
-            float indexF = beatStats.strain.size() * i / ((float)(samplecount));
+            float indexF = beatStats.strain.size() * i / ((float)(samplesCount));
             int indexI = floor(indexF);
             float delta = indexF - indexI;
 
