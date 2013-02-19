@@ -11,11 +11,32 @@ P AngleDistanceToPoint(float angle, float distance)
     return p;
 }
 
-CoordSystemRadial::CoordSystemRadial(P center, float startDistance, float endDistance, float angleStart,
-                                     float angleEnd, int resultMatCols, int resultMatRows) :
-    center(center), startDistance(startDistance), endDistance(endDistance), angleStart(angleStart),
-    angleEnd(angleEnd), resultMatRows(resultMatRows), resultMatCols(resultMatCols)
+CoordSystemRadial::CoordSystemRadial()
 {
+    init(P(263,0), P(632,258), P(10,360), 50, 200, 400);
+}
+
+CoordSystemRadial::CoordSystemRadial(P center, float startDistance, float endDistance, float angleStart,
+                                     float angleEnd, int resultMatCols, int resultMatRows)
+{
+    init(center, startDistance, endDistance, angleStart, angleEnd, resultMatCols, resultMatRows);
+}
+
+CoordSystemRadial::CoordSystemRadial(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows)
+{
+    init(center, arcStart, arcEnd, startDistance, resultMatCols, resultMatRows);
+}
+
+void CoordSystemRadial::init(P center, float startDistance, float endDistance, float angleStart, float angleEnd, int resultMatCols, int resultMatRows)
+{
+    this->center = center;
+    this->startDistance = startDistance;
+    this->endDistance = endDistance;
+    this->angleStart = angleStart;
+    this->angleEnd = angleEnd;
+    this->resultMatCols = resultMatCols;
+    this->resultMatRows = resultMatRows;
+
     dAngle = angleEnd - angleStart;
     angleStep = dAngle / (resultMatCols-1);
 
@@ -23,9 +44,13 @@ CoordSystemRadial::CoordSystemRadial(P center, float startDistance, float endDis
     distanceStep = dDistance / (resultMatRows-1);
 }
 
-CoordSystemRadial::CoordSystemRadial(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows) :
-    center(center), startDistance(startDistance), resultMatCols(resultMatCols), resultMatRows(resultMatRows)
+void CoordSystemRadial::init(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows)
 {
+    this->center = center;
+    this->startDistance = startDistance;
+    this->resultMatCols = resultMatCols;
+    this->resultMatRows = resultMatRows;
+
     float toStart = Common::eucl(center, arcStart);
     float toEnd = Common::eucl(center, arcEnd);
     endDistance = (toStart+toEnd)/2;
@@ -38,14 +63,6 @@ CoordSystemRadial::CoordSystemRadial(P center, P arcStart, P arcEnd, float start
 
     P start(center.x + dStartX, center.y + dStartY);
     P end(center.x + dEndX, center.y + dEndY);
-
-    /*Mat8 img = src.clone();
-    cv::circle(img, center, 3, 255);
-    cv::circle(img, start, 3, 255);
-    cv::circle(img, end, 3, 255);
-    cv::circle(img, center, endDistance, 255);
-    cv::imshow("image", img);
-    cv::waitKey();*/
 
     //float angleEnd;
     // arc start

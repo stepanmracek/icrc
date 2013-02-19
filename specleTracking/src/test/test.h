@@ -305,7 +305,6 @@ public:
     static int testQtManager(int argc, char *argv[])
     {
         PCA pca("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
-        CoordSystemRadial coord(P(263,0), P(632,258), P(10,360), 50, 200, 400);
         StatisticalShapeModel model(pca);
         ShapeNormalizerIterativeStatisticalShape normalizer(model);
         ListOfImageProcessing processing;
@@ -314,7 +313,7 @@ public:
         LongitudinalStrain ls(normalizer);
         float weightValues[] = {10.0, 5.0, 3.0, 2.0, 1.0};
         VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
-        ShapeTracker tracker(ls, &coord, processing, pointTracker, postProcessing, weights);
+        ShapeTracker tracker(ls, processing, pointTracker, postProcessing, weights);
 
         // create GUI
         QApplication app(argc, argv);

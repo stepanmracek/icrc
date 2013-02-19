@@ -25,7 +25,7 @@ void WidgetStrainVideo::display(int index)
     ui->widgetResult->setImage(image);
     ui->lblIndex->setText(QString::number(index));
     if (shapes.contains(index))
-        ui->widgetResult->setResultPoints(shapes[index]);
+        ui->widgetResult->setResultPoints(shapes[index], this->clip.metadata.coordSystem);
     emit displayIndexChanged(index);
 }
 
@@ -55,11 +55,11 @@ void WidgetStrainVideo::on_horizontalSlider_valueChanged(int value)
 
     if (shapes.contains(currentIndex))
     {
-        ui->widgetResult->setResultPoints(Points(shapes[currentIndex]));
+        ui->widgetResult->setResultPoints(Points(shapes[currentIndex]), this->clip.metadata.coordSystem);
     }
     else
     {
-        ui->widgetResult->setResultPoints(Points());
+        ui->widgetResult->setResultPoints(Points(), this->clip.metadata.coordSystem);
     }
 }
 
@@ -128,12 +128,12 @@ void WidgetStrainVideo::setClip(VideoDataClip &clip)
 
 void WidgetStrainVideo::setControlPoints(Points controlPoints, int shapeWidth)
 {
-    ui->widgetResult->setControlPoints(controlPoints, shapeWidth);
+    ui->widgetResult->setControlPoints(controlPoints, shapeWidth, this->clip.metadata.coordSystem);
     shapes[currentIndex] = ui->widgetResult->getResultPoints();
 }
 
 void WidgetStrainVideo::setResultPoints(Points points)
 {
-    ui->widgetResult->setResultPoints(points);
+    ui->widgetResult->setResultPoints(points, this->clip.metadata.coordSystem);
     shapes[currentIndex] = points;
 }

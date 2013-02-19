@@ -37,8 +37,8 @@ signals:
 public slots:
 
     void setImage(QPixmap pixmap);
-    void setControlPoints(Points controlPoints, int shapeWidth);
-    void setResultPoints(Points points);
+    void setControlPoints(Points controlPoints, int shapeWidth, CoordSystemBase &coordSystem);
+    void setResultPoints(Points points, CoordSystemBase &coordSystem);
 
 };
 

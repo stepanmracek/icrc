@@ -73,9 +73,13 @@ public:
     float angleStart, angleStep, angleEnd, distanceStep, dAngle, dDistance;
 
 public:
+    CoordSystemRadial();
     CoordSystemRadial(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows);
     CoordSystemRadial(P center, float startDistance, float endDistance, float angleStart, float angleEnd,
                       int resultMatCols, int resultMatRows);
+
+    void init(P center, float startDistance, float endDistance, float angleStart, float angleEnd, int resultMatCols, int resultMatRows);
+    void init(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows);
 
     Mat8 transform(Mat8 &src);
     P transform(P input);

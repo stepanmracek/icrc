@@ -146,6 +146,24 @@ void VideoDataClipMetadata::deserialize(const QString &path)
         (*it) >> i;
         beatIndicies << i;
     }
+
+    VectorF centerVec;
+    cv::FileNodeIterator it = storage["center"].begin();
+    cv::FileNodeIterator end = storage["center"].end();
+    for(; it != end; ++it)
+    {
+        float val = (float)(*it);
+        centerVec.push_back(val);
+    }
+    P center(centerVec[0], centerVec[1]);
+
+    float startDistance = (float)storage["startDistance"];
+    float endDistance = (float)storage["endDistance"];
+    float angleStart = (float)storage["angleStart"];
+    float angleEnd = (float)storage["angleEnd"];
+    int resultMatCols = (int)storage["resultMatCols"];
+    int resultMatRows = (int)storage["resultMatRows"];
+    coordSystem.init(center, startDistance, endDistance, angleStart, angleEnd, resultMatCols, resultMatRows);
 }
 
 void VideoDataClipMetadata::serialize(const QString &path)
@@ -158,4 +176,13 @@ void VideoDataClipMetadata::serialize(const QString &path)
         storage << i;
     }
     storage << "]";
+
+    //void CoordSystemRadial::init(P center, float startDistance, float endDistance, float angleStart, float angleEnd, int resultMatCols, int resultMatRows)
+    storage << "center" << coordSystem.center;
+    storage << "startDistance" << coordSystem.startDistance;
+    storage << "endDistance" << coordSystem.endDistance;
+    storage << "angleStart" << coordSystem.angleStart;
+    storage << "angleEnd" << coordSystem.angleEnd;
+    storage << "resultMatCols" << coordSystem.resultMatCols;
+    storage << "resultMatRows" << coordSystem.resultMatRows;
 }

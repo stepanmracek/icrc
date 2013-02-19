@@ -146,7 +146,7 @@ void WidgetAnotationManager::on_btnTrack_clicked()
         std::reverse(prevShapes.begin(), prevShapes.end());
         std::reverse(prevFrames.begin(), prevFrames.end());
         //qDebug() << "  tracking";
-        Points nextShape = tracker->track(prevFrames, prevShapes, nextFrame);
+        Points nextShape = tracker->track(prevFrames, prevShapes, nextFrame, ui->widgetStrainVideo->getClip().metadata.coordSystem);
         ui->widgetStrainVideo->shapes[nextIndex] = nextShape;
     }
 
@@ -209,10 +209,10 @@ void WidgetAnotationManager::on_btnCoordSystem_clicked()
     if (ui->widgetStrainVideo->getClip().size() == 0) return;
 
     Mat8 frame = ui->widgetStrainVideo->getClip().frames[ui->widgetStrainVideo->currentIndex];
-    DialogCreateCoordSystemRadial dlg(frame, (CoordSystemRadial*)(tracker->coordSystem), this);
+    DialogCreateCoordSystemRadial dlg(frame, ui->widgetStrainVideo->getClip().metadata.coordSystem , this);
     if (dlg.exec() == QDialog::Accepted)
     {
-        tracker->coordSystem = dlg.getNewCoordSystem();
+        ui->widgetStrainVideo->getClip().metadata.coordSystem = dlg.getNewCoordSystem();
         ui->widgetStrainVideo->display(ui->widgetStrainVideo->currentIndex);
     }
 }

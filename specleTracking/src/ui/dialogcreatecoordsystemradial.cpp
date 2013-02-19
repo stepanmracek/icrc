@@ -6,7 +6,7 @@
 
 #include "ui/uiutils.h"
 
-DialogCreateCoordSystemRadial::DialogCreateCoordSystemRadial(Mat8 &image, CoordSystemRadial *coordSystem, QWidget *parent):
+DialogCreateCoordSystemRadial::DialogCreateCoordSystemRadial(Mat8 &image, CoordSystemRadial coordSystem, QWidget *parent):
     loadCompleted(false), QDialog(parent), coordSystem(coordSystem), ui(new Ui::DialogCreatCoordSystemRadial)
 {
     image.copyTo(originalImage);
@@ -15,17 +15,17 @@ DialogCreateCoordSystemRadial::DialogCreateCoordSystemRadial(Mat8 &image, CoordS
     ui->gvOriginal->setScene(new QGraphicsScene());
     ui->gvTransformed->setScene(new QGraphicsScene());
 
-    ui->dsbCenterX->setValue(coordSystem->center.x);
-    ui->dsbCenterY->setValue(coordSystem->center.y);
+    ui->dsbCenterX->setValue(coordSystem.center.x);
+    ui->dsbCenterY->setValue(coordSystem.center.y);
 
-    ui->dsbAngleStart->setValue(coordSystem->angleStart);
-    ui->dsbAngleEnd->setValue(coordSystem->angleEnd);
+    ui->dsbAngleStart->setValue(coordSystem.angleStart);
+    ui->dsbAngleEnd->setValue(coordSystem.angleEnd);
 
-    ui->dsbDistanceStart->setValue(coordSystem->startDistance);
-    ui->dsbDistanceEnd->setValue(coordSystem->endDistance);
+    ui->dsbDistanceStart->setValue(coordSystem.startDistance);
+    ui->dsbDistanceEnd->setValue(coordSystem.endDistance);
 
-    ui->sbResultRows->setValue(coordSystem->resultMatRows);
-    ui->sbResultCols->setValue(coordSystem->resultMatCols);
+    ui->sbResultRows->setValue(coordSystem.resultMatRows);
+    ui->sbResultCols->setValue(coordSystem.resultMatCols);
 
     drawResult(coordSystem);
     loadCompleted = true;
@@ -36,19 +36,19 @@ DialogCreateCoordSystemRadial::~DialogCreateCoordSystemRadial()
     delete ui;
 }
 
-void DialogCreateCoordSystemRadial::drawResult(CoordSystemRadial *c)
+void DialogCreateCoordSystemRadial::drawResult(CoordSystemRadial &c)
 {
     QGraphicsScene *originalScene = ui->gvOriginal->scene();
     originalScene->clear();
 
     QPixmap originalPixmap = UIUtils::Mat8ToQPixmap(originalImage);
     originalScene->addPixmap(originalPixmap);
-    c->draw(originalScene);
+    c.draw(originalScene);
 
     QGraphicsScene *transformedScene = ui->gvTransformed->scene();
     transformedScene->clear();
 
-    Mat8 transformedImage = c->transform(originalImage);
+    Mat8 transformedImage = c.transform(originalImage);
     QPixmap transformedPixmap = UIUtils::Mat8ToQPixmap(transformedImage);
     transformedScene->addPixmap(transformedPixmap);
 }
@@ -90,7 +90,7 @@ void DialogCreateCoordSystemRadial::recalculate()
         return;
     }
 
-    qDebug() << "Recalculating radial coord system...";
+    //qDebug() << "Recalculating radial coord system...";
     double centerX = ui->dsbCenterX->value();
     double centerY = ui->dsbCenterY->value();
     double angleStart = ui->dsbAngleStart->value();
@@ -100,7 +100,7 @@ void DialogCreateCoordSystemRadial::recalculate()
     int rows = ui->sbResultRows->value();
     int cols = ui->sbResultCols->value();
     CoordSystemRadial newCoord(P(centerX, centerY), distanceStart, distanceEnd, angleStart, angleEnd, cols, rows);
-    drawResult(&newCoord);
+    drawResult(newCoord);
 }
 
 void DialogCreateCoordSystemRadial::on_buttonBox_accepted()
@@ -115,7 +115,7 @@ void DialogCreateCoordSystemRadial::on_buttonBox_accepted()
     accept();
 }
 
-CoordSystemBase *DialogCreateCoordSystemRadial::getNewCoordSystem()
+CoordSystemRadial DialogCreateCoordSystemRadial::getNewCoordSystem()
 {
     double centerX = ui->dsbCenterX->value();
     double centerY = ui->dsbCenterY->value();
@@ -126,5 +126,5 @@ CoordSystemBase *DialogCreateCoordSystemRadial::getNewCoordSystem()
     int rows = ui->sbResultRows->value();
     int cols = ui->sbResultCols->value();
 
-    return new CoordSystemRadial(P(centerX, centerY), distanceStart, distanceEnd, angleStart, angleEnd, cols, rows);
+    return CoordSystemRadial(P(centerX, centerY), distanceStart, distanceEnd, angleStart, angleEnd, cols, rows);
 }

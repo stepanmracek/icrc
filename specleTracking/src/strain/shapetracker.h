@@ -18,7 +18,7 @@
 class ShapeTracker
 {
 public:
-    CoordSystemBase *coordSystem;
+    //CoordSystemBase *coordSystem;
     ListOfImageProcessing &frameProcessing;
     PointTrackerBase &pointTracker;
     StrainResultProcessingBase &resultProcessing;
@@ -26,13 +26,13 @@ public:
     VectorF weights;
 
     ShapeTracker(Strain &strain,
-                 CoordSystemBase *coordSystem,
+                 //CoordSystemBase *coordSystem,
                  ListOfImageProcessing &frameProcessing,
                  PointTrackerBase &pointTracker,
                  StrainResultProcessingBase &resultProcessing,
                  VectorF &weights)
         : strain(strain),
-          coordSystem(coordSystem),
+          //coordSystem(coordSystem),
           frameProcessing(frameProcessing),
           pointTracker(pointTracker),
           resultProcessing(resultProcessing),
@@ -41,7 +41,7 @@ public:
 
     }
 
-    Points track(VectorOfImages &prevFrames, VectorOfShapes &prevShapes, Mat8 &nextFrame);
+    Points track(VectorOfImages &prevFrames, VectorOfShapes &prevShapes, Mat8 &nextFrame, CoordSystemBase &coordSystem);
 
     //static Points track(Mat8 &prevFrame, Points &prevPoints, Mat8 &nextFrame, Strain &strain, CoordSystemBase *coordSystem, ListOfImageProcessing &frameProcessing, PointTrackerBase &pointTracker);
 

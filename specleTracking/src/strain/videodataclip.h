@@ -5,6 +5,7 @@
 #include <QVector>
 #include <QMap>
 
+#include "coordsystem.h"
 #include "videodatabase.h"
 #include "linalg/common.h"
 #include "linalg/serializableobject.h"
@@ -13,6 +14,7 @@ class VideoDataClipMetadata : public SerializableObject
 {
 public:
     QVector<int> beatIndicies;
+    CoordSystemRadial coordSystem;
 
     void serialize(const QString &path);
     void deserialize(const QString &path);

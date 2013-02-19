@@ -21,7 +21,7 @@ void WidgetResult::setImage(QPixmap pixmap)
 }
 
 
-void WidgetResult::setControlPoints(Points controlPoints, int shapeWidth)
+void WidgetResult::setControlPoints(Points controlPoints, int shapeWidth, CoordSystemBase &coordSystem)
 {
     if (tracker == NULL)
     {
@@ -34,10 +34,10 @@ void WidgetResult::setControlPoints(Points controlPoints, int shapeWidth)
         return;
     }
 
-    setResultPoints(tracker->strain.getRealShapePoints(controlPoints, shapeWidth));
+    setResultPoints(tracker->strain.getRealShapePoints(controlPoints, shapeWidth), coordSystem);
 }
 
-void WidgetResult::setResultPoints(Points points)
+void WidgetResult::setResultPoints(Points points, CoordSystemBase &coordSystem)
 {
     if (tracker == NULL)
     {
@@ -61,6 +61,6 @@ void WidgetResult::setResultPoints(Points points)
     }
 
     graphicItems = tracker->strain.drawResult(scene, points);
-    coordGraphicItems = tracker->coordSystem->draw(scene);
+    coordGraphicItems = coordSystem.draw(scene);
 }
 
