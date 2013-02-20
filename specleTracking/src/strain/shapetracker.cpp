@@ -147,3 +147,13 @@ Points ShapeTracker::track(VectorOfImages &prevFrames, VectorOfShapes &prevShape
     return processedResult;
 }*/
 
+ShapeTracker ShapeTracker::getDummyTracker()
+{
+    ShapeNormalizerPass normalizer;
+    LongitudinalStrain strain(normalizer);
+    ListOfImageProcessing listOfProcessing;
+    PointTrackerOpticalFlow pointTracker(20);
+    StrainResultProcessingPass resultProcessing;
+    VectorF weights; weights.push_back(1.0);
+    return ShapeTracker(strain, listOfProcessing, pointTracker, resultProcessing, weights);
+}

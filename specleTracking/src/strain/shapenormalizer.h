@@ -9,7 +9,7 @@ class ShapeNormalizerBase
 {
 public:
     virtual Points normalize(Points &points, Mat8 &frame) = 0;
-    virtual int getNumberOfPoints() = 0;
+    //virtual int getNumberOfPoints() = 0;
 };
 
 class ShapeNormalizerStatisticalShape : public ShapeNormalizerBase
@@ -25,10 +25,10 @@ public:
         return model.normalize(points);
     }
 
-    int getNumberOfPoints()
+    /*int getNumberOfPoints()
     {
         return model.model.getMean().rows/2;
-    }
+    }*/
 };
 
 class ShapeNormalizerIterativeStatisticalShape : public ShapeNormalizerBase
@@ -44,10 +44,10 @@ public:
         return model.iterativeNormalize(points);
     }
 
-    int getNumberOfPoints()
+    /*int getNumberOfPoints()
     {
         return model.model.getMean().rows/2;
-    }
+    }*/
 };
 
 class ShapeNormalizerIterConfStatShape : public ShapeNormalizerBase
@@ -60,29 +60,29 @@ public:
 
     Points normalize(Points &points, Mat8 &frame);
 
-    int getNumberOfPoints()
+    /*int getNumberOfPoints()
     {
         return model.model.getMean().rows/2;
-    }
+    }*/
 };
 
 class ShapeNormalizerPass : public ShapeNormalizerBase
 {
 private:
-    int numberOfPoints;
+    //int numberOfPoints;
 
 public:
-    ShapeNormalizerPass(int numberOfPoints) : numberOfPoints(numberOfPoints) {}
+    ShapeNormalizerPass(/*int numberOfPoints*/) /*: numberOfPoints(numberOfPoints)*/ {}
 
     Points normalize(Points &points, Mat8 &)
     {
         return points;
     }
 
-    int getNumberOfPoints()
+    /*int getNumberOfPoints()
     {
         return numberOfPoints;
-    }
+    }*/
 };
 
 #endif // SHAPENORMALIZER_H

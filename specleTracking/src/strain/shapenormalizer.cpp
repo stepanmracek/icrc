@@ -5,7 +5,6 @@
 Points ShapeNormalizerIterConfStatShape::normalize(Points &points, Mat8 &frame)
 {
     unsigned int n = points.size();
-    assert(n == getNumberOfPoints());
     assert(n > 0);
 
     VectorF confidence(n);

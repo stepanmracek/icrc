@@ -3,6 +3,7 @@
 
 #include "strain.h"
 #include "linalg/spline.h"
+#include "shapenormalizer.h"
 
 class LongitudinalStrain : public Strain
 {

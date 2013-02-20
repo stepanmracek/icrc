@@ -75,6 +75,8 @@ void VideoDataClip::getRange(int start, int end, VideoDataClip &outClip) const
             outClip.metadata.beatIndicies.push_back(beat);
         }
     }
+
+    outClip.metadata.coordSystem = this->metadata.coordSystem;
 }
 
 VideoDataClip VideoDataClip::getRange(int start, int end) const

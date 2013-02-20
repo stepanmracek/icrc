@@ -25,7 +25,7 @@
 #include "strain/strainresultprocessing.h"
 #include "ui/widgetanotation.h"
 #include "ui/uiutils.h"
-#include "ui/widgetanotationmanager.h"
+#include "ui/windowanotationmanager.h"
 #include "strain/longitudinalstrain.h"
 
 class Test
@@ -277,7 +277,7 @@ public:
 
     static void testLongitudinalStrain()
     {
-        ShapeNormalizerPass shapeNorm(30);
+        ShapeNormalizerPass shapeNorm;
         LongitudinalStrain ls(shapeNorm);
 
         VideoDataClip data("test.wmv");
@@ -311,13 +311,21 @@ public:
         StrainResProcFloatingAvg postProcessing(1);
         PointTrackerOpticalFlow pointTracker(20);
         LongitudinalStrain ls(normalizer);
-        float weightValues[] = {10.0, 5.0, 3.0, 2.0, 1.0};
+        float weightValues[] = {1.0f}; // {10.0, 5.0, 3.0, 2.0, 1.0};
         VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
         ShapeTracker tracker(ls, processing, pointTracker, postProcessing, weights);
 
+        /*ShapeNormalizerPass normalizer;
+        LongitudinalStrain strain(normalizer);
+        ListOfImageProcessing listOfProcessing;
+        PointTrackerOpticalFlow pointTracker(20);
+        StrainResultProcessingPass resultProcessing;
+        VectorF weights; weights.push_back(1.0);
+        ShapeTracker tracker(strain, listOfProcessing, pointTracker, resultProcessing, weights);*/
+
         // create GUI
         QApplication app(argc, argv);
-        WidgetAnotationManager w("/home/stepo/SparkleShare/private/icrc/test/", &tracker);
+        WindowAnotationManager w("/home/stepo/SparkleShare/private/icrc/test/", tracker);
         w.show();
         return app.exec();
     }

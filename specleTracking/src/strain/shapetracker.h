@@ -8,11 +8,13 @@
 #include "linalg/spline.h"
 #include "linalg/backprojectionbase.h"
 #include "pointtrackerbase.h"
+#include "pointtrackeropticalflow.h"
 #include "shapenormalizer.h"
 #include "videodatabase.h"
 #include "imagefilter.h"
 #include "strainresultprocessing.h"
 #include "strain.h"
+#include "longitudinalstrain.h"
 #include "coordsystem.h"
 
 class ShapeTracker
@@ -48,6 +50,8 @@ public:
     /*static VectorOfShapes track(VideoDataBase &data, Strain &strain, ListOfProcessing &frameProcessing,
                                 PointTrackerBase &pointTracker, StrainResultProcessingBase &resultProcessing,
                                 Points &initialPoints, bool showVideo = false);*/
+
+    static ShapeTracker getDummyTracker();
 };
 
 #endif // POINTTRACKER_H
