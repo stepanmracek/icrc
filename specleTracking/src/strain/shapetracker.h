@@ -17,8 +17,10 @@
 #include "longitudinalstrain.h"
 #include "coordsystem.h"
 
-class ShapeTracker
+class ShapeTracker : public QObject
 {
+    Q_OBJECT
+
 public:
     //CoordSystemBase *coordSystem;
     ListOfImageProcessing &frameProcessing;
