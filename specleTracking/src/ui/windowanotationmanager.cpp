@@ -68,6 +68,7 @@ void WindowAnotationManager::setDirectory(QString path)
         on_btnLoad_clicked();
     }
 }
+
 void WindowAnotationManager::on_btnLoad_clicked()
 {
     QList<QListWidgetItem*> items = ui->listFiles->selectedItems();
