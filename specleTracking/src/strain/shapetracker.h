@@ -55,7 +55,7 @@ public:
                                 PointTrackerBase &pointTracker, StrainResultProcessingBase &resultProcessing,
                                 Points &initialPoints, bool showVideo = false);*/
 
-    static ShapeTracker getDummyTracker();
+    static ShapeTracker *getDummyTracker();
 };
 
 #endif // POINTTRACKER_H
