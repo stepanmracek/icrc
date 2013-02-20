@@ -15,7 +15,7 @@ class WindowAnotationManager : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit WindowAnotationManager(QString path, ShapeTracker tracker, QWidget *parent = 0);
+    explicit WindowAnotationManager(QString path, ShapeTracker *tracker, QWidget *parent = 0);
     ~WindowAnotationManager();
 
 protected:
@@ -45,7 +45,7 @@ private slots:
 
 private:
     Ui::WindowAnotationManager *ui;
-    ShapeTracker tracker;
+    ShapeTracker *tracker;
     QString path;
 };
 

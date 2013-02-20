@@ -19,13 +19,13 @@
 #include "ui/dialogcreatecoordsystemradial.h"
 #include "ui/dialogvideodataclipmetadata.h"
 
-WindowAnotationManager::WindowAnotationManager(QString path, ShapeTracker tracker, QWidget *parent) :
+WindowAnotationManager::WindowAnotationManager(QString path, ShapeTracker *tracker, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::WindowAnotationManager),
     tracker(tracker)
 {
     ui->setupUi(this);
-    ui->widgetStrainVideo->setTracker(&tracker);
+    ui->widgetStrainVideo->setTracker(tracker);
     setDirectory(path);
 }
 
@@ -137,7 +137,7 @@ void WindowAnotationManager::on_btnTrack_clicked()
         VectorOfShapes prevShapes;
         VectorOfImages prevFrames;
 
-        for (unsigned int j = 0; j < tracker.weights.size(); j++)
+        for (unsigned int j = 0; j < tracker->weights.size(); j++)
         {
             int prevIndex = currentIndex+i-j;
             //qDebug() << "  j:" << j << "prevIndex:" << prevIndex;
@@ -167,7 +167,7 @@ void WindowAnotationManager::on_btnTrack_clicked()
         std::reverse(prevShapes.begin(), prevShapes.end());
         std::reverse(prevFrames.begin(), prevFrames.end());
         //qDebug() << "  tracking";
-        Points nextShape = tracker.track(prevFrames, prevShapes, nextFrame, ui->widgetStrainVideo->getClip().metadata.coordSystem);
+        Points nextShape = tracker->track(prevFrames, prevShapes, nextFrame, ui->widgetStrainVideo->getClip().metadata.coordSystem);
         ui->widgetStrainVideo->shapes[nextIndex] = nextShape;
     }
 
@@ -215,9 +215,9 @@ void WindowAnotationManager::on_btnStats_clicked()
         return;
     }
 
-    StrainStatistics stats(tracker.strain, subShapes);
+    StrainStatistics stats(tracker->strain, subShapes);
     DialogStrainStatistics dlgStats;
-    dlgStats.SetData(&stats, &tracker, subClip, subShapesMap);
+    dlgStats.SetData(&stats, tracker, subClip, subShapesMap);
     dlgStats.exec();
 }
 
