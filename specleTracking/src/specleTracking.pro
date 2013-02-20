@@ -36,7 +36,6 @@ HEADERS += \
     strain/strainresultprocessing.h \
     ui/widgetanotation.h \
     ui/uiutils.h \
-    ui/widgetanotationmanager.h \
     strain/shapeprocessing.h \
     strain/strain.h \
     strain/longitudinalstrain.h \
@@ -75,7 +74,6 @@ SOURCES += \
     strain/shapenormalizer.cpp \
     strain/strainresultprocessing.cpp \
     ui/widgetanotation.cpp \
-    ui/widgetanotationmanager.cpp \
     strain/shapeprocessing.cpp \
     strain/strain.cpp \
     strain/longitudinalstrain.cpp \
@@ -109,7 +107,6 @@ unix {
 
 FORMS += \
     ui/widgetstrainvideo.ui \
-    ui/widgetanotationmanager.ui \
     ui/dialoganotation.ui \
     ui/dialogcreatecoordsystemradial.ui \
     ui/dialogvideodataclipmetadata.ui \
