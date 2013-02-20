@@ -34,8 +34,10 @@ public:
                  ListOfImageProcessing &frameProcessing,
                  PointTrackerBase &pointTracker,
                  StrainResultProcessingBase &resultProcessing,
-                 VectorF &weights)
-        : strain(strain),
+                 VectorF &weights,
+                 QObject *parent = 0)
+        : QObject(parent),
+          strain(strain),
           //coordSystem(coordSystem),
           frameProcessing(frameProcessing),
           pointTracker(pointTracker),
