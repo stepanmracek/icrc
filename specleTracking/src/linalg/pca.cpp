@@ -1,11 +1,11 @@
 #include "pca.h"
 
-PCA::PCA(std::vector<MatF> &vectors, int maxComponents)
+PCA::PCA(std::vector<MatF> &vectors, int maxComponents, QObject *parent) : BackProjectionBase(parent)
 {
     learn(vectors, maxComponents);
 }
 
-PCA::PCA(const char *path)
+PCA::PCA(const char *path, QObject *parent) : BackProjectionBase(parent)
 {
     deserialize(path);
 }

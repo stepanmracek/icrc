@@ -9,6 +9,8 @@
 
 class ICA : public BackProjectionBase
 {
+    Q_OBJECT
+
 private:
     MatF EDET;
     MatF EDETinv;
@@ -17,11 +19,11 @@ private:
     MatF variances;
 
 public:
-    ICA() {}
+    ICA(QObject *parent = 0) : BackProjectionBase(parent) { }
 
-    ICA(std::vector<MatF> &vectors, int independentComponentCount = 0, double eps = 1e-10, int maxIterations = 10000, bool debug = false);
+    ICA(std::vector<MatF> &vectors, int independentComponentCount = 0, double eps = 1e-10, int maxIterations = 10000, bool debug = false, QObject *parent = 0);
 
-    ICA(const char *path);
+    ICA(const char *path, QObject *parent = 0);
 
     int getModes() { return W.rows; }
 

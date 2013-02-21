@@ -8,7 +8,11 @@
 
 class ProjectionBase : public SerializableObject
 {
+    Q_OBJECT
+
 public:
+    ProjectionBase(QObject *parent = 0) : SerializableObject(parent) { }
+
     virtual MatF project(const MatF &vector) = 0;
 
     virtual std::vector<MatF> project(const std::vector<MatF> &vectors)

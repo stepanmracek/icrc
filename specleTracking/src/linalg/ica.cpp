@@ -158,12 +158,13 @@ void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount,
         std::cout << "ICA done" << std::endl;
 }
 
-ICA::ICA(std::vector<MatF> &vectors, int independentComponentCount, double eps, int maxIterations, bool debug)
+ICA::ICA(std::vector<MatF> &vectors, int independentComponentCount, double eps, int maxIterations, bool debug, QObject *parent) :
+    BackProjectionBase(parent)
 {
     learn(vectors, independentComponentCount, eps, maxIterations, debug);
 }
 
-ICA::ICA(const char *path)
+ICA::ICA(const char *path, QObject *parent) : BackProjectionBase(parent)
 {
     deserialize(path);
 }

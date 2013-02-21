@@ -3,8 +3,8 @@
 #include "shapeprocessing.h"
 #include <QDebug>
 
-LongitudinalStrain::LongitudinalStrain(ShapeNormalizerBase &shapeNormalizer) :
-    Strain(shapeNormalizer, 6, 5)
+LongitudinalStrain::LongitudinalStrain(ShapeNormalizerBase *shapeNormalizer, QObject *parent) :
+    Strain(shapeNormalizer, 6, 5, parent)
 {
     //segmentsCount = 6;
     //pointsPerSegment = 5;

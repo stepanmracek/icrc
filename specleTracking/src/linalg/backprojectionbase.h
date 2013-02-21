@@ -8,7 +8,11 @@
 
 class BackProjectionBase : public ProjectionBase
 {
+    Q_OBJECT
+
 public:
+    BackProjectionBase(QObject *parent = 0) : ProjectionBase(parent) { }
+
     virtual MatF backProject(const MatF &vector) = 0;
 
     virtual std::vector<MatF> backProject(const std::vector<MatF> &vectors)

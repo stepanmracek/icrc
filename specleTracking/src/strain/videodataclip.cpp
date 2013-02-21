@@ -1,7 +1,9 @@
 #include "videodataclip.h"
 
-VideoDataClip::VideoDataClip(const QString &path)
+VideoDataClip::VideoDataClip(const QString &path, QObject *parent) : VideoDataBase(parent)
 {
+    metadata = new VideoDataClipMetadata(this);
+
     cv::VideoCapture capture = cv::VideoCapture(path.toUtf8().data());
     cv::Mat rawFrame;
     while (capture.read(rawFrame))
@@ -12,8 +14,10 @@ VideoDataClip::VideoDataClip(const QString &path)
     }
 }
 
-VideoDataClip::VideoDataClip(const QString &path, const QString &metadataPath)
+VideoDataClip::VideoDataClip(const QString &path, const QString &metadataPath, QObject *parent) : VideoDataBase(parent)
 {
+    metadata = new VideoDataClipMetadata(this);
+
     cv::VideoCapture capture = cv::VideoCapture(path.toUtf8().data());
     cv::Mat rawFrame;
     while (capture.read(rawFrame))
@@ -23,12 +27,12 @@ VideoDataClip::VideoDataClip(const QString &path, const QString &metadataPath)
         frames.push_back(frame);
     }
 
-    metadata.deserialize(metadataPath);
+    metadata->deserialize(metadataPath);
 }
 
-VideoDataClip::VideoDataClip()
+VideoDataClip::VideoDataClip(QObject *parent) : VideoDataBase(parent)
 {
-
+    metadata = new VideoDataClipMetadata(this);
 }
 
 bool VideoDataClip::getNextFrame(Mat8 &frame)
@@ -56,34 +60,27 @@ void VideoDataClip::setIndex(int index)
     currentIndex = index;
 }
 
-void VideoDataClip::getRange(int start, int end, VideoDataClip &outClip) const
+void VideoDataClip::getRange(int start, int end, VideoDataClip *outClip) const
 {
-    outClip.frames.clear();
+    outClip->frames.clear();
 
     for (int i = 0; i < frames.size(); i++)
     {
         if (i >= start && i < end)
         {
-            outClip.frames.push_back(frames[i]);
+            outClip->frames.push_back(frames[i]);
         }
     }
-    for (int i = 0; i < metadata.beatIndicies.size(); i++)
+    for (int i = 0; i < metadata->beatIndicies.size(); i++)
     {
-        int beat = metadata.beatIndicies[i];
+        int beat = metadata->beatIndicies[i];
         if (beat >= start && beat < end)
         {
-            outClip.metadata.beatIndicies.push_back(beat);
+            outClip->metadata->beatIndicies.push_back(beat);
         }
     }
 
-    outClip.metadata.coordSystem = this->metadata.coordSystem;
-}
-
-VideoDataClip VideoDataClip::getRange(int start, int end) const
-{
-    VideoDataClip clip;
-    getRange(start, end, clip);
-    return clip;
+    outClip->getMetadata()->getCoordSystem()->init(metadata->getCoordSystem());
 }
 
 void VideoDataClip::getBeatRange(int currentIndex, int &beatStart, int &beatEnd) const
@@ -91,9 +88,9 @@ void VideoDataClip::getBeatRange(int currentIndex, int &beatStart, int &beatEnd)
     beatStart = 0;
     beatEnd = size() - 1;
 
-    for (int i = 0; i < metadata.beatIndicies.size(); i++)
+    for (int i = 0; i < metadata->beatIndicies.size(); i++)
     {
-        int beatIndex = metadata.beatIndicies[i];
+        int beatIndex = metadata->beatIndicies[i];
         if (beatIndex <= currentIndex && beatIndex >= beatStart)
         {
             beatStart = beatIndex;
@@ -106,10 +103,10 @@ void VideoDataClip::getBeatRange(int currentIndex, int &beatStart, int &beatEnd)
 }
 
 char *VideoDataClip::getSubClip(int index, QMap<int, Points> &shapes,
-                                VideoDataClip &outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap)
+                                VideoDataClip *outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap)
 {
     // determine current beat
-    if (metadata.beatIndicies.size() == 0)
+    if (metadata->beatIndicies.size() == 0)
     {
         return "Clip metadata are not set.";
     }
@@ -165,7 +162,7 @@ void VideoDataClipMetadata::deserialize(const QString &path)
     float angleEnd = (float)storage["angleEnd"];
     int resultMatCols = (int)storage["resultMatCols"];
     int resultMatRows = (int)storage["resultMatRows"];
-    coordSystem.init(center, startDistance, endDistance, angleStart, angleEnd, resultMatCols, resultMatRows);
+    coordSystem->init(center, startDistance, endDistance, angleStart, angleEnd, resultMatCols, resultMatRows);
 }
 
 void VideoDataClipMetadata::serialize(const QString &path)
@@ -180,11 +177,11 @@ void VideoDataClipMetadata::serialize(const QString &path)
     storage << "]";
 
     //void CoordSystemRadial::init(P center, float startDistance, float endDistance, float angleStart, float angleEnd, int resultMatCols, int resultMatRows)
-    storage << "center" << coordSystem.center;
-    storage << "startDistance" << coordSystem.startDistance;
-    storage << "endDistance" << coordSystem.endDistance;
-    storage << "angleStart" << coordSystem.angleStart;
-    storage << "angleEnd" << coordSystem.angleEnd;
-    storage << "resultMatCols" << coordSystem.resultMatCols;
-    storage << "resultMatRows" << coordSystem.resultMatRows;
+    storage << "center" << coordSystem->center;
+    storage << "startDistance" << coordSystem->startDistance;
+    storage << "endDistance" << coordSystem->endDistance;
+    storage << "angleStart" << coordSystem->angleStart;
+    storage << "angleEnd" << coordSystem->angleEnd;
+    storage << "resultMatCols" << coordSystem->resultMatCols;
+    storage << "resultMatRows" << coordSystem->resultMatRows;
 }

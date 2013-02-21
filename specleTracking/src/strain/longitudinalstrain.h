@@ -7,11 +7,13 @@
 
 class LongitudinalStrain : public Strain
 {
+    Q_OBJECT
+
 private:
     Spline spline;
 
 public:
-    LongitudinalStrain(ShapeNormalizerBase &shapeNormalizer);
+    LongitudinalStrain(ShapeNormalizerBase *shapeNormalizer, QObject *parent = 0);
 
     Points getRealShapePoints(Points &controlPoints, int shapeWidth);
 

@@ -26,36 +26,36 @@ void applyProcessing(Mat8 &frame, ListOfImageProcessing &filters)
     }
 }
 
-Points ShapeTracker::track(VectorOfImages &prevFrames, VectorOfShapes &prevShapes, Mat8 &nextFrame, CoordSystemBase &coordSystem)
+Points ShapeTracker::track(VectorOfImages &prevFrames, VectorOfShapes &prevShapes, Mat8 &nextFrame, CoordSystemBase *coordSystem)
 {
     unsigned int n = prevFrames.size();
     assert(n == prevShapes.size());
     assert(n <= weights.size());
 
     // transform input shapes according to the given CoordSystem
-    VectorOfShapes transformedPrevShapes = coordSystem.transformShapes(prevShapes);
+    VectorOfShapes transformedPrevShapes = coordSystem->transformShapes(prevShapes);
 
     // image processing
     VectorOfImages transformedPrevFrames;
     for (unsigned int i = 0; i < n; i++)
     {
-        Mat8 transformedPrevFrame = coordSystem.transform(prevFrames[i]);
+        Mat8 transformedPrevFrame = coordSystem->transform(prevFrames[i]);
         applyProcessing(transformedPrevFrame, frameProcessing);
         transformedPrevFrames.push_back(transformedPrevFrame);
     }
-    Mat8 transformedNextFrame = coordSystem.transform(nextFrame);
+    Mat8 transformedNextFrame = coordSystem->transform(nextFrame);
     applyProcessing(transformedNextFrame, frameProcessing);
 
     // track
     Points transformedNextPoints;
-    pointTracker.track(transformedPrevFrames, weights, transformedNextFrame,
+    pointTracker->track(transformedPrevFrames, weights, transformedNextFrame,
                        transformedPrevShapes, transformedNextPoints);
 
     // back-transform to original space
-    Points nextPointsInOriginalSpace = coordSystem.backTransformPoints(transformedNextPoints);
+    Points nextPointsInOriginalSpace = coordSystem->backTransformPoints(transformedNextPoints);
 
     // normalize points
-    Points normalizedPoints = strain.shapeNormalizer.normalize(nextPointsInOriginalSpace, nextFrame);
+    Points normalizedPoints = strain->getShapeNormalizer()->normalize(nextPointsInOriginalSpace, nextFrame);
 
     return normalizedPoints;
 }
@@ -149,11 +149,11 @@ Points ShapeTracker::track(VectorOfImages &prevFrames, VectorOfShapes &prevShape
 
 ShapeTracker *ShapeTracker::getDummyTracker()
 {
-    ShapeNormalizerPass normalizer;
-    LongitudinalStrain strain(normalizer);
+    ShapeNormalizerPass *normalizer = new ShapeNormalizerPass();
+    LongitudinalStrain *strain = new LongitudinalStrain(normalizer);
     ListOfImageProcessing listOfProcessing;
-    PointTrackerOpticalFlow pointTracker(20);
-    StrainResultProcessingPass resultProcessing;
+    PointTrackerOpticalFlow *pointTracker = new PointTrackerOpticalFlow(20);
+    StrainResultProcessingPass *resultProcessing = new StrainResultProcessingPass();
     VectorF weights; weights.push_back(1.0);
     return new ShapeTracker(strain, listOfProcessing, pointTracker, resultProcessing, weights);
 }

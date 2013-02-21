@@ -14,18 +14,32 @@
 #include "linalg/pca.h"
 //#include "strain/coordsystem.h"
 
-class StatisticalShapeModel
+class StatisticalShapeModel : public QObject
 {
-public:
-    BackProjectionBase &model;
+    Q_OBJECT
 
-    StatisticalShapeModel(BackProjectionBase &modelToLearn, VectorOfShapes &shapes);
-    StatisticalShapeModel(BackProjectionBase &learnedModel) : model(learnedModel) {}
+private:
+    BackProjectionBase * model;
+
+public:
+    StatisticalShapeModel(BackProjectionBase *modelToLearn, VectorOfShapes &shapes, QObject *parent = 0);
+    StatisticalShapeModel(BackProjectionBase *learnedModel, QObject *parent = 0);
+
+    void setModel(BackProjectionBase *model)
+    {
+        if (this->model) delete this->model;
+        this->model = model;
+    }
+
+    const BackProjectionBase *getModel() const
+    {
+        return this->model;
+    }
 
     Points normalize(Points &input);
     Points iterativeNormalize(Points &input);
 
-    static void showStatisticalShape(BackProjectionBase &model);
+    static void showStatisticalShape(BackProjectionBase *model);
 };
 
 #endif /* STATISTICALSHAPEMODEL_H_ */

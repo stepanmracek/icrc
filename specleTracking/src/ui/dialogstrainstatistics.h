@@ -21,7 +21,7 @@ public:
     explicit DialogStrainStatistics(QWidget *parent = 0);
     ~DialogStrainStatistics();
 
-    void SetData(StrainStatistics *strainStatistics, ShapeTracker *tracker, VideoDataClip &clip, QMap<int, Points> &shapes);
+    void SetData(StrainStatistics *strainStatistics, ShapeTracker *tracker, VideoDataClip *clip, QMap<int, Points> &shapes);
     
 private:
     Ui::DialogStrainStatistics *ui;

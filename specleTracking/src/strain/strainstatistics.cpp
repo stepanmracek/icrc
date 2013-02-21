@@ -5,7 +5,7 @@
 
 #include "linalg/vecf.h"
 
-StrainStatistics::StrainStatistics(Strain &strainModel, VectorOfShapes &shapes)
+StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
 {
     unsigned int shapesCount = shapes.size();
     assert(shapesCount > 0);
@@ -13,7 +13,7 @@ StrainStatistics::StrainStatistics(Strain &strainModel, VectorOfShapes &shapes)
     unsigned int pointsCount = shapes.front().size();
     assert (pointsCount > 0);
 
-    strainForSegments = std::vector<VectorF>(strainModel.segmentsCount);
+    strainForSegments = std::vector<VectorF>(strainModel->segmentsCount);
 
     // Strain
     for (VectorOfShapes::iterator it = shapes.begin(); it != shapes.end(); ++it)
@@ -21,14 +21,14 @@ StrainStatistics::StrainStatistics(Strain &strainModel, VectorOfShapes &shapes)
         Points &shape = *it;
         assert(pointsCount == shape.size());
 
-        P base = strainModel.getBasePoint(shape);
-        P apex = strainModel.getApexPoint(shape);
+        P base = strainModel->getBasePoint(shape);
+        P apex = strainModel->getApexPoint(shape);
         float s = Common::eucl(base, apex);
 
-        for (int segment = 0; segment < strainModel.segmentsCount; segment++)
+        for (int segment = 0; segment < strainModel->segmentsCount; segment++)
         {
-            int p = segment*(strainModel.pointsPerSegment*3)+1;
-            int n = (segment+1)*(strainModel.pointsPerSegment*3)+1;
+            int p = segment*(strainModel->pointsPerSegment*3)+1;
+            int n = (segment+1)*(strainModel->pointsPerSegment*3)+1;
 
             float s = Common::eucl(shape[p], shape[n]);
             strainForSegments[segment].push_back(s);
@@ -39,7 +39,7 @@ StrainStatistics::StrainStatistics(Strain &strainModel, VectorOfShapes &shapes)
 
     // Strain rate
     strainRate = Common::deltas(strain);
-    for (unsigned int i = 0; i < strainModel.segmentsCount; i++)
+    for (unsigned int i = 0; i < strainModel->segmentsCount; i++)
     {
         strainRateForSegments.push_back(Common::deltas(strainForSegments[i]));
     }

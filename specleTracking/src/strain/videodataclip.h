@@ -12,9 +12,20 @@
 
 class VideoDataClipMetadata : public SerializableObject
 {
+    Q_OBJECT
+
+private:
+    CoordSystemRadial *coordSystem;
+
 public:
+    VideoDataClipMetadata(QObject *parent) : SerializableObject(parent)
+    {
+        coordSystem = new CoordSystemRadial(this);
+    }
+
     QVector<int> beatIndicies;
-    CoordSystemRadial coordSystem;
+
+    CoordSystemRadial *getCoordSystem() { return coordSystem; }
 
     void serialize(const QString &path);
     void deserialize(const QString &path);
@@ -22,23 +33,26 @@ public:
 
 class VideoDataClip : public VideoDataBase
 {
+    Q_OBJECT
+
 private:
     int currentIndex;
 
-public:
-    VideoDataClip();
-    VideoDataClip(const QString &path);
-    VideoDataClip(const QString &path, const QString &metadataPath);
+    VideoDataClipMetadata *metadata;
 
-    VideoDataClip getRange(int start, int end) const;
-    void getRange(int start, int end, VideoDataClip &outClip) const;
+public:
+    VideoDataClip(QObject *parent = 0);
+    VideoDataClip(const QString &path, QObject *parent = 0);
+    VideoDataClip(const QString &path, const QString &metadataPath, QObject *parent = 0);
+
+    VectorOfImages frames;
+    VideoDataClipMetadata *getMetadata() { return metadata; }
+
+    void getRange(int start, int end, VideoDataClip *outClip) const;
     void getBeatRange(int currentIndex, int &beatStart, int &beatEnd) const;
 
     char *getSubClip(int index, QMap<int, Points> &shapes,
-                     VideoDataClip &outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap);
-
-    VectorOfImages frames;
-    VideoDataClipMetadata metadata;
+                     VideoDataClip *outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap);
 
     virtual void setIndex(int index);
     virtual bool getNextFrame(Mat8 &frame);

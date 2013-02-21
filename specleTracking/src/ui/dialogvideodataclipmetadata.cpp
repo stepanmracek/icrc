@@ -1,12 +1,12 @@
 #include "dialogvideodataclipmetadata.h"
 #include "ui_dialogvideodataclipmetadata.h"
 
-DialogVideoDataClipMetadata::DialogVideoDataClipMetadata(VideoDataClipMetadata metadata, QWidget *parent) :
+DialogVideoDataClipMetadata::DialogVideoDataClipMetadata(VideoDataClipMetadata *metadata, QWidget *parent) :
     QDialog(parent), metadata(metadata), ui(new Ui::DialogVideoDataClipMetadata)
 {
     ui->setupUi(this);
 
-    model = new ModelListOfInts(this->metadata.beatIndicies);
+    model = new ModelListOfInts(this->metadata->beatIndicies);
     ui->listView->setModel(model);
 }
 

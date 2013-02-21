@@ -127,7 +127,7 @@
         <item>
          <widget class="QPushButton" name="btnMetadata">
           <property name="text">
-           <string>Metadata</string>
+           <string>Beat Indicies</string>
           </property>
          </widget>
         </item>

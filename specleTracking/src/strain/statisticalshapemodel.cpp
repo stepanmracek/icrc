@@ -18,9 +18,12 @@
 #include "linalg/procrustes.h"
 #include "linalg/vecf.h"
 
-StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase &modelToLearn, VectorOfShapes &shapes) :
-    model(modelToLearn)
+StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *modelToLearn, VectorOfShapes &shapes, QObject *parent) :
+    QObject(parent)
 {
+    model = 0;
+    setModel(modelToLearn);
+
     if (shapes.size() <= 2)
     {
         std::cout << "Not enough samples to learn" << std::endl;
@@ -35,18 +38,25 @@ StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase &modelToLearn, V
     }
 
     Procrustes::procrustesAnalysis(matricies, true, 1e-20, 10000);
-    model.learn(matricies);
+    model->learn(matricies);
+}
+
+StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *learnedModel, QObject *parent) :
+    QObject(parent)
+{
+    model = 0;
+    setModel(learnedModel);
 }
 
 Points StatisticalShapeModel::iterativeNormalize(Points &input)
 {
     MatF inputMat = Common::pointsToMatF(input);
-    MatF meanMat = model.getMean();
+    MatF meanMat = model->getMean();
     assert (inputMat.rows == meanMat.rows);
 
     // initialize the model parametres to zeros
-    MatF params = MatF::zeros(model.getModes(), 1);
-    MatF prevParams = MatF::zeros(model.getModes(), 1);
+    MatF params = MatF::zeros(model->getModes(), 1);
+    MatF prevParams = MatF::zeros(model->getModes(), 1);
 
     TranslationCoefs translation(0, 0);
     ScaleAndRotateCoefs rotAndScale(1, 0);
@@ -57,7 +67,7 @@ Points StatisticalShapeModel::iterativeNormalize(Points &input)
     while (!end)
     {
         // generate shape instance
-        instance = model.backProject(params);
+        instance = model->backProject(params);
 
         MatF inputClone = inputMat.clone();
         translation = Procrustes::centralizedTranslation(inputClone).inv();
@@ -71,10 +81,10 @@ Points StatisticalShapeModel::iterativeNormalize(Points &input)
         //VecF::mul(inputClone, VecF::dot(inputClone, meanMat));
 
         // update model parametres
-        params = model.project(inputClone);
+        params = model->project(inputClone);
 
         // 3*sigma normalization
-        model.threeSigmaNormalization(params);
+        model->threeSigmaNormalization(params);
 
         // finished?
         MatF paramsDiff = prevParams-params;
@@ -94,7 +104,7 @@ Points StatisticalShapeModel::iterativeNormalize(Points &input)
 Points StatisticalShapeModel::normalize(Points &input)
 {
     MatF inputMat = Common::pointsToMatF(input);
-    MatF meanMat = model.getMean();
+    MatF meanMat = model->getMean();
     assert (inputMat.rows == meanMat.rows);
 
     // Align to the mean shape
@@ -104,11 +114,11 @@ Points StatisticalShapeModel::normalize(Points &input)
     Procrustes::rotateAndScale(inputMat, rotAndScaleC);
 
     // 3*sigma normalization
-    MatF params = model.project(inputMat);
-    model.threeSigmaNormalization(params);
+    MatF params = model->project(inputMat);
+    model->threeSigmaNormalization(params);
 
     // Back-projection
-    MatF normalizedShapeMat = model.backProject(params);
+    MatF normalizedShapeMat = model->backProject(params);
 
     // Inverse transform
     ScaleAndRotateCoefs invRotAndScaleC = rotAndScaleC.inv();
@@ -122,23 +132,23 @@ Points StatisticalShapeModel::normalize(Points &input)
 
 struct SSMBackprojectData
 {
-    SSMBackprojectData(BackProjectionBase &model) : model(model)
+    SSMBackprojectData(BackProjectionBase *model) : model(model)
 	{
-        parameters = MatF::zeros(model.getModes(), 1);
+        parameters = MatF::zeros(model->getModes(), 1);
 		winname = "shape";
 	}
 
 	std::string winname;
 	int trackbarValues[10];
 	MatF parameters;
-    BackProjectionBase &model;
+    BackProjectionBase *model;
 	Spline spline;
 };
 
 void drawShape(SSMBackprojectData &data)
 {
 	Mat8 white = Mat8::ones(300,300)*255;
-    MatF shapeMat = data.model.backProject(data.parameters);
+    MatF shapeMat = data.model->backProject(data.parameters);
 
     ScaleAndRotateCoefs rot(300, 0);
 	Procrustes::rotateAndScale(shapeMat, rot);
@@ -165,14 +175,14 @@ void onParameterChange(int, void* param)
     	ss << i;
     	std::string tbName = ss.str();
         float value = cv::getTrackbarPos(tbName, data->winname);
-        value = (value-5.0)/5.0 * (3*sqrt(data->model.getVariance(i)));
+        value = (value-5.0)/5.0 * (3*sqrt(data->model->getVariance(i)));
         data->parameters(i) = value;
     }
 
     drawShape(*data);
 }
 
-void StatisticalShapeModel::showStatisticalShape(BackProjectionBase &model)
+void StatisticalShapeModel::showStatisticalShape(BackProjectionBase *model)
 {
 	std::cout << "shape loaded" << std::endl;
 

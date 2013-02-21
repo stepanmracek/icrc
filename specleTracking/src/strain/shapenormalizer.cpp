@@ -36,7 +36,7 @@ Points ShapeNormalizerIterConfStatShape::normalize(Points &points, Mat8 &frame)
 
         // normalize
         //std::cout << "  preNormalize" << std::endl;
-        Points newPositions = model.iterativeNormalize(result);
+        Points newPositions = model->iterativeNormalize(result);
         //std::cout << "  postNormalize" << std::endl;
 
         // for each point

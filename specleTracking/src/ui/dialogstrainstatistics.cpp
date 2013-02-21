@@ -13,7 +13,7 @@ DialogStrainStatistics::~DialogStrainStatistics()
     delete ui;
 }
 
-void DialogStrainStatistics::SetData(StrainStatistics *strainStatistics, ShapeTracker *tracker, VideoDataClip &clip, QMap<int, Points> &shapes)
+void DialogStrainStatistics::SetData(StrainStatistics *strainStatistics, ShapeTracker *tracker, VideoDataClip *clip, QMap<int, Points> &shapes)
 {
     ui->mainStrainPlot->addData(strainStatistics->strain, "Average strain", Qt::white);
     ui->mainStrainRatePlot->addData(strainStatistics->strainRate, "Average strain rate", Qt::white);

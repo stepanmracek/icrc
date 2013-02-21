@@ -14,14 +14,14 @@ class DialogCreateCoordSystemRadial : public QDialog
 {
     Q_OBJECT
 
-    CoordSystemRadial coordSystem;
+    CoordSystemRadial *coordSystem;
     Mat8 originalImage;
     
 public:
-    explicit DialogCreateCoordSystemRadial(Mat8 &image, CoordSystemRadial coordSystem, QWidget *parent = 0);
+    explicit DialogCreateCoordSystemRadial(Mat8 &image, CoordSystemRadial *coordSystem, QWidget *parent = 0);
     ~DialogCreateCoordSystemRadial();
 
-    CoordSystemRadial getNewCoordSystem();
+    CoordSystemRadial *getNewCoordSystem();
     
 public slots:
     void doubleValueChanged(double arg1);
@@ -35,7 +35,7 @@ private:
     Ui::DialogCreatCoordSystemRadial *ui;
 
     void recalculate();
-    void drawResult(CoordSystemRadial &c);
+    void drawResult(CoordSystemRadial *c);
     bool check();
 };
 

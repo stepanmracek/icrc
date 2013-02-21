@@ -23,7 +23,7 @@ class WidgetStrainVideo : public QWidget
     Q_OBJECT
 
 protected:
-    VideoDataClip clip;
+    VideoDataClip *clip;
     
 public:
     explicit WidgetStrainVideo(QWidget *parent = 0);
@@ -33,9 +33,9 @@ public:
 
     void setTracker(ShapeTracker *tracker);
 
-    void setClip(VideoDataClip &clip);
+    void setClip(VideoDataClip *clip);
 
-    VideoDataClip &getClip()
+    VideoDataClip *getClip()
     {
         return clip;
     }

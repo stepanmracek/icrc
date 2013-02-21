@@ -1,88 +1,90 @@
 #ifndef SHAPENORMALIZER_H
 #define SHAPENORMALIZER_H
 
+#include <QObject>
+
 #include "linalg/common.h"
 #include "linalg/backprojectionbase.h"
 #include "statisticalshapemodel.h"
 
-class ShapeNormalizerBase
+class ShapeNormalizerBase : public QObject
 {
+    Q_OBJECT
+
 public:
+    ShapeNormalizerBase(QObject *parent = 0) : QObject(parent) { }
+
     virtual Points normalize(Points &points, Mat8 &frame) = 0;
-    //virtual int getNumberOfPoints() = 0;
 };
 
 class ShapeNormalizerStatisticalShape : public ShapeNormalizerBase
 {
+    Q_OBJECT
+
 private:
-    StatisticalShapeModel &model;
+    StatisticalShapeModel *model;
 
 public:
-    ShapeNormalizerStatisticalShape(StatisticalShapeModel &model) : model(model) {}
+    ShapeNormalizerStatisticalShape(StatisticalShapeModel *model, QObject *parent = 0) : ShapeNormalizerBase(parent), model(model)
+    {
+        model->setParent(this);
+    }
 
     Points normalize(Points &points, Mat8 &)
     {
-        return model.normalize(points);
+        return model->normalize(points);
     }
-
-    /*int getNumberOfPoints()
-    {
-        return model.model.getMean().rows/2;
-    }*/
 };
 
 class ShapeNormalizerIterativeStatisticalShape : public ShapeNormalizerBase
 {
+    Q_OBJECT
+
 private:
-    StatisticalShapeModel &model;
+    StatisticalShapeModel *model;
 
 public:
-    ShapeNormalizerIterativeStatisticalShape(StatisticalShapeModel &model) : model(model) {}
+    ShapeNormalizerIterativeStatisticalShape(StatisticalShapeModel *model, QObject *parent = 0) : ShapeNormalizerBase(parent), model(model)
+    {
+        model->setParent(this);
+    }
 
     Points normalize(Points &points, Mat8 &)
     {
-        return model.iterativeNormalize(points);
+        return model->iterativeNormalize(points);
     }
-
-    /*int getNumberOfPoints()
-    {
-        return model.model.getMean().rows/2;
-    }*/
 };
 
 class ShapeNormalizerIterConfStatShape : public ShapeNormalizerBase
 {
+    Q_OBJECT
+
 private:
-    StatisticalShapeModel &model;
+    StatisticalShapeModel *model;
 
 public:
-    ShapeNormalizerIterConfStatShape(StatisticalShapeModel &model) : model(model) {}
+    ShapeNormalizerIterConfStatShape(StatisticalShapeModel *model, QObject *parent = 0) : ShapeNormalizerBase(parent), model(model)
+    {
+        model->setParent(this);
+    }
 
     Points normalize(Points &points, Mat8 &frame);
-
-    /*int getNumberOfPoints()
-    {
-        return model.model.getMean().rows/2;
-    }*/
 };
 
 class ShapeNormalizerPass : public ShapeNormalizerBase
 {
+    Q_OBJECT
+
 private:
     //int numberOfPoints;
 
 public:
-    ShapeNormalizerPass(/*int numberOfPoints*/) /*: numberOfPoints(numberOfPoints)*/ {}
+    ShapeNormalizerPass(QObject *parent = 0) : ShapeNormalizerBase(parent) { }
 
     Points normalize(Points &points, Mat8 &)
     {
         return points;
     }
-
-    /*int getNumberOfPoints()
-    {
-        return numberOfPoints;
-    }*/
 };
 
 #endif // SHAPENORMALIZER_H

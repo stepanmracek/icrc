@@ -9,6 +9,7 @@ WidgetStrainVideo::WidgetStrainVideo(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::WidgetStrainVideo)
 {
+    clip = 0;
     ui->setupUi(this);
     currentIndex = 0;
 }
@@ -20,12 +21,12 @@ WidgetStrainVideo::~WidgetStrainVideo()
 
 void WidgetStrainVideo::display(int index)
 {
-    Mat8 frame = clip.frames[index];
+    Mat8 &frame = clip->frames[index];
     QPixmap image = UIUtils::Mat8ToQPixmap(frame);
     ui->widgetResult->setImage(image);
     ui->lblIndex->setText(QString::number(index));
     if (shapes.contains(index))
-        ui->widgetResult->setResultPoints(shapes[index], this->clip.metadata.coordSystem);
+        ui->widgetResult->setResultPoints(shapes[index], clip->getMetadata()->getCoordSystem());
     emit displayIndexChanged(index);
 }
 
@@ -38,28 +39,29 @@ void WidgetStrainVideo::on_btnPrev_clicked()
 
 void WidgetStrainVideo::on_btnNext_clicked()
 {
-    if (currentIndex >= clip.size()-2) return;
+    if (currentIndex >= clip->size()-2) return;
 
     ui->horizontalSlider->setValue(currentIndex + 1);
 }
 
 void WidgetStrainVideo::on_horizontalSlider_valueChanged(int value)
 {
-    if (clip.size() == 0) return;
-    if (value >= clip.size()) return;
+    if (!clip) return;
+    if (clip->size() == 0) return;
+    if (value >= clip->size()) return;
 
-    Mat8 frame = clip.frames[value];
+    Mat8 &frame = clip->frames[value];
     QPixmap image = UIUtils::Mat8ToQPixmap(frame);
     ui->widgetResult->setImage(image);
     currentIndex = value;
 
     if (shapes.contains(currentIndex))
     {
-        ui->widgetResult->setResultPoints(Points(shapes[currentIndex]), this->clip.metadata.coordSystem);
+        ui->widgetResult->setResultPoints(Points(shapes[currentIndex]), clip->getMetadata()->getCoordSystem());
     }
     else
     {
-        ui->widgetResult->setResultPoints(Points(), this->clip.metadata.coordSystem);
+        ui->widgetResult->setResultPoints(Points(), clip->getMetadata()->getCoordSystem());
     }
 }
 
@@ -69,10 +71,10 @@ void WidgetStrainVideo::load(const QString &path, const QString &filename)
     QString fullPath = path + QDir::separator() + filename;
     QString fullMetadataPath = fullPath + "_metadata";
     currentFilename = filename;
-    VideoDataClip loadedClip(fullPath, fullMetadataPath);
+    VideoDataClip *loadedClip = new VideoDataClip(fullPath, fullMetadataPath);
     setClip(loadedClip);
 
-    QPixmap image = UIUtils::Mat8ToQPixmap(clip.frames[0]);
+    QPixmap image = UIUtils::Mat8ToQPixmap(clip->frames[0]);
     ui->widgetResult->setImage(image);
 
     shapes.clear();
@@ -83,7 +85,7 @@ void WidgetStrainVideo::load(const QString &path, const QString &filename)
 
 void WidgetStrainVideo::serializeShapes(const QString &path)
 {
-    if (clip.size() == 0 || shapes.size() == 0) return;
+    if (!clip || clip->size() == 0 || shapes.size() == 0) return;
 
     qDebug() << "Saving shapes for" << currentFilename;
     QString fullPath = path + QDir::separator() + currentFilename + "_shapemap";
@@ -92,11 +94,11 @@ void WidgetStrainVideo::serializeShapes(const QString &path)
 
 void WidgetStrainVideo::serializeMetadata(const QString &path)
 {
-    if (clip.size() == 0) return;
+    if (!clip || clip->size() == 0) return;
 
     qDebug() << "Saving metadata for" << currentFilename;
     QString fullPath = path + QDir::separator() + currentFilename + "_metadata";
-    clip.metadata.serialize(fullPath);
+    clip->getMetadata()->serialize(fullPath);
 }
 
 void WidgetStrainVideo::deserializeShapes(const QString &path)
@@ -119,21 +121,23 @@ void WidgetStrainVideo::setTracker(ShapeTracker *tracker)
     ui->widgetResult->setTracker(tracker);
 }
 
-void WidgetStrainVideo::setClip(VideoDataClip &clip)
+void WidgetStrainVideo::setClip(VideoDataClip *clip)
 {
+    //if (clip) delete this->clip;
     this->clip = clip;
+    clip->setParent(this);
     ui->horizontalSlider->setMinimum(0);
-    ui->horizontalSlider->setMaximum(clip.size()-1);
+    ui->horizontalSlider->setMaximum(clip->size()-1);
 }
 
 void WidgetStrainVideo::setControlPoints(Points controlPoints, int shapeWidth)
 {
-    ui->widgetResult->setControlPoints(controlPoints, shapeWidth, this->clip.metadata.coordSystem);
+    ui->widgetResult->setControlPoints(controlPoints, shapeWidth, clip->getMetadata()->getCoordSystem());
     shapes[currentIndex] = ui->widgetResult->getResultPoints();
 }
 
 void WidgetStrainVideo::setResultPoints(Points points)
 {
-    ui->widgetResult->setResultPoints(points, this->clip.metadata.coordSystem);
+    ui->widgetResult->setResultPoints(points, clip->getMetadata()->getCoordSystem());
     shapes[currentIndex] = points;
 }

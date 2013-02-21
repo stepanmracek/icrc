@@ -21,33 +21,42 @@ class ShapeTracker : public QObject
 {
     Q_OBJECT
 
+private:
+    Strain *strain;
+    PointTrackerBase *pointTracker;
+    StrainResultProcessingBase *resultProcessing;
+
 public:
-    //CoordSystemBase *coordSystem;
-    ListOfImageProcessing &frameProcessing;
-    PointTrackerBase &pointTracker;
-    StrainResultProcessingBase &resultProcessing;
-    Strain &strain;  
+    ListOfImageProcessing frameProcessing;
     VectorF weights;
 
-    ShapeTracker(Strain &strain,
-                 //CoordSystemBase *coordSystem,
-                 ListOfImageProcessing &frameProcessing,
-                 PointTrackerBase &pointTracker,
-                 StrainResultProcessingBase &resultProcessing,
-                 VectorF &weights,
+    ShapeTracker(Strain *strain,
+                 ListOfImageProcessing frameProcessing,
+                 PointTrackerBase *pointTracker,
+                 StrainResultProcessingBase *resultProcessing,
+                 VectorF weights,
                  QObject *parent = 0)
         : QObject(parent),
           strain(strain),
-          //coordSystem(coordSystem),
           frameProcessing(frameProcessing),
           pointTracker(pointTracker),
           resultProcessing(resultProcessing),
           weights(weights)
     {
-
+        pointTracker->setParent(this);
+        resultProcessing->setParent(this);
+        strain->setParent(this);
+        for(ListOfImageProcessing::iterator it = frameProcessing.begin(); it != frameProcessing.end(); ++it)
+        {
+            (*it)->setParent(this);
+        }
     }
 
-    Points track(VectorOfImages &prevFrames, VectorOfShapes &prevShapes, Mat8 &nextFrame, CoordSystemBase &coordSystem);
+    Strain *getStrain() { return strain; }
+    PointTrackerBase *getPointTracker() { return pointTracker; }
+    StrainResultProcessingBase *getResultProcessing() { return resultProcessing; }
+
+    Points track(VectorOfImages &prevFrames, VectorOfShapes &prevShapes, Mat8 &nextFrame, CoordSystemBase *coordSystem);
 
     //static Points track(Mat8 &prevFrame, Points &prevPoints, Mat8 &nextFrame, Strain &strain, CoordSystemBase *coordSystem, ListOfImageProcessing &frameProcessing, PointTrackerBase &pointTracker);
 

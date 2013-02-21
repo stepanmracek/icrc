@@ -72,31 +72,13 @@ public:
 
     static void testLearnPCAShape()
     {
-        PCA pca;
+        PCA *pca = new PCA();
         QMap<int, Points> map = Serialization::readShapeMap("test/test_shapemap_26");
         VectorOfShapes shapes = Common::MapToVectorOfShapes(map);
 
         StatisticalShapeModel model(pca, shapes);
         StatisticalShapeModel::showStatisticalShape(pca);
-        pca.serialize("test/pca-shape-radialBase");
-    }
-
-    static void testTracking()
-    {
-        VideoDataClip data("test.wmv");
-        Mat8 firstFrame;
-        data.getNextFrame(firstFrame);
-        Points initialPoints = Anotation::anotateFromFrame(firstFrame);
-        CoordSystemRadial coord(P(263,0), P(632,258), P(10,360), 50, 200, 400);
-        PointTrackerOpticalFlow tracker(20);
-        PCA pca("pca-shape-radialBase");
-        StatisticalShapeModel shapeModel(pca);
-        ShapeNormalizerStatisticalShape normalizer(shapeModel);
-        ListOfImageProcessing processing;
-        StrainResultProcessingPass postProcessing;
-        LongitudinalStrain strain(normalizer);
-
-        //ShapeTracker::track(data, strain, processing, tracker, postProcessing, initialPoints, true);
+        pca->serialize("test/pca-shape-radialBase");
     }
 
     static void testStatisticalShapeChanges()
@@ -126,82 +108,6 @@ public:
             std::cout << "  difference between original and predicted: " << absDiff << std::endl;
             //Common::printMatrix(diff);
         }
-    }
-
-    static void testAutomaticTracking()
-    {
-        VideoDataClip data("test.wmv");
-
-        CoordSystemRadial coord(P(263,0), P(632,258), P(10,360), 50, 200, 400);
-        PCA pca("pca");
-        StatisticalShapeModel shapeModel(pca);
-        ShapeNormalizerIterativeStatisticalShape normalizer(shapeModel);
-        PointTrackerOpticalFlow tracker(20);
-        ListOfImageProcessing processing;
-        StrainResultProcessingPass postProcessing;
-        LongitudinalStrain strain(normalizer);
-        Points input;
-
-        //VectorOfShapes resultShapes = ShapeTracker::track(data, strain, processing, tracker, postProcessing, input);
-        //Serialization::serialize(resultShapes, "trackingResult");
-    }
-
-    /*static int testStatistics()
-    {
-        VectorOfShapes resultShapes = Serialization::readShapeList("trackingResult");
-        VideoDataClip video("test.wmv");
-        StrainStatistics statistics = StrainStatistics(resultShapes);
-
-        QApplication app(0, 0);
-        WidgetStrainStatistics w;
-        QMap<int, Points> map = Common::shapeListToMap(resultShapes);
-        Strain strain()
-        w.SetData(&statistics, );
-        w.SetData(&statistics, &video, video. &resultShapes, map);
-        w.show();
-
-        return app.exec();
-    }*/
-
-    static void testOpticalFlowTracking()
-    {
-        VectorOfShapes shapes = Serialization::readShapeList("anotated-50");
-        VideoDataClip data("test.wmv");
-        Spline spline;
-
-        VectorOfShapes uniformShapes;
-        int n = shapes.size();
-        for (int i = 0; i < n; i++)
-        {
-            Points uniformShape = spline.uniformDistance(shapes[i], 10, true);
-            uniformShapes.push_back(uniformShape);
-        }
-
-        PCA pca;
-        CoordSystemRadial coord(P(263,0), P(632,258), P(10,360), 50, 200, 400);
-        StatisticalShapeModel model(pca, uniformShapes);
-
-        PointTrackerNeighbourOpticalFlow tracker;
-        //ShapeNormalizerStatisticalShape normalizer(model);
-        ShapeNormalizerIterConfStatShape normalizer(model);
-
-        //ShapeNormalizerPass normalizer2(initialPoints.size());
-
-        ListOfImageProcessing processing;
-        /*ImageFilterMedian median;
-        ImageFilterHistEq histEq;
-        ImageFilterNlMeansDenoise nlMeans(10);
-        processing.push_back(&median);
-        processing.push_back(&histEq);
-        processing.push_back(&nlMeans);*/
-
-        StrainResProcFloatingAvg postProcessing(1);
-        //StrainResultProcessingPass postProcessing;
-
-        LongitudinalStrain strain(normalizer);
-
-        //VectorOfShapes resultShapes = ShapeTracker::track(data, strain, processing, tracker, postProcessing, shapes[0], true);
-        //Serialization::serialize(resultShapes, "trackingResult");
     }
 
     static void testImageProcessing()
@@ -236,92 +142,20 @@ public:
         }
     }
 
-    static void testOpticalFlowIntensityMap()
-    {
-        VideoDataClip data("test.wmv");
-        CoordSystemRadial coord(P(263,0), P(632,258), P(10,360), 50, 200, 400);
-
-        PointTrackerNeighbourOpticalFlow t(500);
-        for (int i = 1; i < data.size(); i++)
-        {
-            Mat8 prev = data.frames[i-1];
-            Mat8 next = data.frames[i];
-
-            Mat8 transformedPrev = coord.transform(prev);
-            Mat8 transformedNext = coord.transform(next);
-
-            MatF intensity = t.trackIntensity(transformedPrev, transformedNext);
-
-            float min, max;
-            Common::getMinMax(intensity, min, max);
-            intensity = (intensity-min)/(max - min);
-
-            cv::imshow("intensity", intensity);
-            cv::waitKey(1);
-        }
-    }
-
-    static int testQtAnotation(int argc, char *argv[])
-    {
-        QApplication app(argc, argv);
-
-        VideoDataClip data("test.wmv");
-        QPixmap image = UIUtils::Mat8ToQPixmap(data.frames[0]);
-
-        WidgetAnotation w;
-        w.setImage(image);
-        w.show();
-
-        return app.exec();
-    }
-
-    static void testLongitudinalStrain()
-    {
-        ShapeNormalizerPass shapeNorm;
-        LongitudinalStrain ls(shapeNorm);
-
-        VideoDataClip data("test.wmv");
-        Points basePoints = Anotation::anotateFromFrame(data.frames[0]);
-
-        Points shapePoints = ls.getRealShapePoints(basePoints, 20);
-
-        Anotation::showShape(data.frames[0], shapePoints);
-    }
-
-    static int testQtAnotationAndDisplay(int argc, char *argv[])
-    {
-        QApplication app(argc, argv);
-
-        VideoDataClip data("test.wmv");
-        QPixmap image = UIUtils::Mat8ToQPixmap(data.frames[0]);
-
-        WidgetAnotation w;
-        w.setImage(image);
-        w.show();
-
-        return app.exec();
-    }
-
     static int testQtManager(int argc, char *argv[])
     {
-        PCA pca("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
-        StatisticalShapeModel model(pca);
-        ShapeNormalizerIterativeStatisticalShape normalizer(model);
+        PCA *pca = new PCA("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
+        StatisticalShapeModel *model = new StatisticalShapeModel(pca);
+        ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
         ListOfImageProcessing processing;
-        StrainResProcFloatingAvg postProcessing(1);
-        PointTrackerOpticalFlow pointTracker(20);
-        LongitudinalStrain ls(normalizer);
+        StrainResProcFloatingAvg *postProcessing = new StrainResProcFloatingAvg(1);
+        PointTrackerOpticalFlow *pointTracker = new PointTrackerOpticalFlow(20);
+        LongitudinalStrain *ls = new LongitudinalStrain(normalizer);
         float weightValues[] = {1.0f}; // {10.0, 5.0, 3.0, 2.0, 1.0};
         VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
         ShapeTracker tracker(ls, processing, pointTracker, postProcessing, weights);
 
-        /*ShapeNormalizerPass normalizer;
-        LongitudinalStrain strain(normalizer);
-        ListOfImageProcessing listOfProcessing;
-        PointTrackerOpticalFlow pointTracker(20);
-        StrainResultProcessingPass resultProcessing;
-        VectorF weights; weights.push_back(1.0);
-        ShapeTracker tracker(strain, listOfProcessing, pointTracker, resultProcessing, weights);*/
+        qDebug() << "Tracker initializated";
 
         // create GUI
         QApplication app(argc, argv);
@@ -336,18 +170,18 @@ public:
                            "/home/stepo/SparkleShare/private/icrc/test/test.wmv_metadata");
         ShapeMap shapeMap = Serialization::readShapeMap("/home/stepo/SparkleShare/private/icrc/test/test.wmv_shapemap");
 
-        PCA pca("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
-        StatisticalShapeModel model(pca);
-        ShapeNormalizerIterativeStatisticalShape normalizer(model);
+        PCA *pca = new PCA("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
+        StatisticalShapeModel *model = new StatisticalShapeModel(pca);
+        ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
         LongitudinalStrain strain(normalizer);
 
         VideoDataClip firstClip; VectorOfShapes firstShapes; ShapeMap firstMap;
-        clip.getSubClip(clip.metadata.beatIndicies[0], shapeMap, firstClip, firstShapes, firstMap);
-        StrainStatistics firstStats(strain, firstShapes);
+        clip.getSubClip(clip.getMetadata()->beatIndicies[0], shapeMap, &firstClip, firstShapes, firstMap);
+        StrainStatistics firstStats(&strain, firstShapes);
 
         VideoDataClip secondClip; VectorOfShapes secondShapes; ShapeMap secondMap;
-        clip.getSubClip(clip.metadata.beatIndicies[1], shapeMap, secondClip, secondShapes, secondMap);
-        StrainStatistics secondStats(strain, secondShapes);
+        clip.getSubClip(clip.getMetadata()->beatIndicies[1], shapeMap, &secondClip, secondShapes, secondMap);
+        StrainStatistics secondStats(&strain, secondShapes);
 
         qDebug() << StrainStatistics::beatToBeatVariance(firstStats, secondStats, 100);
     }

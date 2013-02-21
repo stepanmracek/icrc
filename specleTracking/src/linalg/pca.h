@@ -9,14 +9,16 @@
 
 class PCA : public BackProjectionBase
 {
+    Q_OBJECT
+
 public:
     cv::PCA cvPca;
 
-    PCA() {}
+    PCA(QObject *parent = 0) : BackProjectionBase(parent) { }
 
-    PCA(std::vector<MatF> &vectors, int maxComponents = 0);
+    PCA(std::vector<MatF> &vectors, int maxComponents = 0, QObject *parent = 0);
 
-    PCA(const char *path);
+    PCA(const char *path, QObject *parent = 0);
 
     int getModes() { return cvPca.eigenvalues.rows; }
 

@@ -14,11 +14,14 @@ class DialogVideoDataClipMetadata : public QDialog
 {
     Q_OBJECT
     
+private:
+    VideoDataClipMetadata *metadata;
+
 public:
-    explicit DialogVideoDataClipMetadata(VideoDataClipMetadata metadata, QWidget *parent = 0);
+    explicit DialogVideoDataClipMetadata(VideoDataClipMetadata *metadata, QWidget *parent = 0);
     ~DialogVideoDataClipMetadata();
 
-    VideoDataClipMetadata metadata;
+    VideoDataClipMetadata *getMetadata() { return metadata; }
     
 private slots:
     void on_btnAdd_clicked();

@@ -11,20 +11,27 @@ P AngleDistanceToPoint(float angle, float distance)
     return p;
 }
 
-CoordSystemRadial::CoordSystemRadial()
+CoordSystemRadial::CoordSystemRadial(QObject *parent) : CoordSystemBase(parent)
 {
     init(P(263,0), P(632,258), P(10,360), 50, 200, 400);
 }
 
 CoordSystemRadial::CoordSystemRadial(P center, float startDistance, float endDistance, float angleStart,
-                                     float angleEnd, int resultMatCols, int resultMatRows)
+                                     float angleEnd, int resultMatCols, int resultMatRows, QObject *parent) :
+    CoordSystemBase(parent)
 {
     init(center, startDistance, endDistance, angleStart, angleEnd, resultMatCols, resultMatRows);
 }
 
-CoordSystemRadial::CoordSystemRadial(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows)
+CoordSystemRadial::CoordSystemRadial(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows, QObject *parent) :
+    CoordSystemBase(parent)
 {
     init(center, arcStart, arcEnd, startDistance, resultMatCols, resultMatRows);
+}
+
+void CoordSystemRadial::init(CoordSystemRadial *src)
+{
+    init(src->center, src->startDistance, src->endDistance, src->angleStart, src->angleEnd, src->resultMatCols, src->resultMatRows);
 }
 
 void CoordSystemRadial::init(P center, float startDistance, float endDistance, float angleStart, float angleEnd, int resultMatCols, int resultMatRows)

@@ -1,6 +1,7 @@
 #ifndef STRAIN_H
 #define STRAIN_H
 
+#include <QObject>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QList>
@@ -9,18 +10,24 @@
 #include "coordsystem.h"
 #include "shapenormalizer.h"
 
-class Strain
+class Strain : public QObject
 {
+    Q_OBJECT
+
+private:
+    ShapeNormalizerBase *shapeNormalizer;
+
 public:
+
     int segmentsCount;
-    int pointsPerSegment;
+    int pointsPerSegment;  
 
-    ShapeNormalizerBase &shapeNormalizer;
+    Strain(ShapeNormalizerBase *shapeNormalizer, int segmentsCount, int pointsPerSegment, QObject *parent = 0);
 
-    Strain(ShapeNormalizerBase &shapeNormalizer,
-           int segmentsCount, int pointsPerSegment) :
-        shapeNormalizer(shapeNormalizer), segmentsCount(segmentsCount),
-        pointsPerSegment(pointsPerSegment) {}
+    ShapeNormalizerBase *getShapeNormalizer()
+    {
+        return shapeNormalizer;
+    }
 
     virtual bool isValidShape(Points &realPoints) = 0;
     virtual Points getRealShapePoints(Points &controlPoints, int shapeWidth) = 0;

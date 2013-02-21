@@ -95,9 +95,9 @@ void WindowAnotationManager::loadFile(QString fileName)
 }
 void WindowAnotationManager::on_btnAnotate_clicked()
 {
-    if (ui->widgetStrainVideo->getClip().size() == 0) return;
+    if (ui->widgetStrainVideo->getClip()->size() == 0) return;
 
-    const Mat8 &frame = ui->widgetStrainVideo->getClip().frames[ui->widgetStrainVideo->currentIndex];
+    const Mat8 &frame = ui->widgetStrainVideo->getClip()->frames[ui->widgetStrainVideo->currentIndex];
     QPixmap image = UIUtils::Mat8ToQPixmap(frame);
     DialogAnotation dlgAnotation(this);
     dlgAnotation.setImage(image);
@@ -111,9 +111,11 @@ void WindowAnotationManager::on_btnAnotate_clicked()
 
 void WindowAnotationManager::on_btnTrack_clicked()
 {
-    int limit = ui->widgetStrainVideo->getClip().size() - 1;
+    int limit = ui->widgetStrainVideo->getClip()->size() - 1;
     int currentIndex = ui->widgetStrainVideo->currentIndex;
     if (currentIndex == limit) return;
+
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
 
     if (!ui->widgetStrainVideo->shapes.contains(currentIndex))
     {
@@ -153,7 +155,7 @@ void WindowAnotationManager::on_btnTrack_clicked()
             }
 
             prevShapes.push_back(ui->widgetStrainVideo->shapes[prevIndex]);
-            prevFrames.push_back(ui->widgetStrainVideo->getClip().frames[prevIndex]);
+            prevFrames.push_back(clip->frames[prevIndex]);
         }
         //qDebug() << "  prevShape/prevFrames size:" << prevShapes.size() << prevFrames.size();
         if (prevShapes.size() == 0) break;
@@ -161,13 +163,13 @@ void WindowAnotationManager::on_btnTrack_clicked()
         int nextIndex = currentIndex+i+1;
         //qDebug() << "  nextIndex:" << nextIndex;
         if (nextIndex == limit) break;
-        Mat8 nextFrame = ui->widgetStrainVideo->getClip().frames[nextIndex];
+        Mat8 nextFrame = clip->frames[nextIndex];
 
         //qDebug() << "  reversing prevShapes and prevFrames";
         std::reverse(prevShapes.begin(), prevShapes.end());
         std::reverse(prevFrames.begin(), prevFrames.end());
         //qDebug() << "  tracking";
-        Points nextShape = tracker->track(prevFrames, prevShapes, nextFrame, ui->widgetStrainVideo->getClip().metadata.coordSystem);
+        Points nextShape = tracker->track(prevFrames, prevShapes, nextFrame, clip->getMetadata()->getCoordSystem());
         ui->widgetStrainVideo->shapes[nextIndex] = nextShape;
     }
 
@@ -176,38 +178,40 @@ void WindowAnotationManager::on_btnTrack_clicked()
 
 void WindowAnotationManager::on_btnCoordSystem_clicked()
 {
-    if (ui->widgetStrainVideo->getClip().size() == 0) return;
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
 
-    Mat8 frame = ui->widgetStrainVideo->getClip().frames[ui->widgetStrainVideo->currentIndex];
-    DialogCreateCoordSystemRadial dlg(frame, ui->widgetStrainVideo->getClip().metadata.coordSystem , this);
+    Mat8 frame = clip->frames[ui->widgetStrainVideo->currentIndex];
+    DialogCreateCoordSystemRadial dlg(frame, clip->getMetadata()->getCoordSystem() , this);
     if (dlg.exec() == QDialog::Accepted)
     {
-        ui->widgetStrainVideo->getClip().metadata.coordSystem = dlg.getNewCoordSystem();
+        clip->getMetadata()->getCoordSystem()->init(dlg.getNewCoordSystem());
         ui->widgetStrainVideo->display(ui->widgetStrainVideo->currentIndex);
     }
 }
 
 void WindowAnotationManager::on_btnMetadata_clicked()
 {
-    if (ui->widgetStrainVideo->getClip().size() == 0) return;
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
 
-    DialogVideoDataClipMetadata dlg(ui->widgetStrainVideo->getClip().metadata);
+    DialogVideoDataClipMetadata dlg(clip->getMetadata());
     if (dlg.exec() == QDialog::Accepted)
     {
-        ui->widgetStrainVideo->getClip().metadata = dlg.metadata;
+        clip->getMetadata()->beatIndicies = dlg.getMetadata()->beatIndicies;
     }
 }
 
 void WindowAnotationManager::on_btnStats_clicked()
 {
-    VideoDataClip &clip = ui->widgetStrainVideo->getClip();
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
     QMap<int, Points> &shapes = ui->widgetStrainVideo->shapes;
     int currentIndex = ui->widgetStrainVideo->currentIndex;
 
     VectorOfShapes subShapes;
     QMap<int, Points> subShapesMap;
-    VideoDataClip subClip;
-    char *error = clip.getSubClip(currentIndex, shapes, subClip, subShapes, subShapesMap);
+    VideoDataClip *subClip = new VideoDataClip();
+    char *error = clip->getSubClip(currentIndex, shapes, subClip, subShapes, subShapesMap);
     if (error != 0)
     {
         QMessageBox msg(QMessageBox::Information, "Information", error);
@@ -215,7 +219,7 @@ void WindowAnotationManager::on_btnStats_clicked()
         return;
     }
 
-    StrainStatistics stats(tracker->strain, subShapes);
+    StrainStatistics stats(tracker->getStrain(), subShapes);
     DialogStrainStatistics dlgStats;
     dlgStats.SetData(&stats, tracker, subClip, subShapesMap);
     dlgStats.exec();

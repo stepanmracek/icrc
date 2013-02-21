@@ -8,9 +8,13 @@
 
 #include "linalg/common.h"
 
-class CoordSystemBase
+class CoordSystemBase : public QObject
 {
+    Q_OBJECT
+
 public:
+    CoordSystemBase(QObject *parent = 0) : QObject(parent) { }
+
     virtual Mat8 transform(Mat8 &input) = 0;
     virtual P transform(P input) = 0;
     virtual P transform(float inputX, float inputY) = 0;
@@ -54,7 +58,11 @@ public:
 
 class CoordSystemPass : public CoordSystemBase
 {
+    Q_OBJECT
+
 public:
+    CoordSystemPass(QObject *parent = 0) : CoordSystemBase(parent) { }
+
     Mat8 transform(Mat8 &input) { return input; }
     P transform(P input) { return input; }
     P transform(float inputX, float inputY) { return P(inputX, inputY); }
@@ -65,6 +73,8 @@ public:
 
 class CoordSystemRadial : public CoordSystemBase
 {
+    Q_OBJECT
+
 public:
     P center; //, arcStart, arcEnd;
     float startDistance, endDistance;
@@ -73,11 +83,12 @@ public:
     float angleStart, angleStep, angleEnd, distanceStep, dAngle, dDistance;
 
 public:
-    CoordSystemRadial();
-    CoordSystemRadial(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows);
+    CoordSystemRadial(QObject *parent = 0);
+    CoordSystemRadial(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows, QObject *parent = 0);
     CoordSystemRadial(P center, float startDistance, float endDistance, float angleStart, float angleEnd,
-                      int resultMatCols, int resultMatRows);
+                      int resultMatCols, int resultMatRows, QObject *parent = 0);
 
+    void init(CoordSystemRadial *src);
     void init(P center, float startDistance, float endDistance, float angleStart, float angleEnd, int resultMatCols, int resultMatRows);
     void init(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows);
 
