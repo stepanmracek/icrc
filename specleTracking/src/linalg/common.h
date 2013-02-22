@@ -122,6 +122,12 @@ public:
         return result;
     }
 
+    /**
+     * @brief Converts the input matrix to the vector of individual shapes (each shape is vector of points)
+     * @param mat input column matrix
+     * @param shapeCount number of resulting shapes
+     * @return returns the vector of shapes
+     */
     static std::vector<Points> matFToPoints(MatF &mat, int shapeCount)
     {
         assert(shapeCount > 0);
@@ -318,6 +324,11 @@ public:
         return result;
     }
 
+    /**
+     * @brief Converts vector of shapes QMap
+     * @param shapes input vector of shapes
+     * @return resulting map, first key is 0
+     */
     static ShapeMap vectorOfShapesToMap(VectorOfShapes &shapes)
     {
         QMap<int, Points> result;
@@ -329,6 +340,11 @@ public:
         return result;
     }
 
+    /**
+     * @brief Converts the input map of sheapes to the vector
+     * @param map input map
+     * @return resulting vector
+     */
     static VectorOfShapes MapToVectorOfShapes(ShapeMap &map)
     {
         VectorOfShapes result;
@@ -340,6 +356,32 @@ public:
             ++i;
         }
         return result;
+    }
+
+    /**
+     * @brief Normalize components of the input vector, such that sum of its components is 1
+     * @param w Input column vector
+     */
+    static void normalizeSumOne(MatF &w)
+    {
+        int n = w.rows;
+        assert(n >= 1);
+        assert(w.cols == 1);
+
+        float sum = 0.0;
+        for (int i = 0; i < n; i++)
+        {
+            float val = w(i);
+            if (val < 0.0)
+            {
+                val = 0.0;
+                w(i) = 0.0;
+            }
+            sum += val;
+        }
+
+        for (int i = 0; i < n; i++)
+            w(i) = w(i)/sum*n;
     }
 };
 

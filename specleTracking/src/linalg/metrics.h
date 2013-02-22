@@ -1,6 +1,7 @@
 #ifndef METRICS_H
 #define METRICS_H
 
+#include <QObject>
 #include <vector>
 #include <cassert>
 #include <cmath>
@@ -8,56 +9,78 @@
 #include "vecf.h"
 #include "common.h"
 
-class Metrics
+/**
+ * @brief The Metrics abstract class provides common interface for all used metrics (Euclidean, city-block,...)
+ */
+class Metrics : public QObject
 {
-public:
-    Metrics() {}
+    Q_OBJECT
 
+public:
+
+    /**
+     * @brief Basic constructor
+     * @param parent Parent object in Qt hierarchy
+     */
+    Metrics(QObject *parent = 0) : QObject(parent) { }
+
+    /**
+     * @brief The distance between two input vectors
+     * @param v1 First vector (column matrix)
+     * @param v2 Second vector (column matrix)
+     * @return Returns the distance
+     */
     virtual float distance(MatF &v1, MatF &v2) = 0;
 
     virtual ~Metrics() {}
 };
 
+/**
+ * @brief The weighted metric abstract class
+ */
 class WeightedMetric : public Metrics
 {
+    Q_OBJECT
+
 public:
+    /**
+     * @brief WeightedMetric constructor
+     * @param parent Parent object in Qt hierarchy
+     */
+    WeightedMetric(QObject *parent = 0) : Metrics(parent) { }
+
+    /**
+     * @brief Weights
+     */
     MatF w;
 
     virtual float distance(MatF&v1, MatF&v2) = 0;
 
+    /**
+     * @brief Normalize weights, such that sum of the components is 1
+     */
     void normalizeWeights()
     {
-        normalizeWeights(w);
-    }
-
-    static void normalizeWeights(MatF &w)
-    {
-        int n = w.rows;
-        assert(n >= 1);
-        assert(w.cols == 1);
-
-        float sum = 0.0;
-        for (int i = 0; i < n; i++)
-        {
-            float val = w(i);
-            if (val < 0.0)
-            {
-                val = 0.0;
-                w(i) = 0.0;
-            }
-            sum += val;
-        }
-
-        for (int i = 0; i < n; i++)
-            w(i) = w(i)/sum*n;
+        Common::normalizeSumOne(w);
     }
 
     virtual ~WeightedMetric() {}
 };
 
+/**
+ * @brief The Euclidean metric
+ */
 class EuclideanMetric : public Metrics
 {
+    Q_OBJECT
+
 public:
+    /**
+     * @brief Constructor
+     * @param parent Parent object in Qt hierarchy
+     */
+    EuclideanMetric(QObject *parent = 0) : Metrics(parent) { }
+
     virtual float distance(MatF &v1, MatF &v2)
     {
         int n = v1.rows;
@@ -76,9 +99,20 @@ public:
     virtual ~EuclideanMetric() {}
 };
 
+/**
+ * @brief The Euclidean weighted metric
+ */
 class EuclideanWeightedMetric : public WeightedMetric
 {
+    Q_OBJECT
+
 public:
+    /**
+     * @brief Constructor
+     * @param parent Parent object in Qt hierarchy
+     */
+    EuclideanWeightedMetric(QObject *parent) : WeightedMetric(parent) { }
+
     virtual float distance(MatF &v1, MatF &v2)
     {
         int n = v1.rows;
@@ -98,9 +132,20 @@ public:
     virtual ~EuclideanWeightedMetric() {}
 };
 
+/**
+ * @brief The CityblockMetric class
+ */
 class CityblockMetric : public Metrics
 {
+    Q_OBJECT
+
 public:
+    /**
+     * @brief CityblockMetric Constructor
+     * @param parent Parent object in Qt hieararchy
+     */
+    CityblockMetric(QObject *parent = 0) : Metrics(parent) { }
+
     virtual float distance(MatF &v1, MatF &v2)
     {
         int n = v1.rows;
@@ -120,7 +165,11 @@ public:
 
 class CityblockWeightedMetric : public WeightedMetric
 {
+    Q_OBJECT
+
 public:
+    CityblockWeightedMetric(QObject *parent = 0) : WeightedMetric(parent) { }
+
     virtual float distance(MatF &v1, MatF &v2)
     {
         int n = v1.rows;
@@ -141,7 +190,11 @@ public:
 
 class CorrelationMetric : public Metrics
 {
+    Q_OBJECT
+
 public:
+    CorrelationMetric(QObject *parent = 0) : Metrics(parent) { }
+
     virtual float distance(MatF &v1, MatF &v2)
     {
         return 1.0 - correlation(v1, v2);
@@ -171,7 +224,11 @@ public:
 
 class CorrelationWeightedMetric : public WeightedMetric
 {
+    Q_OBJECT
+
 public:
+    CorrelationWeightedMetric(QObject *parent = 0) : WeightedMetric(parent) { }
+
     virtual float distance(MatF &v1, MatF &v2)
     {
         return 1.0 - correlation(v1, v2);
@@ -204,7 +261,11 @@ public:
 
 class CosineMetric : public Metrics
 {
+    Q_OBJECT
+
 public:
+    CosineMetric(QObject *parent = 0) : Metrics(parent) { }
+
     virtual float distance(MatF &v1, MatF &v2)
     {
         int n = v1.rows;
@@ -227,7 +288,11 @@ public:
 
 class CosineWeightedMetric : public WeightedMetric
 {
+    Q_OBJECT
+
 public:
+    CosineWeightedMetric(QObject *parent = 0) : WeightedMetric(parent) { }
+
     virtual float distance(MatF &v1, MatF &v2)
     {
         int n = v1.rows;
@@ -316,7 +381,11 @@ public:
 
 class SumOfSquareDifferences : public Metrics
 {
+    Q_OBJECT
+
 public:
+    SumOfSquareDifferences(QObject *parent = 0) : Metrics(parent) { }
+
     float distance(MatF &v1, MatF &v2)
     {
         int n = v1.rows;
