@@ -123,5 +123,101 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>strainVideoWidget</sender>
+   <signal>displayIndexChanged(int)</signal>
+   <receiver>mainStrainPlot</receiver>
+   <slot>setIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>689</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>196</x>
+     <y>147</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>strainVideoWidget</sender>
+   <signal>displayIndexChanged(int)</signal>
+   <receiver>strainPerPointsPlot</receiver>
+   <slot>setIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>689</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>196</x>
+     <y>347</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>strainVideoWidget</sender>
+   <signal>displayIndexChanged(int)</signal>
+   <receiver>spectrogramPlot</receiver>
+   <slot>setIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>689</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>196</x>
+     <y>548</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>strainVideoWidget</sender>
+   <signal>displayIndexChanged(int)</signal>
+   <receiver>mainStrainRatePlot</receiver>
+   <slot>setIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>689</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>196</x>
+     <y>147</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>strainVideoWidget</sender>
+   <signal>displayIndexChanged(int)</signal>
+   <receiver>strainRatePerPointsPlot</receiver>
+   <slot>setIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>689</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>196</x>
+     <y>347</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>strainVideoWidget</sender>
+   <signal>displayIndexChanged(int)</signal>
+   <receiver>spectrogramRatePlot</receiver>
+   <slot>setIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>689</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>196</x>
+     <y>548</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>

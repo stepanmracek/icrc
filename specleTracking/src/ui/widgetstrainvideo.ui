@@ -20,6 +20,23 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <widget class="QPushButton" name="btnPrevBeat">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/icons/icons/resultset_first.png</normaloff>:/icons/icons/resultset_first.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="btnPrev">
        <property name="text">
         <string/>
@@ -58,6 +75,23 @@
        <property name="icon">
         <iconset resource="resources.qrc">
          <normaloff>:/icons/icons/resultset_next.png</normaloff>:/icons/icons/resultset_next.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnNextBeat">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/icons/icons/resultset_last.png</normaloff>:/icons/icons/resultset_last.png</iconset>
        </property>
        <property name="iconSize">
         <size>

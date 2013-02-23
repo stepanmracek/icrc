@@ -18,6 +18,7 @@
 #include "ui/dialoganotation.h"
 #include "ui/dialogcreatecoordsystemradial.h"
 #include "ui/dialogvideodataclipmetadata.h"
+#include "ui/dialogbeattobeat.h"
 
 WindowAnotationManager::WindowAnotationManager(QString path, ShapeTracker *tracker, QWidget *parent) :
     QMainWindow(parent),
@@ -95,9 +96,10 @@ void WindowAnotationManager::loadFile(QString fileName)
 }
 void WindowAnotationManager::on_btnAnotate_clicked()
 {
-    if (ui->widgetStrainVideo->getClip()->size() == 0) return;
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
 
-    const Mat8 &frame = ui->widgetStrainVideo->getClip()->frames[ui->widgetStrainVideo->currentIndex];
+    const Mat8 &frame = clip->frames[ui->widgetStrainVideo->getCurrentIndex()];
     QPixmap image = UIUtils::Mat8ToQPixmap(frame);
     DialogAnotation dlgAnotation(this);
     dlgAnotation.setImage(image);
@@ -111,20 +113,41 @@ void WindowAnotationManager::on_btnAnotate_clicked()
 
 void WindowAnotationManager::on_btnTrack_clicked()
 {
-    int limit = ui->widgetStrainVideo->getClip()->size() - 1;
-    int currentIndex = ui->widgetStrainVideo->currentIndex;
-    if (currentIndex == limit) return;
-
     VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
 
-    if (!ui->widgetStrainVideo->shapes.contains(currentIndex))
+    // check if clip has beat indicies
+    if (clip->getMetadata()->beatIndicies.count() == 0)
     {
-        QMessageBox msg(QMessageBox::Information, "Information", "Current frame is not anotated.");
+        QMessageBox msg(QMessageBox::Information, "Information", "Missing beat indicies.");
         msg.exec();
         return;
     }
 
-    int frames = QInputDialog::getInt(this, "Track", "Track for specific number of frames", 1, 1, 1000);
+    int beatStart = 0;
+    int beatEnd = clip->size();
+    int currentIndex = ui->widgetStrainVideo->getCurrentIndex();
+    clip->getBeatRange(currentIndex, beatStart, beatEnd);
+    qDebug() << "Beat range:" << beatStart << beatEnd;
+
+    // check if the beat start is anotated
+    if (!ui->widgetStrainVideo->shapes.contains(beatStart))
+    {
+        QMessageBox msg(QMessageBox::Information, "Information", "Beat start is not anotated");
+        msg.exec();
+        return;
+    }
+
+
+    if (beatEnd <= beatStart)
+    {
+        qDebug() << "Wrong beatRange";
+        return;
+    }
+
+
+    int limit = clip->size() - 1;
+    int frames = beatEnd - beatStart - 1;
     QProgressDialog progress("Processing...", "Cancel", 0, frames);
     progress.setModal(Qt::WindowModal);
 
@@ -141,9 +164,9 @@ void WindowAnotationManager::on_btnTrack_clicked()
 
         for (unsigned int j = 0; j < tracker->weights.size(); j++)
         {
-            int prevIndex = currentIndex+i-j;
+            int prevIndex = beatStart+i-j;
             //qDebug() << "  j:" << j << "prevIndex:" << prevIndex;
-            if (prevIndex < currentIndex)
+            if (prevIndex < beatStart)
             {
                 //qDebug() << "  prevIndex < currentIndex";
                 break;
@@ -160,7 +183,7 @@ void WindowAnotationManager::on_btnTrack_clicked()
         //qDebug() << "  prevShape/prevFrames size:" << prevShapes.size() << prevFrames.size();
         if (prevShapes.size() == 0) break;
 
-        int nextIndex = currentIndex+i+1;
+        int nextIndex = beatStart+i+1;
         //qDebug() << "  nextIndex:" << nextIndex;
         if (nextIndex == limit) break;
         Mat8 nextFrame = clip->frames[nextIndex];
@@ -181,12 +204,12 @@ void WindowAnotationManager::on_btnCoordSystem_clicked()
     VideoDataClip *clip = ui->widgetStrainVideo->getClip();
     if (!clip || clip->size() == 0) return;
 
-    Mat8 frame = clip->frames[ui->widgetStrainVideo->currentIndex];
+    Mat8 frame = clip->frames[ui->widgetStrainVideo->getCurrentIndex()];
     DialogCreateCoordSystemRadial dlg(frame, clip->getMetadata()->getCoordSystem() , this);
     if (dlg.exec() == QDialog::Accepted)
     {
         clip->getMetadata()->getCoordSystem()->init(dlg.getNewCoordSystem());
-        ui->widgetStrainVideo->display(ui->widgetStrainVideo->currentIndex);
+        ui->widgetStrainVideo->display(ui->widgetStrainVideo->getCurrentIndex());
     }
 }
 
@@ -205,8 +228,10 @@ void WindowAnotationManager::on_btnMetadata_clicked()
 void WindowAnotationManager::on_btnStats_clicked()
 {
     VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
+
     QMap<int, Points> &shapes = ui->widgetStrainVideo->shapes;
-    int currentIndex = ui->widgetStrainVideo->currentIndex;
+    int currentIndex = ui->widgetStrainVideo->getCurrentIndex();
 
     VectorOfShapes subShapes;
     QMap<int, Points> subShapesMap;
@@ -229,4 +254,16 @@ void WindowAnotationManager::on_widgetResult_noImage()
 {
     QMessageBox msg(QMessageBox::Information, "Information", "Load the image first");
     msg.exec();
+}
+
+void WindowAnotationManager::on_btnBeatToBeat_clicked()
+{
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
+
+    QVector<StrainStatistics> allBeatsStats = StrainStatistics::getAllBeatsStats(clip, tracker->getStrain(),
+                                                                                 ui->widgetStrainVideo->shapes);
+
+    DialogBeatToBeat dlg(allBeatsStats);
+    dlg.exec();
 }

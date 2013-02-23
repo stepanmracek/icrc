@@ -11,5 +11,7 @@
         <file>icons/arrow_in.png</file>
         <file>icons/arrow_out.png</file>
         <file>icons/pencil.png</file>
+        <file>icons/resultset_first.png</file>
+        <file>icons/resultset_last.png</file>
     </qresource>
 </RCC>

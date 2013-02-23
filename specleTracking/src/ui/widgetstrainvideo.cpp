@@ -32,6 +32,7 @@ void WidgetStrainVideo::display(int index)
 
 void WidgetStrainVideo::on_btnPrev_clicked()
 {
+    if (!clip) return;
     if (currentIndex <= 0) return;
 
     ui->horizontalSlider->setValue(currentIndex - 1);
@@ -39,9 +40,37 @@ void WidgetStrainVideo::on_btnPrev_clicked()
 
 void WidgetStrainVideo::on_btnNext_clicked()
 {
+    if (!clip) return;
     if (currentIndex >= clip->size()-2) return;
 
     ui->horizontalSlider->setValue(currentIndex + 1);
+}
+
+void WidgetStrainVideo::on_btnPrevBeat_clicked()
+{
+    if (!clip) return;
+    int beatStart; int beatEnd;
+    clip->getBeatRange(currentIndex, beatStart, beatEnd);
+
+    if (beatStart == currentIndex)
+    {
+        int i = clip->getMetadata()->beatIndicies.indexOf(beatStart);
+        if (i <= 0) return;
+
+        ui->horizontalSlider->setValue(clip->getMetadata()->beatIndicies[i-1]);
+    }
+    else
+    {
+        ui->horizontalSlider->setValue(beatStart);
+    }
+}
+
+void WidgetStrainVideo::on_btnNextBeat_clicked()
+{
+    if (!clip) return;
+    int beatStart; int beatEnd;
+    clip->getBeatRange(currentIndex, beatStart, beatEnd);
+    ui->horizontalSlider->setValue(beatEnd);
 }
 
 void WidgetStrainVideo::on_horizontalSlider_valueChanged(int value)

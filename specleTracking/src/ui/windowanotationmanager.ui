@@ -149,6 +149,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="btnBeatToBeat">
+          <property name="text">
+           <string>Beat to beat variance</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -213,6 +220,9 @@
    <extends>QWidget</extends>
    <header>ui/widgetstrainvideo.h</header>
    <container>1</container>
+   <slots>
+    <signal>displayIndexChanged(int)</signal>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources>

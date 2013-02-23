@@ -70,7 +70,7 @@ public:
 
     static double stdDeviation(VectorF &vector);
 
-    static VectorF resample(VectorF &vector, int samplesCount);
+    static VectorF resample(const VectorF &vector, int samplesCount);
 };
 
 #endif // VECF_H

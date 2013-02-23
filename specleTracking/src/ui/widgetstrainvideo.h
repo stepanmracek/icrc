@@ -5,6 +5,7 @@
 #include <QMap>
 #include <QGraphicsScene>
 #include <QDir>
+#include <QString>
 
 #include "strain/strainstatistics.h"
 #include "strain/videodataclip.h"
@@ -35,19 +36,17 @@ public:
 
     void setClip(VideoDataClip *clip);
 
-    VideoDataClip *getClip()
-    {
-        return clip;
-    }
+    VideoDataClip *getClip() { return clip; }
+    int getCurrentIndex() { return currentIndex; }
+    QString getCurrentFilename() { return currentFilename; }
 
     QMap<int, Points> shapes;
-    int currentIndex;
-    QString currentFilename;
     
 private:
     Ui::WidgetStrainVideo *ui;
-
     Spline spline;
+    int currentIndex;
+    QString currentFilename;
 
 public slots:
     void serializeShapes(const QString &path);
@@ -64,6 +63,10 @@ private slots:
     void on_btnNext_clicked();
 
     void on_horizontalSlider_valueChanged(int value);
+
+    void on_btnPrevBeat_clicked();
+
+    void on_btnNextBeat_clicked();
 
 signals:
     void displayIndexChanged(int index);

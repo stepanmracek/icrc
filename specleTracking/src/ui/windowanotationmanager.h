@@ -43,6 +43,8 @@ private slots:
 
     void on_widgetResult_noImage();
 
+    void on_btnBeatToBeat_clicked();
+
 private:
     Ui::WindowAnotationManager *ui;
     ShapeTracker *tracker;

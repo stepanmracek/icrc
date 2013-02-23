@@ -445,7 +445,7 @@ MatF VecF::meanVector(std::vector<MatF> &vectors)
     return result;
 }
 
-VectorF VecF::resample(VectorF &vector, int samplesCount)
+VectorF VecF::resample(const VectorF &vector, int samplesCount)
 {
     VectorF result;
 

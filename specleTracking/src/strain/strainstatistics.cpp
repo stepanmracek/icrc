@@ -56,62 +56,66 @@ float StrainStatistics::beatToBeatVariance(StrainStatistics &firstBeat, StrainSt
     return VecF::stdDeviation(delta);
 }
 
-/*{
-    unsigned int shapesCount = shapes.size();
-    assert(shapesCount > 0);
-
-    unsigned int pointsCount = shapes.front().size();
-    assert (pointsCount > 0);
-
-    // initialize per-point statistic structures
-    strainForPoints = std::vector<VectorF>(pointsCount);
-
-    // Strain
-    for (VectorOfShapes::iterator it = shapes.begin(); it != shapes.end(); ++it)
+StrainStatistics StrainStatistics::getOneBeatStats(VideoDataClip *clip, Strain *strainModel,
+                                                   int beatIndex, ShapeMap &shapesMap, bool *success)
+{
+    if (beatIndex >= clip->size())
     {
-        Points &shape = *it;
-        assert(pointsCount == shape.size());
+        (*success) = false;
+        return StrainStatistics();
+    }
 
-        P center = getCenter(shape);
+    // check if beat exists
+    int i = clip->getMetadata()->beatIndicies.indexOf(beatIndex);
+    if (i == -1)
+    {
+        (*success) = false;
+        return StrainStatistics();
+    }
 
-        float sumOfStrains = 0;
-        //float sumOfStrainRates = 0;
-        for (unsigned int i = 0; i < pointsCount; i++)
+    // get next beat index
+    int nextBeatIndex = clip->size();
+    if (i < clip->getMetadata()->beatIndicies.size() - 1)
+    {
+        nextBeatIndex = clip->getMetadata()->beatIndicies[i+1];
+    }
+
+    // check if entire beat has corresponding shapes
+    VectorOfShapes shapes;
+    for (int index = beatIndex; index < nextBeatIndex; index++)
+    {
+        if (!shapesMap.contains(index))
         {
-            P &p = shape[i];
-
-            float strainForPoint = Common::eucl(center, p);
-            sumOfStrains += strainForPoint;
-
-            strainForPoints[i].push_back(strainForPoint);
+            (*success) = false;
+            return StrainStatistics();
         }
 
-        strain.push_back(sumOfStrains/pointsCount);
+        shapes.push_back(shapesMap[index]);
     }
 
-    // Strain rate
-    strainRate = Common::deltas(strain);
-    for (unsigned int i = 0; i < pointsCount; i++)
-    {
-        strainRateForPoints.push_back(Common::deltas(strainForPoints[i]));
-    }
+    (*success) = true;
+    return StrainStatistics(strainModel, shapes);
 }
 
-P StrainStatistics::getCenter(Points &points)
+QVector<StrainStatistics> StrainStatistics::getAllBeatsStats(VideoDataClip *clip, Strain *strainModel,
+                                                             ShapeMap &shapesMap)
 {
-    int n = points.size();
-    assert(n > 0);
+    QVector<StrainStatistics> result;
 
-    float x = 0;
-    float y = 0;
-    for (int i = 0; i < n; i++)
+    //qDebug() << "getAllBeatsStats()";
+    foreach(int beatIndex, clip->getMetadata()->beatIndicies)
     {
-        x += points[i].x;
-        y += points[i].y;
+        //qDebug() << "  beat index:" << beatIndex;
+        bool success;
+        StrainStatistics stats = StrainStatistics::getOneBeatStats(clip, strainModel, beatIndex, shapesMap, &success);
+        if (success)
+        {
+            //qDebug() << "  success, beat length:" << stats.strain.size();
+            result << stats;
+        }
     }
 
-    P p;
-    p.x = x/n;
-    p.y = y/n;
-    return p;
-}*/
+    //qDebug() << "calculated for" << result.count() << "beats";
+    return result;
+}
+
