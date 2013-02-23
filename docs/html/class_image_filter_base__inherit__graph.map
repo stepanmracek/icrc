@@ -1,0 +1,7 @@
+<map id="ImageFilterBase" name="ImageFilterBase">
+<area shape="rect" id="node3" href="$class_image_filter_contrast.html" title="ImageFilterContrast" alt="" coords="316,5,452,32"/>
+<area shape="rect" id="node4" href="$class_image_filter_edge.html" title="ImageFilterEdge" alt="" coords="325,56,443,83"/>
+<area shape="rect" id="node5" href="$class_image_filter_hist_eq.html" title="ImageFilterHistEq" alt="" coords="321,107,447,133"/>
+<area shape="rect" id="node6" href="$class_image_filter_median.html" title="ImageFilterMedian" alt="" coords="319,157,449,184"/>
+<area shape="rect" id="node7" href="$class_image_filter_nl_means_denoise.html" title="ImageFilterNlMeansDenoise" alt="" coords="291,208,477,235"/>
+</map>

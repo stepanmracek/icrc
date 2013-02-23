@@ -1,0 +1,5 @@
+<map id="PointTrackerBase" name="PointTrackerBase">
+<area shape="rect" id="node3" href="$class_point_tracker_distance.html" title="PointTrackerDistance" alt="" coords="5,155,152,181"/>
+<area shape="rect" id="node4" href="$class_point_tracker_neighbour_optical_flow.html" title="PointTrackerNeighbourOpticalFlow" alt="" coords="177,155,399,181"/>
+<area shape="rect" id="node5" href="$class_point_tracker_optical_flow.html" title="PointTrackerOpticalFlow" alt="" coords="423,155,587,181"/>
+</map>

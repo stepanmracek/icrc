@@ -1,0 +1,4 @@
+<map id="WidgetStrainVideo" name="WidgetStrainVideo">
+<area shape="rect" id="node3" href="$class_video_data_clip.html" title="VideoDataClip" alt="" coords="101,160,205,187"/>
+<area shape="rect" id="node4" href="$class_video_data_base.html" title="VideoDataBase" alt="" coords="97,83,208,109"/>
+</map>

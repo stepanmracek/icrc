@@ -1,0 +1,7 @@
+<map id="SerializableObject" name="SerializableObject">
+<area shape="rect" id="node3" href="$class_projection_base.html" title="The ProjectionBase abstract class provides common interface for all probabilistic projection models s..." alt="" coords="19,155,129,181"/>
+<area shape="rect" id="node7" href="$class_video_data_clip_metadata.html" title="VideoDataClipMetadata" alt="" coords="154,155,312,181"/>
+<area shape="rect" id="node4" href="$class_back_projection_base.html" title="The BackProjectionBase abstract class provides common interface for probabilistic models that are abl..." alt="" coords="5,229,144,256"/>
+<area shape="rect" id="node5" href="$class_i_c_a.html" title="Implementation of independent component analysis (ICA)" alt="" coords="18,304,61,331"/>
+<area shape="rect" id="node6" href="$class_p_c_a.html" title="PCA" alt="" coords="86,304,135,331"/>
+</map>

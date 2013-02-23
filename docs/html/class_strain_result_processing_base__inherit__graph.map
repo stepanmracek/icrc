@@ -1,0 +1,4 @@
+<map id="StrainResultProcessingBase" name="StrainResultProcessingBase">
+<area shape="rect" id="node3" href="$class_strain_res_proc_floating_avg.html" title="StrainResProcFloatingAvg" alt="" coords="5,155,179,181"/>
+<area shape="rect" id="node4" href="$class_strain_result_processing_pass.html" title="StrainResultProcessingPass" alt="" coords="203,155,391,181"/>
+</map>
