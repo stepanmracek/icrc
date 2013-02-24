@@ -45,7 +45,11 @@ private slots:
 
     void on_btnBeatToBeat_clicked();
 
+    void on_actionCreateTracker();
+
 private:
+    void setTracker(ShapeTracker *tracker);
+
     Ui::WindowAnotationManager *ui;
     ShapeTracker *tracker;
     QString path;

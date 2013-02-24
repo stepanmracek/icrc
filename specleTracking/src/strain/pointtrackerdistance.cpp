@@ -3,6 +3,8 @@
 bool PointTrackerDistance::track(Mat8 &prevFrame, Mat8 &nextFrame, Points &prevPoints, Points &nextPoints)
 {
     int n = prevPoints.size();
+    nextPoints.clear();
+    nextPoints.resize(n);
     for (int i = 0; i < n; i++)
     {
         // choose point
@@ -30,7 +32,7 @@ bool PointTrackerDistance::track(Mat8 &prevFrame, Mat8 &nextFrame, Points &prevP
                 Common::createWindow(nextFrame, nx, ny, windowSize, nextMat);
                 nextMatInColumn = nextMat.reshape(1, rows);
 
-                float d = metrics.distance(prevMat, nextMatInColumn);
+                float d = metrics->distance(prevMat, nextMatInColumn);
                 if (d < bestDistance)
                 {
                     bestX = nx;

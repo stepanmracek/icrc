@@ -202,6 +202,7 @@
     <property name="title">
      <string>Tools</string>
     </property>
+    <addaction name="actionChangeTracker"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -213,6 +214,11 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionChangeTracker">
+   <property name="text">
+    <string>Change tracker</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -228,5 +234,25 @@
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionChangeTracker</sender>
+   <signal>activated()</signal>
+   <receiver>WindowAnotationManager</receiver>
+   <slot>on_actionCreateTracker()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>552</x>
+     <y>335</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_actionCreateTracker()</slot>
+ </slots>
 </ui>

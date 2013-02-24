@@ -9,14 +9,18 @@ class PointTrackerDistance : public PointTrackerBase
     Q_OBJECT
 
 private:
-    Metrics &metrics;
+    Metrics *metrics;
     int windowSize;
 
 protected:
     bool track(Mat8 &prevFrame, Mat8 &nextFrame, Points &prevPoints, Points &nextPoints);
 
 public:
-    PointTrackerDistance(Metrics &metrics, int windowSize, QObject *parent = 0) : PointTrackerBase(parent), metrics(metrics), windowSize(windowSize) { }
+    PointTrackerDistance(Metrics *metrics, int windowSize, QObject *parent = 0) :
+        PointTrackerBase(parent), metrics(metrics), windowSize(windowSize)
+    {
+        metrics->setParent(this);
+    }
 };
 
 #endif // POINTTRACKERCORRELATION_H

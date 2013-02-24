@@ -19,20 +19,27 @@
 #include "ui/dialogcreatecoordsystemradial.h"
 #include "ui/dialogvideodataclipmetadata.h"
 #include "ui/dialogbeattobeat.h"
+#include "ui/dialogcreatetracker.h"
 
 WindowAnotationManager::WindowAnotationManager(QString path, ShapeTracker *tracker, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::WindowAnotationManager),
-    tracker(tracker)
+    ui(new Ui::WindowAnotationManager)
 {
     ui->setupUi(this);
-    ui->widgetStrainVideo->setTracker(tracker);
+    setTracker(tracker);
     setDirectory(path);
 }
 
 WindowAnotationManager::~WindowAnotationManager()
 {
     delete ui;
+}
+
+void WindowAnotationManager::setTracker(ShapeTracker *tracker)
+{
+    this->tracker = tracker;
+    ui->widgetStrainVideo->setTracker(tracker);
+    tracker->setParent(this);
 }
 
 void WindowAnotationManager::closeEvent(QCloseEvent *event)
@@ -266,4 +273,15 @@ void WindowAnotationManager::on_btnBeatToBeat_clicked()
 
     DialogBeatToBeat dlg(allBeatsStats);
     dlg.exec();
+}
+
+void WindowAnotationManager::on_actionCreateTracker()
+{
+    DialogCreateTracker dlg;
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        ShapeTracker *oldTracker = tracker;
+        setTracker(dlg.getNewShapeTracker());
+        delete oldTracker;
+    }
 }

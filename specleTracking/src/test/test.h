@@ -153,13 +153,13 @@ public:
         LongitudinalStrain *ls = new LongitudinalStrain(normalizer);
         float weightValues[] = {1.0f}; // {10.0, 5.0, 3.0, 2.0, 1.0};
         VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
-        ShapeTracker tracker(ls, processing, pointTracker, postProcessing, weights);
+        ShapeTracker *tracker = new ShapeTracker(ls, processing, pointTracker, postProcessing, weights);
 
         qDebug() << "Tracker initializated";
 
         // create GUI
         QApplication app(argc, argv);
-        WindowAnotationManager w("/home/stepo/SparkleShare/private/icrc/test/", &tracker);
+        WindowAnotationManager w("/home/stepo/SparkleShare/private/icrc/test/", tracker);
         w.show();
         return app.exec();
     }

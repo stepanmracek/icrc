@@ -46,7 +46,8 @@ HEADERS += \
     ui/modellistofints.h \
     ui/dialogstrainstatistics.h \
     ui/windowanotationmanager.h \
-    ui/dialogbeattobeat.h
+    ui/dialogbeattobeat.h \
+    ui/dialogcreatetracker.h
 
 SOURCES += \
     linalg/vecf.cpp \
@@ -85,7 +86,8 @@ SOURCES += \
     strain/pointtrackerbase.cpp \
     ui/dialogstrainstatistics.cpp \
     ui/windowanotationmanager.cpp \
-    ui/dialogbeattobeat.cpp
+    ui/dialogbeattobeat.cpp \
+    ui/dialogcreatetracker.cpp
 
 INCLUDEPATH += src
 
@@ -114,7 +116,8 @@ FORMS += \
     ui/dialogvideodataclipmetadata.ui \
     ui/dialogstrainstatistics.ui \
     ui/windowanotationmanager.ui \
-    ui/dialogbeattobeat.ui
+    ui/dialogbeattobeat.ui \
+    ui/dialogcreatetracker.ui
 
 RESOURCES += \
     ui/resources.qrc
