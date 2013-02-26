@@ -31,7 +31,7 @@ public:
      * @param path Desired path of the file
      * @return Returns true if the serialization was successfull
      */
-    static bool serialize(Points &shape, const char *path);
+    static bool serialize(Points &shape, const QString &path);
 
     /**
      * @brief Serialize the list of shapes to the given file
@@ -39,7 +39,7 @@ public:
      * @param path Desired path of the file
      * @return Returns true if the serialization was successfull
      */
-    static bool serialize(VectorOfShapes &shapes, const char *path);
+    static bool serialize(VectorOfShapes &shapes, const QString &path);
 
     /**
      * @brief Serialize the map of shapes to the given file
@@ -47,7 +47,7 @@ public:
      * @param path Desired path of the file
      * @return Returns true if the serialization was successfull
      */
-    static bool serialize(QMap<int, Points> &shapes, const char *path);
+    static bool serialize(QMap<int, Points> &shapes, const QString &path);
 
     // Deserialization methods
 
@@ -56,28 +56,28 @@ public:
      * @param path Input file where the matrix is stored
      * @return Returns loaded matrix
      */
-    static MatF readMatF(const char *path);
+    static MatF readMatF(const QString &path);
 
     /**
      * @brief Read the shape from the file
      * @param path Input file where the shape is stored
      * @return Returns loaded shape
      */
-    static Points readShape(const char *path);
+    static Points readShape(const QString &path);
 
     /**
      * @brief Read the list of shapes from the file
      * @param path Input file where the shapes are stored
      * @return Returns list of loaded shapes
      */
-    static VectorOfShapes readShapeList(const char *path);
+    static VectorOfShapes readShapeList(const QString &path);
 
     /**
      * @brief Read the map of shapes from the file
      * @param path Input file where the shapes are stored
      * @return Returns map of loaded shapes
      */
-    static QMap<int, Points> readShapeMap(const char *path);
+    static QMap<int, Points> readShapeMap(const QString &path);
 };
 
 #endif // SERIALIZATION_H
