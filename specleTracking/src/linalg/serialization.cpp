@@ -1,22 +1,22 @@
 #include "serialization.h"
 
-bool Serialization::serialize(MatF &m, const char *path)
+bool Serialization::serialize(MatF &m, const QString &path)
 {
-    cv::FileStorage storage(path, cv::FileStorage::WRITE);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::WRITE);
     if (!storage.isOpened()) return false;
     storage << "m" << m;
     return true;
 }
 
-bool Serialization::serialize(Points &shape, const char *path)
+bool Serialization::serialize(Points &shape, const QString &path)
 {
     MatF m = Common::pointsToMatF(shape);
-    return serialize(m, path);
+    return serialize(m, path.toStdString());
 }
 
-bool Serialization::serialize(VectorOfShapes &shapes, const char *path)
+bool Serialization::serialize(VectorOfShapes &shapes, const QString &path)
 {
-    cv::FileStorage storage(path, cv::FileStorage::WRITE);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::WRITE);
     if (!storage.isOpened()) return false;
     storage << "shapes" << "[";
     for (VectorOfShapes::iterator it = shapes.begin(); it != shapes.end(); ++it)
@@ -28,9 +28,9 @@ bool Serialization::serialize(VectorOfShapes &shapes, const char *path)
     return true;
 }
 
-bool Serialization::serialize(QMap<int, Points> &shapes, const char *path)
+bool Serialization::serialize(QMap<int, Points> &shapes, const QString &path)
 {
-    cv::FileStorage storage(path, cv::FileStorage::WRITE);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::WRITE);
     if (!storage.isOpened()) return false;
 
     QList<int> keys = shapes.keys();
@@ -52,24 +52,24 @@ bool Serialization::serialize(QMap<int, Points> &shapes, const char *path)
     return true;
 }
 
-MatF Serialization::readMatF(const char *path)
+MatF Serialization::readMatF(const QString &path)
 {
-    cv::FileStorage storage(path, cv::FileStorage::READ);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
     MatF m;
     storage["m"] >> m;
     return m;
 }
 
-Points Serialization::readShape(const char *path)
+Points Serialization::readShape(const QString &path)
 {
-    MatF m = readMatF(path);
+    MatF m = readMatF(path.toStdString());
     return Common::matFToPoints(m);
 }
 
-VectorOfShapes Serialization::readShapeList(const char *path)
+VectorOfShapes Serialization::readShapeList(const QString &path)
 {
     VectorOfShapes result;
-    cv::FileStorage storage(path, cv::FileStorage::READ);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
     cv::FileNode node = storage["shapes"];
     for (cv::FileNodeIterator it = node.begin(); it != node.end(); ++it)
     {
@@ -82,10 +82,10 @@ VectorOfShapes Serialization::readShapeList(const char *path)
     return result;
 }
 
-QMap<int, Points> Serialization::readShapeMap(const char *path)
+QMap<int, Points> Serialization::readShapeMap(const QString &path)
 {
     QMap<int, Points> result;
-    cv::FileStorage storage(path, cv::FileStorage::READ);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
 
     QVector<int> keys;
     cv::FileNode keysNode = storage["keys"];
