@@ -163,11 +163,19 @@ public:
     virtual ~CityblockMetric() {}
 };
 
+/**
+ * @brief The CityblockWeightedMetric class
+ */
 class CityblockWeightedMetric : public WeightedMetric
 {
     Q_OBJECT
 
 public:
+
+    /**
+     * @brief CityblockWeightedMetric constructor
+     * @param parent Parent object in Qt hieararchy
+     */
     CityblockWeightedMetric(QObject *parent = 0) : WeightedMetric(parent) { }
 
     virtual float distance(MatF &v1, MatF &v2)
@@ -188,11 +196,18 @@ public:
     virtual ~CityblockWeightedMetric() {}
 };
 
+/**
+ * @brief The CorrelationMetric class
+ */
 class CorrelationMetric : public Metrics
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief CorrelationMetric constructor
+     * @param parent Parent object in Qt hieararchy
+     */
     CorrelationMetric(QObject *parent = 0) : Metrics(parent) { }
 
     virtual float distance(MatF &v1, MatF &v2)
@@ -200,6 +215,12 @@ public:
         return 1.0 - correlation(v1, v2);
     }
 
+    /**
+     * @brief calculates correlation between two vectors
+     * @param v1 first vector
+     * @param v2 secons vector
+     * @return  calculated correlation
+     */
     float correlation(MatF&v1, MatF&v2)
     {
         int n = v1.rows;
@@ -222,11 +243,18 @@ public:
     virtual ~CorrelationMetric() {}
 };
 
+/**
+ * @brief The CorrelationWeightedMetric class
+ */
 class CorrelationWeightedMetric : public WeightedMetric
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief CorrelationWeightedMetric constructor
+     * @param parent Parent object in Qt hieararchy
+     */
     CorrelationWeightedMetric(QObject *parent = 0) : WeightedMetric(parent) { }
 
     virtual float distance(MatF &v1, MatF &v2)
@@ -259,11 +287,19 @@ public:
     virtual ~CorrelationWeightedMetric() {}
 };
 
+/**
+ * @brief The CosineMetric class
+ */
 class CosineMetric : public Metrics
 {
     Q_OBJECT
 
 public:
+
+    /**
+     * @brief CosineMetric constructor
+     * @param parent Parent object in Qt hieararchy
+     */
     CosineMetric(QObject *parent = 0) : Metrics(parent) { }
 
     virtual float distance(MatF &v1, MatF &v2)
@@ -286,11 +322,19 @@ public:
     virtual ~CosineMetric() {}
 };
 
+/**
+ * @brief The CosineWeightedMetric class
+ */
 class CosineWeightedMetric : public WeightedMetric
 {
     Q_OBJECT
 
 public:
+
+    /**
+     * @brief CosineWeightedMetric constructor
+     * @param parent Parent object in Qt hieararchy
+     */
     CosineWeightedMetric(QObject *parent = 0) : WeightedMetric(parent) { }
 
     virtual float distance(MatF &v1, MatF &v2)
@@ -379,11 +423,19 @@ public:
     virtual ~MahalanobisWeightedMetric() {}
 };*/
 
+/**
+ * @brief The SumOfSquareDifferences class
+ */
 class SumOfSquareDifferences : public Metrics
 {
     Q_OBJECT
 
 public:
+
+    /**
+     * @brief SumOfSquareDifferences constructor
+     * @param parent Parent object in Qt hieararchy
+     */
     SumOfSquareDifferences(QObject *parent = 0) : Metrics(parent) { }
 
     float distance(MatF &v1, MatF &v2)
