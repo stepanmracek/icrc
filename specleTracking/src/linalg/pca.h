@@ -7,18 +7,38 @@
 #include "common.h"
 #include "backprojectionbase.h"
 
+/**
+ * @brief Implementation of principal component analysis (PCA)
+ */
 class PCA : public BackProjectionBase
 {
     Q_OBJECT
 
-public:
+private:
     cv::PCA cvPca;
 
+public:
+
+    /**
+     * @brief PCA constructor
+     * @param parent Parent object in Qt hierarchy
+     */
     PCA(QObject *parent = 0) : BackProjectionBase(parent) { }
 
+    /**
+     * @brief Calculates PCA of input training vectors
+     * @param vectors Input training vectors
+     * @param maxComponents Maximum count of PCA components. Set to 0 if you want all components
+     * @param parent Parent object in Qt hierarchy
+     */
     PCA(std::vector<MatF> &vectors, int maxComponents = 0, QObject *parent = 0);
 
-    PCA(const char *path, QObject *parent = 0);
+    /**
+     * @brief Reads PCA from input data
+     * @param path
+     * @param parent
+     */
+    PCA(const QString &path, QObject *parent = 0);
 
     int getModes() { return cvPca.eigenvalues.rows; }
 
