@@ -42,6 +42,11 @@ public:
 
     int getModes() { return cvPca.eigenvalues.rows; }
 
+    /**
+     * @brief Returns eigenvalue of specific mode/component
+     * @param mode Mode/Component
+     * @return Eigenvalue
+     */
     float getEigenVal(int mode);
 
     void setModes(int modes);
