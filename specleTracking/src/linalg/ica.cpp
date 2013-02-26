@@ -192,7 +192,7 @@ MatF ICA::backProject(const MatF &vector)
 
 void ICA::serialize(const QString &path)
 {
-    cv::FileStorage storage(path, cv::FileStorage::WRITE);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::WRITE);
     storage << "EDET" << EDET;
     storage << "EDETinv" << EDETinv;
     storage << "W" << W;
@@ -202,7 +202,7 @@ void ICA::serialize(const QString &path)
 
 void ICA::deserialize(const QString &path)
 {
-    cv::FileStorage storage(path, cv::FileStorage::READ);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
     storage["EDET"] >> EDET;
     storage["EDETinv"] >> EDETinv;
     storage["W"] >> W;

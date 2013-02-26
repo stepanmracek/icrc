@@ -7,28 +7,58 @@
 
 #include "linalg/common.h"
 
+/**
+ * @brief Base class of all image filters
+ */
 class ImageFilterBase : public QObject
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief Constructor
+     * @param parent Parent object in Qt hierarchy
+     */
     ImageFilterBase(QObject *parent = 0) : QObject(parent) { }
 
+    /**
+     * @brief Applies the image filter to desired image
+     * @param frame Image
+     */
     virtual void process(Mat8 &frame) = 0;
 
+    /**
+     * @brief Process image filter on vector of images.
+     * @param inputImages Input images
+     * @param windowSize Desired window size. Filter on all images within the window is calculated and the mean is added to the result
+     * @return Vector of resulting means
+     */
     VectorOfImages calculateMean(VectorOfImages &inputImages, int windowSize);
 };
 
+/**
+ * @brief Typedef for List of image filters
+ */
 typedef std::list<ImageFilterBase*> ListOfImageProcessing;
 
 
+/**
+ * @brief Median image filter
+ */
 class ImageFilterMedian : public ImageFilterBase
 {
     Q_OBJECT
 
-public:
+private:
     int ksize;
 
+public:
+
+    /**
+     * @brief Constructor
+     * @param ksize Kernel size
+     * @param parent Parent object in Qt hierarchy
+     */
     ImageFilterMedian(int ksize = 7, QObject *parent = 0) : ImageFilterBase(parent), ksize(ksize) { }
 
     virtual void process(Mat8 &frame)
@@ -37,11 +67,19 @@ public:
     }
 };
 
+/**
+ * @brief Histogram equalization
+ */
 class ImageFilterHistEq : public ImageFilterBase
 {
     Q_OBJECT
 
 public:
+
+    /**
+     * @brief Constructor
+     * @param parent Parent object in Qt hierarchy
+     */
     ImageFilterHistEq(QObject *parent = 0) : ImageFilterBase(parent) { }
 
     virtual void process(Mat8 &frame)
@@ -50,15 +88,27 @@ public:
     }
 };
 
+/**
+ * @brief The Non-linear means denoise filter
+ */
 class ImageFilterNlMeansDenoise : public ImageFilterBase
 {
     Q_OBJECT
 
-public:
+private:
     float h;
     int searchSize;
     int templateSize;
 
+public:
+
+    /**
+     * @brief Constructor
+     * @param regulation Regulation coefficient
+     * @param searchWindowSize Search window size
+     * @param templateWindowSize Template Window Size
+     * @param parent Parent object in Qt hierarchy
+     */
     ImageFilterNlMeansDenoise(float regulation = 3, int searchWindowSize = 21, int templateWindowSize = 7, QObject *parent = 0) :
         ImageFilterBase(parent), h(regulation), searchSize(searchWindowSize), templateSize(templateWindowSize) {}
 
@@ -69,18 +119,29 @@ public:
         result.copyTo(frame);
     }
 
-private:
-    float weight(Mat8 &frame, P reference, P target);
+/*private:
+    float weight(Mat8 &frame, P reference, P target);*/
 };
 
+/**
+ * @brief Contrast filter
+ */
 class ImageFilterContrast : public ImageFilterBase
 {
     Q_OBJECT
 
-public:
+private:
     float alfa;
     float beta;
 
+public:
+
+    /**
+     * @brief Constructor
+     * @param alfa Coefficient alfa
+     * @param beta Coefficient beta
+     * @param parent Parent object in Qt hierarchy
+     */
     ImageFilterContrast(float alfa = 1.0f, float beta = 0.0f, QObject *parent = 0) :
         ImageFilterBase(parent), alfa(alfa), beta(beta) {}
 
@@ -90,11 +151,18 @@ public:
     }
 };
 
+/**
+ * @brief Edge detection filter
+ */
 class ImageFilterEdge : public ImageFilterBase
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief Constructor
+     * @param parent Parent object in Qt hierarchy
+     */
     ImageFilterEdge(QObject *parent = 0) : ImageFilterBase(parent) { }
 
     virtual void process(Mat8 &frame)

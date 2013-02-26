@@ -1,38 +1,63 @@
-/*
- * spline.h
- *
- *  Created on: 8.6.2012
- *      Author: stepo
- */
-
 #ifndef SPLINE_H_
 #define SPLINE_H_
 
 #include "common.h"
 
+/**
+ * @brief Spline that connects all constrol points
+ */
 class Spline
 {
 public:
+    /**
+     * @brief Spline constructor
+     */
 	Spline();
-	virtual ~Spline() {}
 
-    void drawSpline(Points &controllPoints, Mat8 &image, bool circle, unsigned char intensity = 255);
-	//void drawSpline(P &p1, P &p2, P &p3, P &p4, Mat8 &image, unsigned char intensity = 255);
+    /**
+     * @brief Draws spline between all control points
+     * @param controlPoints Control points
+     * @param image Target image
+     * @param circle Draw circle in circle?
+     * @param intensity Intensity of drawn spline
+     */
+    void drawSpline(const Points &controlPoints, Mat8 &image, bool circle, unsigned char intensity = 255);
 
-    Points getCircleSplinePoints(Points &points, int pointsPerSegment = 20);
-	Points getSplinePoints(Points &points, int pointsPerSegment = 20);
-	Points getSplinePoints(P &p1, P &p2, P &p3, P &p4, int pointsPerSegment = 20);
+    /**
+     * @brief Returns all points among spline control points in circle
+     * @param points Control points
+     * @param pointsPerSegment Number of point per each segment
+     * @return All points among spline control points in circle
+     */
+    Points getCircleSplinePoints(const Points &points, int pointsPerSegment = 20);
 
-    Points uniformDistance(Points &in, int segments, bool circle);
+    /**
+     * @brief Returns all points among spline control points
+     * @param points Control points
+     * @param pointsPerSegment Number of point per each segment
+     * @return All points among spline control points
+     */
+    Points getSplinePoints(const Points &points, int pointsPerSegment = 20);
 
+    /**
+     * @brief Returns specific number of points among spline with uniform distance
+     * @param in Control points
+     * @param segments Desired number of segments/points
+     * @param circle In Circle?
+     * @return Points among spline with uniform distance
+     */
+    Points uniformDistance(const Points &in, int segments, bool circle);
+
+private:
     P getPoint(Points &splinePoints, float t);
+
+    Points reorganizePoints(Points &input);
+
+    Points getSplinePoints(const P &p1, const P &p2, const P &p3, const P &p4, int pointsPerSegment = 20);
 
     float length(Points &splinePoints);
 
-	MatF splineMatrix;
-
-private:
-    Points reorganizePoints(Points &input);
+    MatF splineMatrix;
 };
 
 #endif /* SPLINE_H_ */

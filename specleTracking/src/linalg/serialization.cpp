@@ -11,7 +11,7 @@ bool Serialization::serialize(MatF &m, const QString &path)
 bool Serialization::serialize(Points &shape, const QString &path)
 {
     MatF m = Common::pointsToMatF(shape);
-    return serialize(m, path.toStdString());
+    return serialize(m, path);
 }
 
 bool Serialization::serialize(VectorOfShapes &shapes, const QString &path)
@@ -62,7 +62,7 @@ MatF Serialization::readMatF(const QString &path)
 
 Points Serialization::readShape(const QString &path)
 {
-    MatF m = readMatF(path.toStdString());
+    MatF m = readMatF(path);
     return Common::matFToPoints(m);
 }
 

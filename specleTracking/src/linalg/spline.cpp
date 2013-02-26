@@ -19,11 +19,11 @@ Spline::Spline()
                     -1,  3, -3,  1);
 }
 
-void Spline::drawSpline(Points &controllPoints, Mat8 &image, bool circle, unsigned char intensity)
+void Spline::drawSpline(const Points &controlPoints, Mat8 &image, bool circle, unsigned char intensity)
 {
     Points splinePoints = circle ?
-                getCircleSplinePoints(controllPoints, 20)
-              : getSplinePoints(controllPoints, 20);
+                getCircleSplinePoints(controlPoints, 20)
+              : getSplinePoints(controlPoints, 20);
 
 	int n = splinePoints.size();
 	for (int i = 0; i < n; i++)
@@ -34,14 +34,14 @@ void Spline::drawSpline(Points &controllPoints, Mat8 &image, bool circle, unsign
             image(y, x) = intensity;
     }
 
-    n = controllPoints.size();
+    n = controlPoints.size();
 	for (int i = 0; i < n; i++)
 	{
-        cv::circle(image, controllPoints[i], i == 0 ? 5 : 3, cv::Scalar(intensity));
+        cv::circle(image, controlPoints[i], i == 0 ? 5 : 3, cv::Scalar(intensity));
 	}        
 }
 
-Points Spline::getCircleSplinePoints(Points &points, int pointsPerSegment)
+Points Spline::getCircleSplinePoints(const Points &points, int pointsPerSegment)
 {
     Points out;
     int n = points.size();
@@ -66,7 +66,7 @@ Points Spline::getCircleSplinePoints(Points &points, int pointsPerSegment)
     return out;
 }
 
-Points Spline::getSplinePoints(Points &points, int pointsPerSegment)
+Points Spline::getSplinePoints(const Points &points, int pointsPerSegment)
 {
 	Points out;
 	int n = points.size();
@@ -104,7 +104,7 @@ Points Spline::getSplinePoints(Points &points, int pointsPerSegment)
 	return out;
 }
 
-Points Spline::getSplinePoints(P &p1, P &p2, P &p3, P &p4, int pointsPerSegment)
+Points Spline::getSplinePoints(const P &p1, const P &p2, const P &p3, const P &p4, int pointsPerSegment)
 {
 	Points out;
 	MatF Pmat = (MatF(4, 2) <<
@@ -128,7 +128,7 @@ Points Spline::getSplinePoints(P &p1, P &p2, P &p3, P &p4, int pointsPerSegment)
 	return out;
 }
 
-Points Spline::uniformDistance(Points &in, int segments, bool circle)
+Points Spline::uniformDistance(const Points &in, int segments, bool circle)
 {
 	Points out;
     Points allPointsOfSpline = circle ?

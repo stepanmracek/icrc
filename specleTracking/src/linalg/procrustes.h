@@ -90,7 +90,7 @@ struct TranslationCoefs
 };
 
 /**
- * @brief Struct represents general linear 2D transformation (scale,rotation,shift)
+ * @brief Struct represents general linear 2D transformation (scale,rotation,shear)
  */
 struct TransformationCoefs
 {
@@ -114,29 +114,86 @@ struct TransformationCoefs
     float b;
 };
 
+/**
+ * @brief The Procrustes class provides methods for 2D transofrmation and calculation of procrustes analysis
+ */
 class Procrustes
 {
 public:
+
+    /**
+     * @brief Procrustes analysis of input 2D shapes represented as column vectors
+     * @param vectors Input 2D shapes represented as column vectors
+     * @param scale Apply scaling?
+     * @param eps Desired threshold
+     * @param maxIterations Maximum number of iterations
+     */
     static void procrustesAnalysis(std::vector<MatF> &vectors, bool scale = true,
     							   float eps = 0, int maxIterations = INT_MAX);
 
-    static float getOptimalRotation(MatF &from, MatF &to);
+    /**
+     * @brief Calculates optimal rotation from one shape to another
+     * @param from The shape which is rotated towards the second shape
+     * @param to Desired shape (template)
+     * @return Optimal rotation in radians
+     */
+    static float getOptimalRotation(const MatF &from, const MatF &to);
 
-    static ScaleAndRotateCoefs align(MatF &from, MatF &to);
+    /**
+     * @brief Calculates optimal scale and rotation from one shape to another
+     * @param from The shape which is transformated towards the second shape
+     * @param to Desired shape (template)
+     * @return Optimal scale and rotation
+     */
+    static ScaleAndRotateCoefs align(const MatF &from, const MatF &to);
 
-    static void rotateAndScale(MatF &vector, ScaleAndRotateCoefs &coefs);
+    /**
+     * @brief Rotate and scale given shape
+     * @param vector Shape represented as column vector
+     * @param coefs Desired scale and rotation
+     */
+    static void rotateAndScale(MatF &vector, const ScaleAndRotateCoefs &coefs);
 
-    static void transformate(MatF &vector, TransformationCoefs &coefs);
+    /**
+     * @brief Transformate given shape
+     * @param vector Shape represented as column vector
+     * @param coefs desired transformation
+     */
+    static void transformate(MatF &vector, const TransformationCoefs &coefs);
 
-    static void translate(MatF &vector, TranslationCoefs &coefs);
+    /**
+     * @brief Translate (move) given shape
+     * @param vector Shape represented as column vector
+     * @param coefs desired shift
+     */
+    static void translate(MatF &vector, const TranslationCoefs &coefs);
 
-    static TranslationCoefs centralizedTranslation(MatF &vector);
 
+    /**
+     * @brief Calculates translation that moves the shape such its centroid will be in the center of coordinates
+     * @param vector Shape represented as column vector
+     * @return Calculated translation
+     */
+    static TranslationCoefs centralizedTranslation(const MatF &vector);
+
+    /**
+     * @brief Centralizes given shape
+     * @param vector Shape represented as column vector
+     */
     static void centralize(MatF &vector);
 
+    /**
+     * @brief Centralize all shapes
+     * @param vectors Shapes represented as column vectors
+     */
     static void centralize(std::vector<MatF> &vectors);
 
-    static MatF getMeanShape(std::vector<MatF> &vectors);
+    /**
+     * @brief Calculates mean of given shapes
+     * @param vectors Shapes represented as column vectors
+     * @return Mean shape
+     */
+    static MatF getMeanShape(const std::vector<MatF> &vectors);
 };
 
 #endif // PROCRUSTES_H

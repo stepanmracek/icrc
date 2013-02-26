@@ -73,7 +73,7 @@ void Procrustes::procrustesAnalysis(std::vector<MatF> &vectors, bool scale, floa
     }
 }
 
-void Procrustes::translate(MatF &vector, TranslationCoefs &coefs)
+void Procrustes::translate(MatF &vector, const TranslationCoefs &coefs)
 {
     int n = vector.rows/2;
     for (int i = 0; i < n; i++)
@@ -83,7 +83,7 @@ void Procrustes::translate(MatF &vector, TranslationCoefs &coefs)
     }
 }
 
-TranslationCoefs Procrustes::centralizedTranslation(MatF &vector)
+TranslationCoefs Procrustes::centralizedTranslation(const MatF &vector)
 {
     float meanx = 0.0;
     float meany = 0.0;
@@ -116,7 +116,7 @@ void Procrustes::centralize(std::vector<MatF> &vectors)
 		centralize(vectors[i]);
 }
 
-void Procrustes::rotateAndScale(MatF &vector, ScaleAndRotateCoefs &coefs)
+void Procrustes::rotateAndScale(MatF &vector, const ScaleAndRotateCoefs &coefs)
 {
     float sint = coefs.s * sin(coefs.theta);
     float cost = coefs.s * cos(coefs.theta);
@@ -134,7 +134,7 @@ void Procrustes::rotateAndScale(MatF &vector, ScaleAndRotateCoefs &coefs)
     }
 }
 
-void Procrustes::transformate(MatF &vector, TransformationCoefs &coefs)
+void Procrustes::transformate(MatF &vector, const TransformationCoefs &coefs)
 {
     int n = vector.rows/2;
     for (int i = 0; i < n; i++)
@@ -149,7 +149,7 @@ void Procrustes::transformate(MatF &vector, TransformationCoefs &coefs)
     }
 }
 
-float Procrustes::getOptimalRotation(MatF &from, MatF &to)
+float Procrustes::getOptimalRotation(const MatF &from, const MatF &to)
 {
     int n = from.rows/2;
     float numerator = 0.0;
@@ -163,7 +163,7 @@ float Procrustes::getOptimalRotation(MatF &from, MatF &to)
     return atan(numerator/denumerator);
 }
 
-ScaleAndRotateCoefs Procrustes::align(MatF &from, MatF &to)
+ScaleAndRotateCoefs Procrustes::align(const MatF &from, const MatF &to)
 {
     MatF reference = to.clone();
     float referenceScale = 1.0/VecF::magnitude(reference);
@@ -180,7 +180,7 @@ ScaleAndRotateCoefs Procrustes::align(MatF &from, MatF &to)
     return c;
 }
 
-MatF Procrustes::getMeanShape(std::vector<MatF> &vectors)
+MatF Procrustes::getMeanShape(const std::vector<MatF> &vectors)
 {
 	int n = vectors.size();
 	MatF mean = MatF::zeros(vectors[0].rows, 1);

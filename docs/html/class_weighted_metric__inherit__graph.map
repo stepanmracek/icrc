@@ -1,7 +1,7 @@
 <map id="WeightedMetric" name="WeightedMetric">
-<area shape="rect" id="node4" href="$class_cityblock_weighted_metric.html" title="CityblockWeightedMetric" alt="" coords="405,5,571,32"/>
-<area shape="rect" id="node5" href="$class_correlation_weighted_metric.html" title="CorrelationWeightedMetric" alt="" coords="401,56,575,83"/>
-<area shape="rect" id="node6" href="$class_cosine_weighted_metric.html" title="CosineWeightedMetric" alt="" coords="412,107,564,133"/>
-<area shape="rect" id="node7" href="$class_euclidean_weighted_metric.html" title="The Euclidean weighted metric." alt="" coords="403,157,573,184"/>
+<area shape="rect" id="node4" href="$class_cityblock_weighted_metric.html" title="The CityblockWeightedMetric class." alt="" coords="404,5,569,32"/>
+<area shape="rect" id="node5" href="$class_correlation_weighted_metric.html" title="The CorrelationWeightedMetric class." alt="" coords="400,56,573,83"/>
+<area shape="rect" id="node6" href="$class_cosine_weighted_metric.html" title="The CosineWeightedMetric class." alt="" coords="411,107,563,133"/>
+<area shape="rect" id="node7" href="$class_euclidean_weighted_metric.html" title="The Euclidean weighted metric." alt="" coords="402,157,571,184"/>
 <area shape="rect" id="node2" href="$class_metrics.html" title="The Metrics abstract class provides common interface for all used metrics (Euclidean, city&#45;block,...)" alt="" coords="126,81,191,108"/>
 </map>

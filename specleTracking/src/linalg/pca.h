@@ -6,6 +6,7 @@
 
 #include "common.h"
 #include "backprojectionbase.h"
+#include "ica.h"
 
 /**
  * @brief Implementation of principal component analysis (PCA)
@@ -13,6 +14,8 @@
 class PCA : public BackProjectionBase
 {
     Q_OBJECT
+
+    friend class ICA; // ICA may see cvPCA struct
 
 private:
     cv::PCA cvPca;

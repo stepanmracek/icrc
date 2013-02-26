@@ -10,6 +10,9 @@
 #include "coordsystem.h"
 #include "shapenormalizer.h"
 
+/**
+ * @brief Base class for strain estimation
+ */
 class Strain : public QObject
 {
     Q_OBJECT
