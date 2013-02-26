@@ -4,6 +4,7 @@
 #include <QMap>
 #include <QVector>
 #include <vector>
+#include <QString>
 #include <list>
 
 #include "common.h"
@@ -22,7 +23,7 @@ public:
      * @param path Desired path of the file
      * @return Returns true if the serialization was successfull
      */
-    static bool serialize(MatF &m, const char *path);
+    static bool serialize(MatF &m, const QString &path);
 
     /**
      * @brief Serialize the shape to the given file
