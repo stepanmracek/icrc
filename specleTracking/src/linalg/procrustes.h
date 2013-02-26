@@ -7,53 +7,108 @@
 
 #include "common.h"
 
+/**
+ * @brief The ScaleAndRotateCoefs struct
+ */
 struct ScaleAndRotateCoefs
 {
+    /**
+     * @brief ScaleAndRotateCoefs default constructor. Initializes scale to 1 and rotation to 0
+     */
     ScaleAndRotateCoefs()
     {
         s = 1;
         theta = 0;
     }
 
-    ScaleAndRotateCoefs(float _s, float _theta) : s(_s), theta(_theta) {}
+    /**
+     * @brief ScaleAndRotateCoefs constructor
+     * @param s Scale
+     * @param theta Rotation
+     */
+    ScaleAndRotateCoefs(float s, float theta) : s(s), theta(theta) {}
 
+    /**
+     * @brief Calculates inverse transform
+     * @return Inverse transform
+     */
     ScaleAndRotateCoefs inv()
     {
         return ScaleAndRotateCoefs(1/s, -theta);
     }
 
+    /**
+     * @brief Scale
+     */
     float s;
+
+    /**
+     * @brief Rotation
+     */
     float theta;
 };
 
+/**
+ * @brief The TranslationCoefs struct
+ */
 struct TranslationCoefs
 {
+    /**
+     * @brief TranslationCoefs default constructor. Initializes to zero translation
+     */
     TranslationCoefs()
     {
         xt = 0.0;
         yt = 0.0;
     }
 
-    TranslationCoefs(float _xt, float _yt) : xt(_xt), yt(_yt) {}
+    /**
+     * @brief TranslationCoefs constructor
+     * @param xt x-axis shift
+     * @param yt y-axis shift
+     */
+    TranslationCoefs(float xt, float yt) : xt(xt), yt(yt) {}
 
+    /**
+     * @brief Calculates inverse transform
+     * @return Inverse transform
+     */
     TranslationCoefs inv()
     {
         return TranslationCoefs(-xt, -yt);
     }
 
+    /**
+     * @brief x-axis shift
+     */
     float xt;
+
+    /**
+     * @brief y-axis shift
+     */
     float yt;
 };
 
+/**
+ * @brief Struct represents general linear 2D transformation (scale,rotation,shift)
+ */
 struct TransformationCoefs
 {
+    /**
+     * @brief Default constructor initializes to empty transform
+     */
     TransformationCoefs()
     {
         a = 1;
         b = 0;
     }
 
-    TransformationCoefs(float _a, float _b) : a(_a), b(_b) {}
+    /**
+     * @brief Constructor
+     * @param a
+     * @param b
+     */
+    TransformationCoefs(float a, float b) : a(a), b(b) {}
 
     float a;
     float b;
