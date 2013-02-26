@@ -4,7 +4,7 @@ VideoDataClip::VideoDataClip(const QString &path, QObject *parent) : VideoDataBa
 {
     metadata = new VideoDataClipMetadata(this);
 
-    cv::VideoCapture capture = cv::VideoCapture(path.toUtf8().data());
+    cv::VideoCapture capture = cv::VideoCapture(path.toStdString());
     cv::Mat rawFrame;
     while (capture.read(rawFrame))
     {
@@ -18,7 +18,7 @@ VideoDataClip::VideoDataClip(const QString &path, const QString &metadataPath, Q
 {
     metadata = new VideoDataClipMetadata(this);
 
-    cv::VideoCapture capture = cv::VideoCapture(path.toUtf8().data());
+    cv::VideoCapture capture = cv::VideoCapture(path.toStdString());
     cv::Mat rawFrame;
     while (capture.read(rawFrame))
     {
@@ -137,7 +137,7 @@ char *VideoDataClip::getSubClip(int index, QMap<int, Points> &shapes,
 
 void VideoDataClipMetadata::deserialize(const QString &path)
 {
-    cv::FileStorage storage(path.toUtf8().data(), cv::FileStorage::READ);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
     cv::FileNode node = storage["beatIndicies"];
     for (cv::FileNodeIterator it = node.begin(); it != node.end(); ++it)
     {
@@ -167,7 +167,7 @@ void VideoDataClipMetadata::deserialize(const QString &path)
 
 void VideoDataClipMetadata::serialize(const QString &path)
 {
-    cv::FileStorage storage(path.toUtf8().data(), cv::FileStorage::WRITE);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::WRITE);
     if (!storage.isOpened()) return;
     storage << "beatIndicies" << "[";
     foreach(int i, beatIndicies)
