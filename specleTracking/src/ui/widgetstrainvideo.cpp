@@ -118,7 +118,7 @@ void WidgetStrainVideo::serializeShapes(const QString &path)
 
     qDebug() << "Saving shapes for" << currentFilename;
     QString fullPath = path + QDir::separator() + currentFilename + "_shapemap";
-    Serialization::serialize(shapes, fullPath.toStdString().c_str());
+    Serialization::serialize(shapes, fullPath);
 }
 
 void WidgetStrainVideo::serializeMetadata(const QString &path)
@@ -137,7 +137,7 @@ void WidgetStrainVideo::deserializeShapes(const QString &path)
 
     QFileInfo fInfo(fullpath);
     if (!fInfo.exists()) return;
-    shapes = Serialization::readShapeMap(fullpath.toStdString().c_str());
+    shapes = Serialization::readShapeMap(fullpath);
 }
 
 WidgetResult *WidgetStrainVideo::getWidgetResult()
