@@ -47,6 +47,8 @@ private slots:
 
     void on_actionCreateTracker();
 
+    void on_actionChangeImageProcessing();
+
 private:
     void setTracker(ShapeTracker *tracker);
 

@@ -20,6 +20,7 @@
 #include "ui/dialogvideodataclipmetadata.h"
 #include "ui/dialogbeattobeat.h"
 #include "ui/dialogcreatetracker.h"
+#include "ui/dialogimageprocessing.h"
 
 WindowAnotationManager::WindowAnotationManager(QString path, ShapeTracker *tracker, QWidget *parent) :
     QMainWindow(parent),
@@ -284,4 +285,13 @@ void WindowAnotationManager::on_actionCreateTracker()
         setTracker(dlg.getNewShapeTracker());
         delete oldTracker;
     }
+}
+
+void WindowAnotationManager::on_actionChangeImageProcessing()
+{
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
+
+    DialogImageProcessing dlg(clip->frames[0], clip->getMetadata()->getCoordSystem());
+    dlg.exec();
 }

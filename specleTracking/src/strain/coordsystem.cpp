@@ -98,7 +98,7 @@ void CoordSystemRadial::init(P center, P arcStart, P arcEnd, float startDistance
     distanceStep = dDistance / (resultMatRows-1);
 }
 
-Mat8 CoordSystemRadial::transform(Mat8 &src)
+Mat8 CoordSystemRadial::transform(const Mat8 &src)
 {
     Mat8 result(resultMatRows, resultMatCols);
     for (int c = 0; c < resultMatCols; c++)

@@ -158,17 +158,21 @@ class ImageFilterEdge : public ImageFilterBase
 {
     Q_OBJECT
 
+private:
+    int ksize;
+
 public:
     /**
      * @brief Constructor
+     * @param ksize Kernel size
      * @param parent Parent object in Qt hierarchy
      */
-    ImageFilterEdge(QObject *parent = 0) : ImageFilterBase(parent) { }
+    ImageFilterEdge(int ksize, QObject *parent = 0) : ksize(ksize), ImageFilterBase(parent) { }
 
     virtual void process(Mat8 &frame)
     {
         cv::Mat dest(frame.rows, frame.cols, CV_16S);
-        cv::Sobel(frame, dest, CV_16S, 1, 1);
+        cv::Sobel(frame, dest, CV_16S, 1, 1, ksize);
         dest.convertTo(frame, CV_8UC1, 0.5, 127);
     }
 };

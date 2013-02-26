@@ -203,6 +203,7 @@
      <string>Tools</string>
     </property>
     <addaction name="actionChangeTracker"/>
+    <addaction name="actionChangeImageProcessing"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -217,6 +218,11 @@
   <action name="actionChangeTracker">
    <property name="text">
     <string>Change tracker</string>
+   </property>
+  </action>
+  <action name="actionChangeImageProcessing">
+   <property name="text">
+    <string>Change image processing</string>
    </property>
   </action>
  </widget>
@@ -251,8 +257,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionChangeImageProcessing</sender>
+   <signal>activated()</signal>
+   <receiver>WindowAnotationManager</receiver>
+   <slot>on_actionChangeImageProcessing()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>552</x>
+     <y>335</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_actionCreateTracker()</slot>
+  <slot>on_actionChangeImageProcessing()</slot>
  </slots>
 </ui>

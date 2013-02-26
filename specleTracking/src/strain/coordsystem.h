@@ -28,7 +28,7 @@ public:
      * @param input Input image data
      * @return Transformed image data
      */
-    virtual Mat8 transform(Mat8 &input) = 0;
+    virtual Mat8 transform(const Mat8 &input) = 0;
 
     /**
      * @brief Transform input point
@@ -114,7 +114,7 @@ public:
      */
     CoordSystemPass(QObject *parent = 0) : CoordSystemBase(parent) { }
 
-    Mat8 transform(Mat8 &input) { return input; }
+    Mat8 transform(const Mat8 &input) { return input; }
     P transform(P input) { return input; }
     P transform(float inputX, float inputY) { return P(inputX, inputY); }
     P backTransform(P input) { return input; }
@@ -199,7 +199,7 @@ public:
      */
     void init(P center, P arcStart, P arcEnd, float startDistance, int resultMatCols, int resultMatRows);
 
-    Mat8 transform(Mat8 &src);
+    Mat8 transform(const Mat8 &src);
     P transform(P input);
     P transform(float inputX, float inputY);
 
