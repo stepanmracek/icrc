@@ -45,7 +45,7 @@ public:
      * @param path File with serialized ICA data
      * @param parent parent object in Qt hierarchy
      */
-    ICA(const char *path, QObject *parent = 0);
+    ICA(const QString &path, QObject *parent = 0);
 
     int getModes() { return W.rows; }
 
@@ -63,9 +63,9 @@ public:
 
     void learn(const std::vector<MatF> &vectors) { learn(vectors, 0, 1e-10, 10000, false); }
 
-    void serialize(const char *path);
+    void serialize(const QString &path);
 
-    void deserialize(const char *path);
+    void deserialize(const QString &path);
 
     MatF project(const MatF &vector);
 
