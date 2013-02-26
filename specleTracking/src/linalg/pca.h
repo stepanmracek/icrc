@@ -49,8 +49,16 @@ public:
      */
     float getEigenVal(int mode);
 
+    /**
+     * @brief Set specific number of modes/components
+     * @param desired count of modes
+     */
     void setModes(int modes);
 
+    /**
+     * @brief Automatic mode selection
+     * @param t Desired threshold
+     */
     void modesSelectionThreshold(double t = 0.98);
 
     void learn(const std::vector<MatF> &vectors, int maxComponents = 0);
