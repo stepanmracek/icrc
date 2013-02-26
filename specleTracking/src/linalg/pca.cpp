@@ -5,7 +5,7 @@ PCA::PCA(std::vector<MatF> &vectors, int maxComponents, QObject *parent) : BackP
     learn(vectors, maxComponents);
 }
 
-PCA::PCA(const char *path, QObject *parent) : BackProjectionBase(parent)
+PCA::PCA(const QString &path, QObject *parent) : BackProjectionBase(parent)
 {
     deserialize(path);
 }
@@ -18,7 +18,7 @@ void PCA::learn(const std::vector<MatF> &vectors, int maxComponents)
 
 void PCA::serialize(const QString &path)
 {
-    cv::FileStorage storage(path.toUtf8().data(), cv::FileStorage::WRITE);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::WRITE);
     storage << "eigenvalues" << cvPca.eigenvalues;
     storage << "eigenvectors" << cvPca.eigenvectors;
     storage << "mean" << cvPca.mean;
@@ -26,7 +26,7 @@ void PCA::serialize(const QString &path)
 
 void PCA::deserialize(const QString &path)
 {
-    cv::FileStorage storage(path.toUtf8().data(), cv::FileStorage::READ);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
     storage["eigenvalues"] >> cvPca.eigenvalues;
     storage["eigenvectors"] >> cvPca.eigenvectors;
     storage["mean"] >> cvPca.mean;
