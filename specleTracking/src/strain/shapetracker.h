@@ -25,20 +25,22 @@ private:
     Strain *strain;
     PointTrackerBase *pointTracker;
     StrainResultProcessingBase *resultProcessing;
+    ListOfImageProcessing frameProcessing;
+
+    void applyProcessing(Mat8 &frame);
 
 public:
-    ListOfImageProcessing frameProcessing;
+
     VectorF weights;
 
     ShapeTracker(Strain *strain,
-                 ListOfImageProcessing frameProcessing,
+                 ListOfImageProcessing &frameProcessing,
                  PointTrackerBase *pointTracker,
                  StrainResultProcessingBase *resultProcessing,
                  VectorF weights,
                  QObject *parent = 0)
         : QObject(parent),
           strain(strain),
-          frameProcessing(frameProcessing),
           pointTracker(pointTracker),
           resultProcessing(resultProcessing),
           weights(weights)
@@ -46,15 +48,17 @@ public:
         pointTracker->setParent(this);
         resultProcessing->setParent(this);
         strain->setParent(this);
-        for(ListOfImageProcessing::iterator it = frameProcessing.begin(); it != frameProcessing.end(); ++it)
-        {
-            (*it)->setParent(this);
-        }
+        addFilters(frameProcessing);
     }
 
     Strain *getStrain() { return strain; }
     PointTrackerBase *getPointTracker() { return pointTracker; }
     StrainResultProcessingBase *getResultProcessing() { return resultProcessing; }
+
+    void clearFrameProcessing();
+
+    void addFilters(QList<ImageFilterBase*> newFilters);
+
 
     Points track(VectorOfImages &prevFrames, VectorOfShapes &prevShapes, Mat8 &nextFrame, CoordSystemBase *coordSystem);
 

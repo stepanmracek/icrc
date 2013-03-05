@@ -2,6 +2,7 @@
 #define IMAGEFILTER_H
 
 #include <QObject>
+#include <QList>
 
 #include <opencv2/opencv.hpp>
 
@@ -39,7 +40,7 @@ public:
 /**
  * @brief Typedef for List of image filters
  */
-typedef std::list<ImageFilterBase*> ListOfImageProcessing;
+typedef QList<ImageFilterBase*> ListOfImageProcessing;
 
 
 /**

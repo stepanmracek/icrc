@@ -1,5 +1,6 @@
 #include "shapetracker.h"
 
+#include <QList>
 #include <iostream>
 
 #include "anotationdata.h"
@@ -17,11 +18,10 @@ void drawAllPoints(Mat8 &image, Points &points)
     spline.drawSpline(points, image, true);
 }
 
-void applyProcessing(Mat8 &frame, ListOfImageProcessing &filters)
+void ShapeTracker::applyProcessing(Mat8 &frame)
 {
-    for (ListOfImageProcessing::iterator it = filters.begin(); it != filters.end(); ++it)
+    foreach (ImageFilterBase *filter, frameProcessing)
     {
-        ImageFilterBase *filter = *it;
         filter->process(frame);
     }
 }
@@ -40,11 +40,11 @@ Points ShapeTracker::track(VectorOfImages &prevFrames, VectorOfShapes &prevShape
     for (unsigned int i = 0; i < n; i++)
     {
         Mat8 transformedPrevFrame = coordSystem->transform(prevFrames[i]);
-        applyProcessing(transformedPrevFrame, frameProcessing);
+        applyProcessing(transformedPrevFrame);
         transformedPrevFrames.push_back(transformedPrevFrame);
     }
     Mat8 transformedNextFrame = coordSystem->transform(nextFrame);
-    applyProcessing(transformedNextFrame, frameProcessing);
+    applyProcessing(transformedNextFrame);
 
     // track
     Points transformedNextPoints;
@@ -156,4 +156,19 @@ ShapeTracker *ShapeTracker::getDummyTracker()
     StrainResultProcessingPass *resultProcessing = new StrainResultProcessingPass();
     VectorF weights; weights.push_back(1.0);
     return new ShapeTracker(strain, listOfProcessing, pointTracker, resultProcessing, weights);
+}
+
+void ShapeTracker::clearFrameProcessing()
+{
+    qDeleteAll(frameProcessing);
+    frameProcessing.clear();
+}
+
+void ShapeTracker::addFilters(QList<ImageFilterBase *> newFilters)
+{
+    foreach(ImageFilterBase *f, newFilters)
+    {
+        frameProcessing.append(f);
+        f->setParent(this);
+    }
 }

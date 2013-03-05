@@ -293,5 +293,8 @@ void WindowAnotationManager::on_actionChangeImageProcessing()
     if (!clip || clip->size() == 0) return;
 
     DialogImageProcessing dlg(clip->frames[0], clip->getMetadata()->getCoordSystem());
-    dlg.exec();
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        tracker->addFilters(dlg.getFilters());
+    }
 }

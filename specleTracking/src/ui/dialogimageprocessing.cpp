@@ -75,3 +75,16 @@ void DialogImageProcessing::on_btnApply_clicked()
     QPixmap pixmap = UIUtils::Mat8ToQPixmap(clone);
     ui->gv->scene()->addPixmap(pixmap);
 }
+
+QList<ImageFilterBase*> DialogImageProcessing::getFilters()
+{
+    QList<ImageFilterBase*> result;
+    int n = ui->lstFilters->count();
+    for (int i = 0; i < n; i++)
+    {
+        QString filterName = ui->lstFilters->item(i)->text();
+        ImageFilterBase *filter = createImageFilter(filterName);
+        result.append(filter);
+    }
+    return result;
+}

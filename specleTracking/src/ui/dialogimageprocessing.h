@@ -19,6 +19,8 @@ class DialogImageProcessing : public QDialog
 public:
     explicit DialogImageProcessing(const Mat8 &frame, CoordSystemBase *coordSystem, QWidget *parent = 0);
     ~DialogImageProcessing();
+
+    QList<ImageFilterBase*> getFilters();
     
 private slots:
     void on_btnAdd_clicked();
