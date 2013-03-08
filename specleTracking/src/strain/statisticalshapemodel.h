@@ -31,7 +31,7 @@ public:
         this->model = model;
     }
 
-    const BackProjectionBase *getModel() const
+    BackProjectionBase *getBackProjectionBase() const
     {
         return this->model;
     }

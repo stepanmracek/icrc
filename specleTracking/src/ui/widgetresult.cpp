@@ -47,7 +47,7 @@ void WidgetResult::setResultPoints(Points points, CoordSystemBase *coordSystem)
     if (!imageSet)
     {
         emit imageNotSet();
-        return;
+        //return;
     }
 
     resultPoints = points;
@@ -61,6 +61,10 @@ void WidgetResult::setResultPoints(Points points, CoordSystemBase *coordSystem)
     }
 
     graphicItems = tracker->getStrain()->drawResult(scene, points);
-    coordGraphicItems = coordSystem->draw(scene);
+
+    if (coordSystem != 0)
+    {
+        coordGraphicItems = coordSystem->draw(scene);
+    }
 }
 

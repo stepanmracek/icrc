@@ -48,7 +48,8 @@ HEADERS += \
     ui/windowanotationmanager.h \
     ui/dialogbeattobeat.h \
     ui/dialogcreatetracker.h \
-    ui/dialogimageprocessing.h
+    ui/dialogimageprocessing.h \
+    ui/dialogshapemodel.h
 
 SOURCES += \
     linalg/vecf.cpp \
@@ -89,7 +90,8 @@ SOURCES += \
     ui/windowanotationmanager.cpp \
     ui/dialogbeattobeat.cpp \
     ui/dialogcreatetracker.cpp \
-    ui/dialogimageprocessing.cpp
+    ui/dialogimageprocessing.cpp \
+    ui/dialogshapemodel.cpp
 
 INCLUDEPATH += src
 
@@ -120,7 +122,8 @@ FORMS += \
     ui/windowanotationmanager.ui \
     ui/dialogbeattobeat.ui \
     ui/dialogcreatetracker.ui \
-    ui/dialogimageprocessing.ui
+    ui/dialogimageprocessing.ui \
+    ui/dialogshapemodel.ui
 
 RESOURCES += \
     ui/resources.qrc

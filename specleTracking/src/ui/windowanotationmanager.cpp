@@ -21,6 +21,7 @@
 #include "ui/dialogbeattobeat.h"
 #include "ui/dialogcreatetracker.h"
 #include "ui/dialogimageprocessing.h"
+#include "ui/dialogshapemodel.h"
 
 WindowAnotationManager::WindowAnotationManager(QString path, ShapeTracker *tracker, QWidget *parent) :
     QMainWindow(parent),
@@ -272,7 +273,7 @@ void WindowAnotationManager::on_btnBeatToBeat_clicked()
     QVector<StrainStatistics> allBeatsStats = StrainStatistics::getAllBeatsStats(clip, tracker->getStrain(),
                                                                                  ui->widgetStrainVideo->shapes);
 
-    DialogBeatToBeat dlg(allBeatsStats);
+    DialogBeatToBeat dlg(tracker->getStrain(), allBeatsStats);
     dlg.exec();
 }
 
@@ -296,5 +297,22 @@ void WindowAnotationManager::on_actionChangeImageProcessing()
     if (dlg.exec() == QDialog::Accepted)
     {
         tracker->addFilters(dlg.getFilters());
+    }
+}
+
+void WindowAnotationManager::on_actionShowShapeModel()
+{
+    ShapeNormalizerBase *normalizer = tracker->getStrain()->getShapeNormalizer();
+    ShapeNormalizerShapeModel *n = qobject_cast<ShapeNormalizerShapeModel*>(normalizer);
+    if (n != 0)
+    {
+        DialogShapeModel dlg(n->getShapeModel()->getBackProjectionBase(), tracker);
+        dlg.exec();
+    }
+    else
+    {
+        QMessageBox msg(QMessageBox::Information, "Information",
+                        "Current tracker is not based on statistical shape model");
+        msg.exec();
     }
 }

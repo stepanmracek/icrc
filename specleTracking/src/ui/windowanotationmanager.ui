@@ -190,7 +190,7 @@
      <x>0</x>
      <y>0</y>
      <width>1106</width>
-     <height>23</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -204,6 +204,7 @@
     </property>
     <addaction name="actionChangeTracker"/>
     <addaction name="actionChangeImageProcessing"/>
+    <addaction name="actionShowShapeModel"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -225,6 +226,11 @@
     <string>Change image processing</string>
    </property>
   </action>
+  <action name="actionShowShapeModel">
+   <property name="text">
+    <string>Show statistical shape model</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -243,7 +249,7 @@
  <connections>
   <connection>
    <sender>actionChangeTracker</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>WindowAnotationManager</receiver>
    <slot>on_actionCreateTracker()</slot>
    <hints>
@@ -259,9 +265,25 @@
   </connection>
   <connection>
    <sender>actionChangeImageProcessing</sender>
-   <signal>activated()</signal>
+   <signal>triggered()</signal>
    <receiver>WindowAnotationManager</receiver>
    <slot>on_actionChangeImageProcessing()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>552</x>
+     <y>335</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionShowShapeModel</sender>
+   <signal>triggered()</signal>
+   <receiver>WindowAnotationManager</receiver>
+   <slot>on_actionShowShapeModel()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -277,5 +299,6 @@
  <slots>
   <slot>on_actionCreateTracker()</slot>
   <slot>on_actionChangeImageProcessing()</slot>
+  <slot>on_actionShowShapeModel()</slot>
  </slots>
 </ui>

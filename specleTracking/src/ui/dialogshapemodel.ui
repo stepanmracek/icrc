@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogBeatToBeat</class>
- <widget class="QDialog" name="DialogBeatToBeat">
+ <class>DialogShapeModel</class>
+ <widget class="QDialog" name="DialogShapeModel">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,22 +11,38 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Beat to beat variance</string>
+   <string>Dialog</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="Data">
-       <property name="text">
-        <string>Data to display</string>
+      <widget class="QScrollArea" name="scrollArea">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>73</width>
+          <height>425</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="WidgetResult" name="widgetResult" native="true">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -36,22 +52,12 @@
     </layout>
    </item>
    <item>
-    <widget class="WidgetPlot" name="plot" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Close</set>
      </property>
     </widget>
    </item>
@@ -59,13 +65,10 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>WidgetPlot</class>
+   <class>WidgetResult</class>
    <extends>QWidget</extends>
-   <header>ui/widgetplot.h</header>
+   <header>ui/widgetresult.h</header>
    <container>1</container>
-   <slots>
-    <slot>setIndex(int)</slot>
-   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -73,7 +76,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DialogBeatToBeat</receiver>
+   <receiver>DialogShapeModel</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -89,7 +92,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DialogBeatToBeat</receiver>
+   <receiver>DialogShapeModel</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

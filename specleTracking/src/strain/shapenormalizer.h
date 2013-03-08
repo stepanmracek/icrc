@@ -17,18 +17,33 @@ public:
     virtual Points normalize(Points &points, Mat8 &frame) = 0;
 };
 
-class ShapeNormalizerStatisticalShape : public ShapeNormalizerBase
+class ShapeNormalizerShapeModel : public ShapeNormalizerBase
 {
     Q_OBJECT
 
-private:
+protected:
     StatisticalShapeModel *model;
 
 public:
-    ShapeNormalizerStatisticalShape(StatisticalShapeModel *model, QObject *parent = 0) : ShapeNormalizerBase(parent), model(model)
+    ShapeNormalizerShapeModel(StatisticalShapeModel *model, QObject *parent = 0) :
+        ShapeNormalizerBase(parent), model(model)
     {
         model->setParent(this);
     }
+
+    StatisticalShapeModel *getShapeModel() const
+    {
+        return model;
+    }
+};
+
+class ShapeNormalizerStatisticalShape : public ShapeNormalizerShapeModel
+{
+    Q_OBJECT
+
+public:
+    ShapeNormalizerStatisticalShape(StatisticalShapeModel *model, QObject *parent = 0) :
+        ShapeNormalizerShapeModel(model, parent) { }
 
     Points normalize(Points &points, Mat8 &)
     {
@@ -36,18 +51,13 @@ public:
     }
 };
 
-class ShapeNormalizerIterativeStatisticalShape : public ShapeNormalizerBase
+class ShapeNormalizerIterativeStatisticalShape : public ShapeNormalizerShapeModel
 {
     Q_OBJECT
 
-private:
-    StatisticalShapeModel *model;
-
 public:
-    ShapeNormalizerIterativeStatisticalShape(StatisticalShapeModel *model, QObject *parent = 0) : ShapeNormalizerBase(parent), model(model)
-    {
-        model->setParent(this);
-    }
+    ShapeNormalizerIterativeStatisticalShape(StatisticalShapeModel *model, QObject *parent = 0) :
+        ShapeNormalizerShapeModel(model, parent) { }
 
     Points normalize(Points &points, Mat8 &)
     {
@@ -55,18 +65,13 @@ public:
     }
 };
 
-class ShapeNormalizerIterConfStatShape : public ShapeNormalizerBase
+class ShapeNormalizerIterConfStatShape : public ShapeNormalizerShapeModel
 {
     Q_OBJECT
 
-private:
-    StatisticalShapeModel *model;
-
 public:
-    ShapeNormalizerIterConfStatShape(StatisticalShapeModel *model, QObject *parent = 0) : ShapeNormalizerBase(parent), model(model)
-    {
-        model->setParent(this);
-    }
+    ShapeNormalizerIterConfStatShape(StatisticalShapeModel *model, QObject *parent = 0) :
+        ShapeNormalizerShapeModel(model, parent) { }
 
     Points normalize(Points &points, Mat8 &frame);
 };

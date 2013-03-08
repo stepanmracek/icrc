@@ -14,8 +14,11 @@ StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
     assert (pointsCount > 0);
 
     strainForSegments = std::vector<VectorF>(strainModel->segmentsCount);
+    std::vector<float> firstStrainForSegments(strainModel->segmentsCount);
 
     // Strain
+    bool first = true;
+    float firstStrain;
     for (VectorOfShapes::iterator it = shapes.begin(); it != shapes.end(); ++it)
     {
         Points &shape = *it;
@@ -24,17 +27,28 @@ StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
         P base = strainModel->getBasePoint(shape);
         P apex = strainModel->getApexPoint(shape);
         float s = Common::eucl(base, apex);
+        if (first)
+        {
+            firstStrain = s;
+        }
+        s = (s - firstStrain)/firstStrain;
+        strain.push_back(s);
 
         for (int segment = 0; segment < strainModel->segmentsCount; segment++)
         {
-            int p = segment*(strainModel->pointsPerSegment*3)+1;
-            int n = (segment+1)*(strainModel->pointsPerSegment*3)+1;
+            int p = segment * (strainModel->pointsPerSegment*3)+1;
+            int n = (segment+1) * (strainModel->pointsPerSegment*3)+1;
 
             float s = Common::eucl(shape[p], shape[n]);
+            if (first)
+            {
+                firstStrainForSegments[segment] = s;
+            }
+            s = (s - firstStrainForSegments[segment])/firstStrainForSegments[segment];
             strainForSegments[segment].push_back(s);
         }
 
-        strain.push_back(s);
+        first = false;
     }
 
     // Strain rate
