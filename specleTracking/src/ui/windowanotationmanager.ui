@@ -246,56 +246,7 @@
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>actionChangeTracker</sender>
-   <signal>triggered()</signal>
-   <receiver>WindowAnotationManager</receiver>
-   <slot>on_actionCreateTracker()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>552</x>
-     <y>335</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionChangeImageProcessing</sender>
-   <signal>triggered()</signal>
-   <receiver>WindowAnotationManager</receiver>
-   <slot>on_actionChangeImageProcessing()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>552</x>
-     <y>335</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionShowShapeModel</sender>
-   <signal>triggered()</signal>
-   <receiver>WindowAnotationManager</receiver>
-   <slot>on_actionShowShapeModel()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>552</x>
-     <y>335</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>on_actionCreateTracker()</slot>
   <slot>on_actionChangeImageProcessing()</slot>

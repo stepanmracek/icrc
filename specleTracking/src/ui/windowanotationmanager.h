@@ -45,11 +45,11 @@ private slots:
 
     void on_btnBeatToBeat_clicked();
 
-    void on_actionCreateTracker();
+    void on_actionChangeTracker_triggered();
 
-    void on_actionChangeImageProcessing();
+    void on_actionChangeImageProcessing_triggered();
 
-    void on_actionShowShapeModel();
+    void on_actionShowShapeModel_triggered();
 
 private:
     void setTracker(ShapeTracker *tracker);

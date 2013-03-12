@@ -277,7 +277,7 @@ void WindowAnotationManager::on_btnBeatToBeat_clicked()
     dlg.exec();
 }
 
-void WindowAnotationManager::on_actionCreateTracker()
+void WindowAnotationManager::on_actionChangeTracker_triggered()
 {
     DialogCreateTracker dlg;
     if (dlg.exec() == QDialog::Accepted)
@@ -288,7 +288,7 @@ void WindowAnotationManager::on_actionCreateTracker()
     }
 }
 
-void WindowAnotationManager::on_actionChangeImageProcessing()
+void WindowAnotationManager::on_actionChangeImageProcessing_triggered()
 {
     VideoDataClip *clip = ui->widgetStrainVideo->getClip();
     if (!clip || clip->size() == 0) return;
@@ -300,7 +300,7 @@ void WindowAnotationManager::on_actionChangeImageProcessing()
     }
 }
 
-void WindowAnotationManager::on_actionShowShapeModel()
+void WindowAnotationManager::on_actionShowShapeModel_triggered()
 {
     ShapeNormalizerBase *normalizer = tracker->getStrain()->getShapeNormalizer();
     ShapeNormalizerShapeModel *n = qobject_cast<ShapeNormalizerShapeModel*>(normalizer);

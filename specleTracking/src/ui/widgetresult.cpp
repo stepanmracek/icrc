@@ -31,7 +31,7 @@ void WidgetResult::setControlPoints(Points controlPoints, int shapeWidth, CoordS
     if (!imageSet)
     {
         emit imageNotSet();
-        return;
+        //return;
     }
 
     setResultPoints(tracker->getStrain()->getRealShapePoints(controlPoints, shapeWidth), coordSystem);
