@@ -3,6 +3,8 @@
 WidgetResult::WidgetResult(QWidget *parent) :
     QGraphicsView(parent)
 {
+    this->setRenderHints(QPainter::Antialiasing);
+
     tracker = NULL;
     imageSet = false;
     scene = new QGraphicsScene();

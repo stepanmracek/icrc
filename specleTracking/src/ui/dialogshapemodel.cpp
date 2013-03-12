@@ -3,6 +3,8 @@
 
 #include <QVBoxLayout>
 
+#include "linalg/procrustes.h"
+
 DialogShapeModel::DialogShapeModel(BackProjectionBase *backProjectionBase, ShapeTracker *tracker, QWidget *parent) :
     QDialog(parent), ui(new Ui::DialogShapeModel), backProjectionBase(backProjectionBase), tracker(tracker)
 {
@@ -41,10 +43,10 @@ void DialogShapeModel::drawShapeModel()
 
     MatF backProjected = backProjectionBase->backProject(params);
     int r = backProjected.rows;
-    for (int i = 0; i < r; i++)
-    {
-        backProjected(i) = backProjected(i) * r * 5;
-    }
+
+    ScaleAndRotateCoefs c(r * ui->sliderSize->value(), (ui->sliderRotation->value()-50) * 0.0174532925);
+    Procrustes::rotateAndScale(backProjected, c);
+
 
     Points resultPoints = Common::matFToPoints(backProjected);
     ui->widgetResult->setResultPoints(resultPoints, 0);

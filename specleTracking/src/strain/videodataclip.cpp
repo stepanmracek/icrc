@@ -138,6 +138,10 @@ char *VideoDataClip::getSubClip(int index, QMap<int, Points> &shapes,
 void VideoDataClipMetadata::deserialize(const QString &path)
 {
     cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
+    if (!storage.isOpened())
+    {
+        return;
+    }
     cv::FileNode node = storage["beatIndicies"];
     for (cv::FileNodeIterator it = node.begin(); it != node.end(); ++it)
     {

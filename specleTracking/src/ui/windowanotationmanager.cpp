@@ -67,7 +67,7 @@ void WindowAnotationManager::setDirectory(QString path)
     QDir dir(path);
     if (!dir.exists()) return;
 
-    QStringList filter; filter << "*.wmv" << "*.WMV";
+    QStringList filter; filter << "*.wmv" << "*.WMV" << "*.avi" << "*.AVI";
     QStringList files = dir.entryList(filter, QDir::Files | QDir::NoDotAndDotDot, QDir::Name);
 
     ui->listFiles->addItems(files);
