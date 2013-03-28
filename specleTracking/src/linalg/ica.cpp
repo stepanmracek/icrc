@@ -1,5 +1,7 @@
 #include "ica.h"
 
+#include <QDebug>
+
 #include "pca.h"
 #include "vecf.h"
 
@@ -15,6 +17,8 @@ double g2(double u)
 
 void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount, double eps, int maxIterations, bool debug)
 {
+    qDebug() << "ICA learn; vectors:" << vectors.size();
+
     debug = true;
     int n = vectors.size();
     assert(n > 0);
@@ -40,6 +44,7 @@ void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount,
     // whitening; x <- E * D^(-1/2) * E^T * x
     // E - eigenvectors
     // D - eigenvalues
+    qDebug() << "  PCA whitening";
     PCA pca(workingCopy);
 
     int eValCount = pca.getModes();
@@ -52,11 +57,14 @@ void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount,
     }
 
     EDET = pca.cvPca.eigenvectors * eVals * pca.cvPca.eigenvectors.t();
+    //EDET = pca.cvPca.eigenvectors.t() * eVals * pca.cvPca.eigenvectors;
+
     for (int i = 0; i < n; i++)
         workingCopy[i] = EDET * workingCopy[i];
     EDETinv = EDET.inv();
 
     // FAST ICA
+    qDebug() << "  Fast ICA";
     W = MatF::eye(m, independentComponentCount);
     for (int p = 0; p < independentComponentCount; p++)
     {

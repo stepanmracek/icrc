@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
     //Test::testSerialization();
     //Test::testAnotation();
     //Test::testUniformSpline();
-    //Test::testLearnPCAShape();
+    //Test::testLearnShape("/home/stepo/ownCloud/icrc/test/test_shapemap_26");
     //Test::testTracking();
     //Test::testStatisticalShapeChanges();
     //Test::testAutomaticTracking();

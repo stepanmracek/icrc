@@ -70,15 +70,16 @@ public:
 
     }
 
-    static void testLearnPCAShape()
+    static void testLearnShape(const QString &shapeMap)
     {
-        PCA *pca = new PCA();
-        QMap<int, Points> map = Serialization::readShapeMap("test/test_shapemap_26");
+        //PCA *pca = new PCA();
+        ICA *ica = new ICA();
+        QMap<int, Points> map = Serialization::readShapeMap(shapeMap);
         VectorOfShapes shapes = Common::MapToVectorOfShapes(map);
 
-        StatisticalShapeModel model(pca, shapes);
-        StatisticalShapeModel::showStatisticalShape(pca);
-        pca->serialize("test/pca-shape-radialBase");
+        StatisticalShapeModel model(ica, shapes);
+        StatisticalShapeModel::showStatisticalShape(ica);
+       // pca->serialize("test/pca-shape-radialBase");
     }
 
     static void testStatisticalShapeChanges()
@@ -144,7 +145,7 @@ public:
 
     static int testQtManager(int argc, char *argv[])
     {
-        PCA *pca = new PCA("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
+        PCA *pca = new PCA("/home/stepo/ownCloud/icrc/test/pca-shape");
         StatisticalShapeModel *model = new StatisticalShapeModel(pca);
         ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
         ListOfImageProcessing processing;
@@ -159,7 +160,7 @@ public:
 
         // create GUI
         QApplication app(argc, argv);
-        WindowAnotationManager w("/mnt/data/owncloud/icrc/test/", tracker);
+        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test/", tracker);
         w.show();
         return app.exec();
     }
