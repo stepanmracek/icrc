@@ -63,13 +63,19 @@ void DialogBeatToBeat::addMainStrain()
         ui->plotBeats->addData(resampledBeats[i], QString::number(i), Qt::white);
     }
 
+    VectorF diff;
     for (int i = 0; i < 100; i++)
     {
+        VectorF slice(n);
         for (int j = 0; j < n; j++)
         {
-            VecF::stdDeviation()
+            slice.push_back(j);
         }
+
+        diff.push_back(VecF::stdDeviation(slice));
     }
+
+    ui->plotDiff->addData(diff, "diff", Qt::white);
 
     /*for (int i = 0; i < beatsStats.count(); i++)
     {
