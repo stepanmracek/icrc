@@ -159,7 +159,7 @@ public:
 
         // create GUI
         QApplication app(argc, argv);
-        WindowAnotationManager w("/home/stepo/SparkleShare/private/icrc/test2/", tracker);
+        WindowAnotationManager w("/mnt/data/owncloud/icrc/test/", tracker);
         w.show();
         return app.exec();
     }

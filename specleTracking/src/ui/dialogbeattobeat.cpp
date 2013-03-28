@@ -29,7 +29,8 @@ DialogBeatToBeat::~DialogBeatToBeat()
 void DialogBeatToBeat::on_comboBox_activated(const QString &text)
 {
     qDebug() << "Displaying" << text;
-    ui->plot->detachItems();
+    ui->plotBeats->detachItems();
+    ui->plotDiff->detachItems();
 
     if (text.compare("Main strain") == 0)
     {
@@ -46,18 +47,37 @@ void DialogBeatToBeat::on_comboBox_activated(const QString &text)
         addSegment(index);
     }
 
-    ui->plot->replot();
+    ui->plotBeats->replot();
+    ui->plotDiff->replot();
 }
 
 void DialogBeatToBeat::addMainStrain()
 {
-    for (int i = 0; i < beatsStats.count(); i++)
+    int n = beatsStats.count();
+    VectorF resampledBeats[n];
+    for (int i = 0; i < n; i++)
+    {
+        const StrainStatistics &beat = beatsStats.at(i);
+        resampledBeats[i] = VecF::resample(beat.strain, 100);
+
+        ui->plotBeats->addData(resampledBeats[i], QString::number(i), Qt::white);
+    }
+
+    for (int i = 0; i < 100; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            VecF::stdDeviation()
+        }
+    }
+
+    /*for (int i = 0; i < beatsStats.count(); i++)
     {
         const StrainStatistics &beat = beatsStats.at(i);
 
         VectorF curve = VecF::resample(beat.strain, 100);
-        ui->plot->addData(curve, QString::number(i), Qt::white);
-    }
+        ui->plotBeats->addData(curve, QString::number(i), Qt::white);
+    }*/
 }
 
 void DialogBeatToBeat::addAllSegments()
@@ -70,7 +90,7 @@ void DialogBeatToBeat::addAllSegments()
         for (int j = 0; j < segCount; j++)
         {
             VectorF curve = VecF::resample(beat.strainForSegments[j], 100);
-            ui->plot->addData(curve, QString::number(i)+"-"+QString::number(j), QColor::fromHsvF((float)j/segCount, 1, 1));
+            ui->plotBeats->addData(curve, QString::number(i)+"-"+QString::number(j), QColor::fromHsvF((float)j/segCount, 1, 1));
         }
     }
 }
@@ -83,6 +103,6 @@ void DialogBeatToBeat::addSegment(int index)
         const StrainStatistics &beat = beatsStats.at(i);
 
         VectorF curve = VecF::resample(beat.strainForSegments[index], 100);
-        ui->plot->addData(curve, QString::number(i)+"-"+QString::number(index), QColor::fromHsvF((float)index/segCount, 1, 1));
+        ui->plotBeats->addData(curve, QString::number(i)+"-"+QString::number(index), QColor::fromHsvF((float)index/segCount, 1, 1));
     }
 }
