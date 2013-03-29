@@ -150,7 +150,7 @@ public:
         ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
         ListOfImageProcessing processing;
         StrainResProcFloatingAvg *postProcessing = new StrainResProcFloatingAvg(1);
-        PointTrackerOpticalFlow *pointTracker = new PointTrackerOpticalFlow(20);
+        PointTrackerNeighbourOpticalFlow *pointTracker = new PointTrackerNeighbourOpticalFlow(20, 31, 5);
         LongitudinalStrain *ls = new LongitudinalStrain(normalizer);
         float weightValues[] = {1.0f}; // {10.0, 5.0, 3.0, 2.0, 1.0};
         VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));

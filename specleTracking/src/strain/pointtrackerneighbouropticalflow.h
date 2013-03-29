@@ -17,10 +17,10 @@ public:
     int neighbourhoodSize;
     int step;
 
-    PointTrackerNeighbourOpticalFlow(float outlierDistanceThreshold = 20, int neighbourhoodWindoSize = 30, int stepWithinWindow = 5, QObject *parent = 0) :
+    PointTrackerNeighbourOpticalFlow(float outlierDistanceThreshold = 20, int neighbourhoodWindowSize = 31, int stepWithinWindow = 5, QObject *parent = 0) :
         PointTrackerBase(parent),
         outlierDistanceThreshold(outlierDistanceThreshold),
-        neighbourhoodSize(neighbourhoodWindoSize),
+        neighbourhoodSize(neighbourhoodWindowSize/2),
         step(stepWithinWindow)
     { }
 
