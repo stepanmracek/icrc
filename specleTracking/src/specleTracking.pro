@@ -49,7 +49,8 @@ HEADERS += \
     ui/dialogbeattobeat.h \
     ui/dialogcreatetracker.h \
     ui/dialogimageprocessing.h \
-    ui/dialogshapemodel.h
+    ui/dialogshapemodel.h \
+    ui/graphicsviewwithevents.h
 
 SOURCES += \
     linalg/vecf.cpp \
@@ -91,7 +92,8 @@ SOURCES += \
     ui/dialogbeattobeat.cpp \
     ui/dialogcreatetracker.cpp \
     ui/dialogimageprocessing.cpp \
-    ui/dialogshapemodel.cpp
+    ui/dialogshapemodel.cpp \
+    ui/graphicsviewwithevents.cpp
 
 INCLUDEPATH += src
 

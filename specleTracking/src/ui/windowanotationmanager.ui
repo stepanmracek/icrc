@@ -59,9 +59,37 @@
       </item>
       <item>
        <widget class="QPushButton" name="btnLoad">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>Load</string>
         </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>Current tracker</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QTextEdit" name="textEditTrackerInfo">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -197,12 +225,38 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
      <string>Tools</string>
     </property>
-    <addaction name="actionChangeTracker"/>
+    <widget class="QMenu" name="menuChange_tracker">
+     <property name="title">
+      <string>Change tracker</string>
+     </property>
+     <widget class="QMenu" name="menuPoint_Tracker">
+      <property name="title">
+       <string>Point Tracker</string>
+      </property>
+      <addaction name="actionSAD"/>
+      <addaction name="actionSSD"/>
+      <addaction name="actionCorrelation"/>
+      <addaction name="actionCosine"/>
+      <addaction name="actionOptical_flow"/>
+      <addaction name="actionOptical_flow_with_neighbourhood"/>
+     </widget>
+     <widget class="QMenu" name="menuShape_Model">
+      <property name="title">
+       <string>Shape Model</string>
+      </property>
+      <addaction name="actionNone"/>
+      <addaction name="actionPCA"/>
+     </widget>
+     <addaction name="menuPoint_Tracker"/>
+     <addaction name="menuShape_Model"/>
+    </widget>
+    <addaction name="menuChange_tracker"/>
     <addaction name="actionChangeImageProcessing"/>
     <addaction name="actionShowShapeModel"/>
    </widget>
@@ -216,11 +270,6 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionChangeTracker">
-   <property name="text">
-    <string>Change tracker</string>
-   </property>
-  </action>
   <action name="actionChangeImageProcessing">
    <property name="text">
     <string>Change image processing</string>
@@ -229,6 +278,51 @@
   <action name="actionShowShapeModel">
    <property name="text">
     <string>Show statistical shape model</string>
+   </property>
+  </action>
+  <action name="actionSAD">
+   <property name="text">
+    <string>SAD</string>
+   </property>
+  </action>
+  <action name="actionSSD">
+   <property name="text">
+    <string>SSD</string>
+   </property>
+  </action>
+  <action name="actionOptical_flow">
+   <property name="text">
+    <string>Optical flow</string>
+   </property>
+  </action>
+  <action name="actionOptical_flow_with_neighbourhood">
+   <property name="text">
+    <string>Optical flow with neighbourhood</string>
+   </property>
+  </action>
+  <action name="actionNone">
+   <property name="text">
+    <string>None</string>
+   </property>
+  </action>
+  <action name="actionPCA">
+   <property name="text">
+    <string>PCA</string>
+   </property>
+  </action>
+  <action name="actionCorrelation">
+   <property name="text">
+    <string>Correlation</string>
+   </property>
+  </action>
+  <action name="actionCosine">
+   <property name="text">
+    <string>Cosine</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
    </property>
   </action>
  </widget>

@@ -15,7 +15,7 @@ class WindowAnotationManager : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit WindowAnotationManager(QString path, ShapeTracker *tracker, QWidget *parent = 0);
+    explicit WindowAnotationManager(const QString &path, const QString &dataDir, ShapeTracker *tracker, QWidget *parent = 0);
     ~WindowAnotationManager();
 
 protected:
@@ -45,18 +45,37 @@ private slots:
 
     void on_btnBeatToBeat_clicked();
 
-    void on_actionChangeTracker_triggered();
-
     void on_actionChangeImageProcessing_triggered();
 
     void on_actionShowShapeModel_triggered();
 
+    void on_actionSAD_triggered();
+
+    void on_actionSSD_triggered();
+
+    void on_actionOptical_flow_triggered();
+
+    void on_actionOptical_flow_with_neighbourhood_triggered();
+
+    void on_actionCorrelation_triggered();
+
+    void on_actionCosine_triggered();
+
+    void on_actionQuit_triggered();
+
+    void on_actionNone_triggered();
+
+    void on_actionPCA_triggered();
+
 private:
     void setTracker(ShapeTracker *tracker);
+
+    void updateTrackerInfo();
 
     Ui::WindowAnotationManager *ui;
     ShapeTracker *tracker;
     QString path;
+    QString dataDir;
 };
 
 #endif // WINDOWANOTATIONMANAGER_H

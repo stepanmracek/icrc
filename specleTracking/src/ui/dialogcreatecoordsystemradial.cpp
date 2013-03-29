@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QMessageBox>
+#include <QMouseEvent>
 
 #include "ui/uiutils.h"
 
@@ -14,6 +15,7 @@ DialogCreateCoordSystemRadial::DialogCreateCoordSystemRadial(Mat8 &image, CoordS
     ui->setupUi(this);
     ui->gvOriginal->setScene(new QGraphicsScene());
     ui->gvTransformed->setScene(new QGraphicsScene());
+    //ui->gvOriginal->installEventFilter(new MouseFilter);
 
     ui->dsbCenterX->setValue(coordSystem->center.x);
     ui->dsbCenterY->setValue(coordSystem->center.y);
@@ -36,6 +38,25 @@ DialogCreateCoordSystemRadial::~DialogCreateCoordSystemRadial()
     delete ui;
 }
 
+/*void DialogCreateCoordSystemRadial::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (!imageLoaded)
+    {
+        return;
+    }
+
+    if (event->button() == Qt::LeftButton)
+    {
+        QPointF scenePoint = mapToScene(event->pos());
+        double x = scenePoint.x();
+        double y = scenePoint.y();
+
+        qDebug() << "CLICK" << x << y;
+
+    }
+}*/
+
+
 void DialogCreateCoordSystemRadial::drawResult(CoordSystemRadial *c)
 {
     QGraphicsScene *originalScene = ui->gvOriginal->scene();
@@ -53,26 +74,26 @@ void DialogCreateCoordSystemRadial::drawResult(CoordSystemRadial *c)
     transformedScene->addPixmap(transformedPixmap);
 }
 
-void DialogCreateCoordSystemRadial::doubleValueChanged(double arg1)
+void DialogCreateCoordSystemRadial::doubleValueChanged(double /*arg1*/)
 {
     recalculate();
 }
 
-void DialogCreateCoordSystemRadial::intValueChanged(int arg1)
+void DialogCreateCoordSystemRadial::intValueChanged(int /*arg1*/)
 {
     recalculate();
 }
 
 bool DialogCreateCoordSystemRadial::check()
 {
-    double centerX = ui->dsbCenterX->value();
-    double centerY = ui->dsbCenterY->value();
+    /*double centerX = ui->dsbCenterX->value();
+    double centerY = ui->dsbCenterY->value();*/
     double angleStart = ui->dsbAngleStart->value();
     double angleEnd = ui->dsbAngleEnd->value();
     double distanceStart = ui->dsbDistanceStart->value();
     double distanceEnd = ui->dsbDistanceEnd->value();
-    int rows = ui->sbResultRows->value();
-    int cols = ui->sbResultCols->value();
+    /*int rows = ui->sbResultRows->value();
+    int cols = ui->sbResultCols->value();*/
 
     if (angleStart >= angleEnd) return false;
     if (distanceStart >= distanceEnd) return false;
@@ -127,4 +148,10 @@ CoordSystemRadial *DialogCreateCoordSystemRadial::getNewCoordSystem()
     int cols = ui->sbResultCols->value();
 
     return new CoordSystemRadial(P(centerX, centerY), distanceStart, distanceEnd, angleStart, angleEnd, cols, rows);
+}
+
+void DialogCreateCoordSystemRadial::on_gvOriginal_leftMouseClick(const QPoint &point)
+{
+    ui->dsbCenterX->setValue(point.x());
+    ui->dsbCenterY->setValue(point.y());
 }

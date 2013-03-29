@@ -2,6 +2,8 @@
 #define DIALOGCREATCOORDSYSTEMRADIAL_H
 
 #include <QDialog>
+#include <QEvent>
+#include <QPoint>
 
 #include "linalg/common.h"
 #include "strain/coordsystem.h"
@@ -29,6 +31,8 @@ public slots:
 
 private slots:
     void on_buttonBox_accepted();
+
+    void on_gvOriginal_leftMouseClick(const QPoint &point);
 
 private:
     bool loadCompleted;

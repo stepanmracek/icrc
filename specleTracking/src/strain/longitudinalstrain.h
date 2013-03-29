@@ -24,6 +24,8 @@ public:
     P getBasePoint(Points &realPoints);
 
     P getApexPoint(Points &realPoints);
+
+    QString getInfo();
 };
 
 #endif // LONGITUDINALSTRAIN_H

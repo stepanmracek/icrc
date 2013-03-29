@@ -15,6 +15,12 @@ protected:
 
 public:
     PointTrackerOpticalFlow(int outlierDistanceThreshold, QObject *parent = 0) : PointTrackerBase(parent), outlierDistanceThreshold(outlierDistanceThreshold) {}
+
+    QString getInfo()
+    {
+        return QString("Optical flow point tracker\n    Outlier distance: %1\n")
+                .arg(outlierDistanceThreshold);
+    }
 };
 
 #endif // POINTTRACKEROPTICALFLOW_H

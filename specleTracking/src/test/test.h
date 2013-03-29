@@ -3,6 +3,7 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QDir>
 #include <list>
 #include <vector>
 #include <iostream>
@@ -145,7 +146,8 @@ public:
 
     static int testQtManager(int argc, char *argv[])
     {
-        PCA *pca = new PCA("/home/stepo/ownCloud/icrc/test/pca-shape");
+        QString dataDir = "/home/stepo/ownCloud/icrc/dataDir";
+        PCA *pca = new PCA(dataDir + QDir::separator() + "pca-shape");
         StatisticalShapeModel *model = new StatisticalShapeModel(pca);
         ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
         ListOfImageProcessing processing;
@@ -160,7 +162,7 @@ public:
 
         // create GUI
         QApplication app(argc, argv);
-        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test/", tracker);
+        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test2/", dataDir, tracker);
         w.show();
         return app.exec();
     }

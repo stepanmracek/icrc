@@ -20,11 +20,17 @@ public:
     PointTrackerNeighbourOpticalFlow(float outlierDistanceThreshold = 20, int neighbourhoodWindowSize = 31, int stepWithinWindow = 5, QObject *parent = 0) :
         PointTrackerBase(parent),
         outlierDistanceThreshold(outlierDistanceThreshold),
-        neighbourhoodSize(neighbourhoodWindowSize/2),
+        neighbourhoodSize(neighbourhoodWindowSize),
         step(stepWithinWindow)
     { }
 
     MatF trackIntensity(Mat8 &prevFrame, Mat8 &nextFrame);
+
+    QString getInfo()
+    {
+        return QString("Optical flow point tracker\n    Outlier distance: %1\n    Window size: %2\n    Step within window: %3\n")
+                .arg(outlierDistanceThreshold).arg(neighbourhoodSize).arg(step);
+    }
 };
 
 #endif // OPTICALFLOWTRACKER_H

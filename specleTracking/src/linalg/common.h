@@ -279,16 +279,21 @@ public:
      * @param src Input 8-bit image
      * @param centerX x-center of window
      * @param centerY y-center of window
-     * @param windowSize distance from the center to the border
-     * @param result The resulting matrix. Shoul be initializated and the size should be (2*windowSize+1)^2
+     * @param windowSize Size of the resulting window
+     * @param result The resulting matrix. Should be initializated and the size should be windowSize^2
      */
     static void createWindow(Mat8 &src, int centerX, int centerY, int windowSize, MatF &result)
     {
+        assert(windowSize >= 1);
+        assert(windowSize % 2 == 1);
+
+        int delta = windowSize / 2;
+
         int resultX = 0;
         int resultY = 0;
-        for (int y = centerY-windowSize; y <= centerY+windowSize; y++)
+        for (int y = centerY-delta; y <= centerY+delta; y++)
         {
-            for (int x = centerX-windowSize; x <= centerX+windowSize; x++)
+            for (int x = centerX-delta; x <= centerX+delta; x++)
             {
                 if (y >= 0 && y < src.rows && x >= 0 && x < src.cols)
                     result(resultY, resultX) = src(y,x);

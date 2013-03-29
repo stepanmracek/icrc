@@ -18,11 +18,11 @@
 #include "linalg/procrustes.h"
 #include "linalg/vecf.h"
 
-StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *modelToLearn, VectorOfShapes &shapes, QObject *parent) :
+StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *backProjectionToLearn, VectorOfShapes &shapes, QObject *parent) :
     QObject(parent)
 {
-    model = 0;
-    setModel(modelToLearn);
+    backProjection = 0;
+    setBackProjection(backProjectionToLearn);
 
     if (shapes.size() <= 2)
     {
@@ -38,25 +38,25 @@ StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *modelToLearn, V
     }
 
     Procrustes::procrustesAnalysis(matricies, true, 1e-20, 10000);
-    model->learn(matricies);
+    backProjection->learn(matricies);
 }
 
-StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *learnedModel, QObject *parent) :
+StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *learnedBackProjection, QObject *parent) :
     QObject(parent)
 {
-    model = 0;
-    setModel(learnedModel);
+    backProjection = 0;
+    setBackProjection(learnedBackProjection);
 }
 
 Points StatisticalShapeModel::iterativeNormalize(Points &input)
 {
     MatF inputMat = Common::pointsToMatF(input);
-    MatF meanMat = model->getMean();
+    MatF meanMat = backProjection->getMean();
     assert (inputMat.rows == meanMat.rows);
 
     // initialize the model parametres to zeros
-    MatF params = MatF::zeros(model->getModes(), 1);
-    MatF prevParams = MatF::zeros(model->getModes(), 1);
+    MatF params = MatF::zeros(backProjection->getModes(), 1);
+    MatF prevParams = MatF::zeros(backProjection->getModes(), 1);
 
     TranslationCoefs translation(0, 0);
     ScaleAndRotateCoefs rotAndScale(1, 0);
@@ -67,7 +67,7 @@ Points StatisticalShapeModel::iterativeNormalize(Points &input)
     while (!end)
     {
         // generate shape instance
-        instance = model->backProject(params);
+        instance = backProjection->backProject(params);
 
         MatF inputClone = inputMat.clone();
         translation = Procrustes::centralizedTranslation(inputClone).inv();
@@ -81,10 +81,10 @@ Points StatisticalShapeModel::iterativeNormalize(Points &input)
         //VecF::mul(inputClone, VecF::dot(inputClone, meanMat));
 
         // update model parametres
-        params = model->project(inputClone);
+        params = backProjection->project(inputClone);
 
         // 3*sigma normalization
-        model->threeSigmaNormalization(params);
+        backProjection->threeSigmaNormalization(params);
 
         // finished?
         MatF paramsDiff = prevParams-params;
@@ -104,7 +104,7 @@ Points StatisticalShapeModel::iterativeNormalize(Points &input)
 Points StatisticalShapeModel::normalize(Points &input)
 {
     MatF inputMat = Common::pointsToMatF(input);
-    MatF meanMat = model->getMean();
+    MatF meanMat = backProjection->getMean();
     assert (inputMat.rows == meanMat.rows);
 
     // Align to the mean shape
@@ -114,11 +114,11 @@ Points StatisticalShapeModel::normalize(Points &input)
     Procrustes::rotateAndScale(inputMat, rotAndScaleC);
 
     // 3*sigma normalization
-    MatF params = model->project(inputMat);
-    model->threeSigmaNormalization(params);
+    MatF params = backProjection->project(inputMat);
+    backProjection->threeSigmaNormalization(params);
 
     // Back-projection
-    MatF normalizedShapeMat = model->backProject(params);
+    MatF normalizedShapeMat = backProjection->backProject(params);
 
     // Inverse transform
     ScaleAndRotateCoefs invRotAndScaleC = rotAndScaleC.inv();

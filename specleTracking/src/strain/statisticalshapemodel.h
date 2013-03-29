@@ -19,27 +19,28 @@ class StatisticalShapeModel : public QObject
     Q_OBJECT
 
 private:
-    BackProjectionBase * model;
+    BackProjectionBase * backProjection;
 
 public:
-    StatisticalShapeModel(BackProjectionBase *modelToLearn, VectorOfShapes &shapes, QObject *parent = 0);
-    StatisticalShapeModel(BackProjectionBase *learnedModel, QObject *parent = 0);
+    StatisticalShapeModel(BackProjectionBase *backProjectionToLearn, VectorOfShapes &shapes, QObject *parent = 0);
+    StatisticalShapeModel(BackProjectionBase *learnedBackProjection, QObject *parent = 0);
 
-    void setModel(BackProjectionBase *model)
+    void setBackProjection(BackProjectionBase *model)
     {
-        if (this->model) delete this->model;
-        this->model = model;
+        if (this->backProjection) delete this->backProjection;
+        this->backProjection = model;
+        model->setParent(this);
     }
 
-    BackProjectionBase *getBackProjectionBase() const
+    BackProjectionBase *getBackProjection() const
     {
-        return this->model;
+        return this->backProjection;
     }
 
     Points normalize(Points &input);
     Points iterativeNormalize(Points &input);
 
-    static void showStatisticalShape(BackProjectionBase *model);
+    static void showStatisticalShape(BackProjectionBase *backProjection);
 };
 
 #endif /* STATISTICALSHAPEMODEL_H_ */

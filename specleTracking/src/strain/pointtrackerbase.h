@@ -20,6 +20,8 @@ public:
 
     bool track(std::vector<Mat8> &prevFrames, const VectorF &weights,
                Mat8 &nextFrame, VectorOfShapes &prevShapes, Points &nextShape);
+
+    virtual QString getInfo() = 0;
 };
 
 #endif // POINTTRACKERBASE_H

@@ -9,6 +9,7 @@ bool PointTrackerNeighbourOpticalFlow::track(Mat8 &prevFrame, Mat8 &nextFrame, P
     int n = prevPoints.size();
     int pointCount = 0;
     int trackedPointsPerInputPoint = 0;
+    int delta = neighbourhoodSize/2;
 
     // Create trackedPoints
     Points trackedPoints;
@@ -19,9 +20,9 @@ bool PointTrackerNeighbourOpticalFlow::track(Mat8 &prevFrame, Mat8 &nextFrame, P
         int x = p.x;
         int y = p.y;
         trackedPointsPerInputPoint = 0;
-        for (int yy = y - neighbourhoodSize; yy <= y + neighbourhoodSize; yy += step)
+        for (int yy = y - delta; yy <= y + delta; yy += step)
         {
-            for (int xx = x - neighbourhoodSize; xx <= x + neighbourhoodSize; xx += step)
+            for (int xx = x - delta; xx <= x + delta; xx += step)
             {
                 P trackedPoint(xx, yy);
                 trackedPoints.push_back(trackedPoint);
@@ -62,7 +63,7 @@ bool PointTrackerNeighbourOpticalFlow::track(Mat8 &prevFrame, Mat8 &nextFrame, P
             float intensityOnPrev = prevFrame(prev) / 255.0f;
             float intensityOnNext = nextFrame(next) / 255.0f;
             float distance = Common::eucl(currentPrevPoint, prev);
-            float weight = intensityOnNext * intensityOnPrev * exp(-(1.0/(2.0*neighbourhoodSize))*distance*distance);
+            float weight = intensityOnNext * intensityOnPrev * exp(-(1.0/(2.0*delta))*distance*distance);
             sumWeights += weight;
             weights.push_back(weight);
         }

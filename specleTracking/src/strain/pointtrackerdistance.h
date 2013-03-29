@@ -19,7 +19,14 @@ public:
     PointTrackerDistance(Metrics *metrics, int windowSize, QObject *parent = 0) :
         PointTrackerBase(parent), metrics(metrics), windowSize(windowSize)
     {
+        assert(windowSize >= 1);
+        assert(windowSize % 2 == 1);
         metrics->setParent(this);
+    }
+
+    QString getInfo()
+    {
+        return QString("Distance point tracker based on: ") + metrics->metaObject()->className() + QString("\n    Window size: %1").arg(windowSize);
     }
 };
 

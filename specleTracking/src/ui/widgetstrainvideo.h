@@ -41,6 +41,8 @@ public:
     QString getCurrentFilename() { return currentFilename; }
 
     QMap<int, Points> shapes;
+
+    void unload();
     
 private:
     Ui::WidgetStrainVideo *ui;

@@ -35,6 +35,8 @@ public:
      * @return Vector of resulting means
      */
     VectorOfImages calculateMean(VectorOfImages &inputImages, int windowSize);
+
+    virtual QString getInfo() = 0;
 };
 
 /**
@@ -62,9 +64,14 @@ public:
      */
     ImageFilterMedian(int ksize = 7, QObject *parent = 0) : ImageFilterBase(parent), ksize(ksize) { }
 
-    virtual void process(Mat8 &frame)
+    void process(Mat8 &frame)
     {
         cv::medianBlur(frame, frame, ksize);
+    }
+
+    QString getInfo()
+    {
+        return QString("Median with kernel size %1").arg(ksize);
     }
 };
 
@@ -83,9 +90,14 @@ public:
      */
     ImageFilterHistEq(QObject *parent = 0) : ImageFilterBase(parent) { }
 
-    virtual void process(Mat8 &frame)
+    void process(Mat8 &frame)
     {
         cv::equalizeHist(frame, frame);
+    }
+
+    QString getInfo()
+    {
+        return QString("Histogram equalization");
     }
 };
 
@@ -120,6 +132,11 @@ public:
         result.copyTo(frame);
     }
 
+    QString getInfo()
+    {
+        return QString("Non-linear mean denoise, regulation: %1, searchSize: %2, templateSize: %3").arg(h).arg(searchSize).arg(templateSize);
+    }
+
 /*private:
     float weight(Mat8 &frame, P reference, P target);*/
 };
@@ -150,6 +167,11 @@ public:
     {
         frame.convertTo(frame, -1, alfa, beta);
     }
+
+    QString getInfo()
+    {
+        return QString("Contrast, alfa: %1, beta: %2").arg(alfa).arg(beta);
+    }
 };
 
 /**
@@ -175,6 +197,11 @@ public:
         cv::Mat dest(frame.rows, frame.cols, CV_16S);
         cv::Sobel(frame, dest, CV_16S, 1, 1, ksize);
         dest.convertTo(frame, CV_8UC1, 0.5, 127);
+    }
+
+    QString getInfo()
+    {
+        return QString("Edge detection, kernel size: %1").arg(ksize);
     }
 };
 

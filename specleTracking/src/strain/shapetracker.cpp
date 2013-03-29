@@ -26,6 +26,25 @@ void ShapeTracker::applyProcessing(Mat8 &frame)
     }
 }
 
+QString ShapeTracker::getInfo()
+{
+    QString text = strain->getInfo() + pointTracker->getInfo() + "Image processing:\n";
+
+    if (frameProcessing.count() == 0)
+    {
+        text += "    (none)\n";
+    }
+    else
+    {
+        foreach (ImageFilterBase *filter, frameProcessing)
+        {
+            text += QString("    ") + filter->getInfo() + "\n";
+        }
+    }
+
+    return text;
+}
+
 Points ShapeTracker::track(VectorOfImages &prevFrames, VectorOfShapes &prevShapes, Mat8 &nextFrame, CoordSystemBase *coordSystem)
 {
     unsigned int n = prevFrames.size();

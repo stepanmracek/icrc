@@ -15,6 +15,8 @@ public:
     ShapeNormalizerBase(QObject *parent = 0) : QObject(parent) { }
 
     virtual Points normalize(Points &points, Mat8 &frame) = 0;
+
+    virtual QString getInfo() = 0;
 };
 
 class ShapeNormalizerShapeModel : public ShapeNormalizerBase
@@ -49,6 +51,11 @@ public:
     {
         return model->normalize(points);
     }
+
+    QString getInfo()
+    {
+        return QString("Statistical shape normalizer using ") + model->getBackProjection()->metaObject()->className();
+    }
 };
 
 class ShapeNormalizerIterativeStatisticalShape : public ShapeNormalizerShapeModel
@@ -62,6 +69,11 @@ public:
     Points normalize(Points &points, Mat8 &)
     {
         return model->iterativeNormalize(points);
+    }
+
+    QString getInfo()
+    {
+        return QString("Iterative statistical shape normalizer using ") + model->getBackProjection()->metaObject()->className();
     }
 };
 
@@ -89,6 +101,11 @@ public:
     Points normalize(Points &points, Mat8 &)
     {
         return points;
+    }
+
+    QString getInfo()
+    {
+        return QString("No shape normalizer");
     }
 };
 

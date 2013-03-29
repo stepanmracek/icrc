@@ -15,15 +15,18 @@
 #include "ui/dialogstrainstatistics.h"
 #include "linalg/serialization.h"
 #include "strain/shapeprocessing.h"
+#include "strain/pointtrackerdistance.h"
+#include "strain/pointtrackeropticalflow.h"
+#include "strain/pointtrackerneighbouropticalflow.h"
 #include "ui/dialoganotation.h"
 #include "ui/dialogcreatecoordsystemradial.h"
 #include "ui/dialogvideodataclipmetadata.h"
 #include "ui/dialogbeattobeat.h"
-#include "ui/dialogcreatetracker.h"
 #include "ui/dialogimageprocessing.h"
 #include "ui/dialogshapemodel.h"
 
-WindowAnotationManager::WindowAnotationManager(QString path, ShapeTracker *tracker, QWidget *parent) :
+WindowAnotationManager::WindowAnotationManager(const QString &path, const QString &dataDir, ShapeTracker *tracker, QWidget *parent) :
+    dataDir(dataDir),
     QMainWindow(parent),
     ui(new Ui::WindowAnotationManager)
 {
@@ -42,6 +45,13 @@ void WindowAnotationManager::setTracker(ShapeTracker *tracker)
     this->tracker = tracker;
     ui->widgetStrainVideo->setTracker(tracker);
     tracker->setParent(this);
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::updateTrackerInfo()
+{
+    QString text = tracker->getInfo();
+    ui->textEditTrackerInfo->setText(text);
 }
 
 void WindowAnotationManager::closeEvent(QCloseEvent *event)
@@ -67,6 +77,7 @@ void WindowAnotationManager::setDirectory(QString path)
     QDir dir(path);
     if (!dir.exists()) return;
 
+    ui->widgetStrainVideo->unload();
     QStringList filter; filter << "*.wmv" << "*.WMV" << "*.avi" << "*.AVI";
     QStringList files = dir.entryList(filter, QDir::Files | QDir::NoDotAndDotDot, QDir::Name);
 
@@ -277,17 +288,6 @@ void WindowAnotationManager::on_btnBeatToBeat_clicked()
     dlg.exec();
 }
 
-void WindowAnotationManager::on_actionChangeTracker_triggered()
-{
-    DialogCreateTracker dlg;
-    if (dlg.exec() == QDialog::Accepted)
-    {
-        ShapeTracker *oldTracker = tracker;
-        setTracker(dlg.getNewShapeTracker());
-        delete oldTracker;
-    }
-}
-
 void WindowAnotationManager::on_actionChangeImageProcessing_triggered()
 {
     VideoDataClip *clip = ui->widgetStrainVideo->getClip();
@@ -297,6 +297,7 @@ void WindowAnotationManager::on_actionChangeImageProcessing_triggered()
     if (dlg.exec() == QDialog::Accepted)
     {
         tracker->addFilters(dlg.getFilters());
+        updateTrackerInfo();
     }
 }
 
@@ -306,7 +307,7 @@ void WindowAnotationManager::on_actionShowShapeModel_triggered()
     ShapeNormalizerShapeModel *n = qobject_cast<ShapeNormalizerShapeModel*>(normalizer);
     if (n != 0)
     {
-        DialogShapeModel dlg(n->getShapeModel()->getBackProjectionBase(), tracker);
+        DialogShapeModel dlg(n->getShapeModel()->getBackProjection(), tracker);
         dlg.exec();
     }
     else
@@ -315,4 +316,75 @@ void WindowAnotationManager::on_actionShowShapeModel_triggered()
                         "Current tracker is not based on statistical shape model");
         msg.exec();
     }
+}
+
+void WindowAnotationManager::on_actionSAD_triggered()
+{
+    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 21, 1, 100, 2);
+    PointTrackerBase *pTracker = new PointTrackerDistance(new CityblockMetric(), windowSize);
+    tracker->setPointTracker(pTracker);
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionSSD_triggered()
+{
+    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 21, 1, 100, 2);
+    PointTrackerBase *pTracker = new PointTrackerDistance(new SumOfSquareDifferences(), windowSize);
+    tracker->setPointTracker(pTracker);
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionOptical_flow_triggered()
+{
+    int (outlier) = QInputDialog::getInteger(this, "Outlier distance", "Outlier distance:", 20, 5, 100, 1);
+    PointTrackerBase *pTracker = new PointTrackerOpticalFlow(outlier);
+    tracker->setPointTracker(pTracker);
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionOptical_flow_with_neighbourhood_triggered()
+{
+    int (outlier) = QInputDialog::getInteger(this, "Outlier distance", "Outlier distance:", 20, 5, 100, 1);
+    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 21, 1, 100, 2);
+    int step = QInputDialog::getInteger(this, "Step within window", "Step within window:", 5, 1, 10, 1);
+    PointTrackerBase *pTracker = new PointTrackerNeighbourOpticalFlow(outlier, windowSize, step);
+    tracker->setPointTracker(pTracker);
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionCorrelation_triggered()
+{
+    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 21, 1, 100, 2);
+    PointTrackerBase *pTracker = new PointTrackerDistance(new CorrelationMetric(), windowSize);
+    tracker->setPointTracker(pTracker);
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionCosine_triggered()
+{
+    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 21, 1, 100, 2);
+    PointTrackerBase *pTracker = new PointTrackerDistance(new CosineMetric(), windowSize);
+    tracker->setPointTracker(pTracker);
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionQuit_triggered()
+{
+    this->close();
+}
+
+void WindowAnotationManager::on_actionNone_triggered()
+{
+    ShapeNormalizerBase* normalizer = new ShapeNormalizerPass();
+    tracker->getStrain()->SetShapeNormalizer(normalizer);
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionPCA_triggered()
+{
+    PCA *pca = new PCA(dataDir + QDir::separator() + "pca-shape");
+    StatisticalShapeModel *model = new StatisticalShapeModel(pca);
+    ShapeNormalizerBase* normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
+    tracker->getStrain()->SetShapeNormalizer(normalizer);
+    updateTrackerInfo();
 }

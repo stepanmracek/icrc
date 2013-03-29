@@ -79,12 +79,12 @@ void DialogCreateTracker::onCreateNewTrackerRequest()
     if (selectedTracker.compare(pointTrackerSSD) == 0)
     {
         SumOfSquareDifferences *ssd = new SumOfSquareDifferences();
-        pointTracker = new PointTrackerDistance(ssd, 10);
+        pointTracker = new PointTrackerDistance(ssd, 21);
     }
     else if (selectedTracker.compare(pointTrackerCorr) == 0)
     {
         CorrelationMetric *corr = new CorrelationMetric();
-        pointTracker = new PointTrackerDistance(corr, 10);
+        pointTracker = new PointTrackerDistance(corr, 21);
     }
     else if (selectedTracker.compare(pointTrackerOptical) == 0)
     {

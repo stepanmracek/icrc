@@ -161,3 +161,9 @@ P LongitudinalStrain::getApexPoint(Points &realPoints)
     int n = realPoints.size();
     return realPoints[n/2];
 }
+
+QString LongitudinalStrain::getInfo()
+{
+    return QString("Longitudinal strain\n    segments: %1, points per segment: %2\n").arg(segmentsCount).arg(pointsPerSegment)
+            + getShapeNormalizer()->getInfo() + "\n";
+}

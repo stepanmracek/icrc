@@ -158,7 +158,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QGraphicsView" name="gvOriginal">
+      <widget class="GraphicsViewWithEvents" name="gvOriginal">
        <property name="minimumSize">
         <size>
          <width>640</width>
@@ -208,6 +208,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GraphicsViewWithEvents</class>
+   <extends>QGraphicsView</extends>
+   <header>ui/graphicsviewwithevents.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>dsbCenterX</tabstop>
   <tabstop>dsbCenterY</tabstop>

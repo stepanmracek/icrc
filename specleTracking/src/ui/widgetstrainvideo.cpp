@@ -94,6 +94,13 @@ void WidgetStrainVideo::on_horizontalSlider_valueChanged(int value)
     }
 }
 
+void WidgetStrainVideo::unload()
+{
+    currentIndex = 0;
+    currentFilename = "";
+    clip = 0;
+}
+
 void WidgetStrainVideo::load(const QString &path, const QString &filename)
 {
     currentIndex = 0;
@@ -152,7 +159,7 @@ void WidgetStrainVideo::setTracker(ShapeTracker *tracker)
 
 void WidgetStrainVideo::setClip(VideoDataClip *clip)
 {
-    //if (clip) delete this->clip;
+    if (clip) delete this->clip;
     this->clip = clip;
     clip->setParent(this);
     ui->horizontalSlider->setMinimum(0);

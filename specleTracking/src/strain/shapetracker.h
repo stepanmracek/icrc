@@ -55,6 +55,22 @@ public:
     PointTrackerBase *getPointTracker() { return pointTracker; }
     StrainResultProcessingBase *getResultProcessing() { return resultProcessing; }
 
+    void setStrain(Strain *strain)
+    {
+        delete this->strain;
+        this->strain = strain;
+        strain->setParent(this);
+    }
+
+    void setPointTracker(PointTrackerBase *pointTracker)
+    {
+        delete this->pointTracker;
+        this->pointTracker = pointTracker;
+        pointTracker->setParent(this);
+    }
+
+    QString getInfo();
+
     void clearFrameProcessing();
 
     void addFilters(QList<ImageFilterBase*> newFilters);
