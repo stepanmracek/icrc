@@ -7,6 +7,7 @@
 #include "strain/longitudinalstrain.h"
 #include "strain/pointtrackerdistance.h"
 #include "strain/pointtrackeropticalflow.h"
+#include "strain/pointtrackerneighbouropticalflow.h"
 
 DialogCreateTracker::DialogCreateTracker(QWidget *parent) :
     QDialog(parent),
@@ -24,9 +25,12 @@ DialogCreateTracker::DialogCreateTracker(QWidget *parent) :
     pointTrackerSSD = "SSD";
     pointTrackerCorr = "Correlation";
     pointTrackerOptical = "Optical flow";
+    pointTrackerOpticalNeigh = "Optical flow with neighbourhood";
+
     ui->cmbPointTracker->addItem(pointTrackerSSD);
     ui->cmbPointTracker->addItem(pointTrackerCorr);
     ui->cmbPointTracker->addItem(pointTrackerOptical);
+    ui->cmbPointTracker->addItem(pointTrackerOpticalNeigh);
 
     weights1 = "(1)";
     weights2 = "(1, 0.5)";
@@ -82,9 +86,13 @@ void DialogCreateTracker::onCreateNewTrackerRequest()
         CorrelationMetric *corr = new CorrelationMetric();
         pointTracker = new PointTrackerDistance(corr, 10);
     }
+    else if (selectedTracker.compare(pointTrackerOptical) == 0)
+    {
+        pointTracker = new PointTrackerOpticalFlow(20);
+    }
     else
     {
-        pointTracker = new  PointTrackerOpticalFlow(20);
+        pointTracker = new PointTrackerNeighbourOpticalFlow(20, 31, 5);
     }
 
     // Weights

@@ -10,7 +10,7 @@ bool PointTrackerNeighbourOpticalFlow::track(Mat8 &prevFrame, Mat8 &nextFrame, P
     int pointCount = 0;
     int trackedPointsPerInputPoint = 0;
 
-    // Create trackedPoint;
+    // Create trackedPoints
     Points trackedPoints;
     Points trackingResult;
     for (int i = 0; i < n; i++)

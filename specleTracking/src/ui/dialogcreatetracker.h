@@ -31,6 +31,7 @@ private:
     QString pointTrackerSSD;
     QString pointTrackerCorr;
     QString pointTrackerOptical;
+    QString pointTrackerOpticalNeigh;
 
     QString weights1;
     QString weights2;

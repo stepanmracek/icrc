@@ -2,7 +2,7 @@
 
 #include <cfloat>
 
-Points ShapeNormalizerIterConfStatShape::normalize(Points &points, Mat8 &frame)
+/*Points ShapeNormalizerIterConfStatShape::normalize(Points &points, Mat8 &frame)
 {
     unsigned int n = points.size();
     assert(n > 0);
@@ -61,4 +61,4 @@ Points ShapeNormalizerIterConfStatShape::normalize(Points &points, Mat8 &frame)
     }
 
     return result;
-}
+}*/

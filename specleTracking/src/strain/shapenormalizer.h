@@ -65,7 +65,7 @@ public:
     }
 };
 
-class ShapeNormalizerIterConfStatShape : public ShapeNormalizerShapeModel
+/*class ShapeNormalizerIterConfStatShape : public ShapeNormalizerShapeModel
 {
     Q_OBJECT
 
@@ -74,7 +74,7 @@ public:
         ShapeNormalizerShapeModel(model, parent) { }
 
     Points normalize(Points &points, Mat8 &frame);
-};
+};*/
 
 class ShapeNormalizerPass : public ShapeNormalizerBase
 {
