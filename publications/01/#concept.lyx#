@@ -585,6 +585,52 @@ The image transformation block transforms the input image from the input
  image data.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/coords.png
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Image transformation from 
+\begin_inset Formula $x\mbox{-}y$
+\end_inset
+
+ coordinate system to the angle-distance (
+\begin_inset Formula $\theta\mbox{-}d$
+\end_inset
+
+) coordinate system
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Evaluation
 \end_layout
