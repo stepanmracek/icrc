@@ -581,7 +581,8 @@ The image transformation block transforms the input image from the input
 \begin_inset Formula $\theta\mbox{-}d$
 \end_inset
 
- coordinate system is placed to the 
+ coordinate system is placed to the center of the circular sector that contains
+ image data.
 \end_layout
 
 \begin_layout Section
