@@ -651,7 +651,7 @@ reference "fig:Point-tracking"
 \end_inset
 
 ).
- Let the neighbourhood of the point 
+ Let the pixel intensity neighbourhood of the point 
 \begin_inset Formula $x$
 \end_inset
 
@@ -671,12 +671,16 @@ reference "fig:Point-tracking"
  is:
 \begin_inset Formula 
 \begin{equation}
-\triangle x=\arg\min_{i\in}\left\Vert \mathbb{\mathbf{x}}-\mathbf{x}_{i}\right\Vert 
+\triangle x=\arg\min_{i\in I}\left\Vert \mathbb{\mathbf{x}}-\mathbf{x}_{i}\right\Vert 
 \end{equation}
 
 \end_inset
 
+where 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
 
+ is the neighbourhood of the point 
 \end_layout
 
 \begin_layout Standard
