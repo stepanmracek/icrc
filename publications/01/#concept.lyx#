@@ -381,7 +381,8 @@ Our LV shape model consist of 93 points that were manualy anotated from
  In each frame, the human operator anotated points on the mid-myocardium.
  The computer inserted spline between points and 31 new equally-distanced
  points were interpolated.
- Each point was triplicated, such the  
+ Each point was triplicated, such that the 93 inner points outlined inner
+ myocardium and outer 93 points o
 \end_layout
 
 \begin_layout Subsection
