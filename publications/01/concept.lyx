@@ -368,7 +368,7 @@ Now, every shape
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\mathbf{b}=\boldsymbol{\Phi}^{T}(\mathbf{s}-\mathbf{\bar{s}})
+\mathbf{b}=\boldsymbol{\Phi}^{T}(\mathbf{s}-\mathbf{\bar{s}})\label{eq:PCA-projection}
 \end{equation}
 
 \end_inset
@@ -639,10 +639,219 @@ The image processing block involves the application of image filters to
 The point tracking block has three inputs - the previous frame, the annotated
  points within the previous frame, and the next frame, where the point tracking
  algorithm should find the desired points.
+ The next frame is also processed with image transformation and filters.
  Additionaly to the PyrLK point tracker, we have implemented speckle tracking
  based on the minimizing the Euclidean distance, correlation metric, or
  sum of absolute differences between the neighbour of tracked point in previous
- frame and potential position of the point in the next frame.
+ frame and potential position of the point in the next frame (see Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Point-tracking"
+
+\end_inset
+
+).
+ Let the pixel intensity neighbourhood of the point 
+\begin_inset Formula $x$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $\text{\mathbf{x}}$
+\end_inset
+
+.
+ The shift of the point 
+\begin_inset Formula $x$
+\end_inset
+
+ between the previous and the next frame 
+\begin_inset Formula $\triangle x$
+\end_inset
+
+ is:
+\begin_inset Formula 
+\begin{equation}
+\triangle x=\arg\min_{i\in I}\left\Vert \mathbb{\mathbf{x}}-\mathbf{x}_{i}\right\Vert 
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+ is the pixel intensity neighbourhood of the point 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ in the next frame.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/point-tracking.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Point tracking using arbitrary metric
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Point-tracking"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After all points in the next frame are located, the output shape is back-transfo
+rmed to the 
+\begin_inset Formula $x\mbox{-}y$
+\end_inset
+
+ coordinate system.
+ The last step is the employment of the statistical shape model.
+ The shape is projected to the PCA subspace (eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:PCA-projection"
+
+\end_inset
+
+).
+ On each component 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ of the vector 
+\begin_inset Formula $\mathbf{\mathbf{b}}$
+\end_inset
+
+ is applied limit 
+\begin_inset Formula $\pm3\sqrt{\lambda_{i}}$
+\end_inset
+
+, where 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ is the 
+\begin_inset Formula $i$
+\end_inset
+
+-th eigenvalue.
+ This truncation ensures that the resulting shape will be similar to those
+ in the original training set.
+ The back-projection from the PCA subspace to the original space is ensured
+ by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{s}=\bar{\mathbf{s}}+\boldsymbol{\Phi}\mathbf{b}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The result of the application of the limits on the 
+\begin_inset Formula $\mathbf{b}$
+\end_inset
+
+ components is in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:pca-normalization"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/pre-normalized.png
+	width 6cm
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/pca-normalized.png
+	width 6cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Points of the shape before normalization and after the PCA shape normalization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:pca-normalization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
