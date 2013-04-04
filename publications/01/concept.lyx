@@ -260,47 +260,6 @@ v=(A^{T}A)^{-1}A^{T}b
 \end_layout
 
 \begin_layout Standard
-The additional tweak to the plain LK method is the addition of weights 
-\begin_inset Formula $W$
-\end_inset
-
-.
- More emphasis is given to the points closer to the search window.
- 
-\begin_inset Formula $W$
-\end_inset
-
- is therefore a diagonal 
-\begin_inset Formula $n\times n$
-\end_inset
-
- matrix where individual elements 
-\begin_inset Formula $w_{ii}$
-\end_inset
-
- are set to Gaussian function.
- The solution 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:LKSolution"
-
-\end_inset
-
-becomes:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-v=(A^{T}WA)^{-1}A^{T}Wb
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 TODO: PyramidLK
 \end_layout
 
@@ -310,7 +269,7 @@ Statistical shape model
 
 \begin_layout Standard
 The PyrLK point tracker provides robust technique for following and individual
- point of interest.
+ points of interest.
  However, it is important to maintain a specific shape of the LV during
  cardiac cycle.
  We are using a statistical shape model thah has been previously described
@@ -318,10 +277,21 @@ The PyrLK point tracker provides robust technique for following and individual
  The main idea of statistical shape models is employment of probability
  density model.
  Some arbitrary shape 
-\begin_inset Formula $s=$
+\begin_inset Formula $s=((x_{1},y_{1}),(x_{2},y_{2}),\dots,(x_{n},y_{n}))$
 \end_inset
 
+ can be unambiguously represented as a column vector 
+\begin_inset Formula $\mathbf{s}=[x_{1},y_{1},x_{2},y_{2},\dots,x_{n},y_{n}]^{T}$
+\end_inset
 
+.
+ Modeling of the shape variation is accomplished using Principal Component
+ Analysis (PCA).
+ In order to do that, calculations in the following steps are 
+\end_layout
+
+\begin_layout Enumerate
+Mean vector is 
 \end_layout
 
 \begin_layout Subsection
