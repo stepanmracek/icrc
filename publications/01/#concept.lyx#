@@ -342,9 +342,17 @@ Compute the eigenvectors
 
 \begin_layout Enumerate
 Create projection matrix 
-\begin_inset Formula $\boldsymbol{\Phi}=(\boldsymbol{\phi}_{1}|\boldsymbol{\phi}_{2}|\dots|\boldsymbol{\phi}_{m})$
+\begin_inset Formula $\boldsymbol{\Phi}=(\boldsymbol{\phi}_{1}|\boldsymbol{\phi}_{2}|\dots|\boldsymbol{\phi}_{t})$
 \end_inset
 
+ that contains 
+\begin_inset Formula $t$
+\end_inset
+
+ largest eigenvalues from previous step.
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
