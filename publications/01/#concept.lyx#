@@ -326,10 +326,10 @@ Covariance matrix
 
 \begin_layout Enumerate
 Compute the eigenvectors 
-\begin_inset Formula $\mathbf{\phi}$
+\begin_inset Formula $\boldsymbol{\phi}_{1},\dots,\boldsymbol{\phi}_{m}$
 \end_inset
 
-
+ a
 \end_layout
 
 \begin_layout Subsection
