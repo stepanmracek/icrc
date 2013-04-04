@@ -376,7 +376,10 @@ Now, every shape
 \end_layout
 
 \begin_layout Standard
-Our LV shape model consist of 93 points that were anotated from  
+Our LV shape model consist of 93 points that were manualy anotated from
+ 4 LV cycles from 2 subjects.
+ In each frame, the human operator anotated points on the mid-myocardium.
+ The computer 
 \end_layout
 
 \begin_layout Subsection
