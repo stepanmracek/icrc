@@ -368,7 +368,7 @@ Now, every shape
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\mathbf{b}=\boldsymbol{\Phi}^{T}(\mathbf{s}-\mathbf{\bar{s}})
+\mathbf{b}=\boldsymbol{\Phi}^{T}(\mathbf{s}-\mathbf{\bar{s}})\label{eq:PCA-projection}
 \end{equation}
 
 \end_inset
@@ -740,7 +740,24 @@ rmed to the
 
  coordinate system.
  The last step is the employment of the statistical shape model.
- The shape is projected to the PCA subspace
+ The shape is projected to the PCA subspace (eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:PCA-projection"
+
+\end_inset
+
+).
+ Each component 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ of the vector 
+\begin_inset Formula $\\$
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Section
