@@ -280,7 +280,11 @@ The PyrLK point tracker provides robust technique for following and individual
 \begin_inset Formula $s=((x_{1},y_{1}),(x_{2},y_{2}),\dots,(x_{n},y_{n}))$
 \end_inset
 
- can be unambiguosly 
+ can be unambiguosly represented as a column vector 
+\begin_inset Formula $\mathbf{s}=[x_{1},y_{1},x_{2},y_{2},\dots,x_{n},y_{n}]^{T}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
