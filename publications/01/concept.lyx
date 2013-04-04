@@ -9,8 +9,8 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman default
-\font_sans default
+\font_roman palatino
+\font_sans helvet
 \font_typewriter default
 \font_default_family default
 \use_non_tex_fonts false
@@ -507,6 +507,25 @@ Transformation of B-mode images
 Enhancing SNR ratio
 \end_layout
 
+\begin_layout Subsection
+Algorithm description
+\end_layout
+
+\begin_layout Standard
+Our tracking algorithm consists of individua function blocks where each
+ block deals with a specific task and can be easily replaced with another
+ block that solves the same problem, e.g., the image processing block can
+ be be empty or consists of several consecutive image filters.
+ See Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Algorithm-pipeline"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 wide false
@@ -514,6 +533,12 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/pipeline.pdf
+
+\end_inset
+
 
 \end_layout
 
@@ -536,7 +561,64 @@ name "fig:Algorithm-pipeline"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The image transformation block transforms the input image from the input
+ 
+\begin_inset Formula $x\mbox{-}y$
+\end_inset
+
+ coordinate system to the angle-distance (
+\begin_inset Formula $\theta\mbox{-}d$
+\end_inset
+
+) coordinate system.
+ The center of the 
+\begin_inset Formula $\theta\mbox{-}d$
+\end_inset
+
+ coordinate system is placed to the center of the circular sector that contains
+ image data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/coords.png
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Image transformation from 
+\begin_inset Formula $x\mbox{-}y$
+\end_inset
+
+ coordinate system to the angle-distance (
+\begin_inset Formula $\theta\mbox{-}d$
+\end_inset
+
+) coordinate system
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -545,30 +627,22 @@ name "fig:Algorithm-pipeline"
 
 \end_layout
 
-\begin_layout Subsection
-Algorithm description
+\begin_layout Standard
+The image processing block involves the application of image filters to
+ the transformed frame.
+ We have tested contrast enhancement, histogram equalization, edge detection,
+ sharpening, and noise reduction in our experiments.
+ 
 \end_layout
 
-\begin_layout Labeling
-\labelwidthstring 00.00.0000
-dssd
-\end_layout
-
-\begin_deeper
-\begin_layout Labeling
-\labelwidthstring 00.00.0000
-dqwdqw
-\end_layout
-
-\end_deeper
-\begin_layout Labeling
-\labelwidthstring 00.00.0000
-swsqw
-\end_layout
-
-\begin_layout Labeling
-\labelwidthstring 00.00.0000
-wqqwd
+\begin_layout Standard
+The point tracking block has three inputs - the previous frame, the annotated
+ points within the previous frame, and the next frame, where the point tracking
+ algorithm should find the desired points.
+ Additionaly to the PyrLK point tracker, we have implemented speckle tracking
+ based on the minimizing the Euclidean distance, correlation metric, or
+ sum of absolute differences between the neighbour of tracked point in previous
+ frame and potential position of the point in the next frame.
 \end_layout
 
 \begin_layout Section
