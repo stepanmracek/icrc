@@ -739,6 +739,8 @@ rmed to the
 \end_inset
 
  coordinate system.
+ The last step is the employment of the statistical shape model.
+ The shape is projected to the PCA subspace
 \end_layout
 
 \begin_layout Section
