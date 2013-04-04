@@ -25,6 +25,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -287,11 +288,211 @@ The PyrLK point tracker provides robust technique for following and individual
 .
  Modeling of the shape variation is accomplished using Principal Component
  Analysis (PCA).
- In order to do that, calculations in the following steps are 
+ In order to do that, calculations in the following steps are executed:
 \end_layout
 
 \begin_layout Enumerate
-Mean vector is 
+Mean vector 
+\begin_inset Formula $\mathbf{\bar{s}}$
+\end_inset
+
+ of all shapes
+\begin_inset Formula 
+\begin{equation}
+\mathbf{\bar{s}}=\frac{1}{N}\sum_{i=1}^{N}\mathbf{s}_{i}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Covariance matrix 
+\series bold
+
+\begin_inset Formula $\mathbf{S}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\mathbf{S}=\frac{1}{N-1}\sum_{i=1}^{N}(\mathbf{s}_{i}-\mathbf{\bar{s}})(\mathbf{s}_{i}-\mathbf{\bar{s}})^{T}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Compute the eigenvectors 
+\begin_inset Formula $\boldsymbol{\phi}_{1},\dots,\boldsymbol{\phi}_{m}$
+\end_inset
+
+ and corresponding eigenvalues 
+\begin_inset Formula $\boldsymbol{\lambda}_{1},\dots,\boldsymbol{\lambda}_{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{S}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Create projection matrix 
+\begin_inset Formula $\boldsymbol{\Phi}=(\boldsymbol{\phi}_{1}|\boldsymbol{\phi}_{2}|\dots|\boldsymbol{\phi}_{t})$
+\end_inset
+
+ that contains 
+\begin_inset Formula $t$
+\end_inset
+
+ largest eigenvalues from previous step.
+\end_layout
+
+\begin_layout Standard
+Now, every shape 
+\begin_inset Formula $\mathbf{s}$
+\end_inset
+
+ can be represented in 
+\begin_inset Formula $t$
+\end_inset
+
+-dimensional PCA space:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{b}=\boldsymbol{\Phi}^{T}(\mathbf{s}-\mathbf{\bar{s}})
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Our LV shape model consist of 93 points that were manualy anotated from
+ 4 LV cycles from 2 subjects.
+ In each frame, the human operator anotated points on the mid-myocardium.
+ The computer inserted spline between points and 31 new equally-distanced
+ points were interpolated.
+ Each point was triplicated, such that the 93 inner points outlined inner
+ myocardium and outer 93 points outilined outer myocardium.
+ Since we are interested in contraction of individual parts of the myocardium,
+ the spacing variations between points were added to the base set of shapes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/anotation.png
+	width 5cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Manual anotation of mid-myocardium
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Manual-anotation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/mean.png
+	width 3cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/variation1.png
+	width 3cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/variation2.png
+	width 3cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/variation3.png
+	width 3cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Mean LV shape (left) and some examples of it's variation
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Mean-LV-shape"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -304,6 +505,10 @@ Transformation of B-mode images
 
 \begin_layout Subsubsection
 Enhancing SNR ratio
+\end_layout
+
+\begin_layout Subsection
+Algorithm description
 \end_layout
 
 \begin_layout Section
