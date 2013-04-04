@@ -367,12 +367,16 @@ Now, every shape
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\mathbf{b}=\\bold
+\mathbf{b}=\boldsymbol{\Phi}^{T}(\mathbf{s}-\mathbf{\bar{s}})
 \end{equation}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Our LV shape model consist of  
 \end_layout
 
 \begin_layout Subsection
