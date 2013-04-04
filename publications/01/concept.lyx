@@ -65,7 +65,7 @@ LV - Left Ventricle
 \end_layout
 
 \begin_layout Standard
-ST - Specle Tracking
+ST - Speckle Tracking
 \end_layout
 
 \begin_layout Standard
@@ -77,7 +77,7 @@ ICA - Independent component analysis
 \end_layout
 
 \begin_layout Standard
-PyrLK - Pyramid Lukas-Kanade
+PyrLK - Pyramid Lucas-Kanade
 \end_layout
 
 \begin_layout Section
@@ -89,11 +89,11 @@ Method
 \end_layout
 
 \begin_layout Standard
-Contrary to the commonly-used specle tracking method, our approach employes
+Contrary to the commonly-used speckle tracking method, our approach employs
  several principal differences.
  We are using optical flow estimation for tracking the points of interest
- insted of correlation.
- However, the estimation of specle movement is local only.
+ instead of correlation.
+ However, the estimation of speckle movement is local only.
  The usage of generative probability shape model is used in order to preserve
  valid shape estimation of tracked LV.
 \end_layout
@@ -103,8 +103,8 @@ Optical flow estimation
 \end_layout
 
 \begin_layout Standard
-Our experiments shown that the Pyramid Lukas-Kanade (PyrLK) method is a
- good choice for specle motion estimation.
+Our experiments shown that the Pyramid Lucas-Kanade (PyrLK) method is a
+ good choice for speckle motion estimation.
  It assumes that the difference in searching window between two consecutive
  frames is small.
  The general optical flow equation for the point 
@@ -261,7 +261,7 @@ v=(A^{T}A)^{-1}A^{T}b
 \end_layout
 
 \begin_layout Standard
-TODO: PyramidLK
+TODO: PyrLK
 \end_layout
 
 \begin_layout Subsection
@@ -273,7 +273,7 @@ The PyrLK point tracker provides robust technique for following and individual
  points of interest.
  However, it is important to maintain a specific shape of the LV during
  cardiac cycle.
- We are using a statistical shape model thah has been previously described
+ We are using a statistical shape model that has been previously described
  in TODO:ref Cootes.
  The main idea of statistical shape models is employment of probability
  density model.
@@ -377,13 +377,13 @@ Now, every shape
 \end_layout
 
 \begin_layout Standard
-Our LV shape model consist of 93 points that were manualy anotated from
+Our LV shape model consist of 93 points that were manually annotated from
  4 LV cycles from 2 subjects.
- In each frame, the human operator anotated points on the mid-myocardium.
+ In each frame, the human operator annotated points on the mid-myocardium.
  The computer inserted spline between points and 31 new equally-distanced
  points were interpolated.
  Each point was triplicated, such that the 93 inner points outlined inner
- myocardium and outer 93 points outilined outer myocardium.
+ myocardium and outer 93 points outlined outer myocardium.
  Since we are interested in contraction of individual parts of the myocardium,
  the spacing variations between points were added to the base set of shapes.
 \end_layout
@@ -409,7 +409,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Manual anotation of mid-myocardium
+Manual annotation of mid-myocardium
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Manual-anotation"
@@ -509,6 +509,11 @@ Enhancing SNR ratio
 
 \begin_layout Subsection
 Algorithm description
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
 \end_layout
 
 \begin_layout Section
