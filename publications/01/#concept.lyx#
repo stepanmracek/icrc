@@ -777,6 +777,17 @@ reference "eq:PCA-projection"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{s}=\bar{\mathbf{s}}+\boldsymbol{\Phi}\mathbf{b}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
