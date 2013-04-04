@@ -638,8 +638,8 @@ The image processing block involves the application of image filters to
 \begin_layout Standard
 The point tracking block has three inputs - the previous frame, the annotated
  points within the previous frame, and the next frame, where the point tracking
- algorithm should find the postulated points.
- 
+ algorithm should find the desired points.
+ Additionaly to the PyrLK point tracker, we have implemented 
 \end_layout
 
 \begin_layout Section
