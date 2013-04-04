@@ -9,8 +9,8 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman default
-\font_sans default
+\font_roman palatino
+\font_sans helvet
 \font_typewriter default
 \font_default_family default
 \use_non_tex_fonts false
@@ -572,7 +572,16 @@ The image transformation block transforms the input image from the input
 \begin_inset Formula $x\mbox{-}y$
 \end_inset
 
- coordinate system to the 
+ coordinate system to the angle-distance (
+\begin_inset Formula $\theta\mbox{-}d$
+\end_inset
+
+) coordinate system.
+ The center of the 
+\begin_inset Formula $\theta\mbox{-}d$
+\end_inset
+
+ coordinate system is placed to the 
 \end_layout
 
 \begin_layout Section
