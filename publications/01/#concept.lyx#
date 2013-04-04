@@ -287,6 +287,11 @@ The PyrLK point tracker provides robust technique for following and individual
 .
  Modeling of the shape variation is accomplished using Principal Component
  Analysis (PCA).
+ In order to do that, calculations in the following steps are 
+\end_layout
+
+\begin_layout Enumerate
+Mean vector is 
 \end_layout
 
 \begin_layout Subsection
