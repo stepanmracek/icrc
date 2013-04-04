@@ -660,7 +660,23 @@ reference "fig:Point-tracking"
 \end_inset
 
 .
- 
+ The shift of the point 
+\begin_inset Formula $x$
+\end_inset
+
+ between the previous and the next frame 
+\begin_inset Formula $\triangle x$
+\end_inset
+
+ is:
+\begin_inset Formula 
+\begin{equation}
+\triangle x=\arg\min
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
