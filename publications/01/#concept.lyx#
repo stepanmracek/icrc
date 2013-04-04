@@ -640,9 +640,9 @@ The point tracking block has three inputs - the previous frame, the annotated
  points within the previous frame, and the next frame, where the point tracking
  algorithm should find the desired points.
  Additionaly to the PyrLK point tracker, we have implemented speckle tracking
- based on the minimizing the Euclidean distance, correlation, or sum of
- absolute differences between the neighbour of tracked point in previous
- point and potential position of the 
+ based on the minimizing the Euclidean distance, correlation metric, or
+ sum of absolute differences between the neighbour of tracked point in previous
+ frame and potential position of the point in the next frame.
 \end_layout
 
 \begin_layout Section
