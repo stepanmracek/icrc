@@ -749,14 +749,27 @@ reference "eq:PCA-projection"
 \end_inset
 
 ).
- Each component 
+ On each component 
 \begin_inset Formula $b_{i}$
 \end_inset
 
  of the vector 
-\begin_inset Formula $\\$
+\begin_inset Formula $\mathbf{\mathbf{b}}$
 \end_inset
 
+ is applied limit 
+\begin_inset Formula $\pm3\sqrt{\lambda_{i}}$
+\end_inset
+
+, where 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ is the 
+\begin_inset Formula $i$
+\end_inset
+
+-th eigenvalue.
  
 \end_layout
 
