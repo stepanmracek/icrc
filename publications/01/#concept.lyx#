@@ -341,6 +341,10 @@ Compute the eigenvectors
 \end_layout
 
 \begin_layout Enumerate
+Create projection matrix 
+\begin_inset Formula $\boldsymbol{\Phi}=(\boldsymbol{\phi}_{1}|\boldsymbol{\phi}_{2}|\dots|\boldsymbol{\phi}_{m})$
+\end_inset
+
 
 \end_layout
 
