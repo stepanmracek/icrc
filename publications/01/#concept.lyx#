@@ -514,8 +514,16 @@ Algorithm description
 \begin_layout Standard
 Our tracking algorithm consists of individua function blocks where each
  block deals with a specific task and can be easily replaced with another
- block that solves the same problem.
-  
+ block that solves the same problem, e.g., the image processing block can
+ be be empty or consists of several consecutive image filters.
+ See Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Algorithm-pipeline"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -556,6 +564,15 @@ name "fig:Algorithm-pipeline"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The image transformation block transforms the input image from the input
+ 
+\begin_inset Formula $x\mbox{-}y$
+\end_inset
+
+ coordinate system me to the 
 \end_layout
 
 \begin_layout Section
