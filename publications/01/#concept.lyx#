@@ -788,14 +788,27 @@ reference "eq:PCA-projection"
 \end_layout
 
 \begin_layout Standard
+The application of the 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename fig/pre-normalized.png
+	width 6cm
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig/pca-normalized.png
+	width 6cm
 
 \end_inset
 
