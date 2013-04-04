@@ -680,7 +680,11 @@ where
 \begin_inset Formula $\mathbf{x}_{i}$
 \end_inset
 
- is the neighbourhood of the point 
+ is the pixel intensity neighbourhood of the point 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ in the next frame.
 \end_layout
 
 \begin_layout Standard
@@ -725,6 +729,10 @@ name "fig:Point-tracking"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+After all points in the next frame are located
 \end_layout
 
 \begin_layout Section
