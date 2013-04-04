@@ -651,6 +651,15 @@ reference "fig:Point-tracking"
 \end_inset
 
 ).
+ Let the neighbourhood of the point 
+\begin_inset Formula $x$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $\text{\mathbf{x}}$
+\end_inset
+
+.
  
 \end_layout
 
