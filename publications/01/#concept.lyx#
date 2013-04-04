@@ -391,7 +391,7 @@ Our LV shape model consist of 93 points that were manualy anotated from
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -417,6 +417,61 @@ Manual anotation of mid-myocardium
 \end_layout
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/mean.png
+	width 3cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/variation1.png
+	width 3cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/variation2.png
+	width 3cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/variation3.png
+	width 3cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Mean LV shape (left) and some examples of it's variation
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
