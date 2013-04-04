@@ -636,8 +636,8 @@ The image processing block involves the application of image filters to
 \end_layout
 
 \begin_layout Standard
-The point tracking block has three inputs.
- Previous
+The point tracking block has three inputs - previous frame together with
+ annotated points and  
 \end_layout
 
 \begin_layout Section
