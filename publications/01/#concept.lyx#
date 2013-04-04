@@ -329,7 +329,11 @@ Compute the eigenvectors
 \begin_inset Formula $\boldsymbol{\phi}_{1},\dots,\boldsymbol{\phi}_{m}$
 \end_inset
 
- a
+ and corresponding eigenvalues 
+\begin_inset Formula $\boldsymbol{\lambda}_{1},\dots,\boldsymbol{\lambda}_{m}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
