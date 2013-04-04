@@ -507,6 +507,44 @@ Transformation of B-mode images
 Enhancing SNR ratio
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Algorithm pipeline
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Algorithm-pipeline"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Algorithm description
 \end_layout
@@ -516,9 +554,21 @@ Algorithm description
 dssd
 \end_layout
 
+\begin_deeper
 \begin_layout Labeling
 \labelwidthstring 00.00.0000
+dqwdqw
+\end_layout
 
+\end_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+swsqw
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+wqqwd
 \end_layout
 
 \begin_layout Section
