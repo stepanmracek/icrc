@@ -379,7 +379,9 @@ Now, every shape
 Our LV shape model consist of 93 points that were manualy anotated from
  4 LV cycles from 2 subjects.
  In each frame, the human operator anotated points on the mid-myocardium.
- The computer 
+ The computer inserted spline between points and 31 new equally-distanced
+ points were interpolated.
+ Each point was triplicated, such the  
 \end_layout
 
 \begin_layout Subsection
