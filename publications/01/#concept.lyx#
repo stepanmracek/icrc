@@ -325,7 +325,11 @@ Covariance matrix
 \end_layout
 
 \begin_layout Enumerate
-Compute 
+Compute the eigenvectors 
+\begin_inset Formula $\mathbf{\phi}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
