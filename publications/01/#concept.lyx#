@@ -770,7 +770,14 @@ reference "eq:PCA-projection"
 \end_inset
 
 -th eigenvalue.
- 
+ This truncation ensures that the resulting shape will be similar to those
+ in the original training set.
+ The back-projection from the PCA subspace to the original space is ensured
+ by:
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Section
