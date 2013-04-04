@@ -622,13 +622,22 @@ Image transformation from
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The image processing block involves the application of image filters to
+ the transformed frame.
+ We have tested contrast enhancement, histogram equalization, edge detection,
+ and noise reduction in our experiments.
+ 
+\end_layout
+
+\begin_layout Standard
+The point tracking block has three inputs.
+ Previous
 \end_layout
 
 \begin_layout Section
