@@ -307,7 +307,25 @@ Mean vector
 \end_layout
 
 \begin_layout Enumerate
-Coca
+Covariance matrix 
+\series bold
+
+\begin_inset Formula $\mathbf{S}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\mathbf{S}=\frac{1}{N-1}\sum_{i=1}^{N}(\mathbf{s}_{i}-\mathbf{\bar{s}})(\mathbf{s}_{i}-\mathbf{\bar{s}})^{T}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Compute 
 \end_layout
 
 \begin_layout Subsection
