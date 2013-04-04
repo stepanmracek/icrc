@@ -353,6 +353,25 @@ Create projection matrix
 \end_layout
 
 \begin_layout Standard
+Now, every shape 
+\begin_inset Formula $\mathbf{s}$
+\end_inset
+
+ can be represented in 
+\begin_inset Formula $t$
+\end_inset
+
+-dimensional PCA space:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{b}=\\bold
+\end{equation}
+
+\end_inset
+
 
 \end_layout
 
