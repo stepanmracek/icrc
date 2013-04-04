@@ -639,6 +639,7 @@ The image processing block involves the application of image filters to
 The point tracking block has three inputs - the previous frame, the annotated
  points within the previous frame, and the next frame, where the point tracking
  algorithm should find the desired points.
+ The next frame is also processed with image transformation and filters.
  Additionaly to the PyrLK point tracker, we have implemented speckle tracking
  based on the minimizing the Euclidean distance, correlation metric, or
  sum of absolute differences between the neighbour of tracked point in previous
@@ -732,7 +733,12 @@ name "fig:Point-tracking"
 \end_layout
 
 \begin_layout Standard
-After all points in the next frame are located
+After all points in the next frame are located, the output shape is back-transfo
+rmed to the 
+\begin_inset Formula $x\mbox{-}y$
+\end_inset
+
+ coordinate system.
 \end_layout
 
 \begin_layout Section
