@@ -1,0 +1,535 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+LV - Left Ventricle
+\end_layout
+
+\begin_layout Standard
+ST - Speckle Tracking
+\end_layout
+
+\begin_layout Standard
+PCA - Principal component analysis
+\end_layout
+
+\begin_layout Standard
+ICA - Independent component analysis
+\end_layout
+
+\begin_layout Standard
+PyrLK - Pyramid Lucas-Kanade
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Section
+Method
+\end_layout
+
+\begin_layout Standard
+Contrary to the commonly-used speckle tracking method, our approach employs
+ several principal differences.
+ We are using optical flow estimation for tracking the points of interest
+ instead of correlation.
+ However, the estimation of speckle movement is local only.
+ The usage of generative probability shape model is used in order to preserve
+ valid shape estimation of tracked LV.
+\end_layout
+
+\begin_layout Subsection
+Optical flow estimation
+\end_layout
+
+\begin_layout Standard
+Our experiments shown that the Pyramid Lucas-Kanade (PyrLK) method is a
+ good choice for speckle motion estimation.
+ It assumes that the difference in searching window between two consecutive
+ frames is small.
+ The general optical flow equation for the point 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+ is
+\begin_inset Formula 
+\begin{equation}
+I_{x}V_{x}+I_{y}V_{y}=-I_{t}\label{eq:OpticalFlow}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $I_{x}$
+\end_inset
+
+, 
+\begin_inset Formula $I_{y}$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{t}$
+\end_inset
+
+ are the partial derives of image intensity 
+\begin_inset Formula $I(x,y,t)$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $x$
+\end_inset
+
+, 
+\begin_inset Formula $y$
+\end_inset
+
+ and 
+\begin_inset Formula $t$
+\end_inset
+
+ respectively.
+ The 
+\begin_inset Formula $V_{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{y}$
+\end_inset
+
+ are desired components of flow velocity.
+ The assumption of PyrLK method is that the equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:OpticalFlow"
+
+\end_inset
+
+ holds for all points within specific window 
+\begin_inset Formula $Q=q_{1},q_{2},\dots,q_{n}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{c}
+I_{x}(q_{1})V_{x}+I_{y}(q_{1})V_{y}=-I_{t}(q_{1})\\
+I_{x}(q_{2})V_{x}+I_{y}(q_{2})V_{y}=-I_{t}(q_{2})\\
+\vdots\\
+I_{x}(q_{n})V_{x}+I_{y}(q_{n})V_{y}=-I_{t}(q_{n})
+\end{array}\label{eq:LKOpticalFlow}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If we substitute
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+A=\begin{bmatrix}I_{x}(q_{1}) & I_{y}(q_{1})\\
+I_{x}(q_{2}) & I_{y}(q_{2})\\
+\vdots & \vdots\\
+I_{x}(q_{n}) & I_{y}(q_{n})
+\end{bmatrix}\mbox{, }v=\begin{bmatrix}V_{x}\\
+V_{y}
+\end{bmatrix}\mbox{, and }b=\begin{bmatrix}-I_{t}(q_{1})\\
+-I_{t}(q_{1})\\
+\vdots\\
+I_{t}(q_{n})
+\end{bmatrix}\label{eq:LKSolution}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we obtain a matrix form of equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LKOpticalFlow"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Av=b\label{eq:LKOpticalFlowMatrixForm}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The least-square solution of the equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LKOpticalFlowMatrixForm"
+
+\end_inset
+
+ is as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+v=(A^{T}A)^{-1}A^{T}b
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+TODO: PyrLK
+\end_layout
+
+\begin_layout Subsection
+Statistical shape model
+\end_layout
+
+\begin_layout Standard
+The PyrLK point tracker provides robust technique for following and individual
+ points of interest.
+ However, it is important to maintain a specific shape of the LV during
+ cardiac cycle.
+ We are using a statistical shape model that has been previously described
+ in TODO:ref Cootes.
+ The main idea of statistical shape models is employment of probability
+ density model.
+ Some arbitrary shape 
+\begin_inset Formula $s=((x_{1},y_{1}),(x_{2},y_{2}),\dots,(x_{n},y_{n}))$
+\end_inset
+
+ can be unambiguously represented as a column vector 
+\begin_inset Formula $\mathbf{s}=[x_{1},y_{1},x_{2},y_{2},\dots,x_{n},y_{n}]^{T}$
+\end_inset
+
+.
+ Modeling of the shape variation is accomplished using Principal Component
+ Analysis (PCA).
+ In order to do that, calculations in the following steps are executed:
+\end_layout
+
+\begin_layout Enumerate
+Mean vector 
+\begin_inset Formula $\mathbf{\bar{s}}$
+\end_inset
+
+ of all shapes
+\begin_inset Formula 
+\begin{equation}
+\mathbf{\bar{s}}=\frac{1}{N}\sum_{i=1}^{N}\mathbf{s}_{i}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Covariance matrix 
+\series bold
+
+\begin_inset Formula $\mathbf{S}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\mathbf{S}=\frac{1}{N-1}\sum_{i=1}^{N}(\mathbf{s}_{i}-\mathbf{\bar{s}})(\mathbf{s}_{i}-\mathbf{\bar{s}})^{T}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Compute the eigenvectors 
+\begin_inset Formula $\boldsymbol{\phi}_{1},\dots,\boldsymbol{\phi}_{m}$
+\end_inset
+
+ and corresponding eigenvalues 
+\begin_inset Formula $\boldsymbol{\lambda}_{1},\dots,\boldsymbol{\lambda}_{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{S}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Create projection matrix 
+\begin_inset Formula $\boldsymbol{\Phi}=(\boldsymbol{\phi}_{1}|\boldsymbol{\phi}_{2}|\dots|\boldsymbol{\phi}_{t})$
+\end_inset
+
+ that contains 
+\begin_inset Formula $t$
+\end_inset
+
+ largest eigenvalues from previous step.
+\end_layout
+
+\begin_layout Standard
+Now, every shape 
+\begin_inset Formula $\mathbf{s}$
+\end_inset
+
+ can be represented in 
+\begin_inset Formula $t$
+\end_inset
+
+-dimensional PCA space:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{b}=\boldsymbol{\Phi}^{T}(\mathbf{s}-\mathbf{\bar{s}})
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Our LV shape model consist of 93 points that were manually annotated from
+ 4 LV cycles from 2 subjects.
+ In each frame, the human operator annotated points on the mid-myocardium.
+ The computer inserted spline between points and 31 new equally-distanced
+ points were interpolated.
+ Each point was triplicated, such that the 93 inner points outlined inner
+ myocardium and outer 93 points outlined outer myocardium.
+ Since we are interested in contraction of individual parts of the myocardium,
+ the spacing variations between points were added to the base set of shapes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/anotation.png
+	width 5cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Manual annotation of mid-myocardium
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Manual-anotation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/mean.png
+	width 3cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/variation1.png
+	width 3cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/variation2.png
+	width 3cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/variation3.png
+	width 3cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Mean LV shape (left) and some examples of it's variation
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Mean-LV-shape"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Image processing
+\end_layout
+
+\begin_layout Subsubsection
+Transformation of B-mode images
+\end_layout
+
+\begin_layout Subsubsection
+Enhancing SNR ratio
+\end_layout
+
+\begin_layout Subsection
+Algorithm description
+\end_layout
+
+\begin_layout Section
+Evaluation
+\end_layout
+
+\begin_layout Subsection
+Database description
+\end_layout
+
+\begin_layout Subsection
+Performance metrics
+\end_layout
+
+\begin_layout Subsection
+Comparison of implemented techniques
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\end_body
+\end_document
