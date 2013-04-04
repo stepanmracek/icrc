@@ -671,7 +671,7 @@ reference "fig:Point-tracking"
  is:
 \begin_inset Formula 
 \begin{equation}
-\triangle x=\arg\min\left\Vert x\right\Vert ||x||
+\triangle x=\arg\min_{i\in}\left\Vert \mathbb{\mathbf{x}}-\mathbf{x}_{i}\right\Vert 
 \end{equation}
 
 \end_inset
