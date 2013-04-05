@@ -69,7 +69,6 @@ SOURCES += \
     strain/anotation.cpp \
     strain/statisticalshapechanges.cpp \
     strain/strainstatistics.cpp \
-    ui/widgetplot.cpp \
     ui/widgetspectrogram.cpp \
     strain/videodatabase.cpp \
     strain/videodataclip.cpp \
@@ -93,7 +92,8 @@ SOURCES += \
     ui/dialogcreatetracker.cpp \
     ui/dialogimageprocessing.cpp \
     ui/dialogshapemodel.cpp \
-    ui/graphicsviewwithevents.cpp
+    ui/graphicsviewwithevents.cpp \
+    ui/widgetplot_.cpp
 
 INCLUDEPATH += src
 
