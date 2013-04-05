@@ -50,7 +50,8 @@ HEADERS += \
     ui/dialogcreatetracker.h \
     ui/dialogimageprocessing.h \
     ui/dialogshapemodel.h \
-    ui/graphicsviewwithevents.h
+    ui/graphicsviewwithevents.h \
+    strain/batchtesting.h
 
 SOURCES += \
     linalg/vecf.cpp \
@@ -93,7 +94,8 @@ SOURCES += \
     ui/dialogimageprocessing.cpp \
     ui/dialogshapemodel.cpp \
     ui/graphicsviewwithevents.cpp \
-    ui/widgetplot_.cpp
+    ui/widgetplot.cpp \
+    strain/batchtesting.cpp
 
 INCLUDEPATH += src
 

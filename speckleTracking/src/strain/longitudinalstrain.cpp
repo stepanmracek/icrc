@@ -65,7 +65,8 @@ Points LongitudinalStrain::getRealShapePoints(Points &controlPoints, int shapeWi
         result.push_back(uniformOuterPoints[i]);
     }
 
-    return result;
+    Mat8 m;
+    return getShapeNormalizer()->normalize(result, m);
 }
 
 /*Points LongitudinalStrain::getRealShapePoints(Points &controlPoints)

@@ -65,6 +65,8 @@ void WindowAnotationManager::on_btnBrowse_clicked()
     QString selected = QFileDialog::getExistingDirectory(this, QString(), path);
     if (selected.isNull() || selected.isEmpty()) return;
 
+    ui->widgetStrainVideo->serializeShapes(path);
+    ui->widgetStrainVideo->serializeMetadata(path);
     setDirectory(selected);
 }
 
@@ -113,7 +115,9 @@ void WindowAnotationManager::loadFile(QString fileName)
     ui->widgetStrainVideo->serializeShapes(path);
     ui->widgetStrainVideo->serializeMetadata(path);
     ui->widgetStrainVideo->load(path, fileName);
+    ui->listViewBeats->setModel(new ModelListOfInts(ui->widgetStrainVideo->getClip()->getMetadata()->beatIndicies, this));
 }
+
 void WindowAnotationManager::on_btnAnotate_clicked()
 {
     VideoDataClip *clip = ui->widgetStrainVideo->getClip();
@@ -233,7 +237,7 @@ void WindowAnotationManager::on_btnCoordSystem_clicked()
     }
 }
 
-void WindowAnotationManager::on_btnMetadata_clicked()
+/*void WindowAnotationManager::on_btnMetadata_clicked()
 {
     VideoDataClip *clip = ui->widgetStrainVideo->getClip();
     if (!clip || clip->size() == 0) return;
@@ -243,7 +247,7 @@ void WindowAnotationManager::on_btnMetadata_clicked()
     {
         clip->getMetadata()->beatIndicies = dlg.getMetadata()->beatIndicies;
     }
-}
+}*/
 
 void WindowAnotationManager::on_btnStats_clicked()
 {
@@ -260,6 +264,13 @@ void WindowAnotationManager::on_btnStats_clicked()
     if (error != 0)
     {
         QMessageBox msg(QMessageBox::Information, "Information", error);
+        msg.exec();
+        return;
+    }
+
+    if (subClip->size() == 0)
+    {
+        QMessageBox msg(QMessageBox::Information, "Information", "zero beat range");
         msg.exec();
         return;
     }
@@ -386,5 +397,63 @@ void WindowAnotationManager::on_actionPCA_triggered()
     StatisticalShapeModel *model = new StatisticalShapeModel(pca);
     ShapeNormalizerBase* normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
     tracker->getStrain()->SetShapeNormalizer(normalizer);
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_btnAddBeat_clicked()
+{
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
+
+    int beat = ui->widgetStrainVideo->getCurrentIndex();
+
+    QAbstractItemModel *model = ui->listViewBeats->model();
+    int rowCount = model->rowCount();
+    model->insertRow(rowCount);
+    QModelIndex index = model->index(rowCount, 0);
+    model->setData(index, beat);
+}
+
+void WindowAnotationManager::on_btnRemoveBeat_clicked()
+{
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
+
+    QAbstractItemModel *model = ui->listViewBeats->model();
+    QModelIndex modelIndex = ui->listViewBeats->currentIndex();
+    if (modelIndex.row() < 0) return;
+
+    model->removeRow(modelIndex.row());
+}
+
+void WindowAnotationManager::on_actionWeights1_triggered()
+{
+    VectorF weights;
+    weights.push_back(1.0);
+    tracker->weights = weights;
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionWeights2_triggered()
+{
+    VectorF weights;
+    weights.push_back(1.0); weights.push_back(0.5);
+    tracker->weights = weights;
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionWeights3_triggered()
+{
+    VectorF weights;
+    weights.push_back(1.0); weights.push_back(0.5); weights.push_back(0.25);
+    tracker->weights = weights;
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionWeights4_triggered()
+{
+    VectorF weights;
+    weights.push_back(1.0); weights.push_back(0.5); weights.push_back(0.25);  weights.push_back(0.125);
+    tracker->weights = weights;
     updateTrackerInfo();
 }

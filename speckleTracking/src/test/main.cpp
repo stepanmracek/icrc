@@ -1,4 +1,5 @@
 #include "test.h"
+#include "strain/batchtesting.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,7 +15,8 @@ int main(int argc, char *argv[])
     //Test::testImageProcessing();
     //Test::testOpticalFlowIntensityMap();
     //Test::testQtAnotation(argc, argv);
-    Test::testQtManager(argc, argv);
+    //Test::testQtManager(argc, argv);
+    BatchTesting::process();
     //Test::testLongitudinalStrain();
     //Test::testQtAnotationAndDisplay(argc, argv);
     //Test::testBeatToBeatVariance();

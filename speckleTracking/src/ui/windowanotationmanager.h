@@ -5,6 +5,7 @@
 #include <QListWidgetItem>
 
 #include "strain/shapetracker.h"
+#include "ui/modellistofints.h"
 
 namespace Ui {
 class WindowAnotationManager;
@@ -37,8 +38,6 @@ private slots:
 
     void on_btnCoordSystem_clicked();
 
-    void on_btnMetadata_clicked();
-
     void on_btnStats_clicked();
 
     void on_widgetResult_noImage();
@@ -66,6 +65,18 @@ private slots:
     void on_actionNone_triggered();
 
     void on_actionPCA_triggered();
+
+    void on_btnAddBeat_clicked();
+
+    void on_btnRemoveBeat_clicked();
+
+    void on_actionWeights1_triggered();
+
+    void on_actionWeights2_triggered();
+
+    void on_actionWeights3_triggered();
+
+    void on_actionWeights4_triggered();
 
 private:
     void setTracker(ShapeTracker *tracker);

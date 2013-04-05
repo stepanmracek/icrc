@@ -88,10 +88,17 @@ StrainStatistics StrainStatistics::getOneBeatStats(VideoDataClip *clip, Strain *
     }
 
     // get next beat index
-    int nextBeatIndex = clip->size();
+    int nextBeatIndex = clip->size()-1;
     if (i < clip->getMetadata()->beatIndicies.size() - 1)
     {
         nextBeatIndex = clip->getMetadata()->beatIndicies[i+1];
+    }
+
+    int delta = nextBeatIndex-beatIndex;
+    if (delta < 1)
+    {
+        (*success) = false;
+        return StrainStatistics();
     }
 
     // check if entire beat has corresponding shapes

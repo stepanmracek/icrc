@@ -6,7 +6,7 @@ DialogVideoDataClipMetadata::DialogVideoDataClipMetadata(VideoDataClipMetadata *
 {
     ui->setupUi(this);
 
-    model = new ModelListOfInts(this->metadata->beatIndicies);
+    model = new ModelListOfInts(this->metadata->beatIndicies, this);
     ui->listView->setModel(model);
 }
 

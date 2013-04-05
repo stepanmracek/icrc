@@ -153,13 +153,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="btnMetadata">
-          <property name="text">
-           <string>Beat Indicies</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QPushButton" name="btnStats">
           <property name="text">
            <string>Strain statistics</string>
@@ -210,6 +203,43 @@
       </item>
      </layout>
     </item>
+    <item>
+     <widget class="QGroupBox" name="groupBoxBeats">
+      <property name="title">
+       <string>Beats</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QListView" name="listViewBeats">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QPushButton" name="btnAddBeat">
+           <property name="text">
+            <string>&amp;Add Current</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnRemoveBeat">
+           <property name="text">
+            <string>&amp;Remove selected</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -253,8 +283,18 @@
       <addaction name="actionNone"/>
       <addaction name="actionPCA"/>
      </widget>
+     <widget class="QMenu" name="menuWeights">
+      <property name="title">
+       <string>Weights</string>
+      </property>
+      <addaction name="actionWeights1"/>
+      <addaction name="actionWeights2"/>
+      <addaction name="actionWeights3"/>
+      <addaction name="actionWeights4"/>
+     </widget>
      <addaction name="menuPoint_Tracker"/>
      <addaction name="menuShape_Model"/>
+     <addaction name="menuWeights"/>
     </widget>
     <addaction name="menuChange_tracker"/>
     <addaction name="actionChangeImageProcessing"/>
@@ -323,6 +363,26 @@
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionWeights1">
+   <property name="text">
+    <string>1.0</string>
+   </property>
+  </action>
+  <action name="actionWeights2">
+   <property name="text">
+    <string>1.0 0.5</string>
+   </property>
+  </action>
+  <action name="actionWeights3">
+   <property name="text">
+    <string>1.0 0.5 0.25</string>
+   </property>
+  </action>
+  <action name="actionWeights4">
+   <property name="text">
+    <string>1.0 0.5 0.25 0.125</string>
    </property>
   </action>
  </widget>

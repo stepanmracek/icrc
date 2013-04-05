@@ -6,11 +6,13 @@
 
 class ModelListOfInts : public QAbstractListModel
 {
+    Q_OBJECT
+
 private:
     QVector<int> &list;
 
 public:
-    ModelListOfInts(QVector<int> &list) : list(list) { }
+    ModelListOfInts(QVector<int> &list, QObject *parent) : QAbstractListModel(parent), list(list) { }
 
     Qt::ItemFlags flags(const QModelIndex &index) const
     {

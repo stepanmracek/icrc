@@ -42,6 +42,13 @@ QString ShapeTracker::getInfo()
         }
     }
 
+    text += "Weights:\n    ";
+    foreach(const float &w, this->weights)
+    {
+        text += QString::number(w) + ", ";
+    }
+    text += "\n";
+
     return text;
 }
 
