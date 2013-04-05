@@ -1,5 +1,5 @@
 QT += core gui
-TARGET = specleTracking
+TARGET = speckleTracking
 TEMPLATE = app
 
 HEADERS += \
