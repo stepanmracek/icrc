@@ -1,0 +1,12 @@
+Processing "flowWeights1" 
+Cumulative Std. dev.: 7.32503 
+Processing "flow20_31_5_Weights1" 
+Cumulative Std. dev.: 11.2286 
+Processing "flow20_11_2_Weights1" 
+Cumulative Std. dev.: 6.79997 
+Processing "flowWeights2" 
+Cumulative Std. dev.: 6.3957 
+Processing "flow20_31_5_Weights2" 
+Cumulative Std. dev.: 6.83246 
+Processing "flow20_11_2_Weights2" 
+Cumulative Std. dev.: 6.58145 

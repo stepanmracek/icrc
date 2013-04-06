@@ -1,5 +1,7 @@
 #include "serialization.h"
 
+#include <QDebug>
+
 bool Serialization::serialize(MatF &m, const QString &path)
 {
     cv::FileStorage storage(path.toStdString(), cv::FileStorage::WRITE);
@@ -70,6 +72,7 @@ VectorOfShapes Serialization::readShapeList(const QString &path)
 {
     VectorOfShapes result;
     cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
+    assert(storage.isOpened());
     cv::FileNode node = storage["shapes"];
     for (cv::FileNodeIterator it = node.begin(); it != node.end(); ++it)
     {
@@ -86,6 +89,8 @@ QMap<int, Points> Serialization::readShapeMap(const QString &path)
 {
     QMap<int, Points> result;
     cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
+    qDebug() << "Reading shape map from" << path;
+    assert(storage.isOpened());
 
     QVector<int> keys;
     cv::FileNode keysNode = storage["keys"];

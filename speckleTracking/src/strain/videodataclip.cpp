@@ -19,6 +19,7 @@ VideoDataClip::VideoDataClip(const QString &path, const QString &metadataPath, Q
     metadata = new VideoDataClipMetadata(this);
 
     cv::VideoCapture capture = cv::VideoCapture(path.toStdString());
+    assert(capture.isOpened());
     cv::Mat rawFrame;
     while (capture.read(rawFrame))
     {
