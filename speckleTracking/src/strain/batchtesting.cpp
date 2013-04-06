@@ -1,5 +1,8 @@
 #include "batchtesting.h"
 
+#include <QDir>
+
+#include "pointtrackerneighbouropticalflow.h"
 #include "shapetracker.h"
 #include "longitudinalstrain.h"
 #include "shapenormalizer.h"
