@@ -99,11 +99,27 @@ ShapeTracker *getFlow20_11_2_Weights2()
     return new ShapeTracker(strain, processing, pointTracker, postProcessing, weights);
 }
 
+float diff(Points &first, Points &second)
+{
+    int n = first.size();
+    assert(second.size() == n);
+
+    float sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += Common::eucl(first[i], second[i]);
+    }
+    return sum/n;
+}
+
 void processOneTracker(ShapeTracker *tracker, QList<VideoDataClip *> &clips, QList<ShapeMap> &referenceShapeMaps, const QString &trackerName)
 {
     qDebug() << "Processing" << trackerName;
 
     float cumulativeStdDev = 0;
+    float cumulativePerSegmentStdDev = 0;
+    float cumulativeTargetDiff = 0;
+    int beatCounter = 0;
     foreach (VideoDataClip *clip, clips)
     {
         int clipIndex = clips.indexOf(clip);
@@ -112,11 +128,12 @@ void processOneTracker(ShapeTracker *tracker, QList<VideoDataClip *> &clips, QLi
         //qDebug() << "  clip" << clipIndex;
         foreach (int beatIndex, clip->getMetadata()->beatIndicies)
         {
-            //qDebug() << "    beat index" << beatIndex;
+            beatCounter++;
             int start,end;
             clip->getBeatRange(beatIndex, start, end);
-
             int frames = end - start - 1;
+
+            //qDebug() << "    beat index" << beatIndex << start << end << (start+frames);
 
             resultShapes[start] = referenceShapeMaps[clipIndex][beatIndex];
             for (int i = 0; i < frames; i++)
@@ -148,31 +165,48 @@ void processOneTracker(ShapeTracker *tracker, QList<VideoDataClip *> &clips, QLi
                 Points nextShape = tracker->track(prevFrames, prevShapes, nextFrame, clip->getMetadata()->getCoordSystem());
                 resultShapes[nextIndex] = nextShape;
             }
+
+            cumulativeTargetDiff += diff(resultShapes[start+frames], referenceShapeMaps[clipIndex][start+frames]);
         }
 
         // generate statistics
         QVector<StrainStatistics> statsForClip = StrainStatistics::getAllBeatsStats(clip, tracker->getStrain(), resultShapes);
         int n = statsForClip.count();
+        int segmentsCount = tracker->getStrain()->segmentsCount;
         VectorF resampledBeats[n];
-        for (int i = 0; i < n; i++)
+        VectorF resampledSegments[n][segmentsCount];
+        for (int beatIndex = 0; beatIndex < n; beatIndex++)
         {
-            const StrainStatistics &beat = statsForClip.at(i);
-            resampledBeats[i] = VecF::resample(beat.strain, 100);
+            const StrainStatistics &beat = statsForClip.at(beatIndex);
+            resampledBeats[beatIndex] = VecF::resample(beat.strain, 100);
+
+            for (int segmentIndex = 0; segmentIndex < segmentsCount; segmentIndex++)
+            {
+                resampledSegments[beatIndex][segmentIndex] = VecF::resample(beat.strainForSegments[segmentIndex], 100);
+            }
         }
 
-        for (int i = 0; i < 100; i++)
+        for (int sampleIndex = 0; sampleIndex < 100; sampleIndex++)
         {
             VectorF slice;
-            for (int j = 0; j < n; j++)
+            VectorF sliceSegments;
+            for (int beatIndex = 0; beatIndex < n; beatIndex++)
             {
-                slice.push_back(resampledBeats[j][i]);
+                slice.push_back(resampledBeats[beatIndex][sampleIndex]);
+
+                for (int segmentIndex = 0; segmentIndex < segmentsCount; segmentIndex++)
+                {
+                    sliceSegments.push_back(resampledSegments[beatIndex][segmentIndex][sampleIndex]);
+                }
             }
 
             cumulativeStdDev += VecF::stdDeviation(slice);
+            cumulativePerSegmentStdDev += VecF::stdDeviation(sliceSegments);
         }
     }
 
-    qDebug() << "Cumulative Std. dev.:" << cumulativeStdDev;
+    qDebug() << "  std. dev.:" << cumulativeStdDev << cumulativePerSegmentStdDev << (cumulativeStdDev+cumulativePerSegmentStdDev);
+    qDebug() << "  target diff" << cumulativeTargetDiff/beatCounter;
 }
 
 void BatchTesting::process()

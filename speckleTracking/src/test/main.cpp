@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
     //Test::testImageProcessing();
     //Test::testOpticalFlowIntensityMap();
     //Test::testQtAnotation(argc, argv);
-    //Test::testQtManager(argc, argv);
-    BatchTesting::process();
+    Test::testQtManager(argc, argv);
+    //BatchTesting::process();
     //Test::testLongitudinalStrain();
     //Test::testQtAnotationAndDisplay(argc, argv);
     //Test::testBeatToBeatVariance();
