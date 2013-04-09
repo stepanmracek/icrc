@@ -1,15 +1,20 @@
 #include "strainresultprocessing.h"
 
-VectorOfShapes StrainResProcFloatingAvg::process(VectorOfShapes &strainResult, VideoDataBase &)
+StrainResProcFloatingAvg::StrainResProcFloatingAvg(int kernelSize, QObject *parent)  : StrainResultProcessingBase(parent), kernelSize(kernelSize)
 {
-    int n = strainResult.size();
-    assert(n > 0);
-    int pointCount = strainResult[0].size();
+    assert(kernelSize >= 1);
+    assert(kernelSize % 2 == 1);
+}
 
-    VectorOfShapes processingResult;
+ShapeMap StrainResProcFloatingAvg::process(ShapeMap &strainResult, int startIndex, int endIndex, VideoDataClip *)
+{
+    int pointCount = strainResult.begin().value().size();
+    int windowSize = kernelSize/2;
+
+    ShapeMap processingResult(strainResult);
 
     // i - index of shape that we are processing
-    for (int i = 0; i < n; i++)
+    for (int i = startIndex; i < endIndex; i++)
     {
         Points processedShape;
 
@@ -19,7 +24,7 @@ VectorOfShapes StrainResProcFloatingAvg::process(VectorOfShapes &strainResult, V
         int currentWindowSize = 0;
         for (int j = i - windowSize; j <= i + windowSize; j++)
         {
-            if (j < 0 || j >= n) continue;
+            if (j < startIndex || j >= endIndex) continue;
 
             currentWindowSize ++;
             // k - index of point within current j-th shape
@@ -36,7 +41,7 @@ VectorOfShapes StrainResProcFloatingAvg::process(VectorOfShapes &strainResult, V
             processedShape.push_back(p);
         }
 
-        processingResult.push_back(processedShape);
+        processingResult[i] = processedShape;
     }
 
     return processingResult;

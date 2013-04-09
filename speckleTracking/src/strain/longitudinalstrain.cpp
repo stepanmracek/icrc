@@ -157,10 +157,45 @@ P LongitudinalStrain::getBasePoint(Points &realPoints)
     return P((first.x+last.x)/2, (first.y+last.y)/2);
 }
 
+float len(const P& p)
+{
+    return sqrt(p.x*p.x + p.y*p.y);
+}
+
 P LongitudinalStrain::getApexPoint(Points &realPoints)
 {
-    int n = realPoints.size();
-    return realPoints[n/2];
+    //int n = realPoints.size();
+    //return realPoints[n/2];
+
+    int count = realPoints.size();
+    assert(count > 1);
+    P a = realPoints[1];
+    P b = realPoints[count-2];
+    P n = (b-a);
+    float ln = len(n);
+    n.x = n.x / ln;
+    n.y = n.y / ln;
+    float maxLen = 0;
+    int maxIndex = -1;
+    for (int i = 1; i < count; i += 3)
+    {
+        const P &p = realPoints[i];
+        float d = len ((a-p) - ((a-p).dot(n)*n));
+        if (d > maxLen)
+        {
+            maxLen = d;
+            maxIndex = i;
+        }
+    }
+
+    if (maxIndex != -1)
+    {
+        return realPoints[maxIndex];
+    }
+    else
+    {
+        return realPoints[1];
+    }
 }
 
 QString LongitudinalStrain::getInfo()

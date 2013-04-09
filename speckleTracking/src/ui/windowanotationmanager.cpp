@@ -54,10 +54,23 @@ void WindowAnotationManager::updateTrackerInfo()
     ui->textEditTrackerInfo->setText(text);
 }
 
+void WindowAnotationManager::saveMetadataAndShapes()
+{
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
+
+    if (QMessageBox::question(this, "Question", "Save metadata?", QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        ui->widgetStrainVideo->serializeMetadata(path);
+
+    if (ui->widgetStrainVideo->shapes.size() == 0) return;
+    if (QMessageBox::question(this, "Question", "Save shapes?", QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+        ui->widgetStrainVideo->serializeShapes(path);
+
+}
+
 void WindowAnotationManager::closeEvent(QCloseEvent *event)
 {
-    ui->widgetStrainVideo->serializeShapes(path);
-    ui->widgetStrainVideo->serializeMetadata(path);
+    saveMetadataAndShapes();
 }
 
 void WindowAnotationManager::on_btnBrowse_clicked()
@@ -65,8 +78,7 @@ void WindowAnotationManager::on_btnBrowse_clicked()
     QString selected = QFileDialog::getExistingDirectory(this, QString(), path);
     if (selected.isNull() || selected.isEmpty()) return;
 
-    ui->widgetStrainVideo->serializeShapes(path);
-    ui->widgetStrainVideo->serializeMetadata(path);
+    saveMetadataAndShapes();
     setDirectory(selected);
 }
 
@@ -112,8 +124,7 @@ void WindowAnotationManager::loadFile(QString fileName)
     if (!f.exists()) return;
 
     qDebug() << "Loading" << fileName;
-    ui->widgetStrainVideo->serializeShapes(path);
-    ui->widgetStrainVideo->serializeMetadata(path);
+    saveMetadataAndShapes();
     ui->widgetStrainVideo->load(path, fileName);
     ui->listViewBeats->setModel(new ModelListOfInts(ui->widgetStrainVideo->getClip()->getMetadata()->beatIndicies, this));
 }
@@ -170,12 +181,23 @@ void WindowAnotationManager::on_btnTrack_clicked()
     }
 
 
-    int limit = clip->size() - 1;
     int frames = beatEnd - beatStart - 1;
     QProgressDialog progress("Processing...", "Cancel", 0, frames);
     progress.setModal(Qt::WindowModal);
 
-    for (int i = 0; i < frames; i++)
+    ShapeMap newShapes = tracker->track(ui->widgetStrainVideo->getClip(),
+                                        beatStart, beatEnd,
+                                        ui->widgetStrainVideo->shapes[beatStart],
+                                        &progress);
+
+    QMapIterator<int, Points> iter(newShapes);
+    while (iter.hasNext())
+    {
+        iter.next();
+        ui->widgetStrainVideo->shapes[iter.key()] = iter.value();
+    }
+
+    /*for (int i = 0; i < frames; i++)
     {
         progress.setValue(i);
         //qDebug() << "Tracking" << i << "/" << frames;
@@ -220,7 +242,7 @@ void WindowAnotationManager::on_btnTrack_clicked()
         ui->widgetStrainVideo->shapes[nextIndex] = nextShape;
     }
 
-    progress.setValue(frames);
+    progress.setValue(frames);*/
 }
 
 void WindowAnotationManager::on_btnCoordSystem_clicked()

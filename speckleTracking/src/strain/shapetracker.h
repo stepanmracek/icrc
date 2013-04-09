@@ -1,6 +1,7 @@
 #ifndef POINTTRACKER_H
 #define POINTTRACKER_H
 
+#include <QProgressDialog>
 #include <opencv2/opencv.hpp>
 #include <vector>
 #include <list>
@@ -10,7 +11,7 @@
 #include "pointtrackerbase.h"
 #include "pointtrackeropticalflow.h"
 #include "shapenormalizer.h"
-#include "videodatabase.h"
+#include "videodataclip.h"
 #include "imagefilter.h"
 #include "strainresultprocessing.h"
 #include "strain.h"
@@ -77,6 +78,8 @@ public:
 
 
     Points track(VectorOfImages &prevFrames, VectorOfShapes &prevShapes, Mat8 &nextFrame, CoordSystemBase *coordSystem);
+
+    ShapeMap track(VideoDataClip *clip, int startIndex, int endIndex, Points &initialShape, QProgressDialog *progress = 0);
 
     //static Points track(Mat8 &prevFrame, Points &prevPoints, Mat8 &nextFrame, Strain &strain, CoordSystemBase *coordSystem, ListOfImageProcessing &frameProcessing, PointTrackerBase &pointTracker);
 

@@ -26,7 +26,7 @@ public:
 
     QString getInfo()
     {
-        return QString("Distance point tracker based on: ") + metrics->metaObject()->className() + QString("\n    Window size: %1").arg(windowSize);
+        return QString("Distance point tracker based on: ") + metrics->metaObject()->className() + QString("\n    Window size: %1\n").arg(windowSize);
     }
 };
 

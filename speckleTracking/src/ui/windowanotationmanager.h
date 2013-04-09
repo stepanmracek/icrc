@@ -83,6 +83,8 @@ private:
 
     void updateTrackerInfo();
 
+    void saveMetadataAndShapes();
+
     Ui::WindowAnotationManager *ui;
     ShapeTracker *tracker;
     QString path;

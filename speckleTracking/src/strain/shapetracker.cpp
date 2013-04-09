@@ -28,7 +28,7 @@ void ShapeTracker::applyProcessing(Mat8 &frame)
 
 QString ShapeTracker::getInfo()
 {
-    QString text = strain->getInfo() + pointTracker->getInfo() + "Image processing:\n";
+    QString text = strain->getInfo() + pointTracker->getInfo() + resultProcessing->getInfo() + "Image processing:\n";
 
     if (frameProcessing.count() == 0)
     {
@@ -86,10 +86,55 @@ Points ShapeTracker::track(VectorOfImages &prevFrames, VectorOfShapes &prevShape
     return normalizedPoints;
 }
 
-//Points ShapeTracker::track(Mat8 &prevFrame, Points &prevPoints, Mat8 &nextFrame, Strain &strain, CoordSystemBase *coordSystem, ListOfImageProcessing &frameProcessing, PointTrackerBase &pointTracker)
-//{
-//
-//}
+ShapeMap ShapeTracker::track(VideoDataClip *clip, int startIndex, int endIndex, Points &initialShape, QProgressDialog *progress)
+{
+    ShapeMap resultShapes;
+    resultShapes[startIndex] = initialShape;
+
+    int frames = endIndex - startIndex - 1;
+    for (int i = 0; i < frames; i++)
+    {
+        if (progress != 0)
+        {
+            if (progress->wasCanceled())
+            {
+                break;
+            }
+
+            progress->setValue(i);
+        }
+
+        // prepare previous shapes and previous frames
+        VectorOfShapes prevShapes;
+        VectorOfImages prevFrames;
+
+        for (unsigned int j = 0; j < weights.size(); j++)
+        {
+            int prevIndex = startIndex + i-j;
+
+            if (prevIndex < startIndex)
+            {
+                break;
+            }
+
+            prevShapes.push_back(resultShapes[prevIndex]);
+            prevFrames.push_back(clip->frames[prevIndex]);
+        }
+
+        int nextIndex = startIndex + i + 1;
+        Mat8 nextFrame = clip->frames[nextIndex];
+
+        std::reverse(prevShapes.begin(), prevShapes.end());
+        std::reverse(prevFrames.begin(), prevFrames.end());
+
+        // track
+        Points nextShape = track(prevFrames, prevShapes, nextFrame, clip->getMetadata()->getCoordSystem());
+        resultShapes[nextIndex] = nextShape;
+    }
+
+    progress->setValue(frames);
+    return resultProcessing->process(resultShapes, startIndex, endIndex, clip);
+}
 
 /*VectorOfShapes ShapeTracker::track(VideoDataBase &data, Strain &strain, ListOfProcessing &frameProcessing,
                                    PointTrackerBase &pointTracker, StrainResultProcessingBase &resultProcessing,

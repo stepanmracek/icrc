@@ -50,7 +50,7 @@ bool PointTrackerDistance::track(Mat8 &prevFrame, Mat8 &nextFrame, Points &prevP
         }
         else
         {
-            std::cout << i << " something is wrong" << std::endl;
+            //std::cout << i << " something is wrong" << std::endl;
             nextPoints[i] = prevPoints[i];
         }
     }
