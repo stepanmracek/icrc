@@ -1,0 +1,2278 @@
+Reading shape map from "/media/data/ownCloud/icrc/test/test.wmv_shapemap" 
+Reading shape map from "/media/data/ownCloud/icrc/test/z9BUATT02.wmv_shapemap" 
+Reading shape map from "/media/data/ownCloud/icrc/test/zA1BB7B02.wmv_shapemap" 
+Reading shape map from "/media/data/ownCloud/icrc/test2/C51BMQ80.avi_shapemap" 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 13.8528 22.3268 36.1796 
+  target diff 20.7301 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 10.6805 16.3522 27.0328 
+  target diff 16.3789 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 8.62112 13.6248 22.246 
+  target diff 13.4138 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 13.8528 22.3268 36.1796 
+  target diff 20.7301 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 10.6805 16.3522 27.0328 
+  target diff 16.3789 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 8.62112 13.6248 22.246 
+  target diff 13.4138 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 13.8528 22.3268 36.1796 
+  target diff 20.7301 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 10.6805 16.3522 27.0328 
+  target diff 16.3789 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 8.62112 13.6248 22.246 
+  target diff 13.4138 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.4038 14.3344 20.7382 
+  target diff 12.731 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 4.50504 12.8408 17.3458 
+  target diff 12.3148 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 5.46349 10.9894 16.4528 
+  target diff 11.5396 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.4038 14.3344 20.7382 
+  target diff 12.731 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 4.50504 12.8408 17.3458 
+  target diff 12.3148 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 5.46349 10.9894 16.4528 
+  target diff 11.5396 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.4038 14.3344 20.7382 
+  target diff 12.731 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 4.50504 12.8408 17.3458 
+  target diff 12.3148 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 5.46349 10.9894 16.4528 
+  target diff 11.5396 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.42785 14.8327 21.2605 
+  target diff 11.5501 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.17116 12.5893 18.7604 
+  target diff 11.5933 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 5.53684 11.073 16.6098 
+  target diff 10.9131 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.42785 14.8327 21.2605 
+  target diff 11.5501 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.17116 12.5893 18.7604 
+  target diff 11.5933 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 5.53684 11.073 16.6098 
+  target diff 10.9131 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.42785 14.8327 21.2605 
+  target diff 11.5501 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.17116 12.5893 18.7604 
+  target diff 11.5933 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 5.53684 11.073 16.6098 
+  target diff 10.9131 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 14.0636 22.5142 36.5778 
+  target diff 21.1467 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 10.1687 16.3708 26.5395 
+  target diff 16.4738 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 8.68923 13.1117 21.8009 
+  target diff 13.5561 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 14.0636 22.5142 36.5778 
+  target diff 21.1467 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 10.1687 16.3708 26.5395 
+  target diff 16.4738 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 8.68923 13.1117 21.8009 
+  target diff 13.5561 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 14.0636 22.5142 36.5778 
+  target diff 21.1467 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 10.1687 16.3708 26.5395 
+  target diff 16.4738 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 8.68923 13.1117 21.8009 
+  target diff 13.5561 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 20.4016 23.5906 43.9922 
+  target diff 26.3182 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 19.5661 22.4789 42.0451 
+  target diff 20.1158 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 14.0968 19.0354 33.1321 
+  target diff 16.9735 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 20.4016 23.5906 43.9922 
+  target diff 26.3182 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 19.5661 22.4789 42.0451 
+  target diff 20.1158 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 14.0968 19.0354 33.1321 
+  target diff 16.9735 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 20.4016 23.5906 43.9922 
+  target diff 26.3182 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 19.5661 22.4789 42.0451 
+  target diff 20.1158 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 14.0968 19.0354 33.1321 
+  target diff 16.9735 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.88575 16.8895 23.7753 
+  target diff 13.9288 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.25804 15.7219 21.9799 
+  target diff 12.9228 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.5082 14.8162 21.3244 
+  target diff 12.3909 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.88575 16.8895 23.7753 
+  target diff 13.9288 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.25804 15.7219 21.9799 
+  target diff 12.9228 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.5082 14.8162 21.3244 
+  target diff 12.3909 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.88575 16.8895 23.7753 
+  target diff 13.9288 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.25804 15.7219 21.9799 
+  target diff 12.9228 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.5082 14.8162 21.3244 
+  target diff 12.3909 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 7.06964 17.2208 24.2904 
+  target diff 13.4634 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 7.21099 16.9121 24.123 
+  target diff 12.2408 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 7.31541 16.2562 23.5716 
+  target diff 11.7042 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 7.06964 17.2208 24.2904 
+  target diff 13.4634 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 7.21099 16.9121 24.123 
+  target diff 12.2408 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 7.31541 16.2562 23.5716 
+  target diff 11.7042 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 7.06964 17.2208 24.2904 
+  target diff 13.4634 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 7.21099 16.9121 24.123 
+  target diff 12.2408 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 7.31541 16.2562 23.5716 
+  target diff 11.7042 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 20.3666 23.4496 43.8161 
+  target diff 27.3184 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 19.3409 22.5152 41.8561 
+  target diff 20.7681 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 13.5055 18.8014 32.307 
+  target diff 17.6007 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 20.3666 23.4496 43.8161 
+  target diff 27.3184 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 19.3409 22.5152 41.8561 
+  target diff 20.7681 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 13.5055 18.8014 32.307 
+  target diff 17.6007 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 20.3666 23.4496 43.8161 
+  target diff 27.3184 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 19.3409 22.5152 41.8561 
+  target diff 20.7681 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 13.5055 18.8014 32.307 
+  target diff 17.6007 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 7.32503 16.7898 24.1148 
+  target diff 11.5946 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.3957 16.9769 23.3726 
+  target diff 11.8298 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.05559 16.9485 23.0041 
+  target diff 11.5906 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 7.32503 16.7898 24.1148 
+  target diff 11.5946 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.3957 16.9769 23.3726 
+  target diff 11.8298 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.05559 16.9485 23.0041 
+  target diff 11.5906 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 7.32503 16.7898 24.1148 
+  target diff 11.5946 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.3957 16.9769 23.3726 
+  target diff 11.8298 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.05559 16.9485 23.0041 
+  target diff 11.5906 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 31
+    Step within window: 5
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 7.77942 18.2183 25.9977 
+  target diff 10.4073 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 31
+    Step within window: 5
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 7.37882 18.4452 25.824 
+  target diff 10.8018 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 31
+    Step within window: 5
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.85387 18.7911 25.645 
+  target diff 10.9203 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 31
+    Step within window: 5
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 7.77944 18.2183 25.9977 
+  target diff 10.4073 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 31
+    Step within window: 5
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 7.26522 18.421 25.6862 
+  target diff 10.8095 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 31
+    Step within window: 5
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.84916 18.5548 25.4039 
+  target diff 10.9234 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 31
+    Step within window: 5
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 7.77942 18.2183 25.9977 
+  target diff 10.4073 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 31
+    Step within window: 5
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 7.24729 18.4074 25.6547 
+  target diff 10.8012 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 31
+    Step within window: 5
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.84655 18.5575 25.404 
+  target diff 10.9221 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 11
+    Step within window: 2
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.97853 18.1217 25.1002 
+  target diff 10.6277 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 11
+    Step within window: 2
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.86053 18.059 24.9195 
+  target diff 11.1204 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 11
+    Step within window: 2
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.6043 18.0081 24.6124 
+  target diff 11.0408 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 11
+    Step within window: 2
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.97853 18.1217 25.1002 
+  target diff 10.6277 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 11
+    Step within window: 2
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.70187 17.9997 24.7015 
+  target diff 11.135 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 11
+    Step within window: 2
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.66595 17.9711 24.6371 
+  target diff 11.0575 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 11
+    Step within window: 2
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 6.97853 18.1217 25.1002 
+  target diff 10.6277 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 11
+    Step within window: 2
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 6.66106 17.9983 24.6594 
+  target diff 11.1288 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 11
+    Step within window: 2
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 6.60873 18.0285 24.6373 
+  target diff 11.0413 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 18.0815 59.4685 77.55 
+  target diff 25.5797 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 21.6071 42.939 64.5461 
+  target diff 19.6282 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 18.792 40.5194 59.3114 
+  target diff 16.9211 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 18.0815 59.4685 77.55 
+  target diff 25.5797 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 21.6071 42.939 64.5461 
+  target diff 19.6282 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 18.792 40.5194 59.3114 
+  target diff 16.9211 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 18.0815 59.4685 77.55 
+  target diff 25.5797 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 21.6071 42.939 64.5461 
+  target diff 19.6282 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 18.792 40.5194 59.3114 
+  target diff 16.9211 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 19.6333 54.9741 74.6073 
+  target diff 20.7327 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 8.25508 39.0425 47.2976 
+  target diff 16.8469 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 9.25267 32.4199 41.6726 
+  target diff 15.1348 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 19.6333 54.9741 74.6073 
+  target diff 20.7327 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 8.25508 39.0425 47.2976 
+  target diff 16.8469 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 9.25267 32.4199 41.6726 
+  target diff 15.1348 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 19.6333 54.9741 74.6073 
+  target diff 20.7327 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 8.25508 39.0425 47.2976 
+  target diff 16.8469 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 9.25267 32.4199 41.6726 
+  target diff 15.1348 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 10.4803 51.858 62.3384 
+  target diff 20.0271 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 7.87887 36.6975 44.5764 
+  target diff 16.2991 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 7.17693 30.7837 37.9606 
+  target diff 14.2523 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 10.4803 51.858 62.3384 
+  target diff 20.0271 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 7.87887 36.6975 44.5764 
+  target diff 16.2991 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 7.17693 30.7837 37.9606 
+  target diff 14.2523 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 10.4803 51.858 62.3384 
+  target diff 20.0271 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 7.87887 36.6975 44.5764 
+  target diff 16.2991 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 7.17693 30.7837 37.9606 
+  target diff 14.2523 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 15.9395 61.7527 77.6922 
+  target diff 26.3633 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 20.9428 45.7808 66.7236 
+  target diff 19.7855 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 18.8584 37.8806 56.739 
+  target diff 17.2793 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 15.9395 61.7527 77.6922 
+  target diff 26.3633 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 20.9428 45.7808 66.7236 
+  target diff 19.7855 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 18.8584 37.8806 56.739 
+  target diff 17.2793 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 15.9395 61.7527 77.6922 
+  target diff 26.3633 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 20.9428 45.7808 66.7236 
+  target diff 19.7855 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 11
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 18.8584 37.8806 56.739 
+  target diff 17.2793 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 15.1017 62.3841 77.4858 
+  target diff 30.8918 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 11.6412 55.3185 66.9597 
+  target diff 25.9508 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 11.3192 49.9346 61.2537 
+  target diff 22.8204 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 15.1017 62.3841 77.4858 
+  target diff 30.8918 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 11.6412 55.3185 66.9597 
+  target diff 25.9508 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 11.3192 49.9346 61.2537 
+  target diff 22.8204 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 15.1017 62.3841 77.4858 
+  target diff 30.8918 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 11.6412 55.3185 66.9597 
+  target diff 25.9508 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: SumOfSquareDifferences
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 11.3192 49.9346 61.2537 
+  target diff 22.8204 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 14.2215 60.6292 74.8507 
+  target diff 22.6951 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 11.9366 56.9122 68.8488 
+  target diff 20.241 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 9.16214 51.7416 60.9037 
+  target diff 18.2963 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 14.2215 60.6292 74.8507 
+  target diff 22.6951 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 11.9366 56.9122 68.8488 
+  target diff 20.241 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 9.16214 51.7416 60.9037 
+  target diff 18.2963 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 14.2215 60.6292 74.8507 
+  target diff 22.6951 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 11.9366 56.9122 68.8488 
+  target diff 20.241 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CorrelationMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 9.16214 51.7416 60.9037 
+  target diff 18.2963 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 15.5844 72.3329 87.9174 
+  target diff 22.8875 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 12.8962 58.2267 71.1229 
+  target diff 19.9556 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 11.9463 51.7441 63.6904 
+  target diff 18.0083 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 15.5844 72.3329 87.9174 
+  target diff 22.8875 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 12.8962 58.2267 71.1229 
+  target diff 19.9556 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 11.9463 51.7441 63.6904 
+  target diff 18.0083 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 15.5844 72.3329 87.9174 
+  target diff 22.8875 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
+  std. dev.: 12.8962 58.2267 71.1229 
+  target diff 19.9556 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 0.25, 
+" 
+  std. dev.: 11.9463 51.7441 63.6904 
+  target diff 18.0083 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+" 
+  std. dev.: 14.7182 62.7823 77.5005 
+  target diff 30.9384 
+Processing "Longitudinal strain
+    segments: 6, points per segment: 5
+No shape normalizer
+Distance point tracker based on: CityblockMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 0.5, 
+" 
