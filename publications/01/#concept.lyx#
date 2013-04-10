@@ -866,11 +866,11 @@ The optional processing of the tracing result is application of the simple
 \end_inset
 
  of this filter is the floating window size that determines to witch extent
- the data are smoothed.\SpecialChar \ldots{}
-
+ the data are smoothed.
+ The 
 \begin_inset Formula 
 \begin{equation}
-P_{i}\leftarrow\sum_{j=i-N}^{j=i+N}
+P_{i}\leftarrow\frac{\sum_{j=i-N}^{i+N}P_{J}}{2N+1}
 \end{equation}
 
 \end_inset
