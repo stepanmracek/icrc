@@ -70,6 +70,13 @@ public:
         pointTracker->setParent(this);
     }
 
+    void setResultProcessing(StrainResultProcessingBase *resultProcessing)
+    {
+        delete this->resultProcessing;
+        this->resultProcessing = resultProcessing;
+        resultProcessing->setParent(this);
+    }
+
     QString getInfo();
 
     void clearFrameProcessing();
