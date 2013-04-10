@@ -23,8 +23,8 @@ for line in f:
 		state = NAME
 	elif state == NAME:
 		print("state NAME")
-		print(line)
 		if line.strip() == '"':
+			print("END NAME")
 			state == STDDEV
 		else:
 			name = name + line
