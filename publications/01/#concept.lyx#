@@ -861,7 +861,8 @@ Result post-processing
 \begin_layout Standard
 The optional processing of the tracing result is application of the simple
  moving average filter.
- The main parameter of this filter is the floating window size that 
+ The main parameter of this filter is the floating window size that determines
+ to witch extent the data are smoothed.
 \end_layout
 
 \begin_layout Standard
