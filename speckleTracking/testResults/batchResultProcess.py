@@ -34,3 +34,4 @@ for line in f:
 	elif state == DIFF:
 		items = line.split()
 		diff = float(items[1])
+		state = BEGIN
