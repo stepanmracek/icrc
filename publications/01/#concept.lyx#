@@ -905,11 +905,13 @@ Evaluation
 \end_layout
 
 \begin_layout Standard
-The main strain 
+The longitudinal strain represents myocardical deformation directed from
+ the base to the apex.
+ The strain equation 
 \begin_inset Formula $\epsilon$
 \end_inset
 
- of LV is defined as:
+ is defined as:
 \end_layout
 
 \begin_layout Standard
@@ -928,7 +930,11 @@ where
 \begin_inset Formula $L$
 \end_inset
 
- is thw 
+ is the length of the LV after deformation and 
+\begin_inset Formula $L_{0}$
+\end_inset
+
+ is 
 \end_layout
 
 \begin_layout Subsection
