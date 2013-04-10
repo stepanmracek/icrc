@@ -36,4 +36,4 @@ for line in f:
 		diff = float(items[1])
 		state = BEGIN
 
-		print(NAME)
+		print(name)
