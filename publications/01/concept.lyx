@@ -641,10 +641,10 @@ The point tracking block has three inputs - the previous frame, the annotated
  algorithm should find the desired points.
  The next frame is also processed with image transformation and filters.
  Additionally to the PyrLK point tracker, we have implemented speckle tracking
- based on the minimizing the Euclidean distance, correlation metric, or
- sum of absolute differences between the neighbor of tracked point in previous
- frame and potential position of the point in the next frame (see Figure
- 
+ based on the minimizing the Euclidean distance, correlation metric, cosine
+ metric, or sum of absolute differences between the neighbor of tracked
+ point in previous frame and potential position of the point in the next
+ frame (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Point-tracking"
@@ -887,7 +887,7 @@ th shape
 : 
 \begin_inset Formula 
 \begin{equation}
-p_{i}\leftarrow\frac{\sum_{j=i-n}^{i+n}p_{J}}{2n+1}
+p_{i}\leftarrow\frac{\sum_{j=i-n}^{i+n}p_{j}}{2n+1}
 \end{equation}
 
 \end_inset
@@ -904,6 +904,41 @@ We have used this filter with the size parameter set to 0 (no filter), 1,
 Evaluation
 \end_layout
 
+\begin_layout Standard
+The longitudinal strain represents myocardical deformation directed from
+ the base to the apex.
+ The strain equation 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is defined as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\epsilon=\frac{L-L_{0}}{L_{0}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $L$
+\end_inset
+
+ is the length of the LV after deformation and 
+\begin_inset Formula $L_{0}$
+\end_inset
+
+ is the initial length of the LV.
+ Our LV model has been divided into six sectors.
+ We have also evaluated the individual strains within each sector.
+\end_layout
+
 \begin_layout Subsection
 Database description
 \end_layout
@@ -914,7 +949,103 @@ Performance metrics
 
 \begin_layout Standard
 There are several requirements of good tracker.
- Since the The 
+ Since the the LV movement is periodical, strain progress within each beat
+ should be more or less the same -- the beat-to-beat variance should be
+ as low as possible.
+ For one person, all strain progresses for all beats were aligned together
+ and sampled to 100 values (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beat-to-beat-variance"
+
+\end_inset
+
+).
+ Beat-to-beat variance is thus the sum of standard deviations for each sample.
+ We have measured the beat-to-beat variance for main LV deformations as
+ well as for individual segments.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/beat2beatMainStrain.pdf
+	width 5cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/beat2beatSegmentStrain.pdf
+	width 5cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Beat-to-beat variance for main LV strain and for selected segment
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beat-to-beat-variance"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The another important metrics of the tracker is precision and stability.
+ The error during the tracking is cumulative.
+ Together with the initial annotation, we have also annotated the last frame
+ of every beat.
+ The Precision of the tracker is the sum of distances between points in
+ annotated reference in last frame and points from the shape gained by tracing
+ from the first frame.
+\end_layout
+
+\begin_layout Itemize
+Main strain beat-to-beat variance
+\end_layout
+
+\begin_layout Itemize
+Segment strain beat-to-beat variance
+\end_layout
+
+\begin_layout Itemize
+Main strain 
+\begin_inset Formula $+$
+\end_inset
+
+ segment strain beat-to-beat variance
+\end_layout
+
+\begin_layout Itemize
+Precision
+\end_layout
+
+\begin_layout Itemize
+Sum of all previous quality metrics
 \end_layout
 
 \begin_layout Subsection
