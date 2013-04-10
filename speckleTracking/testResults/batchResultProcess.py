@@ -35,3 +35,5 @@ for line in f:
 		items = line.split()
 		diff = float(items[1])
 		state = BEGIN
+
+		print(NAME)
