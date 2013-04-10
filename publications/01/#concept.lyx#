@@ -962,6 +962,8 @@ reference "fig:Beat-to-beat-variance"
 
 ).
  Beat-to-beat variance is thus the sum of standard deviations for each sample.
+ We have measured the beat-to-beat variance for main LV deformations as
+ well as for individual segments.
 \end_layout
 
 \begin_layout Standard
@@ -1007,13 +1009,14 @@ name "fig:Beat-to-beat-variance"
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The another important metrics of the tracker is precision and stability.
+ The error during the tracking is cumulative
 \end_layout
 
 \begin_layout Subsection
