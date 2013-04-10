@@ -24,8 +24,7 @@ for line in f:
 	elif state == NAME:
 		print("state NAME")
 		if line.strip() == '"':
-			print("END NAME")
-			state == STDDEV
+			state = STDDEV
 		else:
 			name = name + line
 	elif state == STDDEV:
