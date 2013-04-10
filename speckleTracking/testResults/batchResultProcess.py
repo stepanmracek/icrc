@@ -43,6 +43,8 @@ for line in f:
 		diff = float(items[1])
 		state = BEGIN
 
+		totalSum = strainSum + diff
+
 		if (meanStrain < minMeanStrain):
 			minMeanStrainName = name
 			minMeanStrain = meanStrain
@@ -79,6 +81,6 @@ print("minDiff: %f" % minDiff)
 print(minDiffName)
 print()
 
-print("minTotalSum: %f\n" % minTotalSum)
+print("minTotalSum: %f" % minTotalSum)
 print(minTotalSumName)
 print()
