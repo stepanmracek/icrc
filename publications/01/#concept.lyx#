@@ -896,12 +896,16 @@ p_{i}\leftarrow\frac{\sum_{j=i-n}^{i+n}p_{J}}{2n+1}
 \end_layout
 
 \begin_layout Standard
-We have used this filter with the size parameter set to 1 (no filter), 3,
- 5, and 7.
+We have used this filter with the size parameter set to 0 (no filter), 1,
+ 2, and 3.
 \end_layout
 
 \begin_layout Section
 Evaluation
+\end_layout
+
+\begin_layout Standard
+There are several 
 \end_layout
 
 \begin_layout Subsection
