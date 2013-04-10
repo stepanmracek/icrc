@@ -1016,7 +1016,10 @@ name "fig:Beat-to-beat-variance"
 
 \begin_layout Standard
 The another important metrics of the tracker is precision and stability.
- The error during the tracking is cumulative
+ The error during the tracking is cumulative.
+ Together with the initial anotation, we have also anotated the last frame
+ of every beat.
+ The measurement of the precision 
 \end_layout
 
 \begin_layout Subsection
