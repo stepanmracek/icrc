@@ -862,15 +862,32 @@ Result post-processing
 The optional processing of the tracing result is application of the simple
  moving average filter.
  The main parameter 
-\begin_inset Formula $N$
+\begin_inset Formula $n$
 \end_inset
 
  of this filter is the floating window size that determines to witch extent
  the data are smoothed.
- The 
+ The arbitrary point 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ within shape 
+\begin_inset Formula $i$
+\end_inset
+
+th shape 
+\begin_inset Formula $\mathbf{s}_{i}$
+\end_inset
+
+ is smoothed using average of the same points from different time indicies
+ 
+\begin_inset Formula $j\in\left\langle i-n,i+n\right\rangle $
+\end_inset
+
+: 
 \begin_inset Formula 
 \begin{equation}
-P_{i}\leftarrow\frac{\sum_{j=i-N}^{i+N}P_{J}}{2N+1}
+p_{i}\leftarrow\frac{\sum_{j=i-n}^{i+n}p_{J}}{2n+1}
 \end{equation}
 
 \end_inset
