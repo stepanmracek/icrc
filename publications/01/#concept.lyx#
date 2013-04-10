@@ -934,7 +934,7 @@ where
 \begin_inset Formula $L_{0}$
 \end_inset
 
- is the initial lenght of the LV.
+ is the initial length of the LV.
  Our LV model has been divided into six sectors.
  We have also evaluated the individual strains within each sector.
 \end_layout
@@ -1017,11 +1017,31 @@ name "fig:Beat-to-beat-variance"
 \begin_layout Standard
 The another important metrics of the tracker is precision and stability.
  The error during the tracking is cumulative.
- Together with the initial anotation, we have also anotated the last frame
+ Together with the initial annotation, we have also annotated the last frame
  of every beat.
  The Precision of the tracker is the sum of distances between points in
- anotated reference in last frame and points from the shape gained by tracing
+ annotated reference in last frame and points from the shape gained by tracing
  from the first frame.
+\end_layout
+
+\begin_layout Itemize
+Main strain beat-to-beat variance
+\end_layout
+
+\begin_layout Itemize
+Segment strain beat-to-beat variance
+\end_layout
+
+\begin_layout Itemize
+Main strain 
+\begin_inset Formula $+$
+\end_inset
+
+ segment strain beat-to-beat variance
+\end_layout
+
+\begin_layout Itemize
+Precision
 \end_layout
 
 \begin_layout Subsection
