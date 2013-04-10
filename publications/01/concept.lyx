@@ -1024,6 +1024,10 @@ The another important metrics of the tracker is precision and stability.
  from the first frame.
 \end_layout
 
+\begin_layout Standard
+All algorithms were compared according to the following performance metrics:
+\end_layout
+
 \begin_layout Itemize
 Main strain beat-to-beat variance
 \end_layout
@@ -1046,6 +1050,10 @@ Precision
 
 \begin_layout Itemize
 Sum of all previous quality metrics
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Subsection
