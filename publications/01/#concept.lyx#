@@ -887,7 +887,7 @@ th shape
 : 
 \begin_inset Formula 
 \begin{equation}
-p_{i}\leftarrow\frac{\sum_{j=i-n}^{i+n}p_{J}}{2n+1}
+p_{i}\leftarrow\frac{\sum_{j=i-n}^{i+n}p_{j}}{2n+1}
 \end{equation}
 
 \end_inset
