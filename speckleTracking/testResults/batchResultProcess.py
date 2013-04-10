@@ -19,7 +19,6 @@ for line in f:
 	if state == BEGIN:
 		index = line.find('"')
 		name = line[index+1:]
-		print(name)
 		state = NAME
 	elif state == NAME:
 		if line == '"\n':
