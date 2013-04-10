@@ -63,5 +63,5 @@ for line in f:
 			minTotalSum = totalSum
 			minTotalSumName = name
 
-print("minMeanStrain: %f,\n", minMeanStrain)
+print("minMeanStrain: %f,\n" % minMeanStrain)
 print(minMeanStrainName)
