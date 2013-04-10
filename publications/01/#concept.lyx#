@@ -904,12 +904,13 @@ We have used this filter with the size parameter set to 0 (no filter), 1,
 Evaluation
 \end_layout
 
-\begin_layout Standard
-There are several 
-\end_layout
-
 \begin_layout Subsection
 Database description
+\end_layout
+
+\begin_layout Standard
+There are several requirements of good tracker.
+ Since the The 
 \end_layout
 
 \begin_layout Subsection
