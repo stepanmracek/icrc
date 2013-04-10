@@ -905,7 +905,30 @@ Evaluation
 \end_layout
 
 \begin_layout Standard
-The main strain of LV is defined as:
+The main strain 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ of LV is defined as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\epsilon=\frac{L-L_{0}}{L_{0}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $L$
+\end_inset
+
+ is thw 
 \end_layout
 
 \begin_layout Subsection
