@@ -1,7 +1,3 @@
-Reading shape map from "/media/data/ownCloud/icrc/test/test.wmv_shapemap" 
-Reading shape map from "/media/data/ownCloud/icrc/test/z9BUATT02.wmv_shapemap" 
-Reading shape map from "/media/data/ownCloud/icrc/test/zA1BB7B02.wmv_shapemap" 
-Reading shape map from "/media/data/ownCloud/icrc/test2/C51BMQ80.avi_shapemap" 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
