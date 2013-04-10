@@ -9,8 +9,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 13.8528 22.3268 36.1796 
-  target diff 20.7301 
+  std.dev. 13.8528 22.3268 36.1796 
+  diff 20.7301 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -22,8 +22,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 10.6805 16.3522 27.0328 
-  target diff 16.3789 
+  std.dev. 10.6805 16.3522 27.0328 
+  diff 16.3789 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -35,8 +35,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 8.62112 13.6248 22.246 
-  target diff 13.4138 
+  std.dev. 8.62112 13.6248 22.246 
+  diff 13.4138 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -49,8 +49,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 13.8528 22.3268 36.1796 
-  target diff 20.7301 
+  std.dev. 13.8528 22.3268 36.1796 
+  diff 20.7301 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -63,8 +63,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 10.6805 16.3522 27.0328 
-  target diff 16.3789 
+  std.dev. 10.6805 16.3522 27.0328 
+  diff 16.3789 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -77,8 +77,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 8.62112 13.6248 22.246 
-  target diff 13.4138 
+  std.dev. 8.62112 13.6248 22.246 
+  diff 13.4138 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -91,8 +91,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 13.8528 22.3268 36.1796 
-  target diff 20.7301 
+  std.dev. 13.8528 22.3268 36.1796 
+  diff 20.7301 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -105,8 +105,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 10.6805 16.3522 27.0328 
-  target diff 16.3789 
+  std.dev. 10.6805 16.3522 27.0328 
+  diff 16.3789 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -119,8 +119,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 8.62112 13.6248 22.246 
-  target diff 13.4138 
+  std.dev. 8.62112 13.6248 22.246 
+  diff 13.4138 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -132,8 +132,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.4038 14.3344 20.7382 
-  target diff 12.731 
+  std.dev. 6.4038 14.3344 20.7382 
+  diff 12.731 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -145,8 +145,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 4.50504 12.8408 17.3458 
-  target diff 12.3148 
+  std.dev. 4.50504 12.8408 17.3458 
+  diff 12.3148 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -158,8 +158,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 5.46349 10.9894 16.4528 
-  target diff 11.5396 
+  std.dev. 5.46349 10.9894 16.4528 
+  diff 11.5396 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -172,8 +172,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.4038 14.3344 20.7382 
-  target diff 12.731 
+  std.dev. 6.4038 14.3344 20.7382 
+  diff 12.731 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -186,8 +186,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 4.50504 12.8408 17.3458 
-  target diff 12.3148 
+  std.dev. 4.50504 12.8408 17.3458 
+  diff 12.3148 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -200,8 +200,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 5.46349 10.9894 16.4528 
-  target diff 11.5396 
+  std.dev. 5.46349 10.9894 16.4528 
+  diff 11.5396 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -214,8 +214,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.4038 14.3344 20.7382 
-  target diff 12.731 
+  std.dev. 6.4038 14.3344 20.7382 
+  diff 12.731 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -228,8 +228,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 4.50504 12.8408 17.3458 
-  target diff 12.3148 
+  std.dev. 4.50504 12.8408 17.3458 
+  diff 12.3148 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -242,8 +242,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 5.46349 10.9894 16.4528 
-  target diff 11.5396 
+  std.dev. 5.46349 10.9894 16.4528 
+  diff 11.5396 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -255,8 +255,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.42785 14.8327 21.2605 
-  target diff 11.5501 
+  std.dev. 6.42785 14.8327 21.2605 
+  diff 11.5501 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -268,8 +268,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.17116 12.5893 18.7604 
-  target diff 11.5933 
+  std.dev. 6.17116 12.5893 18.7604 
+  diff 11.5933 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -281,8 +281,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 5.53684 11.073 16.6098 
-  target diff 10.9131 
+  std.dev. 5.53684 11.073 16.6098 
+  diff 10.9131 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -295,8 +295,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.42785 14.8327 21.2605 
-  target diff 11.5501 
+  std.dev. 6.42785 14.8327 21.2605 
+  diff 11.5501 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -309,8 +309,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.17116 12.5893 18.7604 
-  target diff 11.5933 
+  std.dev. 6.17116 12.5893 18.7604 
+  diff 11.5933 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -323,8 +323,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 5.53684 11.073 16.6098 
-  target diff 10.9131 
+  std.dev. 5.53684 11.073 16.6098 
+  diff 10.9131 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -337,8 +337,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.42785 14.8327 21.2605 
-  target diff 11.5501 
+  std.dev. 6.42785 14.8327 21.2605 
+  diff 11.5501 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -351,8 +351,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.17116 12.5893 18.7604 
-  target diff 11.5933 
+  std.dev. 6.17116 12.5893 18.7604 
+  diff 11.5933 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -365,8 +365,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 5.53684 11.073 16.6098 
-  target diff 10.9131 
+  std.dev. 5.53684 11.073 16.6098 
+  diff 10.9131 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -378,8 +378,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.0636 22.5142 36.5778 
-  target diff 21.1467 
+  std.dev. 14.0636 22.5142 36.5778 
+  diff 21.1467 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -391,8 +391,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 10.1687 16.3708 26.5395 
-  target diff 16.4738 
+  std.dev. 10.1687 16.3708 26.5395 
+  diff 16.4738 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -404,8 +404,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 8.68923 13.1117 21.8009 
-  target diff 13.5561 
+  std.dev. 8.68923 13.1117 21.8009 
+  diff 13.5561 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -418,8 +418,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.0636 22.5142 36.5778 
-  target diff 21.1467 
+  std.dev. 14.0636 22.5142 36.5778 
+  diff 21.1467 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -432,8 +432,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 10.1687 16.3708 26.5395 
-  target diff 16.4738 
+  std.dev. 10.1687 16.3708 26.5395 
+  diff 16.4738 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -446,8 +446,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 8.68923 13.1117 21.8009 
-  target diff 13.5561 
+  std.dev. 8.68923 13.1117 21.8009 
+  diff 13.5561 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -460,8 +460,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.0636 22.5142 36.5778 
-  target diff 21.1467 
+  std.dev. 14.0636 22.5142 36.5778 
+  diff 21.1467 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -474,8 +474,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 10.1687 16.3708 26.5395 
-  target diff 16.4738 
+  std.dev. 10.1687 16.3708 26.5395 
+  diff 16.4738 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -488,8 +488,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 8.68923 13.1117 21.8009 
-  target diff 13.5561 
+  std.dev. 8.68923 13.1117 21.8009 
+  diff 13.5561 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -501,8 +501,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 20.4016 23.5906 43.9922 
-  target diff 26.3182 
+  std.dev. 20.4016 23.5906 43.9922 
+  diff 26.3182 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -514,8 +514,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 19.5661 22.4789 42.0451 
-  target diff 20.1158 
+  std.dev. 19.5661 22.4789 42.0451 
+  diff 20.1158 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -527,8 +527,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 14.0968 19.0354 33.1321 
-  target diff 16.9735 
+  std.dev. 14.0968 19.0354 33.1321 
+  diff 16.9735 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -541,8 +541,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 20.4016 23.5906 43.9922 
-  target diff 26.3182 
+  std.dev. 20.4016 23.5906 43.9922 
+  diff 26.3182 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -555,8 +555,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 19.5661 22.4789 42.0451 
-  target diff 20.1158 
+  std.dev. 19.5661 22.4789 42.0451 
+  diff 20.1158 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -569,8 +569,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 14.0968 19.0354 33.1321 
-  target diff 16.9735 
+  std.dev. 14.0968 19.0354 33.1321 
+  diff 16.9735 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -583,8 +583,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 20.4016 23.5906 43.9922 
-  target diff 26.3182 
+  std.dev. 20.4016 23.5906 43.9922 
+  diff 26.3182 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -597,8 +597,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 19.5661 22.4789 42.0451 
-  target diff 20.1158 
+  std.dev. 19.5661 22.4789 42.0451 
+  diff 20.1158 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -611,8 +611,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 14.0968 19.0354 33.1321 
-  target diff 16.9735 
+  std.dev. 14.0968 19.0354 33.1321 
+  diff 16.9735 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -624,8 +624,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.88575 16.8895 23.7753 
-  target diff 13.9288 
+  std.dev. 6.88575 16.8895 23.7753 
+  diff 13.9288 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -637,8 +637,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.25804 15.7219 21.9799 
-  target diff 12.9228 
+  std.dev. 6.25804 15.7219 21.9799 
+  diff 12.9228 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -650,8 +650,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.5082 14.8162 21.3244 
-  target diff 12.3909 
+  std.dev. 6.5082 14.8162 21.3244 
+  diff 12.3909 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -664,8 +664,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.88575 16.8895 23.7753 
-  target diff 13.9288 
+  std.dev. 6.88575 16.8895 23.7753 
+  diff 13.9288 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -678,8 +678,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.25804 15.7219 21.9799 
-  target diff 12.9228 
+  std.dev. 6.25804 15.7219 21.9799 
+  diff 12.9228 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -692,8 +692,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.5082 14.8162 21.3244 
-  target diff 12.3909 
+  std.dev. 6.5082 14.8162 21.3244 
+  diff 12.3909 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -706,8 +706,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.88575 16.8895 23.7753 
-  target diff 13.9288 
+  std.dev. 6.88575 16.8895 23.7753 
+  diff 13.9288 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -720,8 +720,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.25804 15.7219 21.9799 
-  target diff 12.9228 
+  std.dev. 6.25804 15.7219 21.9799 
+  diff 12.9228 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -734,8 +734,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.5082 14.8162 21.3244 
-  target diff 12.3909 
+  std.dev. 6.5082 14.8162 21.3244 
+  diff 12.3909 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -747,8 +747,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 7.06964 17.2208 24.2904 
-  target diff 13.4634 
+  std.dev. 7.06964 17.2208 24.2904 
+  diff 13.4634 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -760,8 +760,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 7.21099 16.9121 24.123 
-  target diff 12.2408 
+  std.dev. 7.21099 16.9121 24.123 
+  diff 12.2408 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -773,8 +773,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 7.31541 16.2562 23.5716 
-  target diff 11.7042 
+  std.dev. 7.31541 16.2562 23.5716 
+  diff 11.7042 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -787,8 +787,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 7.06964 17.2208 24.2904 
-  target diff 13.4634 
+  std.dev. 7.06964 17.2208 24.2904 
+  diff 13.4634 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -801,8 +801,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 7.21099 16.9121 24.123 
-  target diff 12.2408 
+  std.dev. 7.21099 16.9121 24.123 
+  diff 12.2408 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -815,8 +815,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 7.31541 16.2562 23.5716 
-  target diff 11.7042 
+  std.dev. 7.31541 16.2562 23.5716 
+  diff 11.7042 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -829,8 +829,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 7.06964 17.2208 24.2904 
-  target diff 13.4634 
+  std.dev. 7.06964 17.2208 24.2904 
+  diff 13.4634 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -843,8 +843,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 7.21099 16.9121 24.123 
-  target diff 12.2408 
+  std.dev. 7.21099 16.9121 24.123 
+  diff 12.2408 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -857,8 +857,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 7.31541 16.2562 23.5716 
-  target diff 11.7042 
+  std.dev. 7.31541 16.2562 23.5716 
+  diff 11.7042 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -870,8 +870,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 20.3666 23.4496 43.8161 
-  target diff 27.3184 
+  std.dev. 20.3666 23.4496 43.8161 
+  diff 27.3184 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -883,8 +883,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 19.3409 22.5152 41.8561 
-  target diff 20.7681 
+  std.dev. 19.3409 22.5152 41.8561 
+  diff 20.7681 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -896,8 +896,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.5055 18.8014 32.307 
-  target diff 17.6007 
+  std.dev. 13.5055 18.8014 32.307 
+  diff 17.6007 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -910,8 +910,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 20.3666 23.4496 43.8161 
-  target diff 27.3184 
+  std.dev. 20.3666 23.4496 43.8161 
+  diff 27.3184 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -924,8 +924,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 19.3409 22.5152 41.8561 
-  target diff 20.7681 
+  std.dev. 19.3409 22.5152 41.8561 
+  diff 20.7681 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -938,8 +938,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.5055 18.8014 32.307 
-  target diff 17.6007 
+  std.dev. 13.5055 18.8014 32.307 
+  diff 17.6007 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -952,8 +952,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 20.3666 23.4496 43.8161 
-  target diff 27.3184 
+  std.dev. 20.3666 23.4496 43.8161 
+  diff 27.3184 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -966,8 +966,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 19.3409 22.5152 41.8561 
-  target diff 20.7681 
+  std.dev. 19.3409 22.5152 41.8561 
+  diff 20.7681 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -980,8 +980,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.5055 18.8014 32.307 
-  target diff 17.6007 
+  std.dev. 13.5055 18.8014 32.307 
+  diff 17.6007 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -993,8 +993,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 7.32503 16.7898 24.1148 
-  target diff 11.5946 
+  std.dev. 7.32503 16.7898 24.1148 
+  diff 11.5946 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1006,8 +1006,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.3957 16.9769 23.3726 
-  target diff 11.8298 
+  std.dev. 6.3957 16.9769 23.3726 
+  diff 11.8298 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1019,8 +1019,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.05559 16.9485 23.0041 
-  target diff 11.5906 
+  std.dev. 6.05559 16.9485 23.0041 
+  diff 11.5906 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1033,8 +1033,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 7.32503 16.7898 24.1148 
-  target diff 11.5946 
+  std.dev. 7.32503 16.7898 24.1148 
+  diff 11.5946 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1047,8 +1047,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.3957 16.9769 23.3726 
-  target diff 11.8298 
+  std.dev. 6.3957 16.9769 23.3726 
+  diff 11.8298 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1061,8 +1061,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.05559 16.9485 23.0041 
-  target diff 11.5906 
+  std.dev. 6.05559 16.9485 23.0041 
+  diff 11.5906 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1075,8 +1075,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 7.32503 16.7898 24.1148 
-  target diff 11.5946 
+  std.dev. 7.32503 16.7898 24.1148 
+  diff 11.5946 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1089,8 +1089,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.3957 16.9769 23.3726 
-  target diff 11.8298 
+  std.dev. 6.3957 16.9769 23.3726 
+  diff 11.8298 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1103,8 +1103,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.05559 16.9485 23.0041 
-  target diff 11.5906 
+  std.dev. 6.05559 16.9485 23.0041 
+  diff 11.5906 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1118,8 +1118,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 7.77942 18.2183 25.9977 
-  target diff 10.4073 
+  std.dev. 7.77942 18.2183 25.9977 
+  diff 10.4073 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1133,8 +1133,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 7.37882 18.4452 25.824 
-  target diff 10.8018 
+  std.dev. 7.37882 18.4452 25.824 
+  diff 10.8018 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1148,8 +1148,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.85387 18.7911 25.645 
-  target diff 10.9203 
+  std.dev. 6.85387 18.7911 25.645 
+  diff 10.9203 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1164,8 +1164,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 7.77944 18.2183 25.9977 
-  target diff 10.4073 
+  std.dev. 7.77944 18.2183 25.9977 
+  diff 10.4073 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1180,8 +1180,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 7.26522 18.421 25.6862 
-  target diff 10.8095 
+  std.dev. 7.26522 18.421 25.6862 
+  diff 10.8095 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1196,8 +1196,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.84916 18.5548 25.4039 
-  target diff 10.9234 
+  std.dev. 6.84916 18.5548 25.4039 
+  diff 10.9234 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1212,8 +1212,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 7.77942 18.2183 25.9977 
-  target diff 10.4073 
+  std.dev. 7.77942 18.2183 25.9977 
+  diff 10.4073 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1228,8 +1228,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 7.24729 18.4074 25.6547 
-  target diff 10.8012 
+  std.dev. 7.24729 18.4074 25.6547 
+  diff 10.8012 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1244,8 +1244,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.84655 18.5575 25.404 
-  target diff 10.9221 
+  std.dev. 6.84655 18.5575 25.404 
+  diff 10.9221 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1259,8 +1259,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.97853 18.1217 25.1002 
-  target diff 10.6277 
+  std.dev. 6.97853 18.1217 25.1002 
+  diff 10.6277 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1274,8 +1274,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.86053 18.059 24.9195 
-  target diff 11.1204 
+  std.dev. 6.86053 18.059 24.9195 
+  diff 11.1204 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1289,8 +1289,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.6043 18.0081 24.6124 
-  target diff 11.0408 
+  std.dev. 6.6043 18.0081 24.6124 
+  diff 11.0408 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1305,8 +1305,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.97853 18.1217 25.1002 
-  target diff 10.6277 
+  std.dev. 6.97853 18.1217 25.1002 
+  diff 10.6277 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1321,8 +1321,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.70187 17.9997 24.7015 
-  target diff 11.135 
+  std.dev. 6.70187 17.9997 24.7015 
+  diff 11.135 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1337,8 +1337,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.66595 17.9711 24.6371 
-  target diff 11.0575 
+  std.dev. 6.66595 17.9711 24.6371 
+  diff 11.0575 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1353,8 +1353,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 6.97853 18.1217 25.1002 
-  target diff 10.6277 
+  std.dev. 6.97853 18.1217 25.1002 
+  diff 10.6277 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1369,8 +1369,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.66106 17.9983 24.6594 
-  target diff 11.1288 
+  std.dev. 6.66106 17.9983 24.6594 
+  diff 11.1288 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 Iterative statistical shape normalizer using PCA
@@ -1385,8 +1385,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 6.60873 18.0285 24.6373 
-  target diff 11.0413 
+  std.dev. 6.60873 18.0285 24.6373 
+  diff 11.0413 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1398,8 +1398,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 18.0815 59.4685 77.55 
-  target diff 25.5797 
+  std.dev. 18.0815 59.4685 77.55 
+  diff 25.5797 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1411,8 +1411,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 21.6071 42.939 64.5461 
-  target diff 19.6282 
+  std.dev. 21.6071 42.939 64.5461 
+  diff 19.6282 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1424,8 +1424,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 18.792 40.5194 59.3114 
-  target diff 16.9211 
+  std.dev. 18.792 40.5194 59.3114 
+  diff 16.9211 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1438,8 +1438,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 18.0815 59.4685 77.55 
-  target diff 25.5797 
+  std.dev. 18.0815 59.4685 77.55 
+  diff 25.5797 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1452,8 +1452,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 21.6071 42.939 64.5461 
-  target diff 19.6282 
+  std.dev. 21.6071 42.939 64.5461 
+  diff 19.6282 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1466,8 +1466,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 18.792 40.5194 59.3114 
-  target diff 16.9211 
+  std.dev. 18.792 40.5194 59.3114 
+  diff 16.9211 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1480,8 +1480,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 18.0815 59.4685 77.55 
-  target diff 25.5797 
+  std.dev. 18.0815 59.4685 77.55 
+  diff 25.5797 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1494,8 +1494,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 21.6071 42.939 64.5461 
-  target diff 19.6282 
+  std.dev. 21.6071 42.939 64.5461 
+  diff 19.6282 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1508,8 +1508,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 18.792 40.5194 59.3114 
-  target diff 16.9211 
+  std.dev. 18.792 40.5194 59.3114 
+  diff 16.9211 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1521,8 +1521,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 19.6333 54.9741 74.6073 
-  target diff 20.7327 
+  std.dev. 19.6333 54.9741 74.6073 
+  diff 20.7327 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1534,8 +1534,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 8.25508 39.0425 47.2976 
-  target diff 16.8469 
+  std.dev. 8.25508 39.0425 47.2976 
+  diff 16.8469 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1547,8 +1547,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 9.25267 32.4199 41.6726 
-  target diff 15.1348 
+  std.dev. 9.25267 32.4199 41.6726 
+  diff 15.1348 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1561,8 +1561,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 19.6333 54.9741 74.6073 
-  target diff 20.7327 
+  std.dev. 19.6333 54.9741 74.6073 
+  diff 20.7327 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1575,8 +1575,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 8.25508 39.0425 47.2976 
-  target diff 16.8469 
+  std.dev. 8.25508 39.0425 47.2976 
+  diff 16.8469 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1589,8 +1589,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 9.25267 32.4199 41.6726 
-  target diff 15.1348 
+  std.dev. 9.25267 32.4199 41.6726 
+  diff 15.1348 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1603,8 +1603,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 19.6333 54.9741 74.6073 
-  target diff 20.7327 
+  std.dev. 19.6333 54.9741 74.6073 
+  diff 20.7327 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1617,8 +1617,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 8.25508 39.0425 47.2976 
-  target diff 16.8469 
+  std.dev. 8.25508 39.0425 47.2976 
+  diff 16.8469 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1631,8 +1631,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 9.25267 32.4199 41.6726 
-  target diff 15.1348 
+  std.dev. 9.25267 32.4199 41.6726 
+  diff 15.1348 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1644,8 +1644,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 10.4803 51.858 62.3384 
-  target diff 20.0271 
+  std.dev. 10.4803 51.858 62.3384 
+  diff 20.0271 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1657,8 +1657,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 7.87887 36.6975 44.5764 
-  target diff 16.2991 
+  std.dev. 7.87887 36.6975 44.5764 
+  diff 16.2991 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1670,8 +1670,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 7.17693 30.7837 37.9606 
-  target diff 14.2523 
+  std.dev. 7.17693 30.7837 37.9606 
+  diff 14.2523 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1684,8 +1684,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 10.4803 51.858 62.3384 
-  target diff 20.0271 
+  std.dev. 10.4803 51.858 62.3384 
+  diff 20.0271 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1698,8 +1698,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 7.87887 36.6975 44.5764 
-  target diff 16.2991 
+  std.dev. 7.87887 36.6975 44.5764 
+  diff 16.2991 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1712,8 +1712,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 7.17693 30.7837 37.9606 
-  target diff 14.2523 
+  std.dev. 7.17693 30.7837 37.9606 
+  diff 14.2523 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1726,8 +1726,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 10.4803 51.858 62.3384 
-  target diff 20.0271 
+  std.dev. 10.4803 51.858 62.3384 
+  diff 20.0271 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1740,8 +1740,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 7.87887 36.6975 44.5764 
-  target diff 16.2991 
+  std.dev. 7.87887 36.6975 44.5764 
+  diff 16.2991 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1754,8 +1754,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 7.17693 30.7837 37.9606 
-  target diff 14.2523 
+  std.dev. 7.17693 30.7837 37.9606 
+  diff 14.2523 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1767,8 +1767,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.9395 61.7527 77.6922 
-  target diff 26.3633 
+  std.dev. 15.9395 61.7527 77.6922 
+  diff 26.3633 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1780,8 +1780,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 20.9428 45.7808 66.7236 
-  target diff 19.7855 
+  std.dev. 20.9428 45.7808 66.7236 
+  diff 19.7855 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1793,8 +1793,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 18.8584 37.8806 56.739 
-  target diff 17.2793 
+  std.dev. 18.8584 37.8806 56.739 
+  diff 17.2793 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1807,8 +1807,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.9395 61.7527 77.6922 
-  target diff 26.3633 
+  std.dev. 15.9395 61.7527 77.6922 
+  diff 26.3633 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1821,8 +1821,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 20.9428 45.7808 66.7236 
-  target diff 19.7855 
+  std.dev. 20.9428 45.7808 66.7236 
+  diff 19.7855 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1835,8 +1835,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 18.8584 37.8806 56.739 
-  target diff 17.2793 
+  std.dev. 18.8584 37.8806 56.739 
+  diff 17.2793 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1849,8 +1849,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.9395 61.7527 77.6922 
-  target diff 26.3633 
+  std.dev. 15.9395 61.7527 77.6922 
+  diff 26.3633 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1863,8 +1863,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 20.9428 45.7808 66.7236 
-  target diff 19.7855 
+  std.dev. 20.9428 45.7808 66.7236 
+  diff 19.7855 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1877,8 +1877,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 18.8584 37.8806 56.739 
-  target diff 17.2793 
+  std.dev. 18.8584 37.8806 56.739 
+  diff 17.2793 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1890,8 +1890,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.1017 62.3841 77.4858 
-  target diff 30.8918 
+  std.dev. 15.1017 62.3841 77.4858 
+  diff 30.8918 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1903,8 +1903,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 11.6412 55.3185 66.9597 
-  target diff 25.9508 
+  std.dev. 11.6412 55.3185 66.9597 
+  diff 25.9508 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1916,8 +1916,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 11.3192 49.9346 61.2537 
-  target diff 22.8204 
+  std.dev. 11.3192 49.9346 61.2537 
+  diff 22.8204 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1930,8 +1930,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.1017 62.3841 77.4858 
-  target diff 30.8918 
+  std.dev. 15.1017 62.3841 77.4858 
+  diff 30.8918 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1944,8 +1944,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 11.6412 55.3185 66.9597 
-  target diff 25.9508 
+  std.dev. 11.6412 55.3185 66.9597 
+  diff 25.9508 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1958,8 +1958,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 11.3192 49.9346 61.2537 
-  target diff 22.8204 
+  std.dev. 11.3192 49.9346 61.2537 
+  diff 22.8204 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1972,8 +1972,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.1017 62.3841 77.4858 
-  target diff 30.8918 
+  std.dev. 15.1017 62.3841 77.4858 
+  diff 30.8918 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -1986,8 +1986,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 11.6412 55.3185 66.9597 
-  target diff 25.9508 
+  std.dev. 11.6412 55.3185 66.9597 
+  diff 25.9508 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2000,8 +2000,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 11.3192 49.9346 61.2537 
-  target diff 22.8204 
+  std.dev. 11.3192 49.9346 61.2537 
+  diff 22.8204 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2013,8 +2013,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.2215 60.6292 74.8507 
-  target diff 22.6951 
+  std.dev. 14.2215 60.6292 74.8507 
+  diff 22.6951 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2026,8 +2026,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 11.9366 56.9122 68.8488 
-  target diff 20.241 
+  std.dev. 11.9366 56.9122 68.8488 
+  diff 20.241 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2039,8 +2039,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 9.16214 51.7416 60.9037 
-  target diff 18.2963 
+  std.dev. 9.16214 51.7416 60.9037 
+  diff 18.2963 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2053,8 +2053,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.2215 60.6292 74.8507 
-  target diff 22.6951 
+  std.dev. 14.2215 60.6292 74.8507 
+  diff 22.6951 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2067,8 +2067,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 11.9366 56.9122 68.8488 
-  target diff 20.241 
+  std.dev. 11.9366 56.9122 68.8488 
+  diff 20.241 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2081,8 +2081,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 9.16214 51.7416 60.9037 
-  target diff 18.2963 
+  std.dev. 9.16214 51.7416 60.9037 
+  diff 18.2963 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2095,8 +2095,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.2215 60.6292 74.8507 
-  target diff 22.6951 
+  std.dev. 14.2215 60.6292 74.8507 
+  diff 22.6951 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2109,8 +2109,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 11.9366 56.9122 68.8488 
-  target diff 20.241 
+  std.dev. 11.9366 56.9122 68.8488 
+  diff 20.241 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2123,8 +2123,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 9.16214 51.7416 60.9037 
-  target diff 18.2963 
+  std.dev. 9.16214 51.7416 60.9037 
+  diff 18.2963 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2136,8 +2136,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.5844 72.3329 87.9174 
-  target diff 22.8875 
+  std.dev. 15.5844 72.3329 87.9174 
+  diff 22.8875 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2149,8 +2149,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 12.8962 58.2267 71.1229 
-  target diff 19.9556 
+  std.dev. 12.8962 58.2267 71.1229 
+  diff 19.9556 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2162,8 +2162,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 11.9463 51.7441 63.6904 
-  target diff 18.0083 
+  std.dev. 11.9463 51.7441 63.6904 
+  diff 18.0083 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2176,8 +2176,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.5844 72.3329 87.9174 
-  target diff 22.8875 
+  std.dev. 15.5844 72.3329 87.9174 
+  diff 22.8875 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2190,8 +2190,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 12.8962 58.2267 71.1229 
-  target diff 19.9556 
+  std.dev. 12.8962 58.2267 71.1229 
+  diff 19.9556 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2204,8 +2204,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 11.9463 51.7441 63.6904 
-  target diff 18.0083 
+  std.dev. 11.9463 51.7441 63.6904 
+  diff 18.0083 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2218,8 +2218,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.5844 72.3329 87.9174 
-  target diff 22.8875 
+  std.dev. 15.5844 72.3329 87.9174 
+  diff 22.8875 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2232,8 +2232,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 12.8962 58.2267 71.1229 
-  target diff 19.9556 
+  std.dev. 12.8962 58.2267 71.1229 
+  diff 19.9556 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2246,8 +2246,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 11.9463 51.7441 63.6904 
-  target diff 18.0083 
+  std.dev. 11.9463 51.7441 63.6904 
+  diff 18.0083 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2259,8 +2259,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.7182 62.7823 77.5005 
-  target diff 30.9384 
+  std.dev. 14.7182 62.7823 77.5005 
+  diff 30.9384 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2272,8 +2272,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 11.4029 55.1346 66.5374 
-  target diff 26.8899 
+  std.dev. 11.4029 55.1346 66.5374 
+  diff 26.8899 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2285,8 +2285,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.6359 53.6172 67.2531 
-  target diff 23.469 
+  std.dev. 13.6359 53.6172 67.2531 
+  diff 23.469 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2299,8 +2299,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.7182 62.7823 77.5005 
-  target diff 30.9384 
+  std.dev. 14.7182 62.7823 77.5005 
+  diff 30.9384 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2313,8 +2313,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 11.4029 55.1346 66.5374 
-  target diff 26.8899 
+  std.dev. 11.4029 55.1346 66.5374 
+  diff 26.8899 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2327,8 +2327,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.6359 53.6172 67.2531 
-  target diff 23.469 
+  std.dev. 13.6359 53.6172 67.2531 
+  diff 23.469 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2341,8 +2341,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.7182 62.7823 77.5005 
-  target diff 30.9384 
+  std.dev. 14.7182 62.7823 77.5005 
+  diff 30.9384 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2355,8 +2355,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 11.4029 55.1346 66.5374 
-  target diff 26.8899 
+  std.dev. 11.4029 55.1346 66.5374 
+  diff 26.8899 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2369,8 +2369,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.6359 53.6172 67.2531 
-  target diff 23.469 
+  std.dev. 13.6359 53.6172 67.2531 
+  diff 23.469 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2382,8 +2382,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 11.4087 47.5929 59.0016 
-  target diff 15.9734 
+  std.dev. 11.4087 47.5929 59.0016 
+  diff 15.9734 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2395,8 +2395,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 8.89214 47.6858 56.5779 
-  target diff 15.2106 
+  std.dev. 8.89214 47.6858 56.5779 
+  diff 15.2106 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2408,8 +2408,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 10.0565 50.0728 60.1293 
-  target diff 14.7828 
+  std.dev. 10.0565 50.0728 60.1293 
+  diff 14.7828 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2422,8 +2422,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 11.4087 47.5929 59.0016 
-  target diff 15.9734 
+  std.dev. 11.4087 47.5929 59.0016 
+  diff 15.9734 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2436,8 +2436,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 8.89214 47.6858 56.5779 
-  target diff 15.2106 
+  std.dev. 8.89214 47.6858 56.5779 
+  diff 15.2106 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2450,8 +2450,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 10.0565 50.0728 60.1293 
-  target diff 14.7828 
+  std.dev. 10.0565 50.0728 60.1293 
+  diff 14.7828 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2464,8 +2464,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 11.4087 47.5929 59.0016 
-  target diff 15.9734 
+  std.dev. 11.4087 47.5929 59.0016 
+  diff 15.9734 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2478,8 +2478,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 8.89214 47.6858 56.5779 
-  target diff 15.2106 
+  std.dev. 8.89214 47.6858 56.5779 
+  diff 15.2106 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2492,8 +2492,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 10.0565 50.0728 60.1293 
-  target diff 14.7828 
+  std.dev. 10.0565 50.0728 60.1293 
+  diff 14.7828 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2507,8 +2507,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.5279 65.6228 80.1507 
-  target diff 17.7638 
+  std.dev. 14.5279 65.6228 80.1507 
+  diff 17.7638 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2522,8 +2522,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 10.7255 60.6572 71.3826 
-  target diff 17.2985 
+  std.dev. 10.7255 60.6572 71.3826 
+  diff 17.2985 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2537,8 +2537,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.8678 61.6019 75.4697 
-  target diff 16.6787 
+  std.dev. 13.8678 61.6019 75.4697 
+  diff 16.6787 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2553,8 +2553,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.5274 65.6227 80.1501 
-  target diff 17.7659 
+  std.dev. 14.5274 65.6227 80.1501 
+  diff 17.7659 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2569,8 +2569,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 10.76 60.662 71.422 
-  target diff 17.2994 
+  std.dev. 10.76 60.662 71.422 
+  diff 17.2994 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2585,8 +2585,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.8254 61.5826 75.4079 
-  target diff 16.6782 
+  std.dev. 13.8254 61.5826 75.4079 
+  diff 16.6782 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2601,8 +2601,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 14.5278 65.6228 80.1506 
-  target diff 17.7629 
+  std.dev. 14.5278 65.6228 80.1506 
+  diff 17.7629 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2617,8 +2617,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 10.7004 60.6594 71.3598 
-  target diff 17.2952 
+  std.dev. 10.7004 60.6594 71.3598 
+  diff 17.2952 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2633,8 +2633,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.8566 61.5998 75.4563 
-  target diff 16.6792 
+  std.dev. 13.8566 61.5998 75.4563 
+  diff 16.6792 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2648,8 +2648,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.5953 53.64 69.2354 
-  target diff 16.3799 
+  std.dev. 15.5953 53.64 69.2354 
+  diff 16.3799 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2663,8 +2663,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.73912 55.4263 62.1654 
-  target diff 15.9388 
+  std.dev. 6.73912 55.4263 62.1654 
+  diff 15.9388 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2678,8 +2678,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.342 56.9279 70.2699 
-  target diff 15.6742 
+  std.dev. 13.342 56.9279 70.2699 
+  diff 15.6742 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2694,8 +2694,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.569 53.5529 69.1219 
-  target diff 16.3786 
+  std.dev. 15.569 53.5529 69.1219 
+  diff 16.3786 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2710,8 +2710,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.73995 55.4241 62.164 
-  target diff 15.939 
+  std.dev. 6.73995 55.4241 62.164 
+  diff 15.939 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2726,8 +2726,8 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.3129 56.9219 70.2348 
-  target diff 15.6743 
+  std.dev. 13.3129 56.9219 70.2348 
+  diff 15.6743 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2742,8 +2742,8 @@ Image processing:
 Weights:
     1, 
 " 
-  std. dev.: 15.8539 53.6223 69.4762 
-  target diff 16.3741 
+  std.dev. 15.8539 53.6223 69.4762 
+  diff 16.3741 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2758,8 +2758,8 @@ Image processing:
 Weights:
     1, 0.5, 
 " 
-  std. dev.: 6.7359 55.4264 62.1623 
-  target diff 15.9382 
+  std.dev. 6.7359 55.4264 62.1623 
+  diff 15.9382 
 Processing "Longitudinal strain
     segments: 6, points per segment: 5
 No shape normalizer
@@ -2774,5 +2774,5 @@ Image processing:
 Weights:
     1, 0.5, 0.25, 
 " 
-  std. dev.: 13.3255 56.9243 70.2498 
-  target diff 15.6749 
+  std.dev. 13.3255 56.9243 70.2498 
+  diff 15.6749 
