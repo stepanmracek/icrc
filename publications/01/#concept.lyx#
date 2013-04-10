@@ -934,7 +934,9 @@ where
 \begin_inset Formula $L_{0}$
 \end_inset
 
- is 
+ is the initial lenght of the LV.
+ Our LV model has been divided into six sectors.
+ We have also evaluated the individual strains within each sector.
 \end_layout
 
 \begin_layout Subsection
