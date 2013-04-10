@@ -859,7 +859,9 @@ Result post-processing
 \end_layout
 
 \begin_layout Standard
-The optional processing of the tracing result 
+The optional processing of the tracing result is application of the moving
+ average filter.
+ We have used this filter with 
 \end_layout
 
 \begin_layout Section
