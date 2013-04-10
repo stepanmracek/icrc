@@ -512,7 +512,7 @@ Algorithm description
 \end_layout
 
 \begin_layout Standard
-Our tracking algorithm consists of individua function blocks where each
+Our tracking algorithm consists of individual function blocks where each
  block deals with a specific task and can be easily replaced with another
  block that solves the same problem, e.g., the image processing block can
  be be empty or consists of several consecutive image filters.
@@ -640,9 +640,9 @@ The point tracking block has three inputs - the previous frame, the annotated
  points within the previous frame, and the next frame, where the point tracking
  algorithm should find the desired points.
  The next frame is also processed with image transformation and filters.
- Additionaly to the PyrLK point tracker, we have implemented speckle tracking
+ Additionally to the PyrLK point tracker, we have implemented speckle tracking
  based on the minimizing the Euclidean distance, correlation metric, or
- sum of absolute differences between the neighbour of tracked point in previous
+ sum of absolute differences between the neighbor of tracked point in previous
  frame and potential position of the point in the next frame (see Figure
  
 \begin_inset CommandInset ref
@@ -652,7 +652,7 @@ reference "fig:Point-tracking"
 \end_inset
 
 ).
- Let the pixel intensity neighbourhood of the point 
+ Let the pixel intensity neighborhood of the point 
 \begin_inset Formula $x$
 \end_inset
 
@@ -681,7 +681,7 @@ where
 \begin_inset Formula $\mathbf{x}_{i}$
 \end_inset
 
- is the pixel intensity neighbourhood of the point 
+ is the pixel intensity neighborhood of the point 
 \begin_inset Formula $x_{i}$
 \end_inset
 
@@ -855,7 +855,7 @@ name "fig:pca-normalization"
 \end_layout
 
 \begin_layout Subsubsection
-Result 
+Result post-processing
 \end_layout
 
 \begin_layout Section
