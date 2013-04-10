@@ -78,6 +78,12 @@ private slots:
 
     void on_actionWeights4_triggered();
 
+    void on_actionResult_Processing_triggered();
+
+    void on_actionResProcAvg_triggered();
+
+    void on_actionResProcNone_triggered();
+
 private:
     void setTracker(ShapeTracker *tracker);
 

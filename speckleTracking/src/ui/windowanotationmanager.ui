@@ -292,9 +292,17 @@
       <addaction name="actionWeights3"/>
       <addaction name="actionWeights4"/>
      </widget>
+     <widget class="QMenu" name="menuResut_Processing">
+      <property name="title">
+       <string>Resut Processing</string>
+      </property>
+      <addaction name="actionResProcNone"/>
+      <addaction name="actionResProcAvg"/>
+     </widget>
      <addaction name="menuPoint_Tracker"/>
      <addaction name="menuShape_Model"/>
      <addaction name="menuWeights"/>
+     <addaction name="menuResut_Processing"/>
     </widget>
     <addaction name="menuChange_tracker"/>
     <addaction name="actionChangeImageProcessing"/>
@@ -383,6 +391,16 @@
   <action name="actionWeights4">
    <property name="text">
     <string>1.0 0.5 0.25 0.125</string>
+   </property>
+  </action>
+  <action name="actionResProcNone">
+   <property name="text">
+    <string>None</string>
+   </property>
+  </action>
+  <action name="actionResProcAvg">
+   <property name="text">
+    <string>Floating average</string>
    </property>
   </action>
  </widget>

@@ -24,6 +24,7 @@
 #include "ui/dialogbeattobeat.h"
 #include "ui/dialogimageprocessing.h"
 #include "ui/dialogshapemodel.h"
+#include "strain/strainresultprocessing.h"
 
 WindowAnotationManager::WindowAnotationManager(const QString &path, const QString &dataDir, ShapeTracker *tracker, QWidget *parent) :
     dataDir(dataDir),
@@ -477,5 +478,21 @@ void WindowAnotationManager::on_actionWeights4_triggered()
     VectorF weights;
     weights.push_back(1.0); weights.push_back(0.5); weights.push_back(0.25);  weights.push_back(0.125);
     tracker->weights = weights;
+    updateTrackerInfo();
+}
+
+
+void WindowAnotationManager::on_actionResProcAvg_triggered()
+{
+    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 3, 1, 51, 2);
+    StrainResProcFloatingAvg *proc = new StrainResProcFloatingAvg(windowSize);
+    tracker->setResultProcessing(proc);
+    updateTrackerInfo();
+}
+
+void WindowAnotationManager::on_actionResProcNone_triggered()
+{
+    StrainResultProcessingPass *proc = new StrainResultProcessingPass();
+    tracker->setResultProcessing(proc);
     updateTrackerInfo();
 }
