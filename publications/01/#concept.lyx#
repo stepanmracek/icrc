@@ -950,16 +950,16 @@ Performance metrics
 \begin_layout Standard
 There are several requirements of good tracker.
  Since the the LV movement is periodical, strain progress within each beat
- should be more or less the same -- the beat to beat variance should be
+ should be more or less the same -- the beat-to-beat variance should be
  as low as possible.
- 
+ For 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -983,7 +983,7 @@ status collapsed
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Beat-to-beat variance from main LV strain and for selected segment
+Beat-to-beat variance for main LV strain and for selected segment
 \end_layout
 
 \end_inset
