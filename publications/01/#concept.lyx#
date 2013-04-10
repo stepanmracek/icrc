@@ -955,6 +955,51 @@ There are several requirements of good tracker.
  
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/beat2beatMainStrain.pdf
+	width 5cm
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/beat2beatSegmentStrain.pdf
+	width 5cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Beat-to-beat variance from main LV strain and for selected segment
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Comparison of implemented techniques
 \end_layout
