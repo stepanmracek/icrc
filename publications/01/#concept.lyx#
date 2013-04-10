@@ -1019,7 +1019,9 @@ The another important metrics of the tracker is precision and stability.
  The error during the tracking is cumulative.
  Together with the initial anotation, we have also anotated the last frame
  of every beat.
- The measurement of the precision 
+ The Precision of the tracker is the sum of distances between points in
+ anotated reference in last frame and points from the shape gained by tracing
+ from the first frame.
 \end_layout
 
 \begin_layout Subsection
