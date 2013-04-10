@@ -858,6 +858,10 @@ name "fig:pca-normalization"
 Result post-processing
 \end_layout
 
+\begin_layout Standard
+The optional processing of the tracing result 
+\end_layout
+
 \begin_layout Section
 Evaluation
 \end_layout
