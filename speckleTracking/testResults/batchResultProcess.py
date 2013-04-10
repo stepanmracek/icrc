@@ -23,7 +23,7 @@ for line in f:
 		state = NAME
 	elif state == NAME:
 		print("state NAME")
-		if line == '"\n':
+		if line == '" \n':
 			state == STDDEV
 		else:
 			name = name + line
