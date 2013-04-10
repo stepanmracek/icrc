@@ -904,6 +904,10 @@ We have used this filter with the size parameter set to 0 (no filter), 1,
 Evaluation
 \end_layout
 
+\begin_layout Standard
+The main strain of LV is defined as:
+\end_layout
+
 \begin_layout Subsection
 Database description
 \end_layout
@@ -914,7 +918,7 @@ Performance metrics
 
 \begin_layout Standard
 There are several requirements of good tracker.
- Since the the LV movement is periodica
+ Since the the LV movement is periodical, 
 \end_layout
 
 \begin_layout Subsection
