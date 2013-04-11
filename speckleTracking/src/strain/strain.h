@@ -40,7 +40,7 @@ public:
     }
 
     virtual bool isValidShape(Points &realPoints) = 0;
-    virtual Points getRealShapePoints(Points &controlPoints, int shapeWidth) = 0;
+    virtual Points getRealShapePoints(const Points &controlPoints, int shapeWidth) = 0;
     virtual QList<QGraphicsItem*> drawResult(QGraphicsScene *scene, Points &realPoints) = 0;
     virtual P getBasePoint(Points &realPoints) = 0;
     virtual P getApexPoint(Points &realPoints) = 0;

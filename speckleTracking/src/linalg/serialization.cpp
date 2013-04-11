@@ -68,7 +68,7 @@ Points Serialization::readShape(const QString &path)
     return Common::matFToPoints(m);
 }
 
-VectorOfShapes Serialization::readShapeList(const QString &path)
+VectorOfShapes Serialization::readVectorOfShapes(const QString &path)
 {
     VectorOfShapes result;
     cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);

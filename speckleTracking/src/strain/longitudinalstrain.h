@@ -15,7 +15,7 @@ private:
 public:
     LongitudinalStrain(ShapeNormalizerBase *shapeNormalizer, QObject *parent = 0);
 
-    Points getRealShapePoints(Points &controlPoints, int shapeWidth);
+    Points getRealShapePoints(const Points &controlPoints, int shapeWidth);
 
     bool isValidShape(Points &realPoints) { return true; }
 

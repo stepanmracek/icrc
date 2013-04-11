@@ -10,7 +10,7 @@ LongitudinalStrain::LongitudinalStrain(ShapeNormalizerBase *shapeNormalizer, QOb
     //pointsPerSegment = 5;
 }
 
-Points LongitudinalStrain::getRealShapePoints(Points &controlPoints, int shapeWidth)
+Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, int shapeWidth)
 {
     Points result;
     int n = controlPoints.size();

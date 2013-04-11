@@ -132,7 +132,11 @@ ShapeMap ShapeTracker::track(VideoDataClip *clip, int startIndex, int endIndex, 
         resultShapes[nextIndex] = nextShape;
     }
 
-    progress->setValue(frames);
+    if (progress != 0)
+    {
+        progress->setValue(frames);
+    }
+
     return resultProcessing->process(resultShapes, startIndex, endIndex, clip);
 }
 

@@ -24,6 +24,7 @@
 #include "strain/pointtrackerneighbouropticalflow.h"
 #include "strain/imagefilter.h"
 #include "strain/strainresultprocessing.h"
+#include "ui/dialogshapemodel.h"
 #include "ui/widgetanotation.h"
 #include "ui/uiutils.h"
 #include "ui/windowanotationmanager.h"
@@ -49,7 +50,7 @@ public:
 
         Serialization::serialize(before, "test-serialization-listOfPoints");
 
-        VectorOfShapes after = Serialization::readShapeList("test-serialization-listOfPoints");
+        VectorOfShapes after = Serialization::readVectorOfShapes("test-serialization-listOfPoints");
         Serialization::serialize(after, "test-serialization-listOfPoints2");
     }
 
@@ -71,23 +72,49 @@ public:
 
     }
 
-    static void testLearnShape(const QString &shapeMap)
+    static void testLearnShape()
     {
-        //PCA *pca = new PCA();
-        ICA *ica = new ICA();
-        QMap<int, Points> map = Serialization::readShapeMap(shapeMap);
-        VectorOfShapes shapes = Common::MapToVectorOfShapes(map);
+        QString pathToRawControlPoints = "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
+        VectorOfShapes rawShapes = Serialization::readVectorOfShapes(pathToRawControlPoints);
 
-        StatisticalShapeModel model(ica, shapes);
-        StatisticalShapeModel::showStatisticalShape(ica);
-       // pca->serialize("test/pca-shape-radialBase");
+        ShapeNormalizerPass *dummyNormalizer = new ShapeNormalizerPass();
+        LongitudinalStrain dummyStrain(dummyNormalizer);
+
+        VectorOfShapes shapes;
+        foreach (const Points &controlPoints, rawShapes)
+        {
+            for (int width = 30; width <= 40; width += 2)
+            {
+                Points shape = dummyStrain.getRealShapePoints(controlPoints, width);
+                shapes.push_back(shape);
+            }
+        }
+
+        PCA *pca = new PCA();
+        StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);
+        pca->serialize("/home/stepo/ownCloud/icrc/dataDir/pca-shape2");
+
+        /*ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
+        LongitudinalStrain *strain = new LongitudinalStrain(normalizer);
+        ListOfImageProcessing imgProc;
+        PointTrackerBase *pointTracker = new PointTrackerOpticalFlow(20);
+        StrainResultProcessingBase *resProc = new StrainResultProcessingPass();
+        VectorF weights; weights.push_back(1);
+        ShapeTracker tracker(strain, imgProc, pointTracker, resProc, weights);
+
+        QApplication app(0, 0);
+
+        DialogShapeModel dlgShapeModel(pca, &tracker);
+        dlgShapeModel.show();
+
+        app.exec();*/
     }
 
     static void testStatisticalShapeChanges()
     {
         PCA model;
         int framesCount = 10;
-        VectorOfShapes shapes = Serialization::readShapeList("anotated-50");
+        VectorOfShapes shapes = Serialization::readVectorOfShapes("anotated-50");
         StatisticalShapeChanges changes(shapes, framesCount, model);
         std::vector<Points> deltas = changes.createDeltas(shapes);
         model.modesSelectionThreshold();
@@ -147,11 +174,11 @@ public:
     static int testQtManager(int argc, char *argv[])
     {
         QString dataDir = "/home/stepo/ownCloud/icrc/dataDir";
-        PCA *pca = new PCA(dataDir + QDir::separator() + "pca-shape");
+        PCA *pca = new PCA(dataDir + QDir::separator() + "pca-shape2");
         StatisticalShapeModel *model = new StatisticalShapeModel(pca);
         ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
         ListOfImageProcessing processing;
-        StrainResProcFloatingAvg *postProcessing = new StrainResProcFloatingAvg(5);
+        StrainResultProcessingBase *postProcessing = new StrainResultProcessingPass(); // new StrainResProcFloatingAvg(5);
         PointTrackerNeighbourOpticalFlow *pointTracker = new PointTrackerNeighbourOpticalFlow(20, 11, 2);
         LongitudinalStrain *ls = new LongitudinalStrain(normalizer);
         float weightValues[] = {1.0f}; // {10.0, 5.0, 3.0, 2.0, 1.0};
@@ -162,7 +189,7 @@ public:
 
         // create GUI
         QApplication app(argc, argv);
-        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test2/", dataDir, tracker);
+        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test/", dataDir, tracker);
         w.show();
         return app.exec();
     }
