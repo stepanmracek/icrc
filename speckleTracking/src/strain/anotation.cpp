@@ -54,14 +54,15 @@ VectorOfShapes Anotation::anotateFromVideo(VideoDataBase &video)
         {
             if (anotationData.points.size() > 2)
             {
-                Points uniformPoints = spline.uniformDistance(anotationData.points, 15, false);
-                Mat8 frameWithPoints = frame.clone();
-                spline.drawSpline(uniformPoints, frameWithPoints, false);
+                //Points uniformPoints = spline.uniformDistance(anotationData.points, 15, false);
+                //Mat8 frameWithPoints = frame.clone();
+                //spline.drawSpline(anotation, frameWithPoints, false);
 
-                shapes.push_back(uniformPoints);
+                Points copy(anotationData.points);
+                shapes.push_back(copy);
 
-                cv::imshow("anotation", frameWithPoints);
-                cv::waitKey(1000);
+                //cv::imshow("anotation", frameWithPoints);
+                //cv::waitKey(1000);
 
                 std::cout << "stored " << shapes.size() << " shapes." << std::endl;
             }

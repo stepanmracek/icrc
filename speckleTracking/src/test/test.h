@@ -55,9 +55,9 @@ public:
 
     static void testAnotation()
     {
-        VideoDataClip data("test.wmv");
+        VideoDataClip data("/home/stepo/ownCloud/icrc/test/test.wmv");
         VectorOfShapes shapes = Anotation::anotateFromVideo(data);
-        Serialization::serialize(shapes, "shapes");
+        Serialization::serialize(shapes, "/home/stepo/ownCloud/icrc/dataDir/rawShapes");
     }
 
     static void testUniformSpline()
