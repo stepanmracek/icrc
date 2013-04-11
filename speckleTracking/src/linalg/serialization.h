@@ -70,7 +70,7 @@ public:
      * @param path Input file where the shapes are stored
      * @return Returns list of loaded shapes
      */
-    static VectorOfShapes readShapeList(const QString &path);
+    static VectorOfShapes readVectorOfShapes(const QString &path);
 
     /**
      * @brief Read the map of shapes from the file
