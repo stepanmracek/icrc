@@ -178,10 +178,10 @@ public:
         StatisticalShapeModel *model = new StatisticalShapeModel(pca);
         ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
         ListOfImageProcessing processing;
-        StrainResultProcessingBase *postProcessing = new StrainResultProcessingPass(); // new StrainResProcFloatingAvg(5);
+        StrainResultProcessingBase *postProcessing = new StrainResProcFloatingAvg(3);
         PointTrackerBase *pointTracker = new PointTrackerOpticalFlow(20); // new PointTrackerNeighbourOpticalFlow(20, 11, 2);
         Strain *ls = new LongitudinalStrain(normalizer);
-        float weightValues[] = {1.0f, 0.5f, 0.25f};
+        float weightValues[] = {1.0f, 0.5f};
         VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
         ShapeTracker *tracker = new ShapeTracker(ls, processing, pointTracker, postProcessing, weights);
 
@@ -189,7 +189,7 @@ public:
 
         // create GUI
         QApplication app(argc, argv);
-        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test/", dataDir, tracker);
+        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test2/", dataDir, tracker);
         w.show();
         return app.exec();
     }
