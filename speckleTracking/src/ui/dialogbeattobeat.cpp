@@ -66,6 +66,7 @@ void DialogBeatToBeat::addMainStrain()
     }
 
     VectorF diff;
+    VectorF mean;
     for (int i = 0; i < 100; i++)
     {
         VectorF slice;
@@ -75,9 +76,11 @@ void DialogBeatToBeat::addMainStrain()
         }
 
         diff.push_back(VecF::stdDeviation(slice));
+        mean.push_back(VecF::meanValue(slice));
     }
 
     ui->plotDiff->addData(diff, "diff", Qt::white);
+    ui->plotMean->addData(mean, "mean", Qt::white);
 }
 
 void DialogBeatToBeat::addAllSegments()
