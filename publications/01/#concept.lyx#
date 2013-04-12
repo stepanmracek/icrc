@@ -1015,13 +1015,16 @@ name "fig:Beat-to-beat-variance"
 \end_layout
 
 \begin_layout Standard
-The another important metrics of the tracker is precision and stability.
+The most important metrics of the tracker is precision.
  The error during the tracking is cumulative.
  Together with the initial annotation, we have also annotated the last frame
- of every beat.
- The Precision of the tracker is the sum of distances between points in
- annotated reference in last frame and points from the shape gained by tracing
- from the first frame.
+ of every beat and arbitrary frame approximately in between the beat start
+ and end.
+ The precision of the tracker is the sum of distances between points in
+ annotated reference and points from the shape gained by tracing from the
+ first frame.
+ The resulting precision of the tracker is sum of all precisions in all
+ records.
 \end_layout
 
 \begin_layout Standard
@@ -1054,6 +1057,10 @@ Sum of all previous quality metrics
 
 \begin_layout Subsection
 Comparison of implemented techniques
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Section
