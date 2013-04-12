@@ -51,7 +51,8 @@ HEADERS += \
     ui/dialogimageprocessing.h \
     ui/dialogshapemodel.h \
     ui/graphicsviewwithevents.h \
-    strain/batchtesting.h
+    strain/batchtesting.h \
+    ui/dialogsaveplot.h
 
 SOURCES += \
     linalg/vecf.cpp \
@@ -95,7 +96,8 @@ SOURCES += \
     ui/dialogshapemodel.cpp \
     ui/graphicsviewwithevents.cpp \
     ui/widgetplot.cpp \
-    strain/batchtesting.cpp
+    strain/batchtesting.cpp \
+    ui/dialogsaveplot.cpp
 
 INCLUDEPATH += src
 
@@ -127,7 +129,8 @@ FORMS += \
     ui/dialogbeattobeat.ui \
     ui/dialogcreatetracker.ui \
     ui/dialogimageprocessing.ui \
-    ui/dialogshapemodel.ui
+    ui/dialogshapemodel.ui \
+    ui/dialogsaveplot.ui
 
 RESOURCES += \
     ui/resources.qrc
