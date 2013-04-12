@@ -1,0 +1,39 @@
+Impact of Weights
+=================
+Cosine 11
+weights improve stability, but not precision
+Weights1 575.655 5.83587 15.8586 
+Weights2 587.114 4.35005 12.8015 
+Weights3 597.686 3.45233 12.0442 
+
+Optical flow
+weights improve both stability and precision
+Weights1 564.799 8.06084 17.2343 
+Weights2 539.254 8.3596 18.9067 
+Weights3 520.509 6.89009 18.7483
+
+Neighbour optical flow 11 2
+weights improve both stability and precision
+Weights1 561.507 8.41026 19.2354 
+Weights2 546.271 8.38119 19.1293 
+Weights3 525.206 7.33454 19.3082 
+
+Impact of averaging
+===================
+Cosine 11
+averaging improves stability, but not precision
+1 575.655 5.83587 15.8586 
+3 593.707 5.65342 15.0556 
+5 607.525 5.61986 14.4779
+
+Optical flow
+averaging improves stability, but not precision
+1 564.799 8.06084 17.2343 
+3 587.569 7.68536 16.4871 
+5 609.912 7.15478 15.7039 
+
+Neighbour optical flow 11 2
+averaging improves stability, but not precision
+1 561.507 8.41026 19.2354 
+3 584.984 8.10625 18.0001 
+5 608.548 7.61647 16.9981 
