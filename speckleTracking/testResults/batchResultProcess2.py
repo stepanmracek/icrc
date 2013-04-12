@@ -26,7 +26,10 @@ minTotalSum = 1e300
 
 state = NAME
 
+index = 0
 for line in f:
+	inde += 1
+	if (index == 10) break
 	if state == NAME:
 		if line.strip() == '':
 			state = DATA
