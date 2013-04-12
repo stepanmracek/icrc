@@ -28,7 +28,7 @@ state = NAME
 
 index = 0
 for line in f:
-	inde += 1
+	index += 1
 	if (index == 10): break
 	if state == NAME:
 		if line.strip() == '':
