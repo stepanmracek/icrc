@@ -33,10 +33,8 @@ for line in f:
 	if state == NAME:
 		if line.strip() == '':
 			state = DATA
-
-			print(name)
-			print('--------------------------')
 		else:
+			print (line.strip())
 			name = name + line
 
 	elif state == DATA:
