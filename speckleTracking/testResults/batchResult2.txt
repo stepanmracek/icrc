@@ -1272,4 +1272,3 @@ Weights:
 cumulativeDiff 573.807 
 cumulativeStdDev 6.74505 
 cumulativePerSegmentStdDev 17.6907 
- 
