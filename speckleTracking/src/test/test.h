@@ -179,9 +179,9 @@ public:
         ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
         ListOfImageProcessing processing;
         StrainResultProcessingBase *postProcessing = new StrainResultProcessingPass(); // new StrainResProcFloatingAvg(5);
-        PointTrackerNeighbourOpticalFlow *pointTracker = new PointTrackerNeighbourOpticalFlow(20, 11, 2);
+        PointTrackerNeighbourOpticalFlow *pointTracker = new PointTrackerOpticalFlow(20); // new PointTrackerNeighbourOpticalFlow(20, 11, 2);
         LongitudinalStrain *ls = new LongitudinalStrain(normalizer);
-        float weightValues[] = {1.0f}; // {10.0, 5.0, 3.0, 2.0, 1.0};
+        float weightValues[] = {1.0f, 0.5f, 0.25f};
         VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
         ShapeTracker *tracker = new ShapeTracker(ls, processing, pointTracker, postProcessing, weights);
 
