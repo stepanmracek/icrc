@@ -31,6 +31,7 @@ void DialogBeatToBeat::on_comboBox_activated(const QString &text)
     //qDebug() << "Displaying" << text;
     ui->plotBeats->detachItems();
     ui->plotDiff->detachItems();
+    ui->plotMean->detachItems();
 
     if (text.compare("Main strain") == 0)
     {
@@ -49,6 +50,7 @@ void DialogBeatToBeat::on_comboBox_activated(const QString &text)
 
     ui->plotBeats->replot();
     ui->plotDiff->replot();
+    ui->plotMean->replot();
 }
 
 void DialogBeatToBeat::addMainStrain()
