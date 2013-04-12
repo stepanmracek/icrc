@@ -29,7 +29,7 @@ state = NAME
 index = 0
 for line in f:
 	index += 1
-	if (index == 10): break
+	if (index == 30): break
 	if state == NAME:
 		if line.strip() == '':
 			state = DATA
