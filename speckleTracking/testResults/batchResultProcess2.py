@@ -74,22 +74,3 @@ for line in f:
 
 			state = NAME
 
-print("minMeanStrain: %f" % minMeanStrain)
-print(minMeanStrainName)
-print()
-
-print("minPerSegmentStrain: %f" % minPerSegmentStrain)
-print(minPerSegmentStrainName)
-print()
-
-print("minStrainSum: %f" % minStrainSum)
-print(minStrainSumName)
-print()
-
-print("minDiff: %f" % minDiff)
-print(minDiffName)
-print()
-
-print("minTotalSum: %f" % minTotalSum)
-print(minTotalSumName)
-print()
