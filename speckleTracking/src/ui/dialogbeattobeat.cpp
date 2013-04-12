@@ -114,6 +114,7 @@ void DialogBeatToBeat::addSegment(int index)
     }
 
     VectorF diff;
+    VectorF mean;
     for (int i = 0; i < 100; i++)
     {
         VectorF slice;
@@ -123,7 +124,9 @@ void DialogBeatToBeat::addSegment(int index)
         }
 
         diff.push_back(VecF::stdDeviation(slice));
+        mean.push_back(VecF::meanValue(slice));
     }
 
     ui->plotDiff->addData(diff, "diff", QColor::fromHsvF((float)index/segCount, 1, 1));
+    ui->plotMean->addData(mean, "mean", QColor::fromHsvF((float)index/segCount, 1, 1));
 }
