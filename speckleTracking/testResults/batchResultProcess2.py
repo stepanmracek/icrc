@@ -29,12 +29,11 @@ state = NAME
 index = 0
 for line in f:
 	index += 1
-	if (index == 30): break
+	if (index == 10): break
 	if state == NAME:
 		if line.strip() == '':
 			state = DATA
 		else:
-			print (line.strip())
 			name = name + line
 
 	elif state == DATA:
@@ -74,4 +73,5 @@ for line in f:
 				minTotalSumName = name
 
 			state = NAME
+			name = ''
 
