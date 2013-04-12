@@ -1,11 +1,9 @@
 #! /usr/bin/env python
 
-f = open("batchResult.txt")
+f = open("batchResult2.txt")
 
-BEGIN = 1
-NAME = 2
-STDDEV = 3
-DIFF = 4
+NAME = 1
+DATA = 2
 
 name = ""
 meanStrain = 0.0
@@ -14,56 +12,64 @@ strainSum = 0.0
 diff = 0.0
 totalSum = 0.0
 
+meanStrainDict = {}
+perSegmentStrainDict = {}
+strainSumDict = {}
+diffDict = {}
+totalSumDict = {}
+
 minMeanStrain = 1e300
 minPerSegmentStrain = 1e300
 minStrainSum = 1e300
 minDiff = 1e300
 minTotalSum = 1e300
 
-state = BEGIN
+state = NAME
 
 for line in f:
-	if state == BEGIN:
-		index = line.find('"')
-		name = line[index+1:]
-		state = NAME
-	elif state == NAME:
-		if line.strip() == '"':
-			state = STDDEV
+	if state == NAME:
+		if line.strip() == '':
+			state = DATA
 		else:
 			name = name + line
-	elif state == STDDEV:
-		items = line.split()
-		meanStrain = float(items[1])
-		perSegmentStrain = float(items[2])
-		strainSum = float(items[3])
-		state = DIFF
-	elif state == DIFF:
-		items = line.split()
-		diff = float(items[1])
-		state = BEGIN
+			
+	elif state == DATA:
+		if line.strip() != '':
+			items = line.split()
+			if (items[0] == 'cumulativeDiff'):
+				diff = float(items[1])
+				diffDict[name] = diff
+			elif (items[0] == 'cumulativeStdDev'):
+				meanStrain = float(items[1])
+				meanStrainDict[name] 
+			elif (items[0] = 'cumulativePerSegmentStdDev'):
+				perSegmentStrain = float(items[1])
+				perSegmentStrainDict[name] = perSegmentStrain
+		else:
+			strainSum = meanStrain + perSegmentStrain
+			totalSum = strainSum + diff
 
-		totalSum = strainSum + diff
+			if (meanStrain < minMeanStrain):
+				minMeanStrainName = name
+				minMeanStrain = meanStrain
 
-		if (meanStrain < minMeanStrain):
-			minMeanStrainName = name
-			minMeanStrain = meanStrain
+			if (perSegmentStrain < minPerSegmentStrain):
+				minPerSegmentStrain = perSegmentStrain
+				minPerSegmentStrainName = name
 
-		if (perSegmentStrain < minPerSegmentStrain):
-			minPerSegmentStrain = perSegmentStrain
-			minPerSegmentStrainName = name
+			if (strainSum < minStrainSum):
+				minStrainSum = strainSum
+				minStrainSumName = name
 
-		if (strainSum < minStrainSum):
-			minStrainSum = strainSum
-			minStrainSumName = name
+			if (diff < minDiff):
+				minDiff = diff
+				minDiffName = name
 
-		if (diff < minDiff):
-			minDiff = diff
-			minDiffName = name
+			if (totalSum < minTotalSum):
+				minTotalSum = totalSum
+				minTotalSumName = name
 
-		if (totalSum < minTotalSum):
-			minTotalSum = totalSum
-			minTotalSumName = name
+			state = NAME
 
 print("minMeanStrain: %f" % minMeanStrain)
 print(minMeanStrainName)
