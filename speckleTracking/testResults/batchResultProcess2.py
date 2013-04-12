@@ -41,7 +41,7 @@ for line in f:
 				diffDict[name] = diff
 			elif (items[0] == 'cumulativeStdDev'):
 				meanStrain = float(items[1])
-				meanStrainDict[name] 
+				meanStrainDict[name] = meanStrain
 			elif (items[0] == 'cumulativePerSegmentStdDev'):
 				perSegmentStrain = float(items[1])
 				perSegmentStrainDict[name] = perSegmentStrain
