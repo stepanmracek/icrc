@@ -32,7 +32,7 @@ for line in f:
 			state = DATA
 		else:
 			name = name + line
-			
+
 	elif state == DATA:
 		if line.strip() != '':
 			items = line.split()
@@ -42,7 +42,7 @@ for line in f:
 			elif (items[0] == 'cumulativeStdDev'):
 				meanStrain = float(items[1])
 				meanStrainDict[name] 
-			elif (items[0] = 'cumulativePerSegmentStdDev'):
+			elif (items[0] == 'cumulativePerSegmentStdDev'):
 				perSegmentStrain = float(items[1])
 				perSegmentStrainDict[name] = perSegmentStrain
 		else:
