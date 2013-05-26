@@ -279,7 +279,7 @@ There i a tradeoff between local accuracy and robustness when choosing the
  window.
  Contraty, the large window size lacks accuracy.
  Therefore, an ivolvemenet of the imager pyramid representation has been
- proposed [TODO citace].
+ proposed by [TODO citace].
  The main 
 \end_layout
 
