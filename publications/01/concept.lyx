@@ -272,7 +272,31 @@ v=(A^{T}A)^{-1}A^{T}b
 \end_layout
 
 \begin_layout Standard
-TODO: PyrLK
+There i a tradeoff between local accuracy and robustness when choosing the
+ integration window size.
+ Smaller window size is able to capture even tiny motion.
+ On the other hand, the tracking is lost when the movement exceeds the search
+ window.
+ Contraty, the large window size lacks accuracy.
+ Therefore, an ivolvemenet of the imager pyramid representation has been
+ proposed by [TODO citace].
+ The main 
+\end_layout
+
+\begin_layout Itemize
+Image pyramid representation
+\end_layout
+
+\begin_layout Itemize
+Reformulated optimal solution of tracking
+\end_layout
+
+\begin_layout Itemize
+Guess propagation
+\end_layout
+
+\begin_layout Itemize
+Iterative solution
 \end_layout
 
 \begin_layout Subsection
