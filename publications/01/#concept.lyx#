@@ -276,12 +276,20 @@ TODO: PyrLK
 \end_layout
 
 \begin_layout Itemize
-radeo between local accuracy and robustness when choosing the integration
+tradeoff between local accuracy and robustness when choosing the integration
  window size
 \end_layout
 
 \begin_layout Itemize
+Image pyramid representation
+\end_layout
 
+\begin_layout Itemize
+Reformulated optimal solution of tracking
+\end_layout
+
+\begin_layout Itemize
+Propagation of error
 \end_layout
 
 \begin_layout Subsection
