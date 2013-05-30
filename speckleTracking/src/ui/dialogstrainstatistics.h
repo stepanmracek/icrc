@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QMap>
+#include <QTimer>
 
 #include "strain/strainstatistics.h"
 #include "strain/videodatabase.h"
@@ -23,8 +24,14 @@ public:
 
     void SetData(StrainStatistics *strainStatistics, ShapeTracker *tracker, VideoDataClip *clip, QMap<int, Points> &shapes);
     
+private slots:
+    void timerTick();
+    void on_playSlider_valueChanged(int value);
+
 private:
     Ui::DialogStrainStatistics *ui;
+    QTimer timer;
+
 };
 
 #endif // DIALOGSTRAINSTATISTICS_H

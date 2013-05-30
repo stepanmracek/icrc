@@ -6,6 +6,9 @@ DialogStrainStatistics::DialogStrainStatistics(QWidget *parent) :
     ui(new Ui::DialogStrainStatistics)
 {
     ui->setupUi(this);
+    timer.setSingleShot(false);
+    timer.stop();
+    timer.connect(&timer, SIGNAL(timeout()), this, SLOT(timerTick()));
 }
 
 DialogStrainStatistics::~DialogStrainStatistics()
@@ -36,4 +39,24 @@ void DialogStrainStatistics::SetData(StrainStatistics *strainStatistics, ShapeTr
     ui->strainVideoWidget->setClip(clip);
     ui->strainVideoWidget->shapes = shapes;
     ui->strainVideoWidget->display(0);
+}
+
+void DialogStrainStatistics::timerTick()
+{
+    int i = ui->strainVideoWidget->getCurrentIndex();
+    int n = ui->strainVideoWidget->getClip()->size();
+    ui->strainVideoWidget->setSliderValue((i+1) % n);
+}
+
+void DialogStrainStatistics::on_playSlider_valueChanged(int value)
+{
+    if (ui->playSlider->value() == 0)
+    {
+        timer.stop();
+    }
+    else
+    {
+        int interval = (ui->playSlider->maximum()-value)*30;
+        timer.start(interval);
+    }
 }

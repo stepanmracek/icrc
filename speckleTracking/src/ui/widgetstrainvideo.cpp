@@ -30,6 +30,11 @@ void WidgetStrainVideo::display(int index)
     emit displayIndexChanged(index);
 }
 
+void WidgetStrainVideo::setSliderValue(int index)
+{
+    ui->horizontalSlider->setValue(index);
+}
+
 void WidgetStrainVideo::on_btnPrev_clicked()
 {
     if (!clip) return;

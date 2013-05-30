@@ -58,6 +58,8 @@ public slots:
     void setControlPoints(Points controlPoints, int shapeWidth);
     void setResultPoints(Points points);
     void display(int index);
+    void setSliderValue(int index);
+
 
 private slots:
     void on_btnPrev_clicked();
