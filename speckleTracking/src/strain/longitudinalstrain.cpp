@@ -49,9 +49,9 @@ Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, int s
         float dy = next.y - prev.y;
         float dMag = sqrt(dx*dx + dy*dy);
 
-        float midx = cur.x - dy/dMag*shapeWidth/2.0;
-        float midy = cur.y + dx/dMag*shapeWidth/2.0;
-        uniformInnerPoints.push_back(P(midx, midy));
+        float inx = cur.x - dy/dMag*shapeWidth/2.0;
+        float iny = cur.y + dx/dMag*shapeWidth/2.0;
+        uniformInnerPoints.push_back(P(inx, iny));
 
         float outx = cur.x + dy/dMag*shapeWidth/2.0;
         float outy = cur.y - dx/dMag*shapeWidth/2.0;
