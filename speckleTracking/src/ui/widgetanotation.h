@@ -13,6 +13,7 @@ class WidgetAnotation : public QGraphicsView
 public:
     explicit WidgetAnotation(QWidget *parent = 0);
 
+    void setShapeWidth(int width);
     void setImage(QPixmap pixmap);
     void setControlPoints(Points points);
     Points getControlPoints();
@@ -27,6 +28,7 @@ protected:
 private:
     QPen whitePen;
     QPen yellowPen;
+    int shapeWidth;
 
     Spline spline;
     Points controlPoints;

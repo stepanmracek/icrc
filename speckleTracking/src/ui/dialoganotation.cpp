@@ -27,3 +27,8 @@ int DialogAnotation::getShapeWidth()
 {
     return ui->spinBox->value();
 }
+
+void DialogAnotation::on_spinBox_valueChanged(int newValue)
+{
+    ui->widgetAnotation->setShapeWidth(newValue);
+}

@@ -24,6 +24,9 @@ public:
 public slots:
     void setImage(QPixmap pixmap);
     
+private slots:
+    void on_spinBox_valueChanged(int newValue);
+
 private:
     Ui::DialogAnotation *ui;
 };

@@ -7,6 +7,7 @@
 WidgetAnotation::WidgetAnotation(QWidget *parent) :
     QGraphicsView(parent)
 {
+    shapeWidth = 20;
     whitePen = QPen(Qt::white);
     yellowPen = QPen(Qt::yellow);
 
@@ -29,6 +30,13 @@ void WidgetAnotation::setImage(QPixmap pixmap)
     scene->clear();
     scene->addPixmap(pixmap);
     imageLoaded = true;
+}
+
+void WidgetAnotation::setShapeWidth(int width)
+{
+    shapeWidth = width;
+    clearLines();
+    drawLines();
 }
 
 void WidgetAnotation::setControlPoints(Points points)
@@ -131,14 +139,64 @@ void WidgetAnotation::clearControlCircles()
 
 void WidgetAnotation::drawLines()
 {
+    if (controlPoints.size() <= 1) return;
+
+    Points inner, outer;
+    for (int i = 0; i < controlPoints.size(); i++)
+    {
+        int prevIndex, nextIndex;
+        if (i == 0)
+        {
+            prevIndex = 0;
+            nextIndex = 1;
+        }
+        else if (i == controlPoints.size()-1)
+        {
+            prevIndex = controlPoints.size()-2;
+            nextIndex = controlPoints.size()-1;
+        }
+        else
+        {
+            prevIndex = i-1;
+            nextIndex = i+1;
+        }
+
+        P &prev = controlPoints[prevIndex];
+        P &cur = controlPoints[i];
+        P &next = controlPoints[nextIndex];
+
+        float dx = next.x - prev.x;
+        float dy = next.y - prev.y;
+        float dMag = sqrt(dx*dx + dy*dy);
+
+        float inx = cur.x - dy/dMag*shapeWidth/2.0;
+        float iny = cur.y + dx/dMag*shapeWidth/2.0;
+        inner.push_back(P(inx, iny));
+
+        float outx = cur.x + dy/dMag*shapeWidth/2.0;
+        float outy = cur.y - dx/dMag*shapeWidth/2.0;
+        outer.push_back(P(outx, outy));
+    }
+
     Points splinePoints = spline.getSplinePoints(controlPoints);
+    Points innerSplinePoints = spline.getSplinePoints(inner);
+    Points outerSplinePoints = spline.getSplinePoints(outer);
     int n = splinePoints.size();
     for (int i = 1; i < n; i++)
     {
-        P &prev = splinePoints[i-1];
-        P &next = splinePoints[i];
-
+        P prev = splinePoints[i-1];
+        P next = splinePoints[i];
         QGraphicsLineItem *line = scene->addLine(prev.x, prev.y, next.x, next.y, whitePen);
+        splineLines << line;
+
+        prev = innerSplinePoints[i-1];
+        next = innerSplinePoints[i];
+        line = scene->addLine(prev.x, prev.y, next.x, next.y, whitePen);
+        splineLines << line;
+
+        prev = outerSplinePoints[i-1];
+        next = outerSplinePoints[i];
+        line = scene->addLine(prev.x, prev.y, next.x, next.y, whitePen);
         splineLines << line;
     }
 }
