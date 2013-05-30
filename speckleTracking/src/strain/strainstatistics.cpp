@@ -12,48 +12,69 @@ StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
 
     unsigned int pointsCount = shapes.front().size();
     assert (pointsCount > 0);
+    qDebug() << "StrainStatistics";
+    qDebug() << "pointsCount" << pointsCount << pointsCount/3 -1;
+    qDebug() << "points per segment" << strainModel->pointsPerSegment;
+    qDebug() << "segments" << strainModel->segmentsCount;
 
+    strainForPoints = std::vector<VectorF>(pointsCount/3 - 1);
     strainForSegments = std::vector<VectorF>(strainModel->segmentsCount);
-    std::vector<float> firstStrainForSegments(strainModel->segmentsCount);
 
     // Strain
     bool first = true;
-    float firstStrain;
+    float firstD;
+    VectorF firstStrainForPoints;
     for (VectorOfShapes::iterator it = shapes.begin(); it != shapes.end(); ++it)
     {
         Points &shape = *it;
         assert(pointsCount == shape.size());
 
-        P base = strainModel->getBasePoint(shape);
-        P apex = strainModel->getApexPoint(shape);
-        float s = Common::eucl(base, apex);
-        if (first)
+        float totalD = 0;
+        for (int p = 0; p < pointsCount/3 - 1; p++)
         {
-            firstStrain = s;
-        }
-        s = (s - firstStrain)/firstStrain;
-        strain.push_back(s);
+            float d = Common::eucl(shape[p], shape[p+3]);
+            d += Common::eucl(shape[p+1], shape[p+4]);
+            d += Common::eucl(shape[p+2], shape[p+5]);
+            d /= 3;
 
-        for (int segment = 0; segment < strainModel->segmentsCount; segment++)
-        {
-            int p = segment * (strainModel->pointsPerSegment*3)+1;
-            int n = (segment+1) * (strainModel->pointsPerSegment*3)+1;
-
-            float s = Common::eucl(shape[p], shape[n]);
             if (first)
             {
-                firstStrainForSegments[segment] = s;
+                firstStrainForPoints.push_back(d);
             }
-            s = (s - firstStrainForSegments[segment])/firstStrainForSegments[segment];
-            strainForSegments[segment].push_back(s);
+
+            strainForPoints[p].push_back((d - firstStrainForPoints[p]) / firstStrainForPoints[p]);
+            totalD += d;
         }
 
-        first = false;
+        for (int i = 0; i < strainModel->segmentsCount; i++)
+        {
+            int startPointIndex = i*strainModel->pointsPerSegment;
+            float segmentStrain = 0;
+            for (int p = startPointIndex; p < startPointIndex + strainModel->pointsPerSegment; p++)
+            {
+                segmentStrain += strainForPoints[p].back();
+            }
+            segmentStrain /= strainModel->pointsPerSegment;
+            strainForSegments[i].push_back(segmentStrain);
+        }
+
+        if (first)
+        {
+            first = false;
+            firstD = totalD;
+        }
+
+        float s = (totalD - firstD)/ firstD;
+        strain.push_back(s);
     }
 
     // Strain rate
     strainRate = Common::deltas(strain);
-    for (unsigned int i = 0; i < strainModel->segmentsCount; i++)
+    for (int i = 0; i < pointsCount/3 - 1; i++)
+    {
+        strainRateForPoints.push_back(Common::deltas(strainForPoints[i]));
+    }
+    for (int i = 0; i < strainModel->segmentsCount; i++)
     {
         strainRateForSegments.push_back(Common::deltas(strainForSegments[i]));
     }

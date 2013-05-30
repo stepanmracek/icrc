@@ -13,7 +13,9 @@ public:
     VectorF strain;
     VectorF strainRate;
 
+    std::vector<VectorF> strainForPoints;
     std::vector<VectorF> strainForSegments;
+    std::vector<VectorF> strainRateForPoints;
     std::vector<VectorF> strainRateForSegments;
 
     StrainStatistics() { }
