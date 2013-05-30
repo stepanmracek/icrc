@@ -189,7 +189,7 @@ public:
 
         // create GUI
         QApplication app(argc, argv);
-        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test2/", dataDir, tracker);
+        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test/", dataDir, tracker);
         w.show();
         return app.exec();
     }
