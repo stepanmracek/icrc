@@ -134,13 +134,15 @@ QList<QGraphicsItem*> LongitudinalStrain::drawResult(QGraphicsScene *scene, Poin
     newItems << baseLine;
 
     QPen pen;
+    QBrush brush(Qt::SolidPattern);
     for (int i = 0; i < n; i++)
     {
         double hue = (double)i/n;
         pen.setColor(QColor::fromHsvF(hue, 1, 1));
+        brush.setColor(QColor::fromHsvF(hue, 1, 1, 0.5));
 
         P &p = resultPoints[i];
-        QGraphicsItem *item = scene->addEllipse(p.x-2, p.y-2, 4, 4, pen);
+        QGraphicsItem *item = scene->addEllipse(p.x-2, p.y-2, 4, 4, pen, brush);
         newItems << item;
     }
 
