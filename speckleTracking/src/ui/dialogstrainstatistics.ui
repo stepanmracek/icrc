@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>364</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -71,20 +71,41 @@
           </widget>
          </item>
          <item>
-          <widget class="WidgetSpectrogram" name="spectrogramPlot" native="true">
-           <property name="minimumSize">
-            <size>
-             <width>200</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>200</height>
-            </size>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="WidgetRainbow" name="widgetRainbow" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>15</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>15</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="WidgetSpectrogram" name="spectrogramPlot" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>200</height>
+              </size>
+             </property>
+             <zorder>widgetRainbow</zorder>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
@@ -126,20 +147,40 @@
           </widget>
          </item>
          <item>
-          <widget class="WidgetSpectrogram" name="spectrogramRatePlot" native="true">
-           <property name="minimumSize">
-            <size>
-             <width>200</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>200</height>
-            </size>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="WidgetRainbow" name="widgetRainbow_2" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>15</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>15</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="WidgetSpectrogram" name="spectrogramRatePlot" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>200</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
@@ -224,6 +265,12 @@
    <slots>
     <slot>setIndex(int)</slot>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>WidgetRainbow</class>
+   <extends>QWidget</extends>
+   <header>ui/widgetrainbow.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

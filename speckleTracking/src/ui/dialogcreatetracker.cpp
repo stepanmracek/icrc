@@ -71,7 +71,7 @@ void DialogCreateTracker::onCreateNewTrackerRequest()
         StatisticalShapeModel *model = new StatisticalShapeModel(pca);
         normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
     }
-    LongitudinalStrain *strain = new LongitudinalStrain(normalizer);
+    LongitudinalStrain *strain = new LongitudinalStrain(normalizer, 6, 5);
 
     // Point tracker
     QString selectedTracker = ui->cmbPointTracker->currentText();
