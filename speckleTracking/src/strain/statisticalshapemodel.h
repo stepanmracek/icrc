@@ -14,7 +14,7 @@
 #include "linalg/pca.h"
 //#include "strain/coordsystem.h"
 
-class StatisticalShapeModel : public QObject
+class StatisticalShapeModel : public SerializableObject
 {
     Q_OBJECT
 
@@ -37,8 +37,11 @@ public:
         return this->backProjection;
     }
 
-    Points normalize(Points &input);
-    Points iterativeNormalize(Points &input);
+    Points normalize(const Points &input);
+    Points iterativeNormalize(const Points &input);
+
+    void serialize(const QString &path);
+    void deserialize(const QString &path);
 
     static void showStatisticalShape(BackProjectionBase *backProjection);
 };

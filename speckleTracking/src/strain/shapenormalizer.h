@@ -6,15 +6,16 @@
 #include "linalg/common.h"
 #include "linalg/backprojectionbase.h"
 #include "statisticalshapemodel.h"
+#include "linalg/serializableobject.h"
 
-class ShapeNormalizerBase : public QObject
+class ShapeNormalizerBase : public SerializableObject
 {
     Q_OBJECT
 
 public:
-    ShapeNormalizerBase(QObject *parent = 0) : QObject(parent) { }
+    ShapeNormalizerBase(QObject *parent = 0) : SerializableObject(parent) { }
 
-    virtual Points normalize(Points &points, Mat8 &frame) = 0;
+    virtual Points normalize(const Points &points, const Mat8 &frame) = 0;
 
     virtual QString getInfo() = 0;
 };
@@ -33,6 +34,16 @@ public:
         model->setParent(this);
     }
 
+    void serialize(const QString &path)
+    {
+        model->serialize(path);
+    }
+
+    void deserialize(const QString &path)
+    {
+        model->deserialize(path);
+    }
+
     StatisticalShapeModel *getShapeModel() const
     {
         return model;
@@ -47,7 +58,7 @@ public:
     ShapeNormalizerStatisticalShape(StatisticalShapeModel *model, QObject *parent = 0) :
         ShapeNormalizerShapeModel(model, parent) { }
 
-    Points normalize(Points &points, Mat8 &)
+    Points normalize(const Points &points, const Mat8 &)
     {
         return model->normalize(points);
     }
@@ -66,7 +77,7 @@ public:
     ShapeNormalizerIterativeStatisticalShape(StatisticalShapeModel *model, QObject *parent = 0) :
         ShapeNormalizerShapeModel(model, parent) { }
 
-    Points normalize(Points &points, Mat8 &)
+    Points normalize(const Points &points, const Mat8 &)
     {
         return model->iterativeNormalize(points);
     }
@@ -98,7 +109,10 @@ private:
 public:
     ShapeNormalizerPass(QObject *parent = 0) : ShapeNormalizerBase(parent) { }
 
-    Points normalize(Points &points, Mat8 &)
+    void serialize(const QString &) {}
+    void deserialize(const QString &) {}
+
+    Points normalize(const Points &points, const Mat8 &)
     {
         return points;
     }

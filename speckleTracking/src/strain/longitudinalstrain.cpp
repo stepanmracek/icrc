@@ -1,10 +1,12 @@
 #include "longitudinalstrain.h"
 
-#include "shapeprocessing.h"
 #include <QDebug>
 
-LongitudinalStrain::LongitudinalStrain(ShapeNormalizerBase *shapeNormalizer, QObject *parent) :
-    Strain(shapeNormalizer, 6, 5, parent)
+#include "shapeprocessing.h"
+#include "linalg/frequencymodulation.h"
+
+LongitudinalStrain::LongitudinalStrain(ShapeNormalizerBase *shapeNormalizer, int segmentsCount, int pointsPerSegment, QObject *parent) :
+    Strain(shapeNormalizer, segmentsCount, pointsPerSegment, parent)
 {
     //segmentsCount = 6;
     //pointsPerSegment = 5;
@@ -12,12 +14,21 @@ LongitudinalStrain::LongitudinalStrain(ShapeNormalizerBase *shapeNormalizer, QOb
 
 Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, int shapeWidth)
 {
+    return getRealShapePoints(controlPoints, shapeWidth, 0);
+}
+
+Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, int shapeWidth, VectorF *modulationValues)
+{
     Points result;
     int n = controlPoints.size();
     if (n <= 1) return result;
 
     Points uniformMidControlPoints = spline.uniformDistance(controlPoints, segmentsCount, false);
     Points uniformMidPoints = spline.getSplinePoints(uniformMidControlPoints, pointsPerSegment);
+    if (modulationValues)
+    {
+        uniformMidPoints = FrequencyModulation::modulate(uniformMidPoints, *modulationValues);
+    }
     int uniformSize = uniformMidPoints.size();
 
     Points uniformInnerPoints;
@@ -68,38 +79,6 @@ Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, int s
     Mat8 m;
     return getShapeNormalizer()->normalize(result, m);
 }
-
-/*Points LongitudinalStrain::getRealShapePoints(Points &controlPoints)
-{
-    Points result;
-    int n = controlPoints.size();
-    if (n <= 2) return result;
-
-    Points uniformInnerControlPoints = spline.uniformDistance(controlPoints, 6, false);
-    qDebug() << "uniformInnerControlPoints:" << uniformInnerControlPoints.size();
-
-    Points uniformInnerPoints = spline.getSplinePoints(uniformInnerControlPoints, 5);
-    qDebug() << "uniformInnerPoints:" << uniformInnerPoints.size();
-    for (unsigned int i = 0; i < uniformInnerPoints.size(); i++)
-    {
-        qDebug() << "  " << i << uniformInnerPoints[i].x << uniformInnerPoints[i].y;
-    }
-
-    P base = P((controlPoints[0].x + controlPoints[n-1].x) / 2, (controlPoints[0].y + controlPoints[n-1].y) / 2);
-
-    Points uniformMidPoints = ShapeProcessing::outline(uniformInnerPoints, shapeWidth/2, base);
-    Points uniformOuterPoints = ShapeProcessing::outline(uniformInnerPoints, shapeWidth, base);
-
-    int uniformSize = uniformInnerPoints.size();
-    for (int i = 0; i < uniformSize; i++)
-    {
-        result.push_back(uniformInnerPoints[i]);
-        result.push_back(uniformMidPoints[i]);
-        result.push_back(uniformOuterPoints[i]);
-    }
-
-    return result;
-}*/
 
 QList<QGraphicsItem*> LongitudinalStrain::drawResult(QGraphicsScene *scene, Points &resultPoints)
 {

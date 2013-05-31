@@ -64,7 +64,7 @@ public:
      * @param points input shape
      * @return Converted shape. The shape ((x1,y1),...,(xn,yn)) is converted to column matrix [x1,...,xm,y1,...,yn]
      */
-	static MatF pointsToMatF(Points &points)
+    static MatF pointsToMatF(const Points &points)
 	{
 		int n = points.size();
 		MatF mat(n*2, 1);
@@ -98,7 +98,7 @@ public:
      * @param shapes vector of points/shapes
      * @return Resulting matrix. [shape_1_x1,shape_1_y1,shape_1_x2,shape_1_y2,...,shape_1xn,shape_1ym,shape_2,...,shape_m]
      */
-    static MatF pointsToMatF(std::vector<Points> &shapes)
+    static MatF pointsToMatF(const std::vector<Points> &shapes)
     {
         int m = shapes.size();
         assert(m > 0);
@@ -108,10 +108,10 @@ public:
         int r = 0;
         for (int shapeIndex = 0; shapeIndex < m; shapeIndex++)
         {
-            Points &shape = shapes[shapeIndex];
+            const Points &shape = shapes[shapeIndex];
             for (int pointIndex = 0; pointIndex < n; pointIndex++)
             {
-                P &p = shape[pointIndex];
+                const P &p = shape[pointIndex];
                 result(r) = p.x;
                 r++;
                 result(r) = p.y;

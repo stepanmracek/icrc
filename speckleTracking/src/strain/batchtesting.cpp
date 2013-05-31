@@ -304,7 +304,7 @@ void BatchTesting::process()
             {
                 foreach (VectorF w, weights)
                 {
-                    LongitudinalStrain *strain = new LongitudinalStrain(normalizer);
+                    LongitudinalStrain *strain = new LongitudinalStrain(normalizer, 6, 5);
                     ShapeTracker *tracker = new ShapeTracker(strain, processing, pointTracker, resultProcessing, w);
 
                     processOneTracker(tracker, clips, referenceShapeMaps);

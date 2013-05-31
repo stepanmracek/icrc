@@ -13,9 +13,11 @@ private:
     Spline spline;
 
 public:
-    LongitudinalStrain(ShapeNormalizerBase *shapeNormalizer, QObject *parent = 0);
+    LongitudinalStrain(ShapeNormalizerBase *shapeNormalizer, int segmentsCount, int pointsPerSegment, QObject *parent = 0);
 
     Points getRealShapePoints(const Points &controlPoints, int shapeWidth);
+
+    Points getRealShapePoints(const Points &controlPoints, int shapeWidth, VectorF *modulationValues);
 
     bool isValidShape(Points &realPoints) { return true; }
 

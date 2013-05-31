@@ -52,7 +52,9 @@ HEADERS += \
     ui/dialogshapemodel.h \
     ui/graphicsviewwithevents.h \
     strain/batchtesting.h \
-    ui/dialogsaveplot.h
+    ui/dialogsaveplot.h \
+    linalg/frequencymodulation.h \
+    ui/widgetrainbow.h
 
 SOURCES += \
     linalg/vecf.cpp \
@@ -97,7 +99,9 @@ SOURCES += \
     ui/graphicsviewwithevents.cpp \
     ui/widgetplot.cpp \
     strain/batchtesting.cpp \
-    ui/dialogsaveplot.cpp
+    ui/dialogsaveplot.cpp \
+    linalg/frequencymodulation.cpp \
+    ui/widgetrainbow.cpp
 
 INCLUDEPATH += src
 

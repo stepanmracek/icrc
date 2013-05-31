@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
 //    Test::testAnotation();
 //    Test::testUniformSpline();
 //    Test::testLearnShape();
+//    Test::testLearnShapeWithFM();
 //    Test::testTracking();
 //    Test::testStatisticalShapeChanges();
 //    Test::testAutomaticTracking();

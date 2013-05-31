@@ -29,6 +29,7 @@
 #include "ui/uiutils.h"
 #include "ui/windowanotationmanager.h"
 #include "strain/longitudinalstrain.h"
+#include "linalg/frequencymodulation.h"
 
 class Test
 {
@@ -78,12 +79,12 @@ public:
         VectorOfShapes rawShapes = Serialization::readVectorOfShapes(pathToRawControlPoints);
 
         ShapeNormalizerPass *dummyNormalizer = new ShapeNormalizerPass();
-        LongitudinalStrain dummyStrain(dummyNormalizer);
+        LongitudinalStrain dummyStrain(dummyNormalizer, 6, 5);
 
         VectorOfShapes shapes;
         foreach (const Points &controlPoints, rawShapes)
         {
-            for (int width = 30; width <= 40; width += 2)
+            for (int width = 10; width <= 40; width += 5)
             {
                 Points shape = dummyStrain.getRealShapePoints(controlPoints, width);
                 shapes.push_back(shape);
@@ -93,21 +94,60 @@ public:
         PCA *pca = new PCA();
         StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);
         pca->serialize("/home/stepo/ownCloud/icrc/dataDir/pca-shape2");
+    }
 
-        /*ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
-        LongitudinalStrain *strain = new LongitudinalStrain(normalizer);
-        ListOfImageProcessing imgProc;
-        PointTrackerBase *pointTracker = new PointTrackerOpticalFlow(20);
-        StrainResultProcessingBase *resProc = new StrainResultProcessingPass();
-        VectorF weights; weights.push_back(1);
-        ShapeTracker tracker(strain, imgProc, pointTracker, resProc, weights);
+    static void testLearnShapeWithFM()
+    {
+        int segmentsCount = 6;
+        int pointsPerSegment = 10;
 
-        QApplication app(0, 0);
+        std::vector<VectorF> modValues = FrequencyModulation::generateModulationValues(segmentsCount*pointsPerSegment + 1 , 0.5, 2.0, 0.5, 5.0, 1.0);
+        int modValuesCount = modValues.size();
 
-        DialogShapeModel dlgShapeModel(pca, &tracker);
-        dlgShapeModel.show();
+        QString pathToRawControlPoints = "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
+        VectorOfShapes rawShapes = Serialization::readVectorOfShapes(pathToRawControlPoints);
 
-        app.exec();*/
+        ShapeNormalizerPass *dummyNormalizer = new ShapeNormalizerPass();
+        LongitudinalStrain dummyStrain(dummyNormalizer, segmentsCount, pointsPerSegment);
+
+        VectorOfShapes shapes;
+        qDebug() << "raw shapes" << rawShapes.size();
+        foreach (const Points &controlPoints, rawShapes)
+        {
+            for (int width = 10; width <= 40; width += 5)
+            {
+                for (int i = 0; i < modValuesCount; i++)
+                {
+                    Points shape = dummyStrain.getRealShapePoints(controlPoints, width, &modValues[i]);
+                    shapes.push_back(shape);
+                }
+                //break; // TODO remove later
+            }
+            //break; // TODO remove later
+        }
+        qDebug() << "processed shapes" << shapes.size();
+
+        PCA *pca = new PCA();
+        StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);
+        pca->modesSelectionThreshold(0.95);
+        qDebug() << "PCA modes" << pca->getModes() << pca->getMean().rows;
+
+        ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
+        LongitudinalStrain resultStrain(normalizer, segmentsCount, pointsPerSegment);
+        resultStrain.serialize("/home/stepo/ownCloud/icrc/dataDir/longstrain-fm-6-10");
+
+        // --------------------------------------------------------
+
+        PCA *newPCA = new PCA();
+        StatisticalShapeModel *newShapeModel = new StatisticalShapeModel(newPCA);
+        ShapeNormalizerBase *newNormalizer = new ShapeNormalizerIterativeStatisticalShape(newShapeModel);
+        LongitudinalStrain newStrain(newNormalizer, 0, 0);
+        newStrain.deserialize("/home/stepo/ownCloud/icrc/dataDir/longstrain-fm-6-10");
+
+        qDebug() << "newStrain:";
+        qDebug() << "segmentsCount" << newStrain.segmentsCount;
+        qDebug() << "pointsPerSegment" << newStrain.pointsPerSegment;
+        qDebug() << "PCA modes meanSize" << newPCA->getModes() << newPCA->getMean().rows;
     }
 
     static void testStatisticalShapeChanges()
@@ -174,16 +214,19 @@ public:
     static int testQtManager(int argc, char *argv[])
     {
         QString dataDir = "/home/stepo/ownCloud/icrc/dataDir";
-        PCA *pca = new PCA(dataDir + QDir::separator() + "pca-shape2");
-        StatisticalShapeModel *model = new StatisticalShapeModel(pca);
-        ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
+
+        PCA *pca = new PCA();
+        StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca);
+        ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
+        Strain *strain = new LongitudinalStrain(normalizer, 0, 0);
+        strain->deserialize("/home/stepo/ownCloud/icrc/dataDir/longstrain-fm-6-10");
+
         ListOfImageProcessing processing;
         StrainResultProcessingBase *postProcessing = new StrainResProcFloatingAvg(3);
         PointTrackerBase *pointTracker = new PointTrackerOpticalFlow(20); // new PointTrackerNeighbourOpticalFlow(20, 11, 2);
-        Strain *ls = new LongitudinalStrain(normalizer);
         float weightValues[] = {1.0f, 0.5f};
         VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
-        ShapeTracker *tracker = new ShapeTracker(ls, processing, pointTracker, postProcessing, weights);
+        ShapeTracker *tracker = new ShapeTracker(strain, processing, pointTracker, postProcessing, weights);
 
         qDebug() << "Tracker initializated";
 
@@ -203,7 +246,7 @@ public:
         PCA *pca = new PCA("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
         StatisticalShapeModel *model = new StatisticalShapeModel(pca);
         ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
-        LongitudinalStrain strain(normalizer);
+        LongitudinalStrain strain(normalizer, 6, 5);
 
         VideoDataClip firstClip; VectorOfShapes firstShapes; ShapeMap firstMap;
         clip.getSubClip(clip.getMetadata()->beatIndicies[0], shapeMap, &firstClip, firstShapes, firstMap);

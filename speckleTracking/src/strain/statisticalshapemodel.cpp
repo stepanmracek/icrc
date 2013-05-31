@@ -19,7 +19,7 @@
 #include "linalg/vecf.h"
 
 StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *backProjectionToLearn, VectorOfShapes &shapes, QObject *parent) :
-    QObject(parent)
+    SerializableObject(parent)
 {
     backProjection = 0;
     setBackProjection(backProjectionToLearn);
@@ -42,13 +42,23 @@ StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *backProjectionT
 }
 
 StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *learnedBackProjection, QObject *parent) :
-    QObject(parent)
+    SerializableObject(parent)
 {
     backProjection = 0;
     setBackProjection(learnedBackProjection);
 }
 
-Points StatisticalShapeModel::iterativeNormalize(Points &input)
+void StatisticalShapeModel::serialize(const QString &path)
+{
+    backProjection->serialize(path);
+}
+
+void StatisticalShapeModel::deserialize(const QString &path)
+{
+    backProjection->deserialize(path);
+}
+
+Points StatisticalShapeModel::iterativeNormalize(const Points &input)
 {
     MatF inputMat = Common::pointsToMatF(input);
     MatF meanMat = backProjection->getMean();
@@ -101,7 +111,7 @@ Points StatisticalShapeModel::iterativeNormalize(Points &input)
     return result;
 }
 
-Points StatisticalShapeModel::normalize(Points &input)
+Points StatisticalShapeModel::normalize(const Points &input)
 {
     MatF inputMat = Common::pointsToMatF(input);
     MatF meanMat = backProjection->getMean();

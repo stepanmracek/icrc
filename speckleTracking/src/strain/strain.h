@@ -13,7 +13,7 @@
 /**
  * @brief Base class for strain estimation
  */
-class Strain : public QObject
+class Strain : public SerializableObject
 {
     Q_OBJECT
 
@@ -26,6 +26,10 @@ public:
     int pointsPerSegment;  
 
     Strain(ShapeNormalizerBase *shapeNormalizer, int segmentsCount, int pointsPerSegment, QObject *parent = 0);
+
+    void serialize(const QString &path);
+
+    void deserialize(const QString &path);
 
     ShapeNormalizerBase *getShapeNormalizer()
     {

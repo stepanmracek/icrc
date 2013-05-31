@@ -225,7 +225,7 @@ ShapeMap ShapeTracker::track(VideoDataClip *clip, int startIndex, int endIndex, 
 ShapeTracker *ShapeTracker::getDummyTracker()
 {
     ShapeNormalizerPass *normalizer = new ShapeNormalizerPass();
-    LongitudinalStrain *strain = new LongitudinalStrain(normalizer);
+    LongitudinalStrain *strain = new LongitudinalStrain(normalizer, 6, 5);
     ListOfImageProcessing listOfProcessing;
     PointTrackerOpticalFlow *pointTracker = new PointTrackerOpticalFlow(20);
     StrainResultProcessingPass *resultProcessing = new StrainResultProcessingPass();
