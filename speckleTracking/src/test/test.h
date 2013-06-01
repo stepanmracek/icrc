@@ -96,6 +96,16 @@ public:
         pca->serialize("/home/stepo/ownCloud/icrc/dataDir/pca-shape2");
     }
 
+    static void testFreqModulation()
+    {
+        QString pathToRawControlPoints = "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
+        Points rawControlPoints = Serialization::readVectorOfShapes(pathToRawControlPoints)[0];
+        Spline spline;
+        Points uniformControlPoints = spline.uniformDistance(rawControlPoints, 6, false);
+        Points uniformPoints = spline.getSplinePoints(uniformControlPoints, 5);
+        FrequencyModulation::test(uniformPoints);
+    }
+
     static void testLearnShapeWithFM()
     {
         int segmentsCount = 6;

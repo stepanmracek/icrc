@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
 //    Test::testUniformSpline();
 //    Test::testLearnShape();
 //    Test::testLearnShapeWithFM();
+    Test::testFreqModulation();
 //    Test::testTracking();
 //    Test::testStatisticalShapeChanges();
 //    Test::testAutomaticTracking();
@@ -15,7 +16,7 @@ int main(int argc, char *argv[])
 //    Test::testOpticalFlowTracking();
 //    Test::testImageProcessing();
 //    Test::testOpticalFlowIntensityMap();
-    Test::testQtManager(argc, argv);
+//    Test::testQtManager(argc, argv);
 //    BatchTesting::process();
 //    Test::testLongitudinalStrain();
 //    Test::testQtAnotationAndDisplay(argc, argv);

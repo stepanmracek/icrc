@@ -40,27 +40,104 @@ Points FrequencyModulation::modulate(const Points &points, const VectorF &modula
     return result;
 }
 
-std::vector<VectorF> FrequencyModulation::generateModulationValues(float resultLen, float freqStart, float freqEnd,
+VectorF FrequencyModulation::generateModulationValues(int resultLen, float freq, float phase, float scale)
+{
+    VectorF vec;
+    for (int i = 0; i < resultLen; i++)
+    {
+        float v = sin(i/(resultLen/freq)*2.0*M_PI + phase*2*M_PI) * scale;
+        vec.push_back(v);
+    }
+    return vec;
+}
+
+std::vector<VectorF> FrequencyModulation::generateModulationValues(int resultLen, float freqStart, float freqEnd,
                                                                    float freqStep, float phaseSteps, float scale)
 {
     std::vector<VectorF> result;
-
     for (float freq = freqStart; freq <= freqEnd; freq += freqStep)
     {
         for (float phase = 0; phase <= 1.0; phase += 1.0/phaseSteps)
         {
             qDebug() << "freq" << freq << "phase" << phase;
-            VectorF vec;
-            for (int i = 0; i < resultLen; i++)
-            {
-                float v = sin(i/(resultLen/freq)*2.0*M_PI + phase*2*M_PI);
-                v *= scale;
-                //qDebug() << " " << v;
-                vec.push_back(v);
-            }
+            VectorF vec = generateModulationValues(resultLen, freq, phase, scale);
             result.push_back(vec);
         }
     }
 
     return result;
+}
+
+struct FreqModulationStruct
+{
+    FreqModulationStruct(const Points &points)
+        : points(points), freq(0), phase(0), scale(10)
+    { }
+
+    VectorF modulationValues()
+    {
+        float f = (freq + 1.0) / 2.0;
+        float p = phase / 10.0;
+        float s = scale / 10.0;
+        return FrequencyModulation::generateModulationValues(points.size(), f, p, s);
+    }
+
+    const Points &points;
+    int freq;
+    int phase;
+    int scale;
+};
+
+void showModulationValues(FreqModulationStruct *data)
+{
+    int n = data->points.size();
+    Mat8 frame = Mat8::zeros(200, n*25);
+
+    VectorF values = data->modulationValues();
+    for (int i = 1; i < n; i++)
+    {
+        float v = values[i-1];
+        int y1 = (v + 1.0)*100;
+        int x1 = (i-1)*25;
+
+        v = values[i];
+        int y2 = (v + 1.0)*100;
+        int x2 = i*25;
+
+        cv::line(frame, cv::Point(x1, y1), cv::Point(x2, y2), 255);
+    }
+    cv::imshow("modulation values", frame);
+}
+
+void showPoints(FreqModulationStruct *data)
+{
+    VectorF modulationValues = data->modulationValues();
+    Points points = FrequencyModulation::modulate(data->points, modulationValues);
+    Mat8 frame = Mat8::zeros(480, 640);
+
+    int n = points.size();
+    for (int i = 0; i < n; i++)
+    {
+        cv::circle(frame, points[i], 2, 255);
+    }
+    cv::imshow("points", frame);
+}
+
+void onChange(int pos, void *data)
+{
+    showModulationValues((FreqModulationStruct*) data);
+    showPoints((FreqModulationStruct*) data);
+}
+
+void FrequencyModulation::test(const Points &points)
+{
+    cv::namedWindow("points");
+    cv::namedWindow("modulation values");
+
+    FreqModulationStruct data(points);
+    cv::createTrackbar("freq", "points", &data.freq, 10, onChange, &data);
+    cv::createTrackbar("phase", "points", &data.phase, 10, onChange, &data);
+    cv::createTrackbar("scale", "points", &data.scale, 10, onChange, &data);
+    onChange(0, &data);
+    while ((char)cv::waitKey() != 27) {}
 }
