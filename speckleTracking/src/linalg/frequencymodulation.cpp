@@ -97,11 +97,11 @@ void showModulationValues(FreqModulationStruct *data)
     for (int i = 1; i < n; i++)
     {
         float v = values[i-1];
-        int y1 = (v + 1.0)*100;
+        int y1 = 200-(v + 1.0)*100;
         int x1 = (i-1)*25;
 
         v = values[i];
-        int y2 = (v + 1.0)*100;
+        int y2 = 200-(v + 1.0)*100;
         int x2 = i*25;
 
         cv::line(frame, cv::Point(x1, y1), cv::Point(x2, y2), 255);
