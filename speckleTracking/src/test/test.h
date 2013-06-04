@@ -98,12 +98,13 @@ public:
 
     static void testFreqModulation()
     {
-        QString pathToRawControlPoints = "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
+        /*QString pathToRawControlPoints = "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
         Points rawControlPoints = Serialization::readVectorOfShapes(pathToRawControlPoints)[0];
         Spline spline;
         Points uniformControlPoints = spline.uniformDistance(rawControlPoints, 6, false);
-        Points uniformPoints = spline.getSplinePoints(uniformControlPoints, 5);
-        FrequencyModulation::test(uniformPoints);
+        Points uniformPoints = spline.getSplinePoints(uniformControlPoints, 5);*/
+
+        FrequencyModulation::test();
     }
 
     static void testLearnShapeWithFM()
@@ -111,7 +112,7 @@ public:
         int segmentsCount = 6;
         int pointsPerSegment = 10;
 
-        std::vector<VectorF> modValues = FrequencyModulation::generateModulationValues(segmentsCount*pointsPerSegment + 1 , 0.5, 2.0, 0.5, 5.0, 1.0);
+        std::vector<VectorF> modValues = FrequencyModulation::generateModulationValues(segmentsCount*pointsPerSegment + 1 , 1.0, 3.0, 1.0, 3.0, 1.0);
         int modValuesCount = modValues.size();
 
         QString pathToRawControlPoints = "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
@@ -139,7 +140,7 @@ public:
 
         PCA *pca = new PCA();
         StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);
-        pca->modesSelectionThreshold(0.95);
+        pca->setModes(20);
         qDebug() << "PCA modes" << pca->getModes() << pca->getMean().rows;
 
         ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);

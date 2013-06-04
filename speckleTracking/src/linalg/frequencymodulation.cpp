@@ -45,7 +45,7 @@ VectorF FrequencyModulation::generateModulationValues(int resultLen, float freq,
     VectorF vec;
     for (int i = 0; i < resultLen; i++)
     {
-        float v = sin(i/(resultLen/freq)*2.0*M_PI + phase*2*M_PI) * scale;
+        float v = cos(i/(resultLen/freq)*2.0*M_PI + phase*2*M_PI) * scale;
         vec.push_back(v);
     }
     return vec;
@@ -88,56 +88,75 @@ struct FreqModulationStruct
     int scale;
 };
 
-void showModulationValues(FreqModulationStruct *data)
+void show(FreqModulationStruct *data)
 {
     int n = data->points.size();
-    Mat8 frame = Mat8::zeros(200, n*25);
+    Mat8 frame = Mat8::zeros(200, n*10);
 
     VectorF values = data->modulationValues();
+    VectorF diff = Common::deltas(values);
+    //VectorF diff2 = Common::deltas(diff);
     for (int i = 1; i < n; i++)
     {
         float v = values[i-1];
         int y1 = 200-(v + 1.0)*100;
-        int x1 = (i-1)*25;
+        int x1 = (i-1)*10;
 
         v = values[i];
         int y2 = 200-(v + 1.0)*100;
-        int x2 = i*25;
+        int x2 = i*10;
 
         cv::line(frame, cv::Point(x1, y1), cv::Point(x2, y2), 255);
+
+        v = -diff[i-1];
+        y1 = 200-(v + 1.0)*100;
+        x1 = (i-1)*10;
+
+        v = -diff[i];
+        y2 = 200-(v + 1.0)*100;
+        x2 = i*10;
+
+        //cv::line(frame, cv::Point(x1, y1), cv::Point(x2, y2), 192);
+
+        /*v = diff2[i-1];
+        y1 = 200-(v + 1.0)*100;
+        x1 = (i-1)*10;
+
+        v = diff2[i];
+        y2 = 200-(v + 1.0)*100;
+        x2 = i*10;
+
+        cv::line(frame, cv::Point(x1, y1), cv::Point(x2, y2), 127);*/
     }
-    cv::imshow("modulation values", frame);
-}
 
-void showPoints(FreqModulationStruct *data)
-{
-    VectorF modulationValues = data->modulationValues();
-    Points points = FrequencyModulation::modulate(data->points, modulationValues);
-    Mat8 frame = Mat8::zeros(480, 640);
-
-    int n = points.size();
+    Points points = FrequencyModulation::modulate(data->points, values);
     for (int i = 0; i < n; i++)
     {
         cv::circle(frame, points[i], 2, 255);
     }
-    cv::imshow("points", frame);
+
+    cv::imshow("modulation", frame);
 }
 
 void onChange(int pos, void *data)
 {
-    showModulationValues((FreqModulationStruct*) data);
-    showPoints((FreqModulationStruct*) data);
+    show((FreqModulationStruct*) data);
 }
 
-void FrequencyModulation::test(const Points &points)
+void FrequencyModulation::test()
 {
-    cv::namedWindow("points");
-    cv::namedWindow("modulation values");
+    Points points;
+    for (int i = 0; i < 60; i++)
+    {
+        points.push_back(P(i*10, 100));
+    }
+
+    cv::namedWindow("modulation");
 
     FreqModulationStruct data(points);
-    cv::createTrackbar("freq", "points", &data.freq, 10, onChange, &data);
-    cv::createTrackbar("phase", "points", &data.phase, 10, onChange, &data);
-    cv::createTrackbar("scale", "points", &data.scale, 10, onChange, &data);
-    onChange(0, &data);
+    cv::createTrackbar("freq", "modulation", &data.freq, 10, onChange, &data);
+    cv::createTrackbar("phase", "modulation", &data.phase, 10, onChange, &data);
+    cv::createTrackbar("scale", "modulation", &data.scale, 10, onChange, &data);
+    show(&data);
     while ((char)cv::waitKey() != 27) {}
 }

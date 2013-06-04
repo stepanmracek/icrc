@@ -12,7 +12,7 @@ public:
     static std::vector<VectorF> generateModulationValues(int resultLen, float freqStart, float freqEnd,
                                                          float freqStep, float phaseSteps, float scale);
 
-    static void test(const Points &points);
+    static void test();
 };
 
 #endif // FREQUENCYMODULATION_H

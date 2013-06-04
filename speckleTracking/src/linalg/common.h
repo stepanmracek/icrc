@@ -312,7 +312,7 @@ public:
     /**
      * @brief Calculate deltas of input vector
      * @param input Input Vector
-     * @return Resulting deltas. The result has the same length as the input. Zero is added at the beginning.
+     * @return Resulting deltas. The result has the same length as the input.
      */
     static VectorF deltas(VectorF &input)
     {
@@ -320,10 +320,12 @@ public:
         int n = input.size();
         if (n == 0) return result;
 
-        result.push_back(0.0f);
-        for (int i = 1; i < n; i++)
+        for (int i = 0; i < n; i++)
         {
-            float delta = input[i] - input[i-1];
+            int prev = (i == 0) ? 0 : i-1;
+            int next = (i == (n-1)) ? i : i+1;
+            float delta = input[next] - input[prev];
+            if (i > 0 && i < (n-1)) delta /= 2.0;
             result.push_back(delta);
         }
         return result;
