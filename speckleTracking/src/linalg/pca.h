@@ -1,7 +1,7 @@
 #ifndef PCA_H
 #define PCA_H
 
-#include <opencv/cv.h>
+#include <opencv2/opencv.hpp>
 #include <vector>
 
 #include "common.h"

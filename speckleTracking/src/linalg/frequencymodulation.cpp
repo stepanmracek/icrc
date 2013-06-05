@@ -45,7 +45,7 @@ VectorF FrequencyModulation::generateModulationValues(int resultLen, float freq,
     VectorF vec;
     for (int i = 0; i < resultLen; i++)
     {
-        float v = cos(i/(resultLen/freq)*2.0*M_PI + phase*2*M_PI) * scale;
+        float v = sin(i/(resultLen/freq)*2.0*M_PI + phase*2*M_PI) * scale;
         vec.push_back(v);
     }
     return vec;

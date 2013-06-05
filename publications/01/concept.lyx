@@ -109,7 +109,7 @@ Contrary to the commonly-used speckle tracking method, our approach employs
  valid shape estimation of tracked LV.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Optical flow estimation
 \end_layout
 
@@ -272,13 +272,13 @@ v=(A^{T}A)^{-1}A^{T}b
 \end_layout
 
 \begin_layout Standard
-There i a tradeoff between local accuracy and robustness when choosing the
- integration window size.
+There i a trade-off between local accuracy and robustness when choosing
+ the integration window size.
  Smaller window size is able to capture even tiny motion.
  On the other hand, the tracking is lost when the movement exceeds the search
  window.
- Contraty, the large window size lacks accuracy.
- Therefore, an ivolvemenet of the imager pyramid representation has been
+ Contrary, the large window size lacks accuracy.
+ Therefore, an involvement of the image pyramid representation has been
  proposed by [TODO citace].
  The main 
 \end_layout
@@ -299,7 +299,7 @@ Guess propagation
 Iterative solution
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Statistical shape model
 \end_layout
 
@@ -323,7 +323,294 @@ The PyrLK point tracker provides robust technique for following individual
 .
  Modeling of the shape variation is accomplished using Principal Component
  Analysis (PCA).
- In order to do that, calculations in the following steps are executed:
+\end_layout
+
+\begin_layout Standard
+Our shape model takes into account several different origins of the shape
+ variation.
+ The first is the overall variability of LV shape during cardiac cycle as
+ well shape difference between different subjects.
+ The second origin of the shape variation is the thickness of the myocardium.
+ The last origin of the shape variation is connected with the different
+ strain across the myocardium.
+\end_layout
+
+\begin_layout Standard
+The overall shape variation is modeled from the manually anotated data.
+ 50 shapes from 4 LV cycles from 2 different subjects were anotated.
+ The operator marked the points of the mid-myocardum and the spline was
+ interpolated between points (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Manual-anotation"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/anotation.png
+	width 5cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Manual annotation of mid-myocardium
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Manual-anotation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+New points on the spline were established, such that the distance between
+ consecutive points was uniform.
+ All these uniformly distributed points were triplicated, such that the
+ inner points represent endocardium and the outer points represent epicardium.
+ Let the 
+\begin_inset Formula $p$
+\end_inset
+
+ is some arbitraty mid-myocardium point.
+ The 
+\begin_inset Formula $p_{prev}$
+\end_inset
+
+ is its predecessor and 
+\begin_inset Formula $p_{next}$
+\end_inset
+
+ is its successor.
+ The corresponding points 
+\begin_inset Formula $p_{inner}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{outer}$
+\end_inset
+
+on the endocardium and epicardioum respectively are:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+p_{inner\, x}=p_{x}-w\frac{(p_{next\, y}-p_{prev\, y})}{2\left\Vert p_{next}-p_{prev}\right\Vert }\,\,\,\,\, p_{inner\, y}=p_{y}+w\frac{(p_{next\, x}-p_{prev\, x})}{2\left\Vert p_{next}-p_{prev}\right\Vert }
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+p_{outer\, x}=p_{x}+w\frac{(p_{next\, y}-p_{prev\, y})}{2\left\Vert p_{next}-p_{prev}\right\Vert }\,\,\,\,\, p_{inner\, y}=p_{y}-w\frac{(p_{next\, x}-p_{prev\, x})}{2\left\Vert p_{next}-p_{prev}\right\Vert }
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $w$
+\end_inset
+
+ is desired width of the myocardium.
+\end_layout
+
+\begin_layout Standard
+The variaton of the strain among the myocardium is accomplished with the
+ frequency modulation added to the uniformly distributed points.
+ Let the uniformly distributed points 
+\begin_inset Formula $P=(p_{1},p_{2},\dots,p_{n})$
+\end_inset
+
+ forms a carrier wave.
+ This wave is modulated with the following signal:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s(i)=\sin(\frac{2\pi\cdot i}{n\cdot f}+2\varphi\pi)\mathrm{\,\, for\,}i\in(0,1,\dots n-1)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $n$
+\end_inset
+
+ is number of points, 
+\begin_inset Formula $f$
+\end_inset
+
+ is desired frequency, and 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is phase shift.
+ The frequency modulation of points 
+\begin_inset Formula $P=(p_{1},p_{2},\dots,p_{n})$
+\end_inset
+
+ with modulation values 
+\begin_inset Formula $S=(s_{1},s_{2},\dots,s_{n})$
+\end_inset
+
+ is accomplished by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+p_{i}=\begin{cases}
+p_{i}+0.5\cdot(p_{i+1}-p_{i})\cdot s_{i} & \mathrm{if\,\,\,}s_{i}\geq0\\
+p_{i}+0.5\cdot(p_{i-1}-p_{i})\cdot s_{i} & \mathrm{if\,\,\,}s_{i}<0
+\end{cases}\label{eq:fm}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Frequency-modulation"
+
+\end_inset
+
+ shows the example of point distribution frequency modulation.
+ Please note, that the highest point distribution frequency is shifted compared
+ to the amplitude of the modulation wave.
+ This is caused by the manner of the freqency modulation calculation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/fm.png
+	width 6cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Point distribution frequency modulation
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Frequency-modulation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The training set of shapes for the PCA calculation is formed from the input
+ annotated shapes in the following manner:
+\end_layout
+
+\begin_layout Enumerate
+For each shape 
+\begin_inset Formula $(\mathbf{s}_{1},\mathbf{s}{}_{2},\dots,\mathbf{s}_{n_{s}})$
+\end_inset
+
+, uniformly distributed points denoting the mid-myocardium are computed.
+\end_layout
+
+\begin_layout Enumerate
+The uniformly distributed mid myocardium points are modulated with various
+ frequencies 
+\begin_inset Formula $(f_{1},f_{2},\dots,f_{n_{f}})$
+\end_inset
+
+ and phase shifts 
+\begin_inset Formula $(\varphi_{1},\varphi_{2},\dots,\varphi_{n_{\varphi}})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Corresponding epicardical and endocardical points are added to the resulting
+ modulated mid-myocardium points using different tissue widhts 
+\begin_inset Formula $(w_{1},w_{2},\dots,w_{n_{w}})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The total number of training shapes is thus 
+\begin_inset Formula $N=n_{s}\cdot n_{f}\cdot n_{\varphi}\cdot n_{w}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In order to do that, calculations in the following steps are executed:
 \end_layout
 
 \begin_layout Enumerate
@@ -412,57 +699,16 @@ Now, every shape
 \end_layout
 
 \begin_layout Standard
-Our LV shape model consist of 93 points that were manually annotated from
- 4 LV cycles from 2 subjects.
- In each frame, the human operator annotated points on the mid-myocardium.
- The computer inserted spline between points and 31 new equally-distanced
- points were interpolated.
- Each point was triplicated, such that the 93 inner points outlined inner
- myocardium and outer 93 points outlined outer myocardium.
- Since we are interested in contraction of individual parts of the myocardium,
- the spacing variations between points were added to the base set of shapes.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename fig/anotation.png
-	width 5cm
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mean-LV-shape"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Manual annotation of mid-myocardium
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Manual-anotation"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
+ shows mean calculated LV shape and some of its variations modeled with
+ various vectors 
+\begin_inset Formula $\mathbf{b}.$
 \end_inset
 
 
@@ -530,16 +776,7 @@ name "fig:Mean-LV-shape"
 
 \end_layout
 
-\begin_layout Subsection
-Image processing
-\end_layout
-
-\begin_layout Standard
-TODO...
- Navic nevim, jestli to k necemu bude
-\end_layout
-
-\begin_layout Subsection
+\begin_layout Section
 Algorithm description
 \end_layout
 
@@ -596,6 +833,10 @@ name "fig:Algorithm-pipeline"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Image transformation and processing
 \end_layout
 
 \begin_layout Standard
@@ -667,10 +908,14 @@ The image processing block involves the application of image filters to
  
 \end_layout
 
+\begin_layout Subsection
+Point tracking
+\end_layout
+
 \begin_layout Standard
-The point tracking block has three inputs - the previous frame, the annotated
- points within the previous frame, and the next frame, where the point tracking
- algorithm should find the desired points.
+The point tracking block has three inputs - the previous frames, the annotated
+ points within the previous frames, and the next frame, where the point
+ tracking algorithm should find the desired points.
  The next frame is also processed with image transformation and filters.
  Additionally to the PyrLK point tracker, we have implemented speckle tracking
  based on the minimizing the Euclidean distance, correlation metric, cosine
@@ -802,6 +1047,10 @@ Our algorithm also allows to have multiple weighted input frames.
  is used to form the final shape.
 \end_layout
 
+\begin_layout Subsection
+Shape back-transform and normalization
+\end_layout
+
 \begin_layout Standard
 After all points in the next frame are located, the output shape is back-transfo
 rmed to the 
@@ -809,7 +1058,7 @@ rmed to the
 \end_inset
 
  coordinate system.
- The last step is the employment of the statistical shape model.
+ The next step is the employment of the statistical shape model.
  The shape is projected to the PCA subspace (eq.
  
 \begin_inset CommandInset ref
@@ -819,7 +1068,103 @@ reference "eq:PCA-projection"
 \end_inset
 
 ).
- On each component 
+\end_layout
+
+\begin_layout Standard
+The task of the shape normalization is to find optimal projection vector
+ vector 
+\begin_inset Formula $\mathbf{\mathbf{b}}$
+\end_inset
+
+ that normalizes the input shape 
+\begin_inset Formula $\mathbf{S}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Initialize the projection parameters 
+\begin_inset Formula $\mathbf{\mathbf{b}}$
+\end_inset
+
+ to zeros.
+\end_layout
+
+\begin_layout Enumerate
+generate model instance 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathbf{s}=\bar{\mathbf{s}}+\boldsymbol{\Phi}\mathbf{b}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Find optimal rotation and scale 
+\begin_inset Formula $T_{\theta,s}$
+\end_inset
+
+ that transforms the 
+\begin_inset Formula $\mathbf{s}$
+\end_inset
+
+ to the input shape 
+\begin_inset Formula $\mathbf{S}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Apply the inversed transform 
+\begin_inset Formula $T_{\theta,s}^{-1}$
+\end_inset
+
+ to the input shape 
+\begin_inset Formula $\mathbf{S}'=T_{\theta,s}^{-1}\mathbf{S}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Project transformed shape 
+\begin_inset Formula $\mathbf{S}'$
+\end_inset
+
+ to the PCA subspace: 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathbf{b}=\boldsymbol{\Phi}^{T}(\mathbf{S}'-\mathbf{\bar{s}})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+On each component 
 \begin_inset Formula $b_{i}$
 \end_inset
 
@@ -827,7 +1172,7 @@ reference "eq:PCA-projection"
 \begin_inset Formula $\mathbf{\mathbf{b}}$
 \end_inset
 
- is applied limit 
+ apply the limit 
 \begin_inset Formula $\pm3\sqrt{\lambda_{i}}$
 \end_inset
 
@@ -842,27 +1187,38 @@ reference "eq:PCA-projection"
 th eigenvalue.
  This truncation ensures that the resulting shape will be similar to those
  in the original training set.
- The back-projection from the PCA subspace to the original space is ensured
- by:
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-\mathbf{s}=\bar{\mathbf{s}}+\boldsymbol{\Phi}\mathbf{b}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The result of the application of the limits on the 
+\begin_layout Enumerate
+If the difference between previoud 
 \begin_inset Formula $\mathbf{b}$
 \end_inset
 
- components is in Figure 
+ and current 
+\begin_inset Formula $\mathbf{b}$
+\end_inset
+
+ is greater than some threshold go to 2.
+\end_layout
+
+\begin_layout Enumerate
+apply the last transformation 
+\begin_inset Formula $T_{\theta,s}$
+\end_inset
+
+ to the generated model instance 
+\begin_inset Formula $\mathbf{s}$
+\end_inset
+
+: 
+\begin_inset Formula $\mathbf{S}=T_{\theta,s}\mathbf{s}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The result of the shape normalization is in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:pca-normalization"
@@ -924,7 +1280,7 @@ name "fig:pca-normalization"
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Result post-processing
 \end_layout
 
@@ -975,7 +1331,7 @@ Evaluation
 \end_layout
 
 \begin_layout Standard
-The longitudinal strain represents myocardical deformation directed from
+The longitudinal strain represents myocardial deformation directed from
  the base to the apex.
  The strain equation 
 \begin_inset Formula $\epsilon$
