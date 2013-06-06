@@ -151,6 +151,28 @@ void VideoDataClipMetadata::deserialize(const QString &path)
         beatIndicies << i;
     }
 
+    rawShapes.clear();
+    QVector<int> rawShapesKeys;
+    cv::FileNode rawShapesKeysNode = storage["rawShapesKeys"];
+    for (cv::FileNodeIterator it = rawShapesKeysNode.begin(); it != rawShapesKeysNode.end(); ++it)
+    {
+        int i;
+        (*it) >> i;
+        rawShapesKeys << i;
+    }
+
+    cv::FileNode rawShapesValuesNode = storage["rawShapesValues"];
+    int index = 0;
+    for (cv::FileNodeIterator it = rawShapesValuesNode.begin(); it != rawShapesValuesNode.end(); ++it)
+    {
+        MatF m;
+        (*it) >> m;
+        Points shape = Common::matFToPoints(m);
+        rawShapes[rawShapesKeys[index]] = shape;
+
+        index++;
+    }
+
     VectorF centerVec;
     cv::FileNodeIterator it = storage["center"].begin();
     cv::FileNodeIterator end = storage["center"].end();
@@ -181,7 +203,25 @@ void VideoDataClipMetadata::serialize(const QString &path)
     }
     storage << "]";
 
-    //void CoordSystemRadial::init(P center, float startDistance, float endDistance, float angleStart, float angleEnd, int resultMatCols, int resultMatRows)
+    storage << "rawShapesKeys" << "[";
+    QList<int> keys = rawShapes.keys();
+    foreach(int key, keys)
+    {
+        storage << key;
+    }
+    storage << "]";
+
+    storage << "rawShapesValues" << "[";
+    foreach(int key, keys)
+    {
+        const Points &shape = rawShapes[key];
+        MatF m = Common::pointsToMatF(shape);
+        storage << m;
+    }
+    storage << "]";
+
+    //void CoordSystemRadial::init(P center, float startDistance, float endDistance,
+    //  float angleStart, float angleEnd, int resultMatCols, int resultMatRows)
     storage << "center" << coordSystem->center;
     storage << "startDistance" << coordSystem->startDistance;
     storage << "endDistance" << coordSystem->endDistance;

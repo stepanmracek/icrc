@@ -24,6 +24,7 @@ public:
     }
 
     QVector<int> beatIndicies;
+    ShapeMap rawShapes;
 
     CoordSystemRadial *getCoordSystem() { return coordSystem; }
 

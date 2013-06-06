@@ -18,6 +18,7 @@ public:
     ~DialogAnotation();
 
     Points getControlPoints();
+    void setControlPoints(const Points &controlPoints);
 
     int getShapeWidth();
 

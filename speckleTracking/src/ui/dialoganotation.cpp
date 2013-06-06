@@ -23,6 +23,11 @@ Points DialogAnotation::getControlPoints()
     return ui->widgetAnotation->getControlPoints();
 }
 
+void DialogAnotation::setControlPoints(const Points &controlPoints)
+{
+    ui->widgetAnotation->setControlPoints(controlPoints);
+}
+
 int DialogAnotation::getShapeWidth()
 {
     return ui->spinBox->value();

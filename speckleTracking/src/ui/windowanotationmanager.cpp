@@ -135,15 +135,26 @@ void WindowAnotationManager::on_btnAnotate_clicked()
     VideoDataClip *clip = ui->widgetStrainVideo->getClip();
     if (!clip || clip->size() == 0) return;
 
-    const Mat8 &frame = clip->frames[ui->widgetStrainVideo->getCurrentIndex()];
+    int curIndex = ui->widgetStrainVideo->getCurrentIndex();
+    const Mat8 &frame = clip->frames[curIndex];
     QPixmap image = UIUtils::Mat8ToQPixmap(frame);
     DialogAnotation dlgAnotation(this);
     dlgAnotation.setImage(image);
-    int dlgResult = dlgAnotation.exec();
 
+    if (clip->getMetadata()->rawShapes.contains(curIndex))
+    {
+        dlgAnotation.setControlPoints(clip->getMetadata()->rawShapes[curIndex]);
+    }
+
+    int dlgResult = dlgAnotation.exec();
     if (dlgResult == QDialog::Accepted)
     {
-        ui->widgetStrainVideo->setControlPoints(dlgAnotation.getControlPoints(), dlgAnotation.getShapeWidth());
+        Points rawPoints = dlgAnotation.getControlPoints();
+        if (rawPoints.size() > 1)
+        {
+            clip->getMetadata()->rawShapes[curIndex] = rawPoints;
+            ui->widgetStrainVideo->setControlPoints(rawPoints, dlgAnotation.getShapeWidth());
+        }
     }
 }
 
