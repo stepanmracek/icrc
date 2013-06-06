@@ -417,6 +417,7 @@ void WindowAnotationManager::on_actionNone_triggered()
 void WindowAnotationManager::on_actionPCA_triggered()
 {
     QString pcaPath = QInputDialog::getText(this, "Path to pca file", "Path to pca file", QLineEdit::Normal, "pca-shape2");
+    if (pcaPath.isNull() || pcaPath.isEmpty()) return;
     PCA *pca = new PCA(dataDir + QDir::separator() + pcaPath);
     StatisticalShapeModel *model = new StatisticalShapeModel(pca);
     ShapeNormalizerBase* normalizer = new ShapeNormalizerIterativeStatisticalShape(model);

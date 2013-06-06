@@ -57,6 +57,7 @@ void DialogSavePlot::on_buttonBox_accepted()
     }
 
     plotStream << "plot ";
+    bool first = true;
     foreach(const QwtPlotItem *item, list)
     {
         const QString &name = item->title().text();
@@ -78,8 +79,17 @@ void DialogSavePlot::on_buttonBox_accepted()
         out.flush();
         f.close();
 
-        plotStream << '\"' + name + '\"' + " w l" + color + ",";
+        if (first)
+        {
+            first = false;
+        }
+        else
+        {
+            plotStream << ", ";
+        }
+        plotStream << '\"' + name + '\"' + " w l" + color;
     }
+    plotStream << '\n';
     plotStream.flush();
     plotFile.close();
 }

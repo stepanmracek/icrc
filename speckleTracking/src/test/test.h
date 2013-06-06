@@ -110,9 +110,10 @@ public:
     static void testLearnShapeWithFM()
     {
         int segmentsCount = 6;
-        int pointsPerSegment = 10;
+        int pointsPerSegment = 3;
 
-        std::vector<VectorF> modValues = FrequencyModulation::generateModulationValues(segmentsCount*pointsPerSegment + 1 , 1.0, 3.0, 1.0, 3.0, 1.0);
+        std::vector<VectorF> modValues =
+                FrequencyModulation::generateModulationValues(segmentsCount*pointsPerSegment + 1 , 1.0, 3.0, 1.0, 3.0, 1.0);
         int modValuesCount = modValues.size();
 
         QString pathToRawControlPoints = "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
@@ -125,7 +126,7 @@ public:
         qDebug() << "raw shapes" << rawShapes.size();
         foreach (const Points &controlPoints, rawShapes)
         {
-            for (int width = 10; width <= 40; width += 5)
+            for (int width = 20; width <= 30; width += 10)
             {
                 for (int i = 0; i < modValuesCount; i++)
                 {
@@ -243,7 +244,7 @@ public:
 
         // create GUI
         QApplication app(argc, argv);
-        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test/", dataDir, tracker);
+        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test2/", dataDir, tracker);
         w.show();
         return app.exec();
     }
