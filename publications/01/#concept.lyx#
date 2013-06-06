@@ -188,7 +188,7 @@ The
 \begin_inset Formula $w_{y}$
 \end_inset
 
- define integration (neighborhood) window of size 
+ define integration (neighborhood) window 
 \begin_inset Formula $(2w_{x}+1)\times(2w_{y}+1).$
 \end_inset
 
@@ -201,7 +201,7 @@ The
 \end_layout
 
 \begin_layout Standard
-There is a trade-off between local accuracy and robustness when choosing
+There i a trade-off between local accuracy and robustness when choosing
  the integration window size.
  Smaller window size is able to capture even tiny motion.
  On the other hand, the tracking is lost when the movement exceeds the search
