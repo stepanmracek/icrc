@@ -188,7 +188,7 @@ The
 \begin_inset Formula $w_{y}$
 \end_inset
 
- define integration (neighborhood) window 
+ define integration (neighborhood) window of size 
 \begin_inset Formula $(2w_{x}+1)\times(2w_{y}+1).$
 \end_inset
 
@@ -201,7 +201,7 @@ The
 \end_layout
 
 \begin_layout Standard
-There i a trade-off between local accuracy and robustness when choosing
+There is a trade-off between local accuracy and robustness when choosing
  the integration window size.
  Smaller window size is able to capture even tiny motion.
  On the other hand, the tracking is lost when the movement exceeds the search
@@ -519,7 +519,7 @@ The variation of the strain among the myocardium is accomplished with the
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-s(i)=\sin(\frac{2\pi\cdot i}{n\cdot f}+2\varphi\pi)\mathrm{\,\, for\,}i\in(0,1,\dots n-1)
+s(i)=\sin\left(\frac{2\pi\cdot i}{n\cdot f}+2\varphi\pi\right)\mathrm{\,\, for\,}i\in(0,1,\dots n-1)
 \end{equation}
 
 \end_inset

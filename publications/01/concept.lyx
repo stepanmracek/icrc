@@ -519,7 +519,7 @@ The variation of the strain among the myocardium is accomplished with the
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-s(i)=\sin(\frac{2\pi\cdot i}{n\cdot f}+2\varphi\pi)\mathrm{\,\, for\,}i\in(0,1,\dots n-1)
+s(i)=\sin\left(\frac{2\pi\cdot i}{n\cdot f}+2\varphi\pi\right)\mathrm{\,\, for\,}i\in(0,1,\dots n-1)
 \end{equation}
 
 \end_inset
@@ -575,7 +575,7 @@ reference "fig:Frequency-modulation"
 \end_inset
 
  shows the example of point distribution frequency modulation.
- Please note, that the highest point distribution frequency is shifted compared
+ Please note that the highest point distribution frequency is shifted compared
  to the amplitude of the modulation wave.
  This is caused by the manner of the frequency modulation calculation.
 \end_layout
