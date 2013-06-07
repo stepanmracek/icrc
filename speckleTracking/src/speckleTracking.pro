@@ -51,10 +51,12 @@ HEADERS += \
     ui/dialogimageprocessing.h \
     ui/dialogshapemodel.h \
     ui/graphicsviewwithevents.h \
-    strain/batchtesting.h \
     ui/dialogsaveplot.h \
     linalg/frequencymodulation.h \
-    ui/widgetrainbow.h
+    ui/widgetrainbow.h \
+    linalg/shapecomparer.h \
+    test/batchtesting.h \
+    strain/batchtestingold.h
 
 SOURCES += \
     linalg/vecf.cpp \
@@ -98,10 +100,12 @@ SOURCES += \
     ui/dialogshapemodel.cpp \
     ui/graphicsviewwithevents.cpp \
     ui/widgetplot.cpp \
-    strain/batchtesting.cpp \
     ui/dialogsaveplot.cpp \
     linalg/frequencymodulation.cpp \
-    ui/widgetrainbow.cpp
+    ui/widgetrainbow.cpp \
+    linalg/shapecomparer.cpp \
+    test/batchtesting.cpp \
+    strain/batchtestingold.cpp
 
 INCLUDEPATH += src
 

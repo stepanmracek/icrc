@@ -110,7 +110,7 @@ public:
     static void testLearnShapeWithFM()
     {
         int segmentsCount = 6;
-        int pointsPerSegment = 3;
+        int pointsPerSegment = 6;
 
         std::vector<VectorF> modValues =
                 FrequencyModulation::generateModulationValues(segmentsCount*pointsPerSegment + 1 , 1.0, 3.0, 1.0, 3.0, 1.0);

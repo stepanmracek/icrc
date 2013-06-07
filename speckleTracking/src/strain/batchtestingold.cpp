@@ -1,4 +1,4 @@
-#include "batchtesting.h"
+#include "batchtestingold.h"
 
 #include <QDir>
 #include <QDebug>
@@ -277,7 +277,7 @@ void load(const QString &path, QList<VideoDataClip*> &clips, QList<ShapeMap> &sh
     shapeMaps << shapeMap;
 }
 
-void BatchTesting::process()
+void BatchTestingOld::process()
 {
     // load data and reference shapes
     QList<VideoDataClip*> clips;
