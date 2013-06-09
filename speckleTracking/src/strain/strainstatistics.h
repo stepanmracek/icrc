@@ -24,6 +24,10 @@ public:
     P getCenter(Points &points);
 
     static float beatToBeatVariance(StrainStatistics &firstBeat, StrainStatistics &secondBeat, int samplesCount);
+    static float beatToBeatVariance(QVector<StrainStatistics> &beats, int samplesCount);
+
+    static VectorF beatToBeatVariancePerSegment(StrainStatistics &firstBeat, StrainStatistics &secondBeat, int samplesCount);
+    static VectorF beatToBeatVariancePerSegment(QVector<StrainStatistics> &beats, int samplesCount);
 
     static StrainStatistics getOneBeatStats(VideoDataClip *clip, Strain *strainModel,
                                             int beatIndex, ShapeMap &shapesMap, bool *success);

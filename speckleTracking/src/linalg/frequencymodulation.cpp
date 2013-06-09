@@ -59,7 +59,7 @@ std::vector<VectorF> FrequencyModulation::generateModulationValues(int resultLen
     {
         for (float phase = 0; phase <= 1.0; phase += 1.0/phaseSteps)
         {
-            qDebug() << "freq" << freq << "phase" << phase;
+            //qDebug() << "freq" << freq << "phase" << phase;
             VectorF vec = generateModulationValues(resultLen, freq, phase, scale);
             result.push_back(vec);
         }

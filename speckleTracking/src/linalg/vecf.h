@@ -64,7 +64,7 @@ public:
 
     static double minValue(VectorF &vector);
 
-    static double meanValue(VectorF &vector);
+    static double meanValue(const VectorF &vector);
 
     static MatF meanVector(std::vector<MatF> &vectors);
 

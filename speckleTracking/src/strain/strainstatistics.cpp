@@ -12,10 +12,10 @@ StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
 
     unsigned int pointsCount = shapes.front().size();
     assert (pointsCount > 0);
-    qDebug() << "StrainStatistics";
-    qDebug() << "pointsCount" << pointsCount << pointsCount/3 -1;
-    qDebug() << "points per segment" << strainModel->pointsPerSegment;
-    qDebug() << "segments" << strainModel->segmentsCount;
+    //qDebug() << "StrainStatistics";
+    //qDebug() << "pointsCount" << pointsCount << pointsCount/3 -1;
+    //qDebug() << "points per segment" << strainModel->pointsPerSegment;
+    //qDebug() << "segments" << strainModel->segmentsCount;
 
     strainForPoints = std::vector<VectorF>(pointsCount/3 - 1);
     strainForSegments = std::vector<VectorF>(strainModel->segmentsCount);
@@ -89,6 +89,70 @@ float StrainStatistics::beatToBeatVariance(StrainStatistics &firstBeat, StrainSt
     MatF secondMat = VecF::fromVector(secondSampled);
     MatF delta = firstMat - secondMat;
     return VecF::stdDeviation(delta);
+}
+
+float StrainStatistics::beatToBeatVariance(QVector<StrainStatistics> &beats, int samplesCount)
+{
+    int n = beats.count();
+    float sum = 0.0f;
+    int count = 0;
+    for (int i = 0; i < (n-1); i++)
+    {
+        for (int j = i+1; j < n; j++)
+        {
+            sum += beatToBeatVariance(beats[i], beats[j], samplesCount);
+            count++;
+        }
+    }
+    return sum / count;
+}
+
+VectorF StrainStatistics::beatToBeatVariancePerSegment(StrainStatistics &firstBeat, StrainStatistics &secondBeat,
+                                                       int samplesCount)
+{
+    int n = firstBeat.strainForSegments.size();
+    assert(n == secondBeat.strainForSegments.size());
+
+    VectorF result;
+    for (int i = 0; i < n; i++)
+    {
+        VectorF firstSampled = VecF::resample(firstBeat.strainForSegments[i], samplesCount);
+        VectorF secondSampled = VecF::resample(secondBeat.strainForSegments[i], samplesCount);
+
+        MatF firstMat = VecF::fromVector(firstSampled);
+        MatF secondMat = VecF::fromVector(secondSampled);
+        MatF delta = firstMat - secondMat;
+        result.push_back(VecF::stdDeviation(delta));
+    }
+
+    return result;
+}
+
+VectorF StrainStatistics::beatToBeatVariancePerSegment(QVector<StrainStatistics> &beats, int samplesCount)
+{
+    int n = beats.count();
+    assert(beats.size() > 0);
+    int segments = beats[0].strainRateForSegments.size();
+    VectorF result(segments);
+    int count = 0;
+    for (int i = 0; i < (n-1); i++)
+    {
+        for (int j = i+1; j < n; j++)
+        {
+            VectorF partialResult = beatToBeatVariancePerSegment(beats[i], beats[j], samplesCount);
+            for (int k = 0; k < segments; k++)
+            {
+                result[k] += partialResult[k];
+            }
+            count++;
+        }
+    }
+
+    for (int k = 0; k < segments; k++)
+    {
+        result[k] = result[k] / count;
+    }
+    return result;
 }
 
 StrainStatistics StrainStatistics::getOneBeatStats(VideoDataClip *clip, Strain *strainModel,

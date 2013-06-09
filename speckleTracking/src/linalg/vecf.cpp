@@ -348,7 +348,7 @@ double VecF::meanValue(MatF &vector)
     return sum/r;
 }
 
-double VecF::meanValue(VectorF &vector)
+double VecF::meanValue(const VectorF &vector)
 {
     double sum = 0;
     int r = vector.size();
