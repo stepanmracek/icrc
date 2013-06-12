@@ -57,9 +57,9 @@ public:
 
     static void testAnotation()
     {
-        VideoDataClip data("/home/stepo/ownCloud/icrc/test/test.wmv");
+        VideoDataClip data("/home/stepo/Dropbox/projekty/icrc/test/test.wmv");
         VectorOfShapes shapes = Anotation::anotateFromVideo(data);
-        Serialization::serialize(shapes, "/home/stepo/ownCloud/icrc/dataDir/rawShapes");
+        Serialization::serialize(shapes, "/home/stepo/Dropbox/projekty/icrc/dataDir/rawShapes");
     }
 
     static void testUniformSpline()
@@ -75,7 +75,7 @@ public:
 
     static void testLearnShape()
     {
-        QString pathToRawControlPoints = "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
+        QString pathToRawControlPoints = "/home/stepo/Dropbox/projekty/icrc/dataDir/rawControlPoints";
         VectorOfShapes rawShapes = Serialization::readVectorOfShapes(pathToRawControlPoints);
 
         ShapeNormalizerPass *dummyNormalizer = new ShapeNormalizerPass();
@@ -93,12 +93,12 @@ public:
 
         PCA *pca = new PCA();
         StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);
-        pca->serialize("/home/stepo/ownCloud/icrc/dataDir/pca-shape2");
+        pca->serialize("/home/stepo/Dropbox/projekty/icrc/dataDir/pca-shape2");
     }
 
     static void testFreqModulation()
     {
-        /*QString pathToRawControlPoints = "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
+        /*QString pathToRawControlPoints = "/home/stepo/Dropbox/projekty/icrc/dataDir/rawControlPoints";
         Points rawControlPoints = Serialization::readVectorOfShapes(pathToRawControlPoints)[0];
         Spline spline;
         Points uniformControlPoints = spline.uniformDistance(rawControlPoints, 6, false);
@@ -113,10 +113,10 @@ public:
         int pointsPerSegment = 6;
 
         std::vector<VectorF> modValues =
-                FrequencyModulation::generateModulationValues(segmentsCount*pointsPerSegment + 1 , 1.0, 3.0, 1.0, 3.0, 1.0);
+                FrequencyModulation::generateModulationValues(segmentsCount*pointsPerSegment + 1 , 1.0, 3.0, 1.0, 3.0, 0.1);
         int modValuesCount = modValues.size();
 
-        QString pathToRawControlPoints = "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
+        QString pathToRawControlPoints = "/home/stepo/Dropbox/projekty/icrc/dataDir/rawControlPoints";
         VectorOfShapes rawShapes = Serialization::readVectorOfShapes(pathToRawControlPoints);
 
         ShapeNormalizerPass *dummyNormalizer = new ShapeNormalizerPass();
@@ -146,7 +146,7 @@ public:
 
         ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
         LongitudinalStrain resultStrain(normalizer, segmentsCount, pointsPerSegment);
-        resultStrain.serialize("/home/stepo/ownCloud/icrc/dataDir/longstrain-fm-6-10");
+        resultStrain.serialize("/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10");
 
         // --------------------------------------------------------
 
@@ -154,7 +154,7 @@ public:
         StatisticalShapeModel *newShapeModel = new StatisticalShapeModel(newPCA);
         ShapeNormalizerBase *newNormalizer = new ShapeNormalizerIterativeStatisticalShape(newShapeModel);
         LongitudinalStrain newStrain(newNormalizer, 0, 0);
-        newStrain.deserialize("/home/stepo/ownCloud/icrc/dataDir/longstrain-fm-6-10");
+        newStrain.deserialize("/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10");
 
         qDebug() << "newStrain:";
         qDebug() << "segmentsCount" << newStrain.segmentsCount;
@@ -225,18 +225,18 @@ public:
 
     static int testQtManager(int argc, char *argv[])
     {
-        QString dataDir = "/home/stepo/ownCloud/icrc/dataDir";
+        QString dataDir = "/home/stepo/Dropbox/projekty/icrc/dataDir";
 
         PCA *pca = new PCA();
         StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca);
         ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
         Strain *strain = new LongitudinalStrain(normalizer, 0, 0);
-        strain->deserialize("/home/stepo/ownCloud/icrc/dataDir/longstrain-fm-6-10");
+        strain->deserialize("/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10");
 
         ListOfImageProcessing processing;
-        StrainResultProcessingBase *postProcessing = new StrainResProcFloatingAvg(3);
+        StrainResultProcessingBase *postProcessing = new StrainResProcFloatingAvg(5);
         PointTrackerBase *pointTracker = new PointTrackerOpticalFlow(20); // new PointTrackerNeighbourOpticalFlow(20, 11, 2);
-        float weightValues[] = {1.0f, 0.5f};
+        float weightValues[] = {1.0f};
         VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
         ShapeTracker *tracker = new ShapeTracker(strain, processing, pointTracker, postProcessing, weights);
 
@@ -244,18 +244,18 @@ public:
 
         // create GUI
         QApplication app(argc, argv);
-        WindowAnotationManager w("/home/stepo/ownCloud/icrc/test2/", dataDir, tracker);
+        WindowAnotationManager w("/home/stepo/Dropbox/projekty/icrc/test2/", dataDir, tracker);
         w.show();
         return app.exec();
     }
 
     static void testBeatToBeatVariance()
     {
-        VideoDataClip clip("/home/stepo/SparkleShare/private/icrc/test/test.wmv",
-                           "/home/stepo/SparkleShare/private/icrc/test/test.wmv_metadata");
+        VideoDataClip clip("/home/stepo/Dropbox/projekty/icrc/test/test.wmv",
+                           "/home/stepo/Dropbox/projekty/icrc/test/test.wmv_metadata");
         ShapeMap shapeMap = Serialization::readShapeMap("/home/stepo/SparkleShare/private/icrc/test/test.wmv_shapemap");
 
-        PCA *pca = new PCA("/home/stepo/SparkleShare/private/icrc/test/pca-shape");
+        PCA *pca = new PCA("/home/stepo/Dropbox/projekty/icrc/test/pca-shape");
         StatisticalShapeModel *model = new StatisticalShapeModel(pca);
         ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
         LongitudinalStrain strain(normalizer, 6, 5);

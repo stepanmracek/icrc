@@ -27,7 +27,6 @@ void testTracker(ShapeTracker &tracker, const QString &dirPath)
     QFileInfoList videos = dir.entryInfoList();
     foreach (const QFileInfo &info, videos)
     {
-        qDebug() << info.baseName();
         VideoDataClip clip(info.absoluteFilePath(), info.absoluteFilePath()+"_metadata");
 
         // get beat indicies
@@ -72,22 +71,21 @@ void testTracker(ShapeTracker &tracker, const QString &dirPath)
     b2bVariance /= videos.count();
     b2bVariancePerSegment /= videos.count();
     meanDiff /= videos.count();
-    qDebug() << tracker.getInfo();
     qDebug() << b2bVariance << b2bVariancePerSegment << meanDiff;
 }
 
 void BatchTesting::process()
 {
-    QString videoDirectory = "/home/stepo/ownCloud/icrc/test2/";
-    QString rawShapesPath =  "/home/stepo/ownCloud/icrc/dataDir/rawControlPoints";
+    QString videoDirectory = "/home/stepo/Dropbox/projekty/icrc/test2/";
+    QString rawShapesPath =  "/home/stepo/Dropbox/projekty/icrc/dataDir/rawControlPoints";
     VectorOfShapes rawShapes = Serialization::readVectorOfShapes(rawShapesPath);
     ListOfImageProcessing imgProc;
 
-    QList<float> freqStart; freqStart << 1.0;
-    QList<float> freqEnd; freqEnd     << 3.0;
-    QList<float> freqStep; freqStep   << 1.0;
-    QList<float> phase; phase         << 3.0;
-    QList<float> amplitude; amplitude << 1.0;
+    QList<float> freqStart; freqStart << 1.0 << 1.0;
+    QList<float> freqEnd; freqEnd     << 3.0 << 3.0;
+    QList<float> freqStep; freqStep   << 1.0 << 1.0;
+    QList<float> phase; phase         << 3.0 << 3.0;
+    QList<float> amplitude; amplitude << 1.0 << 0.2;
 
     QList<int> segments; segments                 <<  6 << 6 << 6;
     QList<int> pointsPerSegment; pointsPerSegment << 10 << 5 << 3;
@@ -100,23 +98,23 @@ void BatchTesting::process()
     VectorF w3; w3.push_back(1); w3.push_back(0.5); w3.push_back(0.25);
     weights << w1;
 
-    int m = freqStart.count();
-    int n = segments.count();
-    int o = resProcWindowSize.count();
-    int p = weights.count();
+    int freqCount = freqStart.count();
+    int segCount = segments.count();
+    int resProcCount = resProcWindowSize.count();
+    int weightsCount = weights.count();
 
-    for (int i = 0; i < m; i++)
+    for (int freqIndex = 0; freqIndex < freqCount; freqIndex++)
     {
-        for (int j = 0; j < n; j++)
+        for (int segIndex = 0; segIndex < segCount; segIndex++)
         {
             std::vector<VectorF> modValues =
-                    FrequencyModulation::generateModulationValues(segments[j]*pointsPerSegment[j] + 1,
-                                                                  freqStart[i], freqEnd[i], freqStep[i],
-                                                                  phase[i], amplitude[i]);
+                    FrequencyModulation::generateModulationValues(segments[segIndex]*pointsPerSegment[segIndex] + 1,
+                                                                  freqStart[freqIndex], freqEnd[freqIndex], freqStep[freqIndex],
+                                                                  phase[freqIndex], amplitude[freqIndex]);
             int modValuesCount = modValues.size();
 
             ShapeNormalizerPass *dummyNormalizer = new ShapeNormalizerPass();
-            LongitudinalStrain dummyStrain(dummyNormalizer, segments[j], pointsPerSegment[j]);
+            LongitudinalStrain dummyStrain(dummyNormalizer, segments[segIndex], pointsPerSegment[segIndex]);
 
             VectorOfShapes shapes;
             foreach (const Points &controlPoints, rawShapes)
@@ -131,22 +129,24 @@ void BatchTesting::process()
                 }
             }
 
-            for (int k = 0; k < o; k++)
+            for (int resProcIndex = 0; resProcIndex < resProcCount; resProcIndex++)
             {
-                for (int l = 0; l < p; l++)
+                for (int wIndex = 0; wIndex < weightsCount; wIndex++)
                 {
                     PointTrackerBase *pointTracker = new PointTrackerOpticalFlow(21);
 
-                    StrainResultProcessingBase *resProc = resProcWindowSize[k] == 1 ?
+                    StrainResultProcessingBase *resProc = resProcWindowSize[resProcIndex] == 1 ?
                                 (StrainResultProcessingBase*)(new StrainResultProcessingPass()) :
-                                (StrainResultProcessingBase*)(new StrainResProcFloatingAvg(resProcWindowSize[k]));
+                                (StrainResultProcessingBase*)(new StrainResProcFloatingAvg(resProcWindowSize[resProcIndex]));
 
                     PCA *pca = new PCA();
                     StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);
                     ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
-                    LongitudinalStrain *strain = new LongitudinalStrain(normalizer, segments[j], pointsPerSegment[j]);
-                    ShapeTracker tracker(strain, imgProc, pointTracker, resProc, weights[l]);
+                    LongitudinalStrain *strain = new LongitudinalStrain(normalizer, segments[segIndex], pointsPerSegment[segIndex]);
+                    ShapeTracker tracker(strain, imgProc, pointTracker, resProc, weights[wIndex]);
 
+                    qDebug() << tracker.getInfo().toStdString().c_str();
+                    qDebug() << "Freq" << freqStart[freqIndex] << freqEnd[freqIndex] << freqStep[freqIndex] << phase[freqIndex] << amplitude[freqIndex];
                     testTracker(tracker, videoDirectory);
                 }
             }
