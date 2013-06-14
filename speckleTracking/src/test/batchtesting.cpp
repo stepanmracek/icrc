@@ -15,6 +15,8 @@
 #include "strain/shapenormalizer.h"
 #include "strain/longitudinalstrain.h"
 #include "strain/pointtrackeropticalflow.h"
+#include "strain/pointtrackerneighbouropticalflow.h"
+#include "strain/pointtrackerdistance.h"
 #include "strain/strainstatistics.h"
 
 void testTracker(ShapeTracker &tracker, const QString &dirPath)
@@ -32,6 +34,8 @@ void testTracker(ShapeTracker &tracker, const QString &dirPath)
         // get beat indicies
         QVector<int> &beats = clip.getMetadata()->beatIndicies;
         ShapeMap &rawShapes = clip.getMetadata()->rawShapes;
+        clip.getMetadata()->getCoordSystem()->resultMatRows = 300;
+        clip.getMetadata()->getCoordSystem()->resultMatCols = 200;
         ShapeMap resultShapeMap;
         VectorF diffs;
         foreach(int beat, beats)
@@ -74,6 +78,19 @@ void testTracker(ShapeTracker &tracker, const QString &dirPath)
     qDebug() << b2bVariance << b2bVariancePerSegment << meanDiff;
 }
 
+PointTrackerBase * getPointTracker(int index)
+{
+    switch (index)
+    {
+    case 0:
+        return new PointTrackerOpticalFlow(21);
+    case 1:
+        return new PointTrackerNeighbourOpticalFlow(20, 21, 3);
+    case 2:
+        return new PointTrackerDistance(new CosineMetric(), 21);
+    }
+}
+
 void BatchTesting::process()
 {
     QString videoDirectory = "/home/stepo/Dropbox/projekty/icrc/test2/";
@@ -102,6 +119,7 @@ void BatchTesting::process()
     int segCount = segments.count();
     int resProcCount = resProcWindowSize.count();
     int weightsCount = weights.count();
+    int pTrackerCount = 3;
 
     for (int freqIndex = 0; freqIndex < freqCount; freqIndex++)
     {
@@ -133,21 +151,24 @@ void BatchTesting::process()
             {
                 for (int wIndex = 0; wIndex < weightsCount; wIndex++)
                 {
-                    PointTrackerBase *pointTracker = new PointTrackerOpticalFlow(21);
+                    for (int pTrackerIndex = 0; pTrackerIndex < pTrackerCount; pTrackerIndex++)
+                    {
+                        PointTrackerBase *pointTracker = getPointTracker(pTrackerIndex);
 
-                    StrainResultProcessingBase *resProc = resProcWindowSize[resProcIndex] == 1 ?
-                                (StrainResultProcessingBase*)(new StrainResultProcessingPass()) :
-                                (StrainResultProcessingBase*)(new StrainResProcFloatingAvg(resProcWindowSize[resProcIndex]));
+                        StrainResultProcessingBase *resProc = resProcWindowSize[resProcIndex] == 1 ?
+                                    (StrainResultProcessingBase*)(new StrainResultProcessingPass()) :
+                                    (StrainResultProcessingBase*)(new StrainResProcFloatingAvg(resProcWindowSize[resProcIndex]));
 
-                    PCA *pca = new PCA();
-                    StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);
-                    ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
-                    LongitudinalStrain *strain = new LongitudinalStrain(normalizer, segments[segIndex], pointsPerSegment[segIndex]);
-                    ShapeTracker tracker(strain, imgProc, pointTracker, resProc, weights[wIndex]);
+                        PCA *pca = new PCA();
+                        StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);
+                        ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
+                        LongitudinalStrain *strain = new LongitudinalStrain(normalizer, segments[segIndex], pointsPerSegment[segIndex]);
+                        ShapeTracker tracker(strain, imgProc, pointTracker, resProc, weights[wIndex]);
 
-                    qDebug() << tracker.getInfo().toStdString().c_str();
-                    qDebug() << "Freq" << freqStart[freqIndex] << freqEnd[freqIndex] << freqStep[freqIndex] << phase[freqIndex] << amplitude[freqIndex];
-                    testTracker(tracker, videoDirectory);
+                        qDebug() << tracker.getInfo().toStdString().c_str();
+                        qDebug() << "Freq" << freqStart[freqIndex] << freqEnd[freqIndex] << freqStep[freqIndex] << phase[freqIndex] << amplitude[freqIndex];
+                        testTracker(tracker, videoDirectory);
+                    }
                 }
             }
         }
