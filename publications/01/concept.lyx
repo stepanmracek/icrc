@@ -727,7 +727,11 @@ Create projection matrix
 \begin_inset Formula $t$
 \end_inset
 
- largest eigenvalues from previous step.
+ largest eigenvalues from previous step (
+\begin_inset Formula $t\leq m$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -893,7 +897,7 @@ The image transformation block transforms the input image from the input
 \begin_inset Formula $x\mbox{-}y$
 \end_inset
 
- coordinate system to the angle-distance (
+ coordinate system to the polar (angle-distance 
 \begin_inset Formula $\theta\mbox{-}d$
 \end_inset
 
@@ -903,7 +907,35 @@ The image transformation block transforms the input image from the input
 \end_inset
 
  coordinate system is placed to the center of the circular sector that contains
- B-mode image data.
+ B-mode image data (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Image-transformation"
+
+\end_inset
+
+).
+ An arbitrary point 
+\begin_inset Formula $X=(x,y)$
+\end_inset
+
+ is thus transformed to the point 
+\begin_inset Formula $X'=(\theta,d),$
+\end_inset
+
+ such:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray}
+\theta & = & \mathrm{atan2}(y,x)\\
+d & = & \sqrt{x^{2}+y^{2}}
+\end{eqnarray}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -936,6 +968,13 @@ Image transformation from
 \end_inset
 
 ) coordinate system
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Image-transformation"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
