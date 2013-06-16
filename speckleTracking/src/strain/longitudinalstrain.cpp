@@ -107,10 +107,10 @@ QList<QGraphicsItem*> LongitudinalStrain::drawResult(QGraphicsScene *scene, Poin
         newItems << item2;
     }
 
-    P apex = getApexPoint(resultPoints);
-    P base = getBasePoint(resultPoints);
-    QGraphicsItem *baseLine = scene->addLine(base.x, base.y, apex.x, apex.y, linePen);
-    newItems << baseLine;
+    //P apex = getApexPoint(resultPoints);
+    //P base = getBasePoint(resultPoints);
+    //QGraphicsItem *baseLine = scene->addLine(base.x, base.y, apex.x, apex.y, linePen);
+    //newItems << baseLine;
 
     QPen pen;
     QBrush brush(Qt::SolidPattern);
@@ -121,7 +121,7 @@ QList<QGraphicsItem*> LongitudinalStrain::drawResult(QGraphicsScene *scene, Poin
         brush.setColor(QColor::fromHsvF(hue, 1, 1, 0.5));
 
         P &p = resultPoints[i];
-        QGraphicsItem *item = scene->addEllipse(p.x-2, p.y-2, 4, 4, pen, brush);
+        QGraphicsItem *item = scene->addEllipse(p.x-3, p.y-3, 6, 6, pen, brush);
         newItems << item;
     }
 
