@@ -1,0 +1,1074 @@
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0157357 0.0382506 22.9823 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0208942 0.0577761 145.014 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0191616 0.0567326 49.6569 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0153671 0.0370356 22.1966 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0205454 0.058246 138.355 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0186155 0.0551371 47.9924 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0150317 0.0359862 22.2151 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.020228 0.056313 127.686 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0180868 0.0536608 46.8434 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.014651 0.0349264 21.9983 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0199053 0.0551319 119.386 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0175545 0.0523104 46.0429 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0143698 0.0390612 22.9326 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0236671 0.07977 185.985 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0228481 0.0665743 64.916 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0140223 0.0379437 22.1248 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0229805 0.0793268 176.74 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0223888 0.0650473 62.9597 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0137161 0.0369879 22.1031 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0227526 0.077117 166.228 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0219205 0.0636386 60.9574 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0133735 0.035995 21.8466 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0237165 0.0805274 159.491 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0214212 0.0622058 59.5464 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0175793 0.0417807 25.9305 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0284785 0.0920069 213.386 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0262273 0.0620047 89.1694 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0172612 0.0407822 25.1066 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0279312 0.0921123 199.306 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0257467 0.0603023 86.3293 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0169357 0.0399193 25.0707 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0277098 0.0907592 193.907 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0251858 0.0586434 84.4653 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0165542 0.0389765 24.879 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0249349 0.0898608 178.158 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 1 
+
+0.0245682 0.0570891 82.1527 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0127836 0.029509 19.8141 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+
+0.0217115 0.0382371 128.114 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0158212 0.0373075 40.8224 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0123955 0.0283136 19.4279 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0219883 0.0375932 118.065 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0152755 0.0356622 39.1708 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0120332 0.0273019 19.5027 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0221195 0.0369469 111.3 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0147798 0.0343247 37.9898 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0116356 0.0263294 19.3592 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0216568 0.0364473 105.021 
+
+Longitudinal strain
+    segments: 6, points per segment: 10
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0143014 0.0331469 37.1732 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0132115 0.0322691 22.0836 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0213466 0.0490599 128.098 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0169422 0.04243 45.8065 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0128638 0.0312356 21.4755 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0199597 0.0475948 118.719 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0164148 0.0408898 43.9573 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0125244 0.0303297 21.5055 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0198978 0.0466592 111.651 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0158963 0.039501 42.6898 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0121391 0.0293931 21.2699 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0202396 0.0472206 106.333 
+
+Longitudinal strain
+    segments: 6, points per segment: 5
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0153555 0.0381801 41.5141 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0159104 0.0356058 25.6711 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0233533 0.0523786 145.645 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+No result processing
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0202992 0.0507009 51.3617 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0155962 0.0346894 24.6849 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0221587 0.049709 135.774 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 3
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.019801 0.049094 49.7966 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0152932 0.0338811 24.6809 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0231735 0.0501305 127.428 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 5
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0192888 0.0476082 48.7638 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0149198 0.0330078 24.4302 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Optical flow point tracker
+    Outlier distance: 20
+    Window size: 21
+    Step within window: 3
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0225033 0.0481018 120.297 
+
+Longitudinal strain
+    segments: 6, points per segment: 3
+Iterative statistical shape normalizer using PCA
+Distance point tracker based on: CosineMetric
+    Window size: 21
+Result processing:
+  floating average window: 7
+Image processing:
+    (none)
+Weights:
+    1, 
+Freq 1 3 1 3 0.2 
+0.0187594 0.0462317 47.7055 
