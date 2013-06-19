@@ -1,4 +1,6 @@
-#! /usr/bin/env python
+#! /usr/bin/env python2
+import numpy
+import operator
 
 f = open("batchResult4.txt")
 
@@ -6,10 +8,14 @@ NAME = 1
 DATA = 2
 state = NAME
 
-perSegmentStrainDict = {}
-strainDict = {}
+msDict = {}
+pssDict= {}
 diffDict = {}
+allDict = {}
 name = ''
+
+def sort(d):
+	return sorted(d.iteritems(), key=operator.itemgetter(1))
 
 for line in f:
 	if state == NAME:
@@ -19,60 +25,58 @@ for line in f:
 			name = name + line
 
 	elif state == DATA:
-		if line.strip() != '':
-			items = line.split()
-			if (items[0] == 'cumulativeDiff'):
-				diff = float(items[1])
-				diffDict[name] = diff
-			elif (items[0] == 'cumulativeStdDev'):
-				meanStrain = float(items[1])
-				meanStrainDict[name] = meanStrain
-			elif (items[0] == 'cumulativePerSegmentStdDev'):
-				perSegmentStrain = float(items[1])
-				perSegmentStrainDict[name] = perSegmentStrain
-		else:
-			strainSum = meanStrain + perSegmentStrain
-			totalSum = strainSum + diff
+		if line.strip() == '':
+			if name in msDict:
+				print name
+				exit()
 
-			if (meanStrain < minMeanStrain):
-				minMeanStrainName = name
-				minMeanStrain = meanStrain
-
-			if (perSegmentStrain < minPerSegmentStrain):
-				minPerSegmentStrain = perSegmentStrain
-				minPerSegmentStrainName = name
-
-			if (strainSum < minStrainSum):
-				minStrainSum = strainSum
-				minStrainSumName = name
-
-			if (diff < minDiff):
-				minDiff = diff
-				minDiffName = name
-
-			if (totalSum < minTotalSum):
-				minTotalSum = totalSum
-				minTotalSumName = name
-
-			state = NAME
+			msDict[name] = ms
+			pssDict[name] = pss
+			diffDict[name] = diff
+			
 			name = ''
+			state = NAME
 
-print("minMeanStrain: %f" % minMeanStrain)
-print(minMeanStrainName)
-print()
+		else:
+			items = line.split()
+			ms = float(items[0])
+			pss = float(items[1])
+			diff = float(items[2])
 
-print("minPerSegmentStrain: %f" % minPerSegmentStrain)
-print(minPerSegmentStrainName)
-print()
+msSorted = sort(msDict)
+print msSorted[0][0], msSorted[0][1]
+print '------------------------------------------------'
+pssSorted = sort(pssDict)
+print pssSorted[0][0], pssSorted[0][1]
+print '------------------------------------------------'
+diffSorted = sort(diffDict)
+print diffSorted[0][0], diffSorted[0][1]
+print '------------------------------------------------'
 
-print("minStrainSum: %f" % minStrainSum)
-print(minStrainSumName)
-print()
+msValues = msDict.values()
+msMean = numpy.mean(msValues)
+msStd = numpy.std(msValues)
 
-print("minDiff: %f" % minDiff)
-print(minDiffName)
-print()
+pssValues = pssDict.values();
+pssMean = numpy.mean(pssValues)
+pssStd = numpy.std(pssValues)
 
-print("minTotalSum: %f" % minTotalSum)
-print(minTotalSumName)
-print()
+diffValues = diffDict.values()
+diffMean = numpy.mean(diffValues)
+diffStd = numpy.std(diffValues)
+
+out = open('distribution', 'w')
+for i in msDict:
+	msDict[i] = (msDict[i] - msMean) / msStd
+	pssDict[i] = (pssDict[i] - pssMean) / pssStd
+	diffDict[i] = (diffDict[i] - diffMean) / diffStd
+	allDict[i] = msDict[i] + pssDict[i] + diffDict[i]
+
+	print >>out, msDict[i], pssDict[i], diffDict[i]
+
+
+
+allSorted = sort(allDict)
+print allSorted[0][0], allSorted[0][1]
+
+print len(allSorted)
