@@ -556,8 +556,8 @@ where
 \begin_inset Formula 
 \begin{equation}
 p_{i}=\begin{cases}
-p_{i}+0.5\cdot(p_{i+1}-p_{i})\cdot s_{i}\mbox{  if } & s_{i}\geq0\\
-p_{i}+0.5\cdot(p_{i-1}-p_{i})\cdot s_{i}\mbox{  if } & s_{i}<0
+p_{i}+0.5\cdot(p_{i+1}-p_{i})\cdot s_{i}\mbox{ if } & s_{i}\geq0\\
+p_{i}+0.5\cdot(p_{i-1}-p_{i})\cdot s_{i}\mbox{ if } & s_{i}<0
 \end{cases}\label{eq:fm}
 \end{equation}
 
@@ -1788,14 +1788,18 @@ The strain frequency modulation were performed with the following parameters
 \end_inset
 
  pixels.
- Two overall myocardial shapes were trained.
- First directly educed from the fore-mentioned parameters, the second LV
- shape model was trained in the similar way, only the amplitude of the modulatio
-n waves was reduced to 
+ Three overall myocardial shapes were trained.
+ First was directly educed from the fore-mentioned parameters, the second
+ and third LV shape models were trained in the similar way, only the amplitude
+ of the modulation waves were reduced to 
+\begin_inset Formula $0.5$
+\end_inset
+
+ and 
 \begin_inset Formula $0.2$
 \end_inset
 
-.
+ respectively.
  This modification of the training parameter causes more rigid model.
 \end_layout
 
@@ -1833,7 +1837,7 @@ Tracking all virtual points within certain neighborhood around each shape
 \begin_inset Formula $\times$
 \end_inset
 
-3 subwindow)
+3 sub-window)
 \end_layout
 
 \end_deeper
@@ -1874,7 +1878,7 @@ The number of frames and corresponding annotations from which the LV motion
 .
  It has emerged in our experiments that the image processing filters has
  no positive impact on the quality of tracking.
- Therfore we have no included the image processing in batch testing.
+ Therefore, we have not included the image processing in batch testing.,
 \end_layout
 
 \begin_layout Standard
@@ -1891,11 +1895,11 @@ Nevertheless, the total number of tested individual trackers is
 \noun off
 \color none
 
-\begin_inset Formula $2$
+\begin_inset Formula $3$
 \end_inset
 
- (frequency modulation)
-\begin_inset Formula $\cdot2$
+ (frequency modulation, shape model stiffness)
+\begin_inset Formula $\cdot3$
 \end_inset
 
  (point count) 
@@ -1911,10 +1915,41 @@ Nevertheless, the total number of tested individual trackers is
 \end_inset
 
  (result averaging) 
-\begin_inset Formula $=144$
+\begin_inset Formula $=324$
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+In order to find the best tracker, all three main characteristics (MS variance,
+ PSS variance, and precision) have to be combined.
+ For each characteristic 
+\begin_inset Formula $c$
+\end_inset
+
+, we calculate mean value 
+\begin_inset Formula $\mu_{c}$
+\end_inset
+
+ and standard deviation 
+\begin_inset Formula $\sigma_{c}$
+\end_inset
+
+ and perform z-score normalization:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+c'=\frac{c-\mu_{c}}{\sigma_{c}}
+\end{equation}
+
+\end_inset
+
+All three characteristics are summed and trackers can be directly compared.
+ The better the tracker is, the lower is the sum of z-score normalized character
+istics.
 \end_layout
 
 \begin_layout Section
