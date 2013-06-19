@@ -98,11 +98,11 @@ void BatchTesting::process()
     VectorOfShapes rawShapes = Serialization::readVectorOfShapes(rawShapesPath);
     ListOfImageProcessing imgProc;
 
-    QList<float> freqStart; freqStart << 1.0 << 1.0;
-    QList<float> freqEnd; freqEnd     << 3.0 << 3.0;
-    QList<float> freqStep; freqStep   << 1.0 << 1.0;
-    QList<float> phase; phase         << 3.0 << 3.0;
-    QList<float> amplitude; amplitude << 1.0 << 0.2;
+    QList<float> freqStart; freqStart << 1.0 << 1.0 << 1.0;
+    QList<float> freqEnd; freqEnd     << 3.0 << 3.0 << 3.0;
+    QList<float> freqStep; freqStep   << 1.0 << 1.0 << 1.0;
+    QList<float> phase; phase         << 3.0 << 3.0 << 3.0;
+    QList<float> amplitude; amplitude << 1.0 << 0.5 << 0.2;
 
     QList<int> segments; segments                 <<  6 << 6 << 6;
     QList<int> pointsPerSegment; pointsPerSegment << 10 << 5 << 3;
@@ -113,7 +113,7 @@ void BatchTesting::process()
     VectorF w1; w1.push_back(1.0);
     VectorF w2; w2.push_back(1); w2.push_back(0.5);
     VectorF w3; w3.push_back(1); w3.push_back(0.5); w3.push_back(0.25);
-    weights << w1;
+    weights << w1 << w2 << w3;
 
     int freqCount = freqStart.count();
     int segCount = segments.count();
