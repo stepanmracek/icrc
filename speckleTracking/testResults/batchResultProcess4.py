@@ -17,6 +17,12 @@ name = ''
 def sort(d):
 	return sorted(d.iteritems(), key=operator.itemgetter(1))
 
+def printStats(l, n):
+	for i in l[0:n]:
+		print i[0],i[1]
+		print
+
+
 for line in f:
 	if state == NAME:
 		if line.strip() == '':
@@ -43,14 +49,11 @@ for line in f:
 			pss = float(items[1])
 			diff = float(items[2])
 
-msSorted = sort(msDict)
-print msSorted[0][0], msSorted[0][1]
+printStats(sort(msDict), 5)
 print '------------------------------------------------'
-pssSorted = sort(pssDict)
-print pssSorted[0][0], pssSorted[0][1]
+printStats(sort(pssDict), 5)
 print '------------------------------------------------'
-diffSorted = sort(diffDict)
-print diffSorted[0][0], diffSorted[0][1]
+printStats(sort(diffDict), 5)
 print '------------------------------------------------'
 
 msValues = msDict.values()
@@ -67,16 +70,17 @@ diffStd = numpy.std(diffValues)
 
 out = open('distribution', 'w')
 for i in msDict:
-	msDict[i] = (msDict[i] - msMean) / msStd
-	pssDict[i] = (pssDict[i] - pssMean) / pssStd
-	diffDict[i] = (diffDict[i] - diffMean) / diffStd
-	allDict[i] = msDict[i] + pssDict[i] + diffDict[i]
+	ms = (msDict[i] - msMean) / msStd
+	pss = (pssDict[i] - pssMean) / pssStd
+	diff = (diffDict[i] - diffMean) / diffStd
+	allDict[i] = ms + pss + diff
 
-	print >>out, msDict[i], pssDict[i], diffDict[i]
+	print >>out, ms, pss, diff
 
+for i in sort(allDict)[0:5]:
+	print i[0],i[1]
+	print msDict[i[0]]
+	print pssDict[i[0]]
+	print diffDict[i[0]]
 
-
-allSorted = sort(allDict)
-print allSorted[0][0], allSorted[0][1]
-
-print len(allSorted)
+print len(allDict)

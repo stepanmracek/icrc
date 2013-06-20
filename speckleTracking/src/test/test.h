@@ -110,10 +110,10 @@ public:
     static void testLearnShapeWithFM()
     {
         int segmentsCount = 6;
-        int pointsPerSegment = 6;
+        int pointsPerSegment = 10;
 
         std::vector<VectorF> modValues =
-                FrequencyModulation::generateModulationValues(segmentsCount*pointsPerSegment + 1 , 1.0, 3.0, 1.0, 3.0, 0.1);
+                FrequencyModulation::generateModulationValues(segmentsCount*pointsPerSegment + 1 , 1.0, 3.0, 1.0, 3.0, 0.2);
         int modValuesCount = modValues.size();
 
         QString pathToRawControlPoints = "/home/stepo/Dropbox/projekty/icrc/dataDir/rawControlPoints";
