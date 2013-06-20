@@ -33,7 +33,7 @@ figs-within-sections
 \spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_amsmath 1
 \use_esint 1
 \use_mhchem 1
@@ -237,11 +237,11 @@ The image pyramid consists of the original image
 \end_inset
 
  at level 
-\begin_inset Formula $L=0,1,2,\dots,L_{m}$
+\begin_inset Formula $L=1,2,\dots,L_{m}$
 \end_inset
 
  is resized, such its size is recursively set to 
-\begin_inset Formula $\frac{n_{x}^{l-1}}{2}\times\frac{n_{y}^{l-1}}{2}$
+\begin_inset Formula $\frac{1}{2}n_{x}^{L-1}\times\frac{1}{2}n_{y}^{L-1}$
 \end_inset
 
 .
@@ -380,8 +380,8 @@ Our shape model takes into account several different origins of the shape
  The first is the overall variability of LV shape during cardiac cycle as
  well shape difference between different subjects.
  The second origin of the shape variation is the thickness of the myocardium.
- The last origin of the shape variation is connected with the different
- strain across the myocardium.
+ The last origin of the shape variation is connected with the local strain
+ in the myocardium.
 \end_layout
 
 \begin_layout Standard
@@ -502,12 +502,20 @@ where
 \begin_inset Formula $w$
 \end_inset
 
- is desired width of the myocardium.
+ is desired width of the myocardium and 
+\begin_inset Formula $\left\Vert \cdot\right\Vert $
+\end_inset
+
+ represents Euclidean distance between consecutive points.
 \end_layout
 
 \begin_layout Standard
-The variation of the strain among the myocardium is accomplished with the
- frequency modulation added to the uniformly distributed points.
+The local variation of the strain among the myocardium is accomplished with
+ the frequency modulation added to the uniformly distributed points.
+ The distance between consecutive points is altered by different modulation
+ frequencies with various phase shifts.
+ An arbitrary local strain can be thus modeled by the linear combination
+ of basal frequencies and shifts.
  Let the uniformly distributed points 
 \begin_inset Formula $P=(p_{1},p_{2},\dots,p_{n})$
 \end_inset
@@ -705,7 +713,7 @@ Compute the eigenvectors
 \end_inset
 
  and corresponding eigenvalues 
-\begin_inset Formula $\boldsymbol{\lambda}_{1},\dots,\boldsymbol{\lambda}_{m}$
+\begin_inset Formula $\lambda_{1},\dots,\lambda_{m}$
 \end_inset
 
  of 
@@ -729,6 +737,15 @@ Create projection matrix
 \end_inset
 
 ).
+ Usually, the 
+\begin_inset Formula $t$
+\end_inset
+
+ is selected to such value, that 
+\begin_inset Formula $\sum_{i=1}^{t}\lambda_{i}=0.95\sum_{j=1}^{m}\lambda_{j}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1053,7 +1070,11 @@ where
 \begin_inset Formula $x_{i}$
 \end_inset
 
- in the next frame.
+ in the next frame and 
+\begin_inset Formula $I$
+\end_inset
+
+ is the set of all possible neighborhoods in the next frame.
 \end_layout
 
 \begin_layout Standard
@@ -1775,7 +1796,7 @@ reference "sub:Point-tracking"
 
 \begin_layout Standard
 The strain frequency modulation were performed with the following parameters
- -- The frequency parameters 
+ -- the frequency parameters 
 \begin_inset Formula $f=(1,2,3)$
 \end_inset
 
@@ -1811,7 +1832,8 @@ Our LV strain model consists of individual points divided into 6 segments.
  57 points total.
  The second model contains 5 per-point strains in each segment and 93 points
  total.
- The last model 10 per-point strains in each segment and 183 points total.
+ The last model contains 10 per-point strains in each segment and 183 points
+ total.
 \end_layout
 
 \begin_layout Standard
@@ -1829,7 +1851,8 @@ Tracking individual points of the shape
 
 \begin_layout Itemize
 Tracking all virtual points within certain neighborhood around each shape
- point (kernel size 21
+ point.
+ (kernel size 21
 \begin_inset Formula $\times$
 \end_inset
 
@@ -1950,10 +1973,702 @@ c'=\frac{c-\mu_{c}}{\sigma_{c}}
 All three characteristics are summed and trackers can be directly compared.
  The better the tracker is, the lower is the sum of z-score normalized character
 istics.
+ The distribution of normalized characteristics for all compared LV trackers
+ can be seen in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Normalized-characteristics-distribution"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/distribution.png
+	width 7cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Distribution of normalized characteristics for compared LV trackers
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Normalized-characteristics-distribution"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:The-best-trackers"
+
+\end_inset
+
+ shows the best 5 trackers according to the described characteristics.
+ Several conclusions can be deduced from these results.
+ First, the PyrLK-based trackers outperformed simple trackers based on the
+ minimizing the distance between the neighborhood of tracked point and neighborh
+ood around potential point position in consecutive frame -- in our tests
+ represented by trackers based on the cosine metric.
+ Adding additional virtual points around each shape point does not have
+ any positive impact on the tracking performance.
+ The result processing represented by the moving average filter improves
+ the beat-to-beat variance as well as the target precision.
+ However, too large smoothing parameter 
+\begin_inset Formula $n$
+\end_inset
+
+ may vanish some interesting details in myocardium movement.
+ The direct impact of the of the moving average filter can bee seen in Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Normalized-characteristics-distribution"
+
+\end_inset
+
+ as the quaternions aligned on the lines.
+ It has also emerged that too high amplitude in local strain frequency modulatio
+n has negative impact on the beat-to-beat variance.
+ The best results were achieved when the amplitude was set to 
+\begin_inset Formula $0.2$
+\end_inset
+
+.
+ Adding additional weighted input frames to the tracking input does not
+ improve the tracker performance.
+ Our tests shows that better results are achieved when only one (last) frame
+ is used when the optical flow of the points of interest in next frame are
+ calculated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The best trackers (all are PyrLK-based point trackers with modulation amplitude
+ set to 0.2 and only one input frame) 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:The-best-trackers"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="7">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Points 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+moving 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Main strain
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Per-segment
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sum of
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sum of
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rank
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+per
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+average
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Beat-to-beat
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+beat-to-beat 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+square
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+normalized
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+segment
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+filter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+variance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+variance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+differences
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+characteristics
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0115
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0264
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.3349
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-4.8452
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.0119
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0273
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.4738
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-4.6489
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0123
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0283
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.3920
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-4.4637
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0122
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0294
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21.0413
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-4.3603
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0131
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0279
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20.1497
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-4.2462
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
-Conclusion
+Conclusion and further research
+\end_layout
+
+\begin_layout Standard
+We have shown that the utilizing of the probability shape model and PyrLK-based
+ point tracker outperforms simple trackers based on the correlation similarity.
+ We would like to test our method on patients with myocardial movement disruptio
+n in our further experiments in order to prove that our method can be used
+ to non-invasive examination snd detection, e.g., the detection of myocardial
+ ischemism.
 \end_layout
 
 \begin_layout Standard
