@@ -69,49 +69,112 @@ figs-within-sections
 
 \begin_body
 
-\begin_layout Standard
-LV - Left Ventricle
-\end_layout
-
-\begin_layout Standard
-ST - Speckle Tracking
-\end_layout
-
-\begin_layout Standard
-PCA - Principal component analysis
-\end_layout
-
-\begin_layout Standard
-ICA - Independent component analysis
-\end_layout
-
-\begin_layout Standard
-PyrLK - Pyramid Lucas-Kanade
-\end_layout
-
 \begin_layout Section
 Introduction
 \end_layout
 
-\begin_layout Section
-Method
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:Method"
+\begin_layout Standard
+Strain and strain rate imaging are constantly developing techniques in echocardi
+ographic clinical, pre-clinical and basic research.
+ It has been successfully applied in human medicine and more recently in
+ animal experimentation.
+ This technique allows assessment of longitudinal, radial and circumferential
+ component of myocardial function, strain and strain rate, both globally
+ and in individual segments of the myocardium.
+ Additionally, speckle tracking can be used to define rotation of the base
+ and apex and torsion of the left ventricle.
+ STR-derived echocardiography has the potential to quantify left ventricle
+ (LV) systolic and diastolic performance more accurately comparing to convention
+al 2D echocardiography, as described in number of papers 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Meluzin2011,Olsen2011,Wang2009"
 
 \end_inset
 
+.
+\end_layout
 
+\begin_layout Standard
+Nevertheless, despite of substantial research in ultrasound instrumentation
+ and image processing techniques, the utilization of strain analysis is
+ still questionable, due to their limitations.
+ In echocardiography, the strain can be determined by either tissue Doppler
+ techniques or 2D speckle tracking (STR) techniques.
+ This paper is focused on speckle tracking techniques, which have been in
+ center of main interest during the last two decades.
+ The accuracy of these techniques has been widely studied and compared with
+ sonomicrometry and cardiac tagged MRI.
+ The limitations are mainly defined by image quality and temporal resolution
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Nesbitt2009"
+
+\end_inset
+
+ and the presence of reverberations.
+ The method therefore suffers from high results variability (consisting
+ of method limitation, inter- and intra-observer variability 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Marwick2009"
+
+\end_inset
+
+ and beat-to-beat variability).
 \end_layout
 
 \begin_layout Standard
 Contrary to the commonly-used speckle tracking methods, our approach employs
  several principal differences.
  We are using optical flow estimation for tracking the points of interest
- instead of correlation.
- However, the estimation of speckle movement is local only.
+ instead of correlation between consecutive frames 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Behar2004,Sokolov2011"
+
+\end_inset
+
+.
+ Our experiments show that the tracking based on the pyramidal Lucas-Kanade
+ feature tracker outperforms correlation approach.
+\end_layout
+
+\begin_layout Standard
+However, the estimation of speckle movement is local only.
  The usage of generative probability shape model is used in order to preserve
  valid shape estimation of tracked LV.
+ The left ventricle shape model was presented in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jacob1998"
+
+\end_inset
+
+.
+ The similar approach, where the probabilistic statistical shape model bases
+ on PCA was employed, is described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Comaniciu2004"
+
+\end_inset
+
+.
+ However different per-point motion estimator is used 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Comaniciu2003"
+
+\end_inset
+
+.
+ Our probabilistic shape model comes from the is trained from the manually
+ annotated data and from the programmatically computed local deformations
+ of the myocardium.
+ This deformations are computed using frequency modulation of the input
+ control points.
 \end_layout
 
 \begin_layout Section
@@ -169,7 +232,7 @@ key "Lucas1981"
 \begin_inset Formula 
 \begin{equation}
 \begin{array}{c}
-\epsilon(\mathbf{d})=(d_{x},d_{y})=\\
+\epsilon(\mathbf{d})=\epsilon(d_{x},d_{y})=\\
 \sum_{x=u_{x}-w_{x}}^{u_{x}+w_{x}}\sum_{y=u_{y}-w_{y}}^{u_{y}+w_{y}}\left(I(x,y)-J(x+d_{x},y+d_{y})\right)^{2}
 \end{array}
 \end{equation}
@@ -283,7 +346,7 @@ The pyramidal tracking starts at the highest level image
 
  where the more correct flow estimation is computed.
  This is repeated until the base pyramid level is reached.
- The general equation for computing the optical flow at level 
+ The general equation for estimating the optical flow at level 
 \begin_inset Formula $L$
 \end_inset
 
@@ -348,13 +411,14 @@ Statistical shape model
 \begin_layout Standard
 The PyrLK point tracker provides robust technique for following individual
  points of interest.
- However, it is important to maintain a specific shape of the LV during
+ However, it lacks a binding between consecutive points of a shape.
+ Therefore, it is important to maintain a specific shape of the LV during
  cardiac cycle.
  We are using a statistical shape model that has been previously described
  in 
 \begin_inset CommandInset citation
-LatexCommand citet
-key "Cootes2001,Cootes1999"
+LatexCommand cite
+key "Cootes1999,Cootes2001"
 
 \end_inset
 
@@ -387,8 +451,15 @@ Our shape model takes into account several different origins of the shape
 \begin_layout Standard
 The overall shape variation is modeled from the manually annotated data.
  50 shapes from 4 LV cycles from 2 different subjects were annotated.
- The operator marked the points of the mid-myocardium and the spline was
- interpolated between points (see Figure 
+ The operator marked the points of the mid-myocardium and the Catnull-Rom
+ spline 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "catmullrom"
+
+\end_inset
+
+ was interpolated between points (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Manual-anotation"
@@ -440,30 +511,30 @@ name "fig:Manual-anotation"
 \end_layout
 
 \begin_layout Standard
-New points on the spline were established, such that the distance between
- consecutive points was uniform.
+New points on the spline were established, such that the distances between
+ consecutive points were uniform.
  All these uniformly distributed points were triplicated, such that the
  inner points represent endocardium and the outer points represent epicardium.
  Let the 
-\begin_inset Formula $p$
+\begin_inset Formula $\mathbf{p}_{i}$
 \end_inset
 
  is some arbitrary mid-myocardium point.
  The 
-\begin_inset Formula $p_{prev}$
+\begin_inset Formula $\mathbf{p}_{i-1}$
 \end_inset
 
  is its predecessor and 
-\begin_inset Formula $p_{next}$
+\begin_inset Formula $\mathbf{p}_{i+1}$
 \end_inset
 
  is its successor.
  The corresponding points 
-\begin_inset Formula $p_{inner}$
+\begin_inset Formula $\mathbf{p}_{i\mbox{ inner}}$
 \end_inset
 
  and 
-\begin_inset Formula $p_{outer}$
+\begin_inset Formula $\mathbf{p}_{i\mbox{ outer}}$
 \end_inset
 
  on the endocardium and epicardium respectively are:
@@ -472,10 +543,7 @@ New points on the spline were established, such that the distance between
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\begin{array}{c}
-p_{inner\, x}=p_{x}-w\frac{(p_{next\, y}-p_{prev\, y})}{2\left\Vert p_{next}-p_{prev}\right\Vert }\\
-p_{inner\, y}=p_{y}+w\frac{(p_{next\, x}-p_{prev\, x})}{2\left\Vert p_{next}-p_{prev}\right\Vert }
-\end{array}
+\mathbf{p}_{i\mbox{ inner}}=\mathbf{p}_{i}-\frac{w\cdot\mathbf{n}}{2\left\Vert \mathbf{n}\right\Vert }
 \end{equation}
 
 \end_inset
@@ -486,10 +554,7 @@ p_{inner\, y}=p_{y}+w\frac{(p_{next\, x}-p_{prev\, x})}{2\left\Vert p_{next}-p_{
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\begin{array}{c}
-p_{outer\, x}=p_{x}+w\frac{(p_{next\, y}-p_{prev\, y})}{2\left\Vert p_{next}-p_{prev}\right\Vert }\\
-p_{inner\, y}=p_{y}-w\frac{(p_{next\, x}-p_{prev\, x})}{2\left\Vert p_{next}-p_{prev}\right\Vert }
-\end{array}
+\mathbf{p}_{i\mbox{ outer}}=\mathbf{p}_{i}+\frac{w\cdot\mathbf{n}}{2\left\Vert \mathbf{n}\right\Vert }
 \end{equation}
 
 \end_inset
@@ -506,7 +571,60 @@ where
 \begin_inset Formula $\left\Vert \cdot\right\Vert $
 \end_inset
 
- represents Euclidean distance between consecutive points.
+ represents Euclidean distance between consecutive points and 
+\begin_inset Formula $\mathbf{n}$
+\end_inset
+
+ is vector perpendicular to 
+\begin_inset Formula $\mathbf{p}_{i+1}-\mathbf{p}_{i-1}$
+\end_inset
+
+.
+ See Figure for more details.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/inner_outer_points.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Calculation of the points on the epicardium and endocardium.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:inner_outer_points"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -517,7 +635,7 @@ The local variation of the strain among the myocardium is accomplished with
  An arbitrary local strain can be thus modeled by the linear combination
  of basal frequencies and shifts.
  Let the uniformly distributed points 
-\begin_inset Formula $P=(p_{1},p_{2},\dots,p_{n})$
+\begin_inset Formula $P=(\mathbf{p}_{1},\mathbf{p}_{2},\dots,\mathbf{p}_{n})$
 \end_inset
 
  forms a carrier wave.
@@ -540,7 +658,7 @@ where
 \begin_inset Formula $n$
 \end_inset
 
- is number of points, 
+ is number of points that we want to modulate, 
 \begin_inset Formula $f$
 \end_inset
 
@@ -550,7 +668,7 @@ where
 
  is phase shift.
  The frequency modulation of points 
-\begin_inset Formula $P=(p_{1},p_{2},\dots,p_{n})$
+\begin_inset Formula $P=(\mathbf{p}_{1},\mathbf{p}_{2},\dots,\mathbf{p}_{n})$
 \end_inset
 
  with modulation values 
@@ -563,9 +681,9 @@ where
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-p_{i}=\begin{cases}
-p_{i}+0.5\cdot(p_{i+1}-p_{i})\cdot s_{i}\mbox{ if } & s_{i}\geq0\\
-p_{i}+0.5\cdot(p_{i-1}-p_{i})\cdot s_{i}\mbox{ if } & s_{i}<0
+\mathbf{p}_{i}=\begin{cases}
+\mathbf{p}_{i}+0.5\cdot(\mathbf{p}_{i+1}-\mathbf{p}_{i})\cdot s_{i}\mbox{ if } & s_{i}\geq0\\
+\mathbf{p}_{i}+0.5\cdot(\mathbf{p}_{i-1}-\mathbf{p}_{i})\cdot s_{i}\mbox{ if } & s_{i}<0
 \end{cases}\label{eq:fm}
 \end{equation}
 
@@ -1626,7 +1744,7 @@ There are several requirements of good tracker.
  each beat should be more or less the same -- the beat-to-beat variance
  should be as low as possible.
  For one person/record, all strain progresses for all beats were aligned
- together and sampled to 100 values (see Figure 
+ together and re-sampled to 100 values (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Beat-to-beat-variance"
@@ -1740,6 +1858,68 @@ name "fig:Beat-to-beat-variance"
 \end_layout
 
 \begin_layout Standard
+The beat-to-beat variance of two beats is standard deviation of absolute
+ differences between re-sampled values.
+ Let the strain values of the first beat are 
+\begin_inset Formula $\mathbf{v}_{1}=(v_{1,1},v_{1,2},\dots,v_{1,m})$
+\end_inset
+
+.
+ The second beat values are 
+\begin_inset Formula $\mathbf{v}_{2}=(v_{2,1},v_{2,2},\dots,v_{2,m})$
+\end_inset
+
+, the differences are 
+\begin_inset Formula $\mathbf{d}=(|v_{1,1}-v_{2,1}|,|v_{1,2}-v_{2,2}|,\dots,|v_{1,m}-v_{2,m}|)$
+\end_inset
+
+.
+ The standard deviation and thus also the beat to beat variance between
+ two beats is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sigma_{1,2}=\sqrt{\frac{1}{m}\sum_{i=1}^{m}(d_{i}-\mu})^{2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is the mean value of 
+\begin_inset Formula $\mathbf{d}$
+\end_inset
+
+.
+ The PSS variation is similar to the MS variation, but only the points within
+ specific segment are used for the estimation of the variation.
+ For 
+\begin_inset Formula $n$
+\end_inset
+
+ beats the variation becomes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sigma=\frac{\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}\sigma_{i,j}}{\binom{n}{2}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The most important metrics of the tracker is precision.
  Since the movement of the LV is periodical, we can express the precision
  as the sum of quadratic differences of corresponding points from the first
@@ -1747,6 +1927,24 @@ The most important metrics of the tracker is precision.
  The shapes can't be compared directly, the last frame should be aligned
  (translation and rotation) to the first frame shape in terms of least square
  differences.
+ Let the two aligned shapes are 
+\begin_inset Formula $\mathbf{s}_{i}=(\mathbf{p}_{i,1},\mathbf{p}_{i,2},\dots,\mathbf{p}_{i,m})$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{s}_{j}=(\mathbf{p}_{j,1},\mathbf{p}_{j,2},\dots,\mathbf{p}_{j,m})$
+\end_inset
+
+.
+ The precision is the sum of square differences between corresponding points:
+\begin_inset Formula 
+\begin{equation}
+\mbox{precision}=\frac{1}{m}\sum_{k=1}^{m}\Vert\mathbf{p}_{i,k}-\mathbf{p}_{j,k}\Vert^{2}
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1758,7 +1956,7 @@ Main strain beat-to-beat variance
 \end_layout
 
 \begin_layout Itemize
-Segment strain beat-to-beat variance
+Per-segment strain beat-to-beat variance
 \end_layout
 
 \begin_layout Itemize
@@ -1828,12 +2026,9 @@ The strain frequency modulation were performed with the following parameters
 Our LV strain model consists of individual points divided into 6 segments.
  We have compared the models where each segment consists of 4, 6, and 11
  mid-myocardical points.
- Thus the first model contains 3 per-point strains for each segment and
- 57 points total.
- The second model contains 5 per-point strains in each segment and 93 points
- total.
- The last model contains 10 per-point strains in each segment and 183 points
- total.
+ Thus the first model contains 57 points.
+ The second model contains 93 points and the last model contains 183 points.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1951,7 +2146,7 @@ In order to find the best tracker, all three main characteristics (MS variance,
 \begin_inset Formula $c$
 \end_inset
 
-, we calculate mean value 
+, we mean value 
 \begin_inset Formula $\mu_{c}$
 \end_inset
 
@@ -2667,7 +2862,7 @@ We have shown that the utilizing of the probability shape model and PyrLK-based
  point tracker outperforms simple trackers based on the correlation similarity.
  We would like to test our method on patients with myocardial movement disruptio
 n in our further experiments in order to prove that our method can be used
- to non-invasive examination snd detection, e.g., the detection of myocardial
+ to non-invasive examination and detection, e.g., the detection of myocardial
  ischemism.
 \end_layout
 

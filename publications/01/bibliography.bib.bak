@@ -182,34 +182,6 @@
   timestamp = {2013.07.11}
 }
 
-@INPROCEEDINGS{Sokolov2011,
-  author = {Sokolov, S.Y.},
-  title = {{Adaptation of speckle tracking algorithm for estimating global and
-	regional left ventricular function}},
-  booktitle = {4th International Conference on Biomedical Engineering and Informatics
-	(BMEI)},
-  year = {2011},
-  volume = {1},
-  pages = {88--90},
-  publisher = {IEEE},
-  annote = {N\'{a}vrh na \'{u}pravu z\'{a}kladn\'{\i} formy Speckle Trackingu:
-	1. vazena korelace misto zakladni g\_k(x,y) je intenzita snimku k
-	na souradnicich x,y. Pro zjisteni pohybu "speckle" se pouziva vypocet
-	korelace r(delta x, delta y). Pohyb je pak argmax r(delta x, delta
-	y), tedy ten z moznych posunu speckle vybereme ten, ktery dava nejevetsi
-	miru korelace Vazena funkce zohlednuje mozny nasledujici vyskyt.
-	Pouziva se gaussova funkce. 2. Interpolace Pro zjisteni stredu gaussovky
-	a tedy i mozne nasledujici polohy speckle se pouziva kvadraticka
-	a kubicka interpolace 3. Predikce dopredu i zpet Predikce speckli
-	se pocita dopredu i zpet, protoze jejich pohyb je periodicky/cyklicky
-	},
-  file = {:home/stepo/Dokumenty/Mendeley Desktop/Sokolov - 2011 - Adaptation of speckle tracking algorithm for estimating global and regional left ventricular function.pdf:pdf},
-  isbn = {9781424493524},
-  keywords = {-speckle tracking,correlation,heart,ultrasonic image},
-  mendeley-groups = {ICRC-SpeckleTracking},
-  url = {http://ieeexplore.ieee.org/xpls/abs\_all.jsp?arnumber=6098299}
-}
-
 @ARTICLE{Wang2009,
   author = {Wang, J. and Buergler, J. M. and Veerasamy, K.},
   title = {Delayed untwisting: the mechanistic link between dynamic obstruction
