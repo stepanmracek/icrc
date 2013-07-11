@@ -962,6 +962,13 @@ name "fig:Mean-LV-shape"
 
 \begin_layout Section
 Algorithm description
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Algorithm-description"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1971,7 +1978,7 @@ Comparison of implemented techniques
 As was mentioned in section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Method"
+reference "sec:Algorithm-description"
 
 \end_inset
 
