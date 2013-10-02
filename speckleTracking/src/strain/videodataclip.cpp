@@ -1,5 +1,7 @@
 #include "videodataclip.h"
 
+#include <QDebug>
+
 VideoDataClip::VideoDataClip(const QString &path, QObject *parent) : VideoDataBase(parent)
 {
     metadata = new VideoDataClipMetadata(this);
@@ -14,19 +16,29 @@ VideoDataClip::VideoDataClip(const QString &path, QObject *parent) : VideoDataBa
     }
 }
 
-VideoDataClip::VideoDataClip(const QString &path, const QString &metadataPath, QObject *parent) : VideoDataBase(parent)
+VideoDataClip::VideoDataClip(const QString &path, const QString &metadataPath, QProgressDialog *progressDlg, QObject *parent) : VideoDataBase(parent)
 {
     metadata = new VideoDataClipMetadata(this);
 
     cv::VideoCapture capture = cv::VideoCapture(path.toStdString());
     assert(capture.isOpened());
+
+    int frameCount = capture.get(CV_CAP_PROP_FRAME_COUNT);
+    if (progressDlg) progressDlg->setMaximum(frameCount);
+
     cv::Mat rawFrame;
+    int frameIndex = 0;
     while (capture.read(rawFrame))
     {
         Mat8 frame;
         cv::cvtColor(rawFrame, frame, cv::COLOR_BGR2GRAY);
         frames.push_back(frame);
+
+        if (progressDlg) progressDlg->setValue(frameIndex);
+        frameIndex++;
     }
+
+    if (progressDlg) progressDlg->setValue(frameCount);
 
     metadata->deserialize(metadataPath);
 }
@@ -86,12 +98,27 @@ void VideoDataClip::getRange(int start, int end, VideoDataClip *outClip) const
 
 void VideoDataClip::getBeatRange(int currentIndex, int &beatStart, int &beatEnd) const
 {
+    if (metadata->beatIndicies.count() == 0)
+    {
+        beatStart = -1; beatEnd = -1;
+        return;
+    }
+    if (currentIndex < metadata->beatIndicies.first())
+    {
+        beatStart = -1; beatEnd = metadata->beatIndicies.first();
+        return;
+    }
+    if (currentIndex >= metadata->beatIndicies.last())
+    {
+        beatStart = metadata->beatIndicies.last();
+        beatEnd = -1;
+        return;
+    }
+
     beatStart = 0;
     beatEnd = size() - 1;
-
-    for (int i = 0; i < metadata->beatIndicies.size(); i++)
+    foreach (int beatIndex, metadata->beatIndicies)
     {
-        int beatIndex = metadata->beatIndicies[i];
         if (beatIndex <= currentIndex && beatIndex >= beatStart)
         {
             beatStart = beatIndex;

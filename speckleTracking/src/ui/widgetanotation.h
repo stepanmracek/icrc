@@ -26,6 +26,7 @@ protected:
     QGraphicsScene *scene;
 
 private:
+    QPen redPen;
     QPen whitePen;
     QPen yellowPen;
     int shapeWidth;

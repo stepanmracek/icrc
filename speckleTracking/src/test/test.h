@@ -234,17 +234,16 @@ public:
         strain->deserialize("/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10");
 
         ListOfImageProcessing processing;
-        StrainResultProcessingBase *postProcessing = new StrainResProcFloatingAvg(5);
+        StrainResultProcessingBase *postProcessing = new StrainResProcFloatingAvg(3);
         PointTrackerBase *pointTracker = new PointTrackerOpticalFlow(20); // new PointTrackerNeighbourOpticalFlow(20, 11, 2);
-        float weightValues[] = {1.0f};
-        VectorF weights(weightValues, weightValues + sizeof(weightValues)/sizeof(float));
+        VectorF weights; weights.push_back(1.0f);
         ShapeTracker *tracker = new ShapeTracker(strain, processing, pointTracker, postProcessing, weights);
 
         qDebug() << "Tracker initializated";
 
         // create GUI
         QApplication app(argc, argv);
-        WindowAnotationManager w("/home/stepo/Dropbox/projekty/icrc/test2/", dataDir, tracker);
+        WindowAnotationManager w("/home/stepo/Dropbox/projekty/icrc/test3/", dataDir, tracker);
         w.show();
         return app.exec();
     }
@@ -252,7 +251,7 @@ public:
     static void testBeatToBeatVariance()
     {
         VideoDataClip clip("/home/stepo/Dropbox/projekty/icrc/test/test.wmv",
-                           "/home/stepo/Dropbox/projekty/icrc/test/test.wmv_metadata");
+                           "/home/stepo/Dropbox/projekty/icrc/test/test.wmv_metadata", false);
         ShapeMap shapeMap = Serialization::readShapeMap("/home/stepo/SparkleShare/private/icrc/test/test.wmv_shapemap");
 
         PCA *pca = new PCA("/home/stepo/Dropbox/projekty/icrc/test/pca-shape");
@@ -269,6 +268,27 @@ public:
         StrainStatistics secondStats(&strain, secondShapes);
 
         qDebug() << StrainStatistics::beatToBeatVariance(firstStats, secondStats, 100);
+    }
+
+    static void testBeatRange()
+    {
+        QString dir("/home/stepo/Dropbox/projekty/icrc/test3/");
+        VideoDataClip clip(dir + "vut_zd_adr_la_2.mp4", dir + "vut_zd_adr_la_2.mp4_metadata");
+
+        QVector<int> testIndicies = clip.getMetadata()->beatIndicies;
+        testIndicies << 0 << 2 << 52 << 499 << 500;
+        int start, end;
+        foreach (int beatIndex, testIndicies)
+        {
+            clip.getBeatRange(beatIndex, start, end);
+            qDebug() << beatIndex << start << end;
+
+            QMap<int, Points> dummyShapes;
+            VideoDataClip outSubClip;
+            VectorOfShapes outVecOfShapes;
+            QMap<int, Points> outMapOfShapes;
+            clip.getSubClip(beatIndex, dummyShapes, &outSubClip, outVecOfShapes, outMapOfShapes);
+        }
     }
 };
 

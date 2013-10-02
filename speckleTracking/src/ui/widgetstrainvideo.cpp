@@ -2,6 +2,7 @@
 #include "ui_widgetstrainvideo.h"
 
 #include <QDebug>
+#include <QProgressDialog>
 
 #include "uiutils.h"
 
@@ -75,7 +76,8 @@ void WidgetStrainVideo::on_btnNextBeat_clicked()
     if (!clip) return;
     int beatStart; int beatEnd;
     clip->getBeatRange(currentIndex, beatStart, beatEnd);
-    ui->horizontalSlider->setValue(beatEnd);
+    if (beatEnd != -1)
+        ui->horizontalSlider->setValue(beatEnd);
 }
 
 void WidgetStrainVideo::on_horizontalSlider_valueChanged(int value)
@@ -112,7 +114,11 @@ void WidgetStrainVideo::load(const QString &path, const QString &filename)
     QString fullPath = path + QDir::separator() + filename;
     QString fullMetadataPath = fullPath + "_metadata";
     currentFilename = filename;
-    VideoDataClip *loadedClip = new VideoDataClip(fullPath, fullMetadataPath);
+
+    QProgressDialog progDlg("Loading video", QString(), 0, 500, this);
+    progDlg.setWindowModality(Qt::WindowModal);
+    progDlg.setMinimumDuration(100);
+    VideoDataClip *loadedClip = new VideoDataClip(fullPath, fullMetadataPath, &progDlg);
     setClip(loadedClip);
 
     QPixmap image = UIUtils::Mat8ToQPixmap(clip->frames[0]);

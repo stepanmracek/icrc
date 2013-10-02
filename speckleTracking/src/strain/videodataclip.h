@@ -4,6 +4,7 @@
 #include <opencv2/opencv.hpp>
 #include <QVector>
 #include <QMap>
+#include <QProgressDialog>
 
 #include "coordsystem.h"
 #include "videodatabase.h"
@@ -44,7 +45,7 @@ private:
 public:
     VideoDataClip(QObject *parent = 0);
     VideoDataClip(const QString &path, QObject *parent = 0);
-    VideoDataClip(const QString &path, const QString &metadataPath, QObject *parent = 0);
+    VideoDataClip(const QString &path, const QString &metadataPath, QProgressDialog *progressDlg = 0, QObject *parent = 0);
 
     VectorOfImages frames;
     VideoDataClipMetadata *getMetadata() { return metadata; }

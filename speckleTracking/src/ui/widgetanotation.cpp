@@ -8,6 +8,7 @@ WidgetAnotation::WidgetAnotation(QWidget *parent) :
     QGraphicsView(parent)
 {
     shapeWidth = 20;
+    redPen = QPen(Qt::red);
     whitePen = QPen(Qt::white);
     yellowPen = QPen(Qt::yellow);
 
@@ -186,17 +187,17 @@ void WidgetAnotation::drawLines()
     {
         P prev = splinePoints[i-1];
         P next = splinePoints[i];
-        QGraphicsLineItem *line = scene->addLine(prev.x, prev.y, next.x, next.y, whitePen);
+        QGraphicsLineItem *line = scene->addLine(prev.x, prev.y, next.x, next.y, redPen);
         splineLines << line;
 
         prev = innerSplinePoints[i-1];
         next = innerSplinePoints[i];
-        line = scene->addLine(prev.x, prev.y, next.x, next.y, whitePen);
+        line = scene->addLine(prev.x, prev.y, next.x, next.y, redPen);
         splineLines << line;
 
         prev = outerSplinePoints[i-1];
         next = outerSplinePoints[i];
-        line = scene->addLine(prev.x, prev.y, next.x, next.y, whitePen);
+        line = scene->addLine(prev.x, prev.y, next.x, next.y, redPen);
         splineLines << line;
     }
 }

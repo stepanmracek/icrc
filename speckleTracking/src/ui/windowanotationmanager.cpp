@@ -93,7 +93,7 @@ void WindowAnotationManager::setDirectory(QString path)
     if (!dir.exists()) return;
 
     ui->widgetStrainVideo->unload();
-    QStringList filter; filter << "*.wmv" << "*.WMV" << "*.avi" << "*.AVI";
+    QStringList filter; filter << "*.wmv" << "*.WMV" << "*.avi" << "*.AVI" << "*.mp4" << "*.MP4";
     QStringList files = dir.entryList(filter, QDir::Files | QDir::NoDotAndDotDot, QDir::Name);
 
     ui->listFiles->addItems(files);
@@ -124,8 +124,9 @@ void WindowAnotationManager::loadFile(QString fileName)
     QFileInfo f(fullPath);
     if (!f.exists()) return;
 
-    qDebug() << "Loading" << fileName;
     saveMetadataAndShapes();
+
+    qDebug() << "Loading" << fileName;
     ui->widgetStrainVideo->load(path, fileName);
     ui->listViewBeats->setModel(new ModelListOfInts(ui->widgetStrainVideo->getClip()->getMetadata()->beatIndicies, this));
 }
@@ -171,12 +172,23 @@ void WindowAnotationManager::on_btnTrack_clicked()
         return;
     }
 
-    int beatStart = 0;
-    int beatEnd = clip->size();
+    int beatStart, beatEnd;
     int currentIndex = ui->widgetStrainVideo->getCurrentIndex();
     clip->getBeatRange(currentIndex, beatStart, beatEnd);
     qDebug() << "Beat range:" << beatStart << beatEnd;
 
+    if (beatStart == -1)
+    {
+        QMessageBox msg(QMessageBox::Information, "Information", "Beat start is not defined");
+        msg.exec();
+        return;
+    }
+    if (beatEnd == -1)
+    {
+        QMessageBox msg(QMessageBox::Information, "Information", "Beat end is not defined");
+        msg.exec();
+        return;
+    }
     // check if the beat start is anotated
     if (!ui->widgetStrainVideo->shapes.contains(beatStart))
     {
@@ -184,7 +196,6 @@ void WindowAnotationManager::on_btnTrack_clicked()
         msg.exec();
         return;
     }
-
 
     if (beatEnd <= beatStart)
     {
@@ -202,59 +213,14 @@ void WindowAnotationManager::on_btnTrack_clicked()
                                         ui->widgetStrainVideo->shapes[beatStart],
                                         &progress);
 
+    qDebug() << newShapes.keys();
+
     QMapIterator<int, Points> iter(newShapes);
     while (iter.hasNext())
     {
         iter.next();
         ui->widgetStrainVideo->shapes[iter.key()] = iter.value();
     }
-
-    /*for (int i = 0; i < frames; i++)
-    {
-        progress.setValue(i);
-        //qDebug() << "Tracking" << i << "/" << frames;
-
-        if (progress.wasCanceled()) break;
-
-        // prepare previous shapes and previous frames
-        VectorOfShapes prevShapes;
-        VectorOfImages prevFrames;
-
-        for (unsigned int j = 0; j < tracker->weights.size(); j++)
-        {
-            int prevIndex = beatStart+i-j;
-            //qDebug() << "  j:" << j << "prevIndex:" << prevIndex;
-            if (prevIndex < beatStart)
-            {
-                //qDebug() << "  prevIndex < currentIndex";
-                break;
-            }
-            if (prevIndex == limit)
-            {
-                //qDebug() << "  prevIndex == limit";
-                break;
-            }
-
-            prevShapes.push_back(ui->widgetStrainVideo->shapes[prevIndex]);
-            prevFrames.push_back(clip->frames[prevIndex]);
-        }
-        //qDebug() << "  prevShape/prevFrames size:" << prevShapes.size() << prevFrames.size();
-        if (prevShapes.size() == 0) break;
-
-        int nextIndex = beatStart+i+1;
-        //qDebug() << "  nextIndex:" << nextIndex;
-        if (nextIndex == limit) break;
-        Mat8 nextFrame = clip->frames[nextIndex];
-
-        //qDebug() << "  reversing prevShapes and prevFrames";
-        std::reverse(prevShapes.begin(), prevShapes.end());
-        std::reverse(prevFrames.begin(), prevFrames.end());
-        //qDebug() << "  tracking";
-        Points nextShape = tracker->track(prevFrames, prevShapes, nextFrame, clip->getMetadata()->getCoordSystem());
-        ui->widgetStrainVideo->shapes[nextIndex] = nextShape;
-    }
-
-    progress.setValue(frames);*/
 }
 
 void WindowAnotationManager::on_btnCoordSystem_clicked()
@@ -365,7 +331,7 @@ void WindowAnotationManager::on_actionShowShapeModel_triggered()
 
 void WindowAnotationManager::on_actionSAD_triggered()
 {
-    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 21, 1, 100, 2);
+    int windowSize = QInputDialog::getInt(this, "Window size", "Window size:", 21, 1, 100, 2);
     PointTrackerBase *pTracker = new PointTrackerDistance(new CityblockMetric(), windowSize);
     tracker->setPointTracker(pTracker);
     updateTrackerInfo();
@@ -373,7 +339,7 @@ void WindowAnotationManager::on_actionSAD_triggered()
 
 void WindowAnotationManager::on_actionSSD_triggered()
 {
-    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 21, 1, 100, 2);
+    int windowSize = QInputDialog::getInt(this, "Window size", "Window size:", 21, 1, 100, 2);
     PointTrackerBase *pTracker = new PointTrackerDistance(new SumOfSquareDifferences(), windowSize);
     tracker->setPointTracker(pTracker);
     updateTrackerInfo();
@@ -381,7 +347,7 @@ void WindowAnotationManager::on_actionSSD_triggered()
 
 void WindowAnotationManager::on_actionOptical_flow_triggered()
 {
-    int (outlier) = QInputDialog::getInteger(this, "Outlier distance", "Outlier distance:", 20, 5, 100, 1);
+    int (outlier) = QInputDialog::getInt(this, "Outlier distance", "Outlier distance:", 20, 5, 100, 1);
     PointTrackerBase *pTracker = new PointTrackerOpticalFlow(outlier);
     tracker->setPointTracker(pTracker);
     updateTrackerInfo();
@@ -389,9 +355,9 @@ void WindowAnotationManager::on_actionOptical_flow_triggered()
 
 void WindowAnotationManager::on_actionOptical_flow_with_neighbourhood_triggered()
 {
-    int (outlier) = QInputDialog::getInteger(this, "Outlier distance", "Outlier distance:", 20, 5, 100, 1);
-    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 21, 1, 100, 2);
-    int step = QInputDialog::getInteger(this, "Step within window", "Step within window:", 5, 1, 10, 1);
+    int (outlier) = QInputDialog::getInt(this, "Outlier distance", "Outlier distance:", 20, 5, 100, 1);
+    int windowSize = QInputDialog::getInt(this, "Window size", "Window size:", 21, 1, 100, 2);
+    int step = QInputDialog::getInt(this, "Step within window", "Step within window:", 5, 1, 10, 1);
     PointTrackerBase *pTracker = new PointTrackerNeighbourOpticalFlow(outlier, windowSize, step);
     tracker->setPointTracker(pTracker);
     updateTrackerInfo();
@@ -399,7 +365,7 @@ void WindowAnotationManager::on_actionOptical_flow_with_neighbourhood_triggered(
 
 void WindowAnotationManager::on_actionCorrelation_triggered()
 {
-    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 21, 1, 100, 2);
+    int windowSize = QInputDialog::getInt(this, "Window size", "Window size:", 21, 1, 100, 2);
     PointTrackerBase *pTracker = new PointTrackerDistance(new CorrelationMetric(), windowSize);
     tracker->setPointTracker(pTracker);
     updateTrackerInfo();
@@ -407,7 +373,7 @@ void WindowAnotationManager::on_actionCorrelation_triggered()
 
 void WindowAnotationManager::on_actionCosine_triggered()
 {
-    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 21, 1, 100, 2);
+    int windowSize = QInputDialog::getInt(this, "Window size", "Window size:", 21, 1, 100, 2);
     PointTrackerBase *pTracker = new PointTrackerDistance(new CosineMetric(), windowSize);
     tracker->setPointTracker(pTracker);
     updateTrackerInfo();
@@ -497,7 +463,7 @@ void WindowAnotationManager::on_actionWeights4_triggered()
 
 void WindowAnotationManager::on_actionResProcAvg_triggered()
 {
-    int windowSize = QInputDialog::getInteger(this, "Window size", "Window size:", 3, 1, 51, 2);
+    int windowSize = QInputDialog::getInt(this, "Window size", "Window size:", 3, 1, 51, 2);
     StrainResProcFloatingAvg *proc = new StrainResProcFloatingAvg(windowSize);
     tracker->setResultProcessing(proc);
     updateTrackerInfo();

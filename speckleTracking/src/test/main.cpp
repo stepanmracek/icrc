@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 //    Test::testAnotation();
 //    Test::testUniformSpline();
 //    Test::testLearnShape();
-    Test::testLearnShapeWithFM();
+//    Test::testLearnShapeWithFM();
 //    Test::testFreqModulation();
 //    Test::testTracking();
 //    Test::testStatisticalShapeChanges();
@@ -21,4 +21,5 @@ int main(int argc, char *argv[])
 //    Test::testLongitudinalStrain();
 //    Test::testQtAnotationAndDisplay(argc, argv);
 //    Test::testBeatToBeatVariance();
+//    Test::testBeatRange();
 }

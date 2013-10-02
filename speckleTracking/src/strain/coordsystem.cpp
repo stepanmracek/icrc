@@ -13,7 +13,8 @@ P AngleDistanceToPoint(float angle, float distance)
 
 CoordSystemRadial::CoordSystemRadial(QObject *parent) : CoordSystemBase(parent)
 {
-    init(P(263,0), P(632,258), P(10,360), 50, 200, 400);
+    //init(P(263,0), P(632,258), P(10,360), 50, 200, 400);
+    init(P(320,34), 39.0f, 310.13f, 1.06f, 2.10f, 200, 400);
 }
 
 CoordSystemRadial::CoordSystemRadial(P center, float startDistance, float endDistance, float angleStart,
