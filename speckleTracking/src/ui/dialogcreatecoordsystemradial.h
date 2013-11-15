@@ -35,8 +35,8 @@ private slots:
     void on_gvOriginal_leftMouseClick(const QPoint &point);
 
 private:
-    bool loadCompleted;
     Ui::DialogCreatCoordSystemRadial *ui;
+    bool loadCompleted;
 
     void recalculate();
     void drawResult(CoordSystemRadial *c);

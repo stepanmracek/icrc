@@ -1,5 +1,5 @@
-#include "test.h"
-#include "batchtesting.h"
+#include "test/test.h"
+#include "test/batchtesting.h"
 
 int main(int argc, char *argv[])
 {

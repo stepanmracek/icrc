@@ -25,22 +25,27 @@ VideoDataClip::VideoDataClip(const QString &path, const QString &metadataPath, Q
 
     int frameCount = capture.get(CV_CAP_PROP_FRAME_COUNT);
     if (progressDlg) progressDlg->setMaximum(frameCount);
+    frames.reserve(frameCount);
 
     cv::Mat rawFrame;
-    int frameIndex = 0;
-    while (capture.read(rawFrame))
+    //int frameIndex = 0;
+    //while (capture.read(rawFrame))
+    for (int frameIndex = 0; frameIndex < frameCount; frameIndex++)
     {
+        capture.read(rawFrame);
+        //qDebug() << frameIndex;
         Mat8 frame;
         cv::cvtColor(rawFrame, frame, cv::COLOR_BGR2GRAY);
         frames.push_back(frame);
 
         if (progressDlg) progressDlg->setValue(frameIndex);
-        frameIndex++;
+        //frameIndex++;
     }
-
     if (progressDlg) progressDlg->setValue(frameCount);
+    //qDebug() << "video loaded";
 
     metadata->deserialize(metadataPath);
+    //qDebug() << "metadata loaded";
 }
 
 VideoDataClip::VideoDataClip(QObject *parent) : VideoDataBase(parent)
@@ -77,9 +82,9 @@ void VideoDataClip::getRange(int start, int end, VideoDataClip *outClip) const
 {
     outClip->frames.clear();
 
-    for (int i = 0; i < frames.size(); i++)
+    for (unsigned int i = 0; i < frames.size(); i++)
     {
-        if (i >= start && i < end)
+        if ((int)i >= start && (int)i < end)
         {
             outClip->frames.push_back(frames[i]);
         }
@@ -130,8 +135,8 @@ void VideoDataClip::getBeatRange(int currentIndex, int &beatStart, int &beatEnd)
     }
 }
 
-char *VideoDataClip::getSubClip(int index, QMap<int, Points> &shapes,
-                                VideoDataClip *outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap)
+QString VideoDataClip::getSubClip(int index, QMap<int, Points> &shapes,
+                                  VideoDataClip *outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap)
 {
     // determine current beat
     if (metadata->beatIndicies.size() == 0)
@@ -160,7 +165,7 @@ char *VideoDataClip::getSubClip(int index, QMap<int, Points> &shapes,
         outSubShapesMap[i-beatStart] = shapes[i];
     }
 
-    return 0;
+    return QString();
 }
 
 void VideoDataClipMetadata::deserialize(const QString &path)

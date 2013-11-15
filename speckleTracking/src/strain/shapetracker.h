@@ -86,7 +86,7 @@ public:
 
     Points track(VectorOfImages &prevFrames, VectorOfShapes &prevShapes, Mat8 &nextFrame, CoordSystemBase *coordSystem);
 
-    ShapeMap track(VideoDataClip *clip, int startIndex, int endIndex, Points &initialShape, QProgressDialog *progress = 0);
+    ShapeMap track(const VideoDataClip *clip, int startIndex, int endIndex, Points &initialShape, QProgressDialog *progress = 0);
 
     //static Points track(Mat8 &prevFrame, Points &prevPoints, Mat8 &nextFrame, Strain &strain, CoordSystemBase *coordSystem, ListOfImageProcessing &frameProcessing, PointTrackerBase &pointTracker);
 

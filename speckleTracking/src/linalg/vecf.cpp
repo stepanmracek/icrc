@@ -452,7 +452,7 @@ VectorF VecF::resample(const VectorF &vector, int samplesCount)
     for (int i = 0; i < samplesCount; i++)
     {
         float indexF = (vector.size()-1) * i / ((float)(samplesCount));
-        int indexI = floor(indexF);
+        unsigned int indexI = floor(indexF);
         float delta = indexF - indexI;
 
         if ((indexI + 1) == vector.size()) break;

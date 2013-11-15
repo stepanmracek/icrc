@@ -190,7 +190,7 @@ public:
      * @param ksize Kernel size
      * @param parent Parent object in Qt hierarchy
      */
-    ImageFilterEdge(int ksize, QObject *parent = 0) : ksize(ksize), ImageFilterBase(parent) { }
+    ImageFilterEdge(int ksize, QObject *parent = 0) : ImageFilterBase(parent), ksize(ksize) { }
 
     virtual void process(Mat8 &frame)
     {

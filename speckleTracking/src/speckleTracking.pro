@@ -64,7 +64,6 @@ SOURCES += \
     linalg/procrustes.cpp \
     linalg/pca.cpp \
     strain/statisticalshapemodel.cpp \
-    test/main.cpp \
     strain/shapetracker.cpp \
     strain/pointtrackeropticalflow.cpp \
     linalg/metrics.cpp \
@@ -105,7 +104,8 @@ SOURCES += \
     ui/widgetrainbow.cpp \
     linalg/shapecomparer.cpp \
     test/batchtesting.cpp \
-    strain/batchtestingold.cpp
+    strain/batchtestingold.cpp \
+    main.cpp
 
 INCLUDEPATH += src
 

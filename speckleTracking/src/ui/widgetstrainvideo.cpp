@@ -126,6 +126,7 @@ void WidgetStrainVideo::load(const QString &path, const QString &filename)
 
     shapes.clear();
     deserializeShapes(path);
+    qDebug() << "shapes loaded";
     ui->horizontalSlider->setValue(0);
     on_horizontalSlider_valueChanged(0);
 }

@@ -20,7 +20,7 @@ public:
     ~WindowAnotationManager();
 
 protected:
-    void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent *);
 
 private slots:
     void setDirectory(QString path);
@@ -30,7 +30,7 @@ private slots:
 
     void on_btnLoad_clicked();
 
-    void on_listFiles_itemDoubleClicked(QListWidgetItem *item);
+    void on_listFiles_itemDoubleClicked(QListWidgetItem *);
 
     void on_btnAnotate_clicked();
 

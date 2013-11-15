@@ -92,7 +92,7 @@ public:
         }
 
         PCA *pca = new PCA();
-        StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);
+        StatisticalShapeModel(pca, shapes);
         pca->serialize("/home/stepo/Dropbox/projekty/icrc/dataDir/pca-shape2");
     }
 
@@ -225,23 +225,56 @@ public:
 
     static int testQtManager(int argc, char *argv[])
     {
-        QString dataDir = "/home/stepo/Dropbox/projekty/icrc/dataDir";
+        QString rawShapesPath =  "/home/stepo/Dropbox/projekty/icrc/dataDir/rawControlPoints";
+        VectorOfShapes rawShapes = Serialization::readVectorOfShapes(rawShapesPath);
+
+        float freqStart = 1.0;
+        float freqEnd = 3.0;
+        float freqStep = 1.0;
+        float phaseSteps = 3.0;
+        double amplitude = 1.0;
+        int pointsPerSegment = 10;
+        int segments = 6;
+
+        std::vector<VectorF> modValues =
+                FrequencyModulation::generateModulationValues(segments*pointsPerSegment + 1,
+                                                              freqStart, freqEnd, freqStep, phaseSteps, amplitude);
+
+        int modValuesCount = modValues.size();
+
+        ShapeNormalizerPass *dummyNormalizer = new ShapeNormalizerPass();
+        LongitudinalStrain dummyStrain(dummyNormalizer, segments, pointsPerSegment);
+
+        VectorOfShapes shapes;
+        foreach (const Points &controlPoints, rawShapes)
+        {
+            for (int width = 20; width <= 30; width += 10)
+            {
+                for (int i = 0; i < modValuesCount; i++)
+                {
+                    Points shape = dummyStrain.getRealShapePoints(controlPoints, width, &modValues[i]);
+                    shapes.push_back(shape);
+                }
+            }
+        }
 
         PCA *pca = new PCA();
-        StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca);
+        StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);
         ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
-        Strain *strain = new LongitudinalStrain(normalizer, 0, 0);
-        strain->deserialize("/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10");
+        LongitudinalStrain *strain = new LongitudinalStrain(normalizer, segments, pointsPerSegment);
+
+        //strain->deserialize("/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10");
 
         ListOfImageProcessing processing;
-        StrainResultProcessingBase *postProcessing = new StrainResProcFloatingAvg(3);
-        PointTrackerBase *pointTracker = new PointTrackerOpticalFlow(20); // new PointTrackerNeighbourOpticalFlow(20, 11, 2);
+        StrainResultProcessingBase *postProcessing = new StrainResProcFloatingAvg(7);
+        PointTrackerBase *pointTracker = new PointTrackerOpticalFlow(21);
         VectorF weights; weights.push_back(1.0f);
         ShapeTracker *tracker = new ShapeTracker(strain, processing, pointTracker, postProcessing, weights);
 
         qDebug() << "Tracker initializated";
 
         // create GUI
+        QString dataDir = "/home/stepo/Dropbox/projekty/icrc/dataDir";
         QApplication app(argc, argv);
         WindowAnotationManager w("/home/stepo/Dropbox/projekty/icrc/test3/", dataDir, tracker);
         w.show();
@@ -251,7 +284,7 @@ public:
     static void testBeatToBeatVariance()
     {
         VideoDataClip clip("/home/stepo/Dropbox/projekty/icrc/test/test.wmv",
-                           "/home/stepo/Dropbox/projekty/icrc/test/test.wmv_metadata", false);
+                           "/home/stepo/Dropbox/projekty/icrc/test/test.wmv_metadata");
         ShapeMap shapeMap = Serialization::readShapeMap("/home/stepo/SparkleShare/private/icrc/test/test.wmv_shapemap");
 
         PCA *pca = new PCA("/home/stepo/Dropbox/projekty/icrc/test/pca-shape");

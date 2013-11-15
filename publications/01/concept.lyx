@@ -6,15 +6,13 @@
 \use_default_options true
 \begin_modules
 theorems-ams
-eqs-within-sections
-figs-within-sections
 \end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman palatino
+\font_roman times
 \font_sans default
 \font_typewriter default
 \font_default_family default
@@ -143,8 +141,8 @@ key "Behar2004,Sokolov2011"
 
 \begin_layout Standard
 However, the estimation of speckle movement is local only.
- The usage of generative probability shape model is used in order to preserve
- valid shape estimation of tracked LV.
+ Therefore the usage of generative probability shape model is used in order
+ to preserve valid shape estimation of tracked LV.
  The left ventricle shape model was presented in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -153,7 +151,7 @@ key "Jacob1998"
 \end_inset
 
 .
- The similar approach, where the probabilistic statistical shape model bases
+ The similar approach, where the probabilistic statistical shape model based
  on PCA was employed, is described in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -162,7 +160,7 @@ key "Comaniciu2004"
 \end_inset
 
 .
- However different per-point motion estimator is used 
+ Different per-point motion estimator is used 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Comaniciu2003"
@@ -170,11 +168,22 @@ key "Comaniciu2003"
 \end_inset
 
 .
- Our probabilistic shape model comes from the is trained from the manually
- annotated data and from the programmatically computed local deformations
- of the myocardium.
+ Our probabilistic shape model comes from the manually annotated data and
+ from the programmatically computed local deformations of the myocardium.
  This deformations are computed using frequency modulation of the input
  control points.
+\end_layout
+
+\begin_layout Standard
+In the evaluation part (Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Evaluation"
+
+\end_inset
+
+) we also propose an extended possibility for quality assessment of strain
+ analysis using beat-to-beat variance and different performance metrics.
 \end_layout
 
 \begin_layout Section
@@ -190,7 +199,7 @@ key "Lucas1981"
 \end_inset
 
  is a good choice for speckle motion estimation.
- The goal of the tracking is to find for given point 
+ The goal of the PyrLK tracking is to find for given point 
 \begin_inset Formula $\mathbf{u}=(u_{x},u_{y})$
 \end_inset
 
@@ -411,7 +420,7 @@ Statistical shape model
 \begin_layout Standard
 The PyrLK point tracker provides robust technique for following individual
  points of interest.
- However, it lacks a binding between consecutive points of a shape.
+ However, it lacks a binding between neighbourhood points of a shape.
  Therefore, it is important to maintain a specific shape of the LV during
  cardiac cycle.
  We are using a statistical shape model that has been previously described
@@ -490,7 +499,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Manual annotation of mid-myocardium
+Manual annotation of mid-myocardium.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Manual-anotation"
@@ -567,7 +576,7 @@ where
 \begin_inset Formula $w$
 \end_inset
 
- is desired width of the myocardium and 
+ is desired width of the myocardium, 
 \begin_inset Formula $\left\Vert \cdot\right\Vert $
 \end_inset
 
@@ -615,10 +624,6 @@ name "fig:inner_outer_points"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -727,7 +732,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Point distribution frequency modulation
+Point distribution frequency modulation.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Frequency-modulation"
@@ -940,7 +945,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Mean LV shape (left) and some examples of it's variation
+Mean LV shape (left) and some examples of it's variation.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Mean-LV-shape"
@@ -1006,7 +1011,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Algorithm pipeline
+Algorithm pipeline.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Algorithm-pipeline"
@@ -1106,7 +1111,7 @@ Image transformation from
 \begin_inset Formula $\theta\mbox{-}d$
 \end_inset
 
-) coordinate system
+) coordinate system.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Image-transformation"
@@ -1223,7 +1228,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Point tracking using arbitrary metric
+Point tracking using arbitrary metric.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Point-tracking"
@@ -1254,7 +1259,7 @@ Our algorithm also allows to have multiple weighted input frames.
 \begin_inset Formula $j$
 \end_inset
 
- frames 
+ previous frames 
 \begin_inset Formula $(I_{i-j},I_{i-j+1},\dots,I_{i-1})$
 \end_inset
 
@@ -1281,7 +1286,7 @@ Our algorithm also allows to have multiple weighted input frames.
 \begin_inset Formula $\mathbf{w}$
 \end_inset
 
- is used to form the final shape.
+ is used to form the final estimation of the point.
 \end_layout
 
 \begin_layout Subsection
@@ -1516,7 +1521,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Points of the shape before normalization and after the PCA shape normalization
+Points of the shape before normalization and after the PCA shape normalization.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:pca-normalization"
@@ -1528,10 +1533,6 @@ name "fig:pca-normalization"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -1557,7 +1558,7 @@ The optional processing of the tracing result is the application of the
 \begin_inset Formula $p_{i}$
 \end_inset
 
- within shape 
+ within 
 \begin_inset Formula $i$
 \end_inset
 
@@ -1588,6 +1589,13 @@ We have used this filter with the size parameter set to 1 (no filter), 3,
 
 \begin_layout Section
 Evaluation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Evaluation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1595,19 +1603,20 @@ Database description and performance metrics
 \end_layout
 
 \begin_layout Standard
-
-\series bold
-TODO popsat zarizeni, kterym se vse skenovalo.
-
-\series default
- We have tested our LV tracker on the dataset consisting of 10 subjects
- -- 3 or 4 beat cycles were recorder for each subject resulting in total
- 36 beat cycles.
- The frame-rate ranges from 62FPS to 82FPS.
- The individual beat starts (EKG peaks) as well as the initial shape of
- the LV were manually annotated.
- For the shape annotation, just the mid-myocardium control points were annotated.
- The real LV shape was automatically deduced using the PCA shape model.
+The ultrasound image sequences were acquired by Vivid 7 ultrasound scanner
+ (GE Healthcare, Horten, Norway) using "Cardiac" application and FPA 2.5
+ MHz M3S probe.
+ The apical views from 8 healthy subjects were utilized to assess the longitudin
+al strain.
+ Each ultrasound sequence contains approximately 10 heart beats to be able
+ to investigate the inter-beat variability.
+ The study protocol was approved by the review board of St.
+ Anne's University Hospital Brno, and all subjects gave written informed
+ consent.
+ The frame-rate ranges from 62FPS to 82FPS and the first frame of every
+ beat were manually annotated.
+ The operator marked mid-myocardial points and the real LV shape was automatical
+ly deduced using the PCA shape model.
 \end_layout
 
 \begin_layout Standard
@@ -1685,7 +1694,28 @@ L=\frac{1}{n}\sum_{j=1}^{n}l_{j}
 \end_layout
 
 \begin_layout Standard
-Our LV model is divided into six segments -- see Figure 
+Our LV model is divided into six segments that is similar to the Echopac
+ software
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www3.gehealthcare.com/en/Products/Categories/Ultrasound/Vivid/EchoPAC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ -- see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:LV-segmentation"
@@ -1693,12 +1723,6 @@ reference "fig:LV-segmentation"
 \end_inset
 
 .
- 
-\series bold
-TODO: Vlozit citaci, ze toto rozdeleni je standardni
-\series default
-.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1721,7 +1745,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Per-point strain
+Per-point strain.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Per-point-strain"
@@ -1736,7 +1760,43 @@ name "fig:Per-point-strain"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/segments.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+LV segmentation.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LV-segmentation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -1781,50 +1841,6 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename fig/segments.pdf
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-LV segmentation
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:LV-segmentation"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
 	filename fig/beat2beatMainStrain.pdf
 	width 5cm
 
@@ -1844,7 +1860,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Beat-to-beat variance for main LV strain and for selected segment
+Beat-to-beat variance for main LV strain and for selected segment.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Beat-to-beat-variance"
@@ -2153,11 +2169,11 @@ In order to find the best tracker, all three main characteristics (MS variance,
 \begin_inset Formula $c$
 \end_inset
 
-, we mean value 
+, we calculate the mean value 
 \begin_inset Formula $\mu_{c}$
 \end_inset
 
- and standard deviation 
+, the standard deviation 
 \begin_inset Formula $\sigma_{c}$
 \end_inset
 
@@ -2208,7 +2224,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Distribution of normalized characteristics for compared LV trackers
+Distribution of normalized characteristics for compared LV trackers.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Normalized-characteristics-distribution"
@@ -2220,10 +2236,6 @@ name "fig:Normalized-characteristics-distribution"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -2272,9 +2284,9 @@ n has negative impact on the beat-to-beat variance.
 
 .
  Adding additional weighted input frames to the tracking input does not
- improve the tracker performance.
- Our tests shows that better results are achieved when only one (last) frame
- is used when the optical flow of the points of interest in next frame are
+ significantly improve the tracker performance.
+ Our tests show that the best result is achieved when only one (last) frame
+ is used when the optical flow of the points of interest in next frame is
  calculated.
 \end_layout
 
@@ -2289,7 +2301,8 @@ status open
 
 \begin_layout Plain Layout
 The best trackers (all are PyrLK-based point trackers with modulation amplitude
- set to 0.2 and only one input frame) 
+ set to 0.2).
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:The-best-trackers"
@@ -2307,8 +2320,10 @@ name "tab:The-best-trackers"
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="8" columns="7">
+<lyxtabular version="3" rows="8" columns="9">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
@@ -2339,7 +2354,25 @@ Points
 \begin_inset Text
 
 \begin_layout Plain Layout
+Modulation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 moving 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Input
 \end_layout
 
 \end_inset
@@ -2404,7 +2437,25 @@ per
 \begin_inset Text
 
 \begin_layout Plain Layout
+amplitude
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 average
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+frames
 \end_layout
 
 \end_inset
@@ -2469,7 +2520,25 @@ segment
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 filter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -2534,6 +2603,15 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
+0.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 7
 \end_layout
 
@@ -2543,7 +2621,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0115
+1
 \end_layout
 
 \end_inset
@@ -2552,7 +2630,16 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0264
+0.0154
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0304
 \end_layout
 
 \end_inset
@@ -2561,7 +2648,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-19.3349
+20.1585
 \end_layout
 
 \end_inset
@@ -2570,7 +2657,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
--4.8452
+-3.9205
 \end_layout
 
 \end_inset
@@ -2599,7 +2686,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-5
+0.2
 \end_layout
 
 \end_inset
@@ -2608,19 +2695,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.0119
+7
 \end_layout
 
 \end_inset
@@ -2629,7 +2704,25 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0273
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0158
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0294
 \end_layout
 
 \end_inset
@@ -2638,7 +2731,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-19.4738
+23.3608
 \end_layout
 
 \end_inset
@@ -2647,7 +2740,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
--4.6489
+-3.8622
 \end_layout
 
 \end_inset
@@ -2676,7 +2769,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-3
+0.2
 \end_layout
 
 \end_inset
@@ -2685,7 +2778,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0123
+5
 \end_layout
 
 \end_inset
@@ -2694,7 +2787,25 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0283
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0159
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0315
 \end_layout
 
 \end_inset
@@ -2703,7 +2814,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-19.3920
+19.9584
 \end_layout
 
 \end_inset
@@ -2712,7 +2823,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
--4.4637
+-3.7206
 \end_layout
 
 \end_inset
@@ -2732,7 +2843,16 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-6
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2
 \end_layout
 
 \end_inset
@@ -2750,7 +2870,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0122
+3
 \end_layout
 
 \end_inset
@@ -2759,7 +2879,16 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0294
+0.0159
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0303
 \end_layout
 
 \end_inset
@@ -2768,7 +2897,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-21.0413
+26.4963
 \end_layout
 
 \end_inset
@@ -2777,7 +2906,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
--4.3603
+-3.6775
 \end_layout
 
 \end_inset
@@ -2806,7 +2935,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-7
+0.2
 \end_layout
 
 \end_inset
@@ -2815,7 +2944,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0131
+5
 \end_layout
 
 \end_inset
@@ -2824,7 +2953,25 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0279
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0162
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0306
 \end_layout
 
 \end_inset
@@ -2833,7 +2980,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
-20.1497
+23.0497
 \end_layout
 
 \end_inset
@@ -2842,7 +2989,7 @@ characteristics
 \begin_inset Text
 
 \begin_layout Plain Layout
--4.2462
+-3.6559
 \end_layout
 
 \end_inset
@@ -2871,6 +3018,9 @@ We have shown that the utilizing of the probability shape model and PyrLK-based
 n in our further experiments in order to prove that our method can be used
  to non-invasive examination and detection, e.g., the detection of myocardial
  ischemism.
+ Our further experiments should also reveal the optimal parameters for moving
+ average filter and amplitude variation, such the potential myocardium movement
+ malfunctions are not smoothed out.
 \end_layout
 
 \begin_layout Standard

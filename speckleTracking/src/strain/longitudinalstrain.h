@@ -19,7 +19,7 @@ public:
 
     Points getRealShapePoints(const Points &controlPoints, int shapeWidth, VectorF *modulationValues);
 
-    bool isValidShape(Points &realPoints) { return true; }
+    bool isValidShape(Points &/*realPoints*/) { return true; }
 
     QList<QGraphicsItem*> drawResult(QGraphicsScene *scene, Points &resultPoints);
 

@@ -9,7 +9,7 @@ WidgetRainbow::WidgetRainbow(QWidget *parent) :
 {
 }
 
-void WidgetRainbow::paintEvent(QPaintEvent *event)
+void WidgetRainbow::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     int h = height();

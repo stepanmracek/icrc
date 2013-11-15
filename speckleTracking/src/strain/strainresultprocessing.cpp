@@ -6,7 +6,7 @@ StrainResProcFloatingAvg::StrainResProcFloatingAvg(int kernelSize, QObject *pare
     assert(kernelSize % 2 == 1);
 }
 
-ShapeMap StrainResProcFloatingAvg::process(ShapeMap &strainResult, int startIndex, int endIndex, VideoDataClip *)
+ShapeMap StrainResProcFloatingAvg::process(ShapeMap &strainResult, int startIndex, int endIndex, const VideoDataClip *)
 {
     int pointCount = strainResult.begin().value().size();
     int windowSize = kernelSize/2;

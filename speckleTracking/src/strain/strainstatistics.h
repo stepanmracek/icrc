@@ -29,10 +29,10 @@ public:
     static VectorF beatToBeatVariancePerSegment(StrainStatistics &firstBeat, StrainStatistics &secondBeat, int samplesCount);
     static VectorF beatToBeatVariancePerSegment(QVector<StrainStatistics> &beats, int samplesCount);
 
-    static StrainStatistics getOneBeatStats(VideoDataClip *clip, Strain *strainModel,
+    static StrainStatistics getOneBeatStats(const VideoDataClip *clip, Strain *strainModel,
                                             int beatIndex, ShapeMap &shapesMap, bool *success);
 
-    static QVector<StrainStatistics> getAllBeatsStats(VideoDataClip *clip, Strain *strainModel, ShapeMap &shapesMap);
+    static QVector<StrainStatistics> getAllBeatsStats(const VideoDataClip *clip, Strain *strainModel, ShapeMap &shapesMap);
 };
 
 #endif // STRAINSTATISTICS_H

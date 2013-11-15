@@ -143,7 +143,7 @@ void WidgetAnotation::drawLines()
     if (controlPoints.size() <= 1) return;
 
     Points inner, outer;
-    for (int i = 0; i < controlPoints.size(); i++)
+    for (unsigned int i = 0; i < controlPoints.size(); i++)
     {
         int prevIndex, nextIndex;
         if (i == 0)
@@ -282,7 +282,7 @@ void WidgetAnotation::mouseMoveEvent(QMouseEvent *event)
         {
             splineLines[i]->moveBy(dx, dy);
         }
-        for (int i = 0; i < controlPoints.size(); i++)
+        for (unsigned int i = 0; i < controlPoints.size(); i++)
         {
             controlPoints[i] = P(controlPoints[i].x+dx, controlPoints[i].y+dy);
         }

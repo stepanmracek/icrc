@@ -14,7 +14,7 @@ private:
 public:
     ModelListOfInts(QVector<int> &list, QObject *parent) : QAbstractListModel(parent), list(list) { }
 
-    Qt::ItemFlags flags(const QModelIndex &index) const
+    Qt::ItemFlags flags(const QModelIndex &/*index*/) const
     {
         return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled;
     }
@@ -30,7 +30,7 @@ public:
             return QVariant();
     }
 
-    int rowCount(const QModelIndex &parent) const
+    int rowCount(const QModelIndex &/*parent*/) const
     {
         return list.count();
     }
@@ -52,9 +52,10 @@ public:
 
     bool insertRows(int position, int count, const QModelIndex &parent = QModelIndex())
     {
-        beginInsertRows(QModelIndex(), position, position+count-1);
+        beginInsertRows(parent, position, position+count-1);
 
-        for (int row = 0; row < count; ++row) {
+        for (int row = 0; row < count; ++row)
+        {
             list.insert(position, 0);
         }
         endInsertRows();
@@ -64,7 +65,7 @@ public:
 
     bool removeRows(int position, int count, const QModelIndex &parent)
     {
-        beginRemoveRows(QModelIndex(), position, position+count-1);
+        beginRemoveRows(parent, position, position+count-1);
 
         for (int row = 0; row < count; ++row) {
             list.remove(position);
@@ -76,6 +77,7 @@ public:
 
     QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex()) const
     {
+        parent.model();
         return createIndex(row, column);
     }
 };

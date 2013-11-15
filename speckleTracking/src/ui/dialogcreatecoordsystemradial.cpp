@@ -8,7 +8,7 @@
 #include "ui/uiutils.h"
 
 DialogCreateCoordSystemRadial::DialogCreateCoordSystemRadial(Mat8 &image, CoordSystemRadial *coordSystem, QWidget *parent):
-    loadCompleted(false), QDialog(parent), coordSystem(coordSystem), ui(new Ui::DialogCreatCoordSystemRadial)
+    QDialog(parent), coordSystem(coordSystem), ui(new Ui::DialogCreatCoordSystemRadial), loadCompleted(false)
 {
     image.copyTo(originalImage);
 

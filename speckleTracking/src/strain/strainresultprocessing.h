@@ -13,7 +13,7 @@ class StrainResultProcessingBase : public QObject
 public:
     StrainResultProcessingBase(QObject *parent = 0) : QObject(parent) { }
 
-    virtual ShapeMap process(ShapeMap &strainResult, int startIndex, int endIndex, VideoDataClip *videoData) = 0;
+    virtual ShapeMap process(ShapeMap &strainResult, int startIndex, int endIndex, const VideoDataClip *videoData) = 0;
 
     virtual QString getInfo() = 0;
 };
@@ -25,7 +25,7 @@ class StrainResultProcessingPass : public StrainResultProcessingBase
 public:
     StrainResultProcessingPass(QObject *parent = 0) : StrainResultProcessingBase(parent) { }
 
-    virtual ShapeMap process(ShapeMap &strainResult, int , int , VideoDataClip *) { return strainResult; }
+    virtual ShapeMap process(ShapeMap &strainResult, int , int , const VideoDataClip *) { return strainResult; }
 
     QString getInfo() { return "No result processing\n"; }
 };
@@ -40,7 +40,7 @@ private:
 public:
     StrainResProcFloatingAvg(int kernelSize, QObject *parent = 0);
 
-    virtual ShapeMap process(ShapeMap &strainResult, int startIndex, int endIndex, VideoDataClip *);
+    virtual ShapeMap process(ShapeMap &strainResult, int startIndex, int endIndex, const VideoDataClip *);
 
     QString getInfo() { return QString("Result processing:\n  floating average window: %1\n").arg(kernelSize); }
 };

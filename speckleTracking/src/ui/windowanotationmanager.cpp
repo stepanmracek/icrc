@@ -27,9 +27,7 @@
 #include "strain/strainresultprocessing.h"
 
 WindowAnotationManager::WindowAnotationManager(const QString &path, const QString &dataDir, ShapeTracker *tracker, QWidget *parent) :
-    dataDir(dataDir),
-    QMainWindow(parent),
-    ui(new Ui::WindowAnotationManager)
+    QMainWindow(parent), ui(new Ui::WindowAnotationManager), dataDir(dataDir)
 {
     ui->setupUi(this);
     setTracker(tracker);
@@ -69,7 +67,7 @@ void WindowAnotationManager::saveMetadataAndShapes()
 
 }
 
-void WindowAnotationManager::closeEvent(QCloseEvent *event)
+void WindowAnotationManager::closeEvent(QCloseEvent *)
 {
     saveMetadataAndShapes();
 }
@@ -113,7 +111,7 @@ void WindowAnotationManager::on_btnLoad_clicked()
     loadFile(items[0]->text());
 }
 
-void WindowAnotationManager::on_listFiles_itemDoubleClicked(QListWidgetItem *item)
+void WindowAnotationManager::on_listFiles_itemDoubleClicked(QListWidgetItem *)
 {
     on_btnLoad_clicked();
 }
@@ -260,8 +258,8 @@ void WindowAnotationManager::on_btnStats_clicked()
     VectorOfShapes subShapes;
     QMap<int, Points> subShapesMap;
     VideoDataClip *subClip = new VideoDataClip();
-    char *error = clip->getSubClip(currentIndex, shapes, subClip, subShapes, subShapesMap);
-    if (error != 0)
+    QString error = clip->getSubClip(currentIndex, shapes, subClip, subShapes, subShapesMap);
+    if (!error.isEmpty())
     {
         QMessageBox msg(QMessageBox::Information, "Information", error);
         msg.exec();

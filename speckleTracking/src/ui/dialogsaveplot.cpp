@@ -11,8 +11,7 @@
 #include <qwt/qwt_plot.h>
 
 DialogSavePlot::DialogSavePlot(WidgetPlot *plot, QWidget *parent) :
-    plot(plot), QDialog(parent),
-    ui(new Ui::DialogSavePlot)
+    QDialog(parent), ui(new Ui::DialogSavePlot), plot(plot)
 {
     ui->setupUi(this);
 }

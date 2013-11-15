@@ -5,11 +5,11 @@
 Points FrequencyModulation::modulate(const Points &points, const VectorF &modulationValues)
 {
     Points result;
-    int n = points.size();
+    unsigned int n = points.size();
     assert(n == modulationValues.size());
     assert(n >= 3);
 
-    for (int i = 0; i < n; i++)
+    for (unsigned int i = 0; i < n; i++)
     {
         float m = modulationValues[i];
         assert(fabs(m) <= 1);
@@ -138,7 +138,7 @@ void show(FreqModulationStruct *data)
     cv::imshow("modulation", frame);
 }
 
-void onChange(int pos, void *data)
+void onChange(int /*pos*/, void *data)
 {
     show((FreqModulationStruct*) data);
 }

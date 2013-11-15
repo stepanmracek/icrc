@@ -1,14 +1,14 @@
 #include "shapecomparer.h"
 
-#include "procrustes.h";
+#include "procrustes.h"
 
 float ShapeComparer::directDiff(const Points &first, const Points &second)
 {
-    int n = first.size();
+    unsigned int n = first.size();
     assert(second.size() == n);
 
     float sum = 0;
-    for (int i = 0; i < n; i++)
+    for (unsigned int i = 0; i < n; i++)
     {
         const P &p1 = first[i];
         const P &p2 = second[i];

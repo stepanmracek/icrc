@@ -30,7 +30,7 @@ StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
         assert(pointsCount == shape.size());
 
         float totalD = 0;
-        for (int p = 0; p < pointsCount/3 - 1; p++)
+        for (unsigned int p = 0; p < pointsCount/3 - 1; p++)
         {
             float d = Common::eucl(shape[p], shape[p+3]);
             d += Common::eucl(shape[p+1], shape[p+4]);
@@ -70,7 +70,7 @@ StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
 
     // Strain rate
     strainRate = Common::deltas(strain);
-    for (int i = 0; i < pointsCount/3 - 1; i++)
+    for (unsigned int i = 0; i < pointsCount/3 - 1; i++)
     {
         strainRateForPoints.push_back(Common::deltas(strainForPoints[i]));
     }
@@ -110,11 +110,11 @@ float StrainStatistics::beatToBeatVariance(QVector<StrainStatistics> &beats, int
 VectorF StrainStatistics::beatToBeatVariancePerSegment(StrainStatistics &firstBeat, StrainStatistics &secondBeat,
                                                        int samplesCount)
 {
-    int n = firstBeat.strainForSegments.size();
+    unsigned int n = firstBeat.strainForSegments.size();
     assert(n == secondBeat.strainForSegments.size());
 
     VectorF result;
-    for (int i = 0; i < n; i++)
+    for (unsigned int i = 0; i < n; i++)
     {
         VectorF firstSampled = VecF::resample(firstBeat.strainForSegments[i], samplesCount);
         VectorF secondSampled = VecF::resample(secondBeat.strainForSegments[i], samplesCount);
@@ -155,7 +155,7 @@ VectorF StrainStatistics::beatToBeatVariancePerSegment(QVector<StrainStatistics>
     return result;
 }
 
-StrainStatistics StrainStatistics::getOneBeatStats(VideoDataClip *clip, Strain *strainModel,
+StrainStatistics StrainStatistics::getOneBeatStats(const VideoDataClip *clip, Strain *strainModel,
                                                    int beatIndex, ShapeMap &shapesMap, bool *success)
 {
     if (beatIndex >= clip->size())
@@ -203,7 +203,7 @@ StrainStatistics StrainStatistics::getOneBeatStats(VideoDataClip *clip, Strain *
     return StrainStatistics(strainModel, shapes);
 }
 
-QVector<StrainStatistics> StrainStatistics::getAllBeatsStats(VideoDataClip *clip, Strain *strainModel,
+QVector<StrainStatistics> StrainStatistics::getAllBeatsStats(const VideoDataClip *clip, Strain *strainModel,
                                                              ShapeMap &shapesMap)
 {
     QVector<StrainStatistics> result;

@@ -48,13 +48,13 @@ public:
     VideoDataClip(const QString &path, const QString &metadataPath, QProgressDialog *progressDlg = 0, QObject *parent = 0);
 
     VectorOfImages frames;
-    VideoDataClipMetadata *getMetadata() { return metadata; }
+    VideoDataClipMetadata *getMetadata() const { return metadata; }
 
     void getRange(int start, int end, VideoDataClip *outClip) const;
     void getBeatRange(int currentIndex, int &beatStart, int &beatEnd) const;
 
-    char *getSubClip(int index, QMap<int, Points> &shapes,
-                     VideoDataClip *outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap);
+    QString getSubClip(int index, QMap<int, Points> &shapes,
+                       VideoDataClip *outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap);
 
     virtual void setIndex(int index);
     virtual bool getNextFrame(Mat8 &frame);

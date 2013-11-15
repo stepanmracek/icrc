@@ -119,7 +119,7 @@ public:
     P transform(float inputX, float inputY) { return P(inputX, inputY); }
     P backTransform(P input) { return input; }
     P backTransform(float inputX, float inputY) { return P(inputX, inputY); }
-    QList<QGraphicsItem*> draw(QGraphicsScene *scene) { return QList<QGraphicsItem*>(); }
+    QList<QGraphicsItem*> draw(QGraphicsScene *) { return QList<QGraphicsItem*>(); }
 };
 
 /**

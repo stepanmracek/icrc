@@ -73,11 +73,11 @@ QVector<VectorF> getWeights()
 
 float diff(Points &first, Points &second)
 {
-    int n = first.size();
+    unsigned int n = first.size();
     assert(second.size() == n);
 
     float sum = 0;
-    for (int i = 0; i < n; i++)
+    for (unsigned int i = 0; i < n; i++)
     {
         sum += Common::eucl(first[i], second[i]);
     }
