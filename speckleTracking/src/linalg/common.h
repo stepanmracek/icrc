@@ -182,7 +182,7 @@ public:
      * @param p2 second point
      * @return The Euclidean distance between two points
      */
-    static float eucl(P &p1, P &p2)
+    static float eucl(const P &p1, const P &p2)
     {
         float dx = p1.x - p2.x;
         float dy = p1.y - p2.y;
