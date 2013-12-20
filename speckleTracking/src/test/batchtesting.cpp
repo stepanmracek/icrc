@@ -179,7 +179,7 @@ void BatchTesting::process()
                 {
                     for (int i = 0; i < modValuesCount; i++)
                     {
-                        Points shape = dummyStrain.getRealShapePoints(controlPoints, width, &modValues[i]);
+                        Points shape = dummyStrain.getRealShapePoints(controlPoints, width, &modValues[i], 0);
                         shapes.push_back(shape);
                     }
                 }

@@ -127,9 +127,9 @@ public:
 
     virtual void process(Mat8 &frame)
     {
-        Mat8 result;
-        cv::fastNlMeansDenoising(frame, result, h, templateSize, searchSize);
-        result.copyTo(frame);
+        //Mat8 result;
+        //cv::fastNlMeansDenoising(frame, result, h, templateSize, searchSize);
+        //result.copyTo(frame);
     }
 
     QString getInfo()

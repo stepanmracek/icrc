@@ -21,7 +21,7 @@ public:
     StrainStatistics() { }
     StrainStatistics(Strain *strainModel, VectorOfShapes &shapes);
 
-    P getCenter(Points &points);
+    //P getCenter(Points &points);
 
     static float beatToBeatVariance(StrainStatistics &firstBeat, StrainStatistics &secondBeat, int samplesCount);
     static float beatToBeatVariance(QVector<StrainStatistics> &beats, int samplesCount);

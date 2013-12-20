@@ -17,7 +17,7 @@ bool PointTrackerDistance::track(Mat8 &prevFrame, Mat8 &nextFrame, Points &prevP
         MatF prevMat(windowSize, windowSize);
         Common::createWindow(prevFrame, px, py, windowSize, prevMat);
         int rows = windowSize*windowSize;
-        MatF prevMatInColumn = prevMat.reshape(1, rows);
+        MatF prevMatInColumn = Common::reshape(prevMat, rows);
 
         MatF nextMat(windowSize, windowSize);
         MatF nextMatInColumn(rows, 1);
@@ -31,7 +31,7 @@ bool PointTrackerDistance::track(Mat8 &prevFrame, Mat8 &nextFrame, Points &prevP
             for (int nx = px-delta; nx <= px+delta; nx++)
             {
                 Common::createWindow(nextFrame, nx, ny, windowSize, nextMat);
-                nextMatInColumn = nextMat.reshape(1, rows);
+                nextMatInColumn = Common::reshape(nextMat, rows);
 
                 float d = metrics->distance(prevMatInColumn, nextMatInColumn);
                 if (d < bestDistance)

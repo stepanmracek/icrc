@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
 //    Test::testLearnShape();
 //    Test::testLearnShapeWithFM();
 //    Test::testFreqModulation();
+//    Test::testWidthModulation();
 //    Test::testTracking();
 //    Test::testStatisticalShapeChanges();
 //    Test::testAutomaticTracking();

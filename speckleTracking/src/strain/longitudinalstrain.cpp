@@ -12,39 +12,49 @@ LongitudinalStrain::LongitudinalStrain(ShapeNormalizerBase *shapeNormalizer, int
     //pointsPerSegment = 5;
 }
 
-Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, int shapeWidth)
+Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, float shapeWidth)
 {
-    return getRealShapePoints(controlPoints, shapeWidth, 0);
+    return getRealShapePoints(controlPoints, shapeWidth, 0, 0);
 }
 
-Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, int shapeWidth, VectorF *modulationValues)
+Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, float shapeWidth, VectorF *modulationValues, VectorF *widthVector)
 {
     Points result;
     int n = controlPoints.size();
     if (n <= 1) return result;
 
     Points uniformMidControlPoints = spline.uniformDistance(controlPoints, segmentsCount, false);
-    Points uniformMidPoints = spline.getSplinePoints(uniformMidControlPoints, pointsPerSegment);
+    Points midPoints = spline.getSplinePoints(uniformMidControlPoints, pointsPerSegment);
     if (modulationValues)
     {
-        uniformMidPoints = FrequencyModulation::modulate(uniformMidPoints, *modulationValues);
+        midPoints = FrequencyModulation::modulate(midPoints, *modulationValues);
     }
-    int uniformSize = uniformMidPoints.size();
+    int midSize = midPoints.size();
+
+    if (widthVector)
+    {
+        assert(midSize == widthVector->size());
+    }
 
     Points uniformInnerPoints;
     Points uniformOuterPoints;
-    for (int i = 0; i < uniformSize; i++)
+    for (int i = 0; i < midSize; i++)
     {
+        if (widthVector)
+        {
+            shapeWidth = widthVector->at(i);
+        }
+
         int prevIndex, nextIndex;
         if (i == 0)
         {
             prevIndex = 0;
             nextIndex = 1;
         }
-        else if (i == uniformSize-1)
+        else if (i == midSize-1)
         {
-            prevIndex = uniformSize-2;
-            nextIndex = uniformSize-1;
+            prevIndex = midSize-2;
+            nextIndex = midSize-1;
         }
         else
         {
@@ -52,9 +62,9 @@ Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, int s
             nextIndex = i+1;
         }
 
-        P &prev = uniformMidPoints[prevIndex];
-        P &cur = uniformMidPoints[i];
-        P &next = uniformMidPoints[nextIndex];
+        P &prev = midPoints[prevIndex];
+        P &cur = midPoints[i];
+        P &next = midPoints[nextIndex];
 
         float dx = next.x - prev.x;
         float dy = next.y - prev.y;
@@ -69,10 +79,10 @@ Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, int s
         uniformOuterPoints.push_back(P(outx, outy));
     }
 
-    for (int i = 0; i < uniformSize; i++)
+    for (int i = 0; i < midSize; i++)
     {
         result.push_back(uniformInnerPoints[i]);
-        result.push_back(uniformMidPoints[i]);
+        result.push_back(midPoints[i]);
         result.push_back(uniformOuterPoints[i]);
     }
 

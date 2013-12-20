@@ -24,7 +24,6 @@ HEADERS += \
     linalg/serialization.h \
     strain/anotation.h \
     test/test.h \
-    strain/statisticalshapechanges.h \
     strain/strainstatistics.h \
     ui/widgetplot.h \
     ui/widgetspectrogram.h \
@@ -56,7 +55,8 @@ HEADERS += \
     ui/widgetrainbow.h \
     linalg/shapecomparer.h \
     test/batchtesting.h \
-    strain/batchtestingold.h
+    strain/batchtestingold.h \
+    linalg/widthmodulation.h
 
 SOURCES += \
     linalg/vecf.cpp \
@@ -72,7 +72,6 @@ SOURCES += \
     linalg/ica.cpp \
     linalg/serialization.cpp \
     strain/anotation.cpp \
-    strain/statisticalshapechanges.cpp \
     strain/strainstatistics.cpp \
     ui/widgetspectrogram.cpp \
     strain/videodatabase.cpp \
@@ -105,7 +104,8 @@ SOURCES += \
     linalg/shapecomparer.cpp \
     test/batchtesting.cpp \
     strain/batchtestingold.cpp \
-    main.cpp
+    main.cpp \
+    linalg/widthmodulation.cpp
 
 INCLUDEPATH += src
 

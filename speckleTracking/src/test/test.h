@@ -17,7 +17,6 @@
 #include "strain/shapetracker.h"
 #include "strain/pointtrackeropticalflow.h"
 #include "strain/shapenormalizer.h"
-#include "strain/statisticalshapechanges.h"
 #include "strain/strainstatistics.h"
 #include "ui/dialogstrainstatistics.h"
 #include "strain/videodataclip.h"
@@ -30,6 +29,7 @@
 #include "ui/windowanotationmanager.h"
 #include "strain/longitudinalstrain.h"
 #include "linalg/frequencymodulation.h"
+#include "linalg/widthmodulation.h"
 
 class Test
 {
@@ -107,6 +107,11 @@ public:
         FrequencyModulation::test();
     }
 
+    static void testWidthModulation()
+    {
+        WidthModulation::test();
+    }
+
     static void testLearnShapeWithFM()
     {
         int segmentsCount = 6;
@@ -130,7 +135,7 @@ public:
             {
                 for (int i = 0; i < modValuesCount; i++)
                 {
-                    Points shape = dummyStrain.getRealShapePoints(controlPoints, width, &modValues[i]);
+                    Points shape = dummyStrain.getRealShapePoints(controlPoints, width, &modValues[i], 0);
                     shapes.push_back(shape);
                 }
                 //break; // TODO remove later
@@ -160,35 +165,6 @@ public:
         qDebug() << "segmentsCount" << newStrain.segmentsCount;
         qDebug() << "pointsPerSegment" << newStrain.pointsPerSegment;
         qDebug() << "PCA modes meanSize" << newPCA->getModes() << newPCA->getMean().rows;
-    }
-
-    static void testStatisticalShapeChanges()
-    {
-        PCA model;
-        int framesCount = 10;
-        VectorOfShapes shapes = Serialization::readVectorOfShapes("anotated-50");
-        StatisticalShapeChanges changes(shapes, framesCount, model);
-        std::vector<Points> deltas = changes.createDeltas(shapes);
-        model.modesSelectionThreshold();
-
-        for (size_t i = 0; i < deltas.size()-framesCount; i++)
-        {
-            std::cout << "Iteration: " << i << std::endl;
-            std::vector<Points> input;
-            for (int j = 0; j < (framesCount-1); j++)
-            {
-                int realIndex = i+j;
-                input.push_back(deltas[realIndex]);
-            }
-
-            Points desiredOutput = deltas[i + (framesCount-1)];
-            Points output = changes.predict(input);
-
-            MatF diff = (Common::pointsToMatF(desiredOutput) - Common::pointsToMatF(output)); //.t();
-            float absDiff = Common::absSum(diff);
-            std::cout << "  difference between original and predicted: " << absDiff << std::endl;
-            //Common::printMatrix(diff);
-        }
     }
 
     static void testImageProcessing()
@@ -239,8 +215,12 @@ public:
         std::vector<VectorF> modValues =
                 FrequencyModulation::generateModulationValues(segments*pointsPerSegment + 1,
                                                               freqStart, freqEnd, freqStep, phaseSteps, amplitude);
-
         int modValuesCount = modValues.size();
+
+        std::vector<VectorF> widthValues =
+                WidthModulation::generateValues(pointsPerSegment*segments + 1, 1, 5, 1,
+                                                10, 25.0f, 0.15f);
+        int widthValuesCount = widthValues.size();
 
         ShapeNormalizerPass *dummyNormalizer = new ShapeNormalizerPass();
         LongitudinalStrain dummyStrain(dummyNormalizer, segments, pointsPerSegment);
@@ -248,15 +228,17 @@ public:
         VectorOfShapes shapes;
         foreach (const Points &controlPoints, rawShapes)
         {
-            for (int width = 20; width <= 30; width += 10)
+            for (int j = 0; j < widthValuesCount; j++) //(int width = 20; width <= 30; width += 10)
             {
                 for (int i = 0; i < modValuesCount; i++)
                 {
-                    Points shape = dummyStrain.getRealShapePoints(controlPoints, width, &modValues[i]);
+                    Points shape = dummyStrain.getRealShapePoints(controlPoints, 20, &modValues[i], &widthValues[j]);
                     shapes.push_back(shape);
                 }
             }
+            //break;
         }
+        qDebug() << shapes.size();
 
         PCA *pca = new PCA();
         StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca, shapes);

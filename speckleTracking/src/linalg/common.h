@@ -390,6 +390,18 @@ public:
         for (int i = 0; i < n; i++)
             w(i) = w(i)/sum*n;
     }
+
+    /**
+     * @brief Reshapes matrix
+     */
+    static MatF reshape(MatF &input, int rows)
+    {
+#if CV_MAJOR_VERSION >= 2 && CV_MINOR_VERSION >= 4
+        return input.reshape(1, rows);
+#else
+        return input.reshape(rows);
+#endif
+    }
 };
 
 #endif // COMMON_H

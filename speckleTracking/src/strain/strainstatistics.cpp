@@ -12,12 +12,11 @@ StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
 
     unsigned int pointsCount = shapes.front().size();
     assert (pointsCount > 0);
-    //qDebug() << "StrainStatistics";
-    //qDebug() << "pointsCount" << pointsCount << pointsCount/3 -1;
-    //qDebug() << "points per segment" << strainModel->pointsPerSegment;
-    //qDebug() << "segments" << strainModel->segmentsCount;
 
+    // strain for each point
     strainForPoints = std::vector<VectorF>(pointsCount/3 - 1);
+
+    // strain for entire segment
     strainForSegments = std::vector<VectorF>(strainModel->segmentsCount);
 
     // Strain
@@ -26,7 +25,7 @@ StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
     VectorF firstStrainForPoints;
     for (VectorOfShapes::iterator it = shapes.begin(); it != shapes.end(); ++it)
     {
-        Points &shape = *it;
+        const Points &shape = *it;
         assert(pointsCount == shape.size());
 
         float totalD = 0;
@@ -36,6 +35,8 @@ StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
             d += Common::eucl(shape[p+1], shape[p+4]);
             d += Common::eucl(shape[p+2], shape[p+5]);
             d /= 3;
+
+            //float d = (Common::eucl(shape[p], shape[p+1]) + Common::eucl(shape[p+1], shape[p+2]))/2.0;
 
             if (first)
             {
