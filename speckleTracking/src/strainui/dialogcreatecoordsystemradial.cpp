@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QMouseEvent>
 
-#include "ui/uiutils.h"
+#include "uiutils.h"
 
 DialogCreateCoordSystemRadial::DialogCreateCoordSystemRadial(Mat8 &image, CoordSystemRadial *coordSystem, QWidget *parent):
     QDialog(parent), coordSystem(coordSystem), ui(new Ui::DialogCreatCoordSystemRadial), loadCompleted(false)

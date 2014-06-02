@@ -103,7 +103,7 @@
             <x>0</x>
             <y>0</y>
             <width>148</width>
-            <height>313</height>
+            <height>300</height>
            </rect>
           </property>
          </widget>
@@ -112,7 +112,7 @@
       </layout>
      </item>
      <item>
-      <widget class="WidgetResult" name="widgetResult" native="true">
+      <widget class="WidgetResult" name="widgetResult">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -138,8 +138,8 @@
  <customwidgets>
   <customwidget>
    <class>WidgetResult</class>
-   <extends>QWidget</extends>
-   <header>ui/widgetresult.h</header>
+   <extends>QGraphicsView</extends>
+   <header>widgetresult.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

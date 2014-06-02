@@ -3,7 +3,7 @@
 
 #include <QDialog>
 
-#include <ui/widgetplot.h>
+#include "widgetplot.h"
 
 namespace Ui {
 class DialogSavePlot;

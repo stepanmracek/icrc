@@ -5,7 +5,7 @@
 #include <QListWidgetItem>
 
 #include "strain/shapetracker.h"
-#include "ui/modellistofints.h"
+#include "modellistofints.h"
 
 namespace Ui {
 class WindowAnotationManager;
@@ -16,7 +16,7 @@ class WindowAnotationManager : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit WindowAnotationManager(const QString &path, const QString &dataDir, ShapeTracker *tracker, QWidget *parent = 0);
+    explicit WindowAnotationManager(const QString &path, ShapeTracker *tracker, QWidget *parent = 0);
     ~WindowAnotationManager();
 
 protected:
@@ -92,7 +92,6 @@ private:
     Ui::WindowAnotationManager *ui;
     ShapeTracker *tracker;
     QString path;
-    QString dataDir;
 };
 
 #endif // WINDOWANOTATIONMANAGER_H

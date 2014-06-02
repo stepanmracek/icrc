@@ -248,7 +248,7 @@
      <x>0</x>
      <y>0</y>
      <width>1106</width>
-     <height>20</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -276,13 +276,6 @@
       <addaction name="actionOptical_flow"/>
       <addaction name="actionOptical_flow_with_neighbourhood"/>
      </widget>
-     <widget class="QMenu" name="menuShape_Model">
-      <property name="title">
-       <string>Shape Model</string>
-      </property>
-      <addaction name="actionNone"/>
-      <addaction name="actionPCA"/>
-     </widget>
      <widget class="QMenu" name="menuWeights">
       <property name="title">
        <string>Weights</string>
@@ -300,7 +293,6 @@
       <addaction name="actionResProcAvg"/>
      </widget>
      <addaction name="menuPoint_Tracker"/>
-     <addaction name="menuShape_Model"/>
      <addaction name="menuWeights"/>
      <addaction name="menuResut_Processing"/>
     </widget>
@@ -408,7 +400,7 @@
   <customwidget>
    <class>WidgetStrainVideo</class>
    <extends>QWidget</extends>
-   <header>ui/widgetstrainvideo.h</header>
+   <header>widgetstrainvideo.h</header>
    <container>1</container>
    <slots>
     <signal>displayIndexChanged(int)</signal>

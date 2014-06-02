@@ -212,7 +212,7 @@
   <customwidget>
    <class>GraphicsViewWithEvents</class>
    <extends>QGraphicsView</extends>
-   <header>ui/graphicsviewwithevents.h</header>
+   <header>graphicsviewwithevents.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

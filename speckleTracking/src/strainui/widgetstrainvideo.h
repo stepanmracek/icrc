@@ -13,7 +13,7 @@
 #include "strain/shapetracker.h"
 #include "linalg/spline.h"
 #include "linalg/serialization.h"
-#include "ui/widgetresult.h"
+#include "widgetresult.h"
 
 namespace Ui {
 class WidgetStrainVideo;

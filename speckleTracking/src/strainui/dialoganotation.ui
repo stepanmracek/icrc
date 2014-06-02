@@ -70,7 +70,7 @@
   <customwidget>
    <class>WidgetAnotation</class>
    <extends>QGraphicsView</extends>
-   <header>ui/widgetanotation.h</header>
+   <header>widgetanotation.h</header>
    <slots>
     <signal>noImage()</signal>
    </slots>

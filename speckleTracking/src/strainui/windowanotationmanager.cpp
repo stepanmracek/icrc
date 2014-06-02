@@ -11,23 +11,23 @@
 #include <QKeyEvent>
 #include <algorithm>
 
-#include "ui/uiutils.h"
-#include "ui/dialogstrainstatistics.h"
+#include "uiutils.h"
+#include "dialogstrainstatistics.h"
 #include "linalg/serialization.h"
 #include "strain/shapeprocessing.h"
 #include "strain/pointtrackerdistance.h"
 #include "strain/pointtrackeropticalflow.h"
 #include "strain/pointtrackerneighbouropticalflow.h"
-#include "ui/dialoganotation.h"
-#include "ui/dialogcreatecoordsystemradial.h"
-#include "ui/dialogvideodataclipmetadata.h"
-#include "ui/dialogbeattobeat.h"
-#include "ui/dialogimageprocessing.h"
-#include "ui/dialogshapemodel.h"
+#include "dialoganotation.h"
+#include "dialogcreatecoordsystemradial.h"
+#include "dialogvideodataclipmetadata.h"
+#include "dialogbeattobeat.h"
+#include "dialogimageprocessing.h"
+#include "dialogshapemodel.h"
 #include "strain/strainresultprocessing.h"
 
-WindowAnotationManager::WindowAnotationManager(const QString &path, const QString &dataDir, ShapeTracker *tracker, QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::WindowAnotationManager), dataDir(dataDir)
+WindowAnotationManager::WindowAnotationManager(const QString &path, ShapeTracker *tracker, QWidget *parent) :
+    QMainWindow(parent), ui(new Ui::WindowAnotationManager)
 {
     ui->setupUi(this);
     setTracker(tracker);
@@ -391,13 +391,13 @@ void WindowAnotationManager::on_actionNone_triggered()
 
 void WindowAnotationManager::on_actionPCA_triggered()
 {
-    QString pcaPath = QInputDialog::getText(this, "Path to pca file", "Path to pca file", QLineEdit::Normal, "pca-shape2");
+    /*QString pcaPath = QInputDialog::getText(this, "Path to pca file", "Path to pca file", QLineEdit::Normal, "pca-shape2");
     if (pcaPath.isNull() || pcaPath.isEmpty()) return;
     PCA *pca = new PCA(dataDir + QDir::separator() + pcaPath);
     StatisticalShapeModel *model = new StatisticalShapeModel(pca);
     ShapeNormalizerBase* normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
     tracker->getStrain()->SetShapeNormalizer(normalizer);
-    updateTrackerInfo();
+    updateTrackerInfo();*/
 }
 
 void WindowAnotationManager::on_btnAddBeat_clicked()
