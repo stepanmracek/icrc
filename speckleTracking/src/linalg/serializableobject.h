@@ -3,12 +3,15 @@
 
 #include <QObject>
 #include <QString>
+#include <opencv2/core/core.hpp>
 
 /**
  * @brief Class represents serializable and deserializable object
  */
 class SerializableObject : public QObject
 {
+    Q_OBJECT
+
 public:
     /**
      * @brief SerializableObject constructor
@@ -20,13 +23,13 @@ public:
      * @brief Serializes internal data of object to the given file
      * @param path Desired file path
      */
-    virtual void serialize(const QString &path) = 0;
+    virtual void serialize(cv::FileStorage &storage) const = 0;
 
     /**
      * @brief Deserializes internal data from file to object
      * @param path Desired file path
      */
-    virtual void deserialize(const QString &path) = 0;
+    virtual void deserialize(cv::FileStorage &storage) = 0;
 };
 
 #endif // SERIALIZABLEOBJECT_H

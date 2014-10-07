@@ -1,11 +1,11 @@
-QT += core
+QT += core widgets
 TARGET = strain
 TEMPLATE = lib
 
 QMAKE_CXXFLAGS+= -std=c++11
 
 LIBS += `pkg-config --libs opencv`
-LIBS += -lqwt
+LIBS += -L../linalg -llinalg
 
 INCLUDEPATH += ..
 
@@ -28,7 +28,8 @@ HEADERS += \
     shapeprocessing.h \
     strain.h \
     longitudinalstrain.h \
-    batchtestingold.h
+    batchtestingold.h \
+    strainclassifier.h
 
 SOURCES += \
     statisticalshapemodel.cpp \
@@ -48,4 +49,5 @@ SOURCES += \
     strain.cpp \
     longitudinalstrain.cpp \
     pointtrackerbase.cpp \
-    batchtestingold.cpp
+    batchtestingold.cpp \
+    strainclassifier.cpp

@@ -5,7 +5,7 @@
 
 #include "linalg/vecf.h"
 
-StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
+StrainStatistics::StrainStatistics(Strain *strainModel, const VectorOfShapes &shapes)
 {
     unsigned int shapesCount = shapes.size();
     assert(shapesCount > 0);
@@ -23,7 +23,7 @@ StrainStatistics::StrainStatistics(Strain *strainModel, VectorOfShapes &shapes)
     bool first = true;
     float firstD;
     VectorF firstStrainForPoints;
-    for (VectorOfShapes::iterator it = shapes.begin(); it != shapes.end(); ++it)
+    for (VectorOfShapes::const_iterator it = shapes.begin(); it != shapes.end(); ++it)
     {
         const Points &shape = *it;
         assert(pointsCount == shape.size());

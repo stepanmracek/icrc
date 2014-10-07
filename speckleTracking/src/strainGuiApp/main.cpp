@@ -2,16 +2,17 @@
 #include <QDebug>
 #include <QApplication>
 #include <vector>
+#include <opencv2/core/core.hpp>
 
-#include "../linalg/common.h"
-#include "../linalg/serialization.h"
-#include "../linalg/frequencymodulation.h"
-#include "../strain/shapenormalizer.h"
-#include "../strain/strain.h"
-#include "../strain/longitudinalstrain.h"
-#include "../strain/imagefilter.h"
-#include "../strain/shapetracker.h"
-#include "windowanotationmanager.h"
+#include "linalg/common.h"
+#include "linalg/serialization.h"
+#include "linalg/frequencymodulation.h"
+#include "strain/shapenormalizer.h"
+#include "strain/strain.h"
+#include "strain/longitudinalstrain.h"
+#include "strain/imagefilter.h"
+#include "strain/shapetracker.h"
+#include "strainui/windowanotationmanager.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,7 +21,8 @@ int main(int argc, char *argv[])
     ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
     LongitudinalStrain *strain = new LongitudinalStrain(normalizer, 0, 0);
 
-    strain->deserialize("/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10");
+    cv::FileStorage strainStorage("/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10", cv::FileStorage::READ);
+    strain->deserialize(strainStorage);
 
     ListOfImageProcessing processing;
     StrainResultProcessingBase *postProcessing = new StrainResProcFloatingAvg(3);

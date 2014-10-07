@@ -29,8 +29,8 @@ public:
 
     CoordSystemRadial *getCoordSystem() { return coordSystem; }
 
-    void serialize(const QString &path);
-    void deserialize(const QString &path);
+    void serialize(cv::FileStorage &storage) const;
+    void deserialize(cv::FileStorage &storage);
 };
 
 class VideoDataClip : public VideoDataBase

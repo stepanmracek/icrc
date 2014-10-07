@@ -7,20 +7,18 @@ Strain::Strain(ShapeNormalizerBase *shapeNormalizer, int segmentsCount, int poin
     shapeNormalizer->setParent(this);
 }
 
-void Strain::serialize(const QString &path)
+void Strain::serialize(cv::FileStorage &storage) const
 {
-    shapeNormalizer->serialize(path);
-
-    cv::FileStorage storage(path.toStdString(), cv::FileStorage::APPEND);
+    shapeNormalizer->serialize(storage);
     storage << "pointsPerSegment" << pointsPerSegment;
     storage << "segmentsCount" << segmentsCount;
 }
 
-void Strain::deserialize(const QString &path)
-{
-    shapeNormalizer->deserialize(path);
+#include <QDebug>
 
-    cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
+void Strain::deserialize(cv::FileStorage &storage)
+{
+    shapeNormalizer->deserialize(storage);
     storage["pointsPerSegment"] >> pointsPerSegment;
     storage["segmentsCount"] >> segmentsCount;
 }

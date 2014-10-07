@@ -8,9 +8,13 @@ class BatchStrainTracker
 public:
     BatchStrainTracker() {}
 
-    void process();
+    static void extractStrains(QString dirPath);
+    static void evaluate(const QString &positives, const QString &negatives);
 
-    ShapeTracker *learn();
+    static ShapeTracker *learn();
+
+private:
+    static QMultiMap<QString, VectorF> loadDirectoryWithStrains(const QString &path);
 };
 
 #endif // BATCHSTRAINTRACKER_H

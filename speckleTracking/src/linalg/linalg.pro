@@ -4,6 +4,8 @@ TEMPLATE = lib
 
 QMAKE_CXXFLAGS+= -std=c++11
 
+LIBS += `pkg-config --libs opencv`
+
 HEADERS += \
     vecf.h \
     spline.h \
@@ -31,6 +33,3 @@ SOURCES += \
     frequencymodulation.cpp \
     shapecomparer.cpp \
     widthmodulation.cpp
-
-LIBS += `pkg-config --libs opencv`
-LIBS += -lqwt

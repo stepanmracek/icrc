@@ -4,5 +4,6 @@ SUBDIRS += \
     linalg \
     strain \
     strainui \
-    straincli
+    straincli \
+    strainGuiApp
     

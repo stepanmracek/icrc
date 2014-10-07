@@ -19,7 +19,7 @@ public:
     std::vector<VectorF> strainRateForSegments;
 
     StrainStatistics() { }
-    StrainStatistics(Strain *strainModel, VectorOfShapes &shapes);
+    StrainStatistics(Strain *strainModel, const VectorOfShapes &shapes);
 
     //P getCenter(Points &points);
 

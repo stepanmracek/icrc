@@ -174,7 +174,8 @@ ICA::ICA(std::vector<MatF> &vectors, int independentComponentCount, double eps, 
 
 ICA::ICA(const QString &path, QObject *parent) : BackProjectionBase(parent)
 {
-    deserialize(path);
+    cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
+    deserialize(storage);
 }
 
 MatF ICA::whiten(const MatF &vector)
@@ -198,9 +199,8 @@ MatF ICA::backProject(const MatF &vector)
     return result;
 }
 
-void ICA::serialize(const QString &path)
+void ICA::serialize(cv::FileStorage &storage) const
 {
-    cv::FileStorage storage(path.toStdString(), cv::FileStorage::WRITE);
     storage << "EDET" << EDET;
     storage << "EDETinv" << EDETinv;
     storage << "W" << W;
@@ -208,9 +208,8 @@ void ICA::serialize(const QString &path)
     storage << "variances" << variances;
 }
 
-void ICA::deserialize(const QString &path)
+void ICA::deserialize(cv::FileStorage &storage)
 {
-    cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
     storage["EDET"] >> EDET;
     storage["EDETinv"] >> EDETinv;
     storage["W"] >> W;

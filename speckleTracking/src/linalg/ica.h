@@ -63,9 +63,9 @@ public:
 
     void learn(const std::vector<MatF> &vectors) { learn(vectors, 0, 1e-10, 10000, false); }
 
-    void serialize(const QString &path);
+    void serialize(cv::FileStorage &storage) const;
 
-    void deserialize(const QString &path);
+    void deserialize(cv::FileStorage &storage);
 
     MatF project(const MatF &vector);
 

@@ -48,14 +48,14 @@ StatisticalShapeModel::StatisticalShapeModel(BackProjectionBase *learnedBackProj
     setBackProjection(learnedBackProjection);
 }
 
-void StatisticalShapeModel::serialize(const QString &path)
+void StatisticalShapeModel::serialize(cv::FileStorage &storage) const
 {
-    backProjection->serialize(path);
+    backProjection->serialize(storage);
 }
 
-void StatisticalShapeModel::deserialize(const QString &path)
+void StatisticalShapeModel::deserialize(cv::FileStorage &storage)
 {
-    backProjection->deserialize(path);
+    backProjection->deserialize(storage);
 }
 
 Points StatisticalShapeModel::iterativeNormalize(const Points &input)

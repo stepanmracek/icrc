@@ -40,8 +40,8 @@ public:
     Points normalize(const Points &input);
     Points iterativeNormalize(const Points &input);
 
-    void serialize(const QString &path);
-    void deserialize(const QString &path);
+    void serialize(cv::FileStorage &storage) const;
+    void deserialize(cv::FileStorage &storage);
 
     static void showStatisticalShape(BackProjectionBase *backProjection);
 };

@@ -86,7 +86,7 @@ Points ShapeTracker::track(VectorOfImages &prevFrames, VectorOfShapes &prevShape
     return normalizedPoints;
 }
 
-ShapeMap ShapeTracker::track(const VideoDataClip *clip, int startIndex, int endIndex, Points &initialShape, QProgressDialog *progress)
+ShapeMap ShapeTracker::track(const VideoDataClip *clip, int startIndex, int endIndex, const Points &initialShape, QProgressDialog *progress)
 {
     ShapeMap resultShapes;
     resultShapes[startIndex] = initialShape;

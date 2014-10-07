@@ -1,11 +1,19 @@
 #include "batchstraintracker.h"
 
+#include <QDir>
+#include <QDebug>
+
 #include "linalg/serialization.h"
 #include "linalg/frequencymodulation.h"
+#include "linalg/vecf.h"
+#include "strain/videodataclip.h"
+#include "strain/strainstatistics.h"
+#include "strain/strainclassifier.h"
 
-void BatchStrainTracker::process()
+void BatchStrainTracker::extractStrains(QString dirPath)
 {
     // params
+    int samplesPerBeat = 50;
     QString strainPath = "/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10";
 
     // initilize model
@@ -14,7 +22,8 @@ void BatchStrainTracker::process()
     ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
     LongitudinalStrain *strain = new LongitudinalStrain(normalizer, 0, 0);
 
-    strain->deserialize(strainPath);
+    cv::FileStorage storage(strainPath.toStdString(), cv::FileStorage::READ);
+    strain->deserialize(storage);
 
     ListOfImageProcessing processing;
     StrainResultProcessingBase *postProcessing = new StrainResProcFloatingAvg(3);
@@ -23,12 +32,37 @@ void BatchStrainTracker::process()
     ShapeTracker *tracker = new ShapeTracker(strain, processing, pointTracker, postProcessing, weights);
 
     // load directory
+    QStringList filter; filter << "*.mp4" << "*.avi" << "*.wmv";
+    QDir dir(dirPath);
+    QFileInfoList fileInfos = dir.entryInfoList(filter, QDir::Files, QDir::SortFlags(QDir::Name | QDir::IgnoreCase));
 
     // for each video
+    foreach (const QFileInfo &info, fileInfos)
+    {
+        qDebug() << info.absoluteFilePath().toStdString().c_str();
 
-    // track
+        VideoDataClip clip(info.absoluteFilePath(), info.absoluteFilePath() + "_metadata");
+        VideoDataClipMetadata *metadata = clip.getMetadata();
 
-    // serialize
+        // for each beat
+        for(int i = 0; i < metadata->beatIndicies.count()-1; i++)
+        {
+            int beatStart = metadata->beatIndicies[i];
+            int beatEnd = metadata->beatIndicies[i+1];
+            Points initialShape = tracker->getStrain()->getRealShapePoints(metadata->rawShapes[beatStart], 20);
+
+            // track
+            ShapeMap shapeMap = tracker->track(&clip, beatStart, beatEnd, initialShape);
+            StrainStatistics stats(strain, shapeMap.values().toVector().toStdVector());
+
+            // resample
+            VectorF strainValues = VecF::resample(stats.strain, samplesPerBeat);
+
+            // serialize
+            QString resultPath = info.baseName()+"-"+QString::number(i);
+            VecF::toFile(strainValues, resultPath);
+        }
+    }
 }
 
 ShapeTracker * BatchStrainTracker::learn()
@@ -84,4 +118,79 @@ ShapeTracker * BatchStrainTracker::learn()
     ShapeTracker *tracker = new ShapeTracker(strain, processing, pointTracker, postProcessing, weights);
 
     return tracker;
+}
+
+// -------------------------------------------------
+
+void BatchStrainTracker::evaluate(const QString &positives, const QString &negatives)
+{
+    QMultiMap<QString, VectorF> posDict = loadDirectoryWithStrains(positives);
+    QMultiMap<QString, VectorF> negDict = loadDirectoryWithStrains(negatives);
+
+    QMap<QString, int> desiredOutputs;
+    foreach (const QString &k, posDict.uniqueKeys()) { desiredOutputs[k] = 1; }
+    foreach (const QString &k, negDict.uniqueKeys()) { desiredOutputs[k] = -1; }
+
+    int falsePositives = 0;
+    int falseNegatives = 0;
+    foreach (const QString &testKey, desiredOutputs.keys())
+    {
+        QVector<VectorF> posValues;
+        foreach (const QString &key, posDict.uniqueKeys())
+        {
+            if (testKey == key) continue;
+            posValues += posDict.values(key).toVector();
+        }
+
+        QVector<VectorF> negValues;
+        foreach (const QString &key, negDict.uniqueKeys())
+        {
+            if (testKey == key) continue;
+            negValues += negDict.values(key).toVector();
+        }
+
+        StrainClassifierSVM classifier;
+        classifier.learn(posValues, negValues);
+
+        QVector<VectorF> testValues;
+        if (desiredOutputs[testKey] == 1)
+            testValues = posDict.values(testKey).toVector();
+        else
+            testValues = negDict.values(testKey).toVector();
+
+        foreach (const VectorF &v, testValues)
+        {
+            bool result = classifier.classify(v);
+            int desired = desiredOutputs[testKey];
+            bool success = ((result && desired == 1) || (!result && desired == -1));
+            qDebug() << "   guessed:" << result << "success: " << success;
+            //if (success) successCount++;*/
+
+            if (desired == 1 && !result) falseNegatives++;
+            if (desired == -1 && result) falsePositives++;
+        }
+    }
+    qDebug() << "falseNegatives:" << falseNegatives * 100 / posDict.values().size()
+             << "falsePositives:" << falsePositives * 100 / negDict.values().size();
+}
+
+QMultiMap<QString, VectorF> BatchStrainTracker::loadDirectoryWithStrains(const QString &path)
+{
+    QMultiMap<QString, VectorF>  result;
+    QDir dir(path);
+    qDebug() << "loading files from:" << dir.absolutePath();
+    QFileInfoList fileInfos = dir.entryInfoList(QDir::Filters(QDir::NoDotAndDotDot | QDir::Files),
+                                                QDir::SortFlags(QDir::Name | QDir::IgnoreCase));
+    foreach (const QFileInfo &info, fileInfos)
+    {
+        QStringList items = info.baseName().split('-');
+        QString key = items[0];
+        int beat = items[1].toInt();
+
+        VectorF strainValues = VecF::fromFile(info.absoluteFilePath());
+        result.insert(key, strainValues);
+        qDebug() << " " << key << beat << strainValues.size();
+    }
+
+    return result;
 }

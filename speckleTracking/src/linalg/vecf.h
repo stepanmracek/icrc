@@ -30,6 +30,8 @@ public:
 
     static void toFile(VectorF &vector, const QString &path, bool append = false);
 
+    static VectorF fromFile(const QString &path);
+
     /*static void toFileWithIndicies(MatF &vector, const QString &path, bool append = false);
 
     static void toFileTwoCols(MatF &vector,const QString &path, bool append = false);

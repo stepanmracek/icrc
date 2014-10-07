@@ -1,14 +1,14 @@
-QT += core gui
-TARGET = speckleTracking
-TEMPLATE = app
+QT += core gui widgets
+TARGET = strainui
+TEMPLATE = lib
 
 QMAKE_CXXFLAGS+= -std=c++11
 
 LIBS += `pkg-config --libs opencv`
 LIBS += -lqwt
-
 LIBS += -L../linalg -llinalg
 LIBS += -L../strain -lstrain
+
 
 INCLUDEPATH += ..
 
@@ -51,7 +51,6 @@ SOURCES += \
     widgetplot.cpp \
     dialogsaveplot.cpp \
     widgetrainbow.cpp \
-    main.cpp
 
 FORMS += \
     widgetstrainvideo.ui \

@@ -34,14 +34,14 @@ public:
         model->setParent(this);
     }
 
-    void serialize(const QString &path)
+    void serialize(cv::FileStorage &storage) const
     {
-        model->serialize(path);
+        model->serialize(storage);
     }
 
-    void deserialize(const QString &path)
+    void deserialize(cv::FileStorage &storage)
     {
-        model->deserialize(path);
+        model->deserialize(storage);
     }
 
     StatisticalShapeModel *getShapeModel() const
@@ -109,8 +109,8 @@ private:
 public:
     ShapeNormalizerPass(QObject *parent = 0) : ShapeNormalizerBase(parent) { }
 
-    void serialize(const QString &) {}
-    void deserialize(const QString &) {}
+    void serialize(cv::FileStorage &) const {}
+    void deserialize(cv::FileStorage &) {}
 
     Points normalize(const Points &points, const Mat8 &)
     {

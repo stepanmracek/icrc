@@ -1,11 +1,11 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#include <opencv2/opencv.hpp>
+#include <QMap>
 #include <vector>
 #include <list>
+#include <opencv2/opencv.hpp>
 #include <cfloat>
-#include <QMap>
 
 /**
  * @brief Matrix of unsigned char values. Usefull for greyscale image data

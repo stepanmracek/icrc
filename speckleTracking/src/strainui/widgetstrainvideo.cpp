@@ -146,7 +146,8 @@ void WidgetStrainVideo::serializeMetadata(const QString &path)
 
     qDebug() << "Saving metadata for" << currentFilename;
     QString fullPath = path + QDir::separator() + currentFilename + "_metadata";
-    clip->getMetadata()->serialize(fullPath);
+    cv::FileStorage storage(fullPath.toStdString(), cv::FileStorage::WRITE);
+    clip->getMetadata()->serialize(storage);
 }
 
 void WidgetStrainVideo::deserializeShapes(const QString &path)

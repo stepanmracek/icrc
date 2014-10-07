@@ -44,7 +44,8 @@ VideoDataClip::VideoDataClip(const QString &path, const QString &metadataPath, Q
     if (progressDlg) progressDlg->setValue(frameCount);
     //qDebug() << "video loaded";
 
-    metadata->deserialize(metadataPath);
+    cv::FileStorage metadataStorage(metadataPath.toStdString(), cv::FileStorage::READ);
+    metadata->deserialize(metadataStorage);
     //qDebug() << "metadata loaded";
 }
 
@@ -168,13 +169,8 @@ QString VideoDataClip::getSubClip(int index, QMap<int, Points> &shapes,
     return QString();
 }
 
-void VideoDataClipMetadata::deserialize(const QString &path)
+void VideoDataClipMetadata::deserialize(cv::FileStorage &storage)
 {
-    cv::FileStorage storage(path.toStdString(), cv::FileStorage::READ);
-    if (!storage.isOpened())
-    {
-        return;
-    }
     cv::FileNode node = storage["beatIndicies"];
     for (cv::FileNodeIterator it = node.begin(); it != node.end(); ++it)
     {
@@ -224,10 +220,8 @@ void VideoDataClipMetadata::deserialize(const QString &path)
     coordSystem->init(center, startDistance, endDistance, angleStart, angleEnd, resultMatCols, resultMatRows);
 }
 
-void VideoDataClipMetadata::serialize(const QString &path)
+void VideoDataClipMetadata::serialize(cv::FileStorage &storage) const
 {
-    cv::FileStorage storage(path.toStdString(), cv::FileStorage::WRITE);
-    if (!storage.isOpened()) return;
     storage << "beatIndicies" << "[";
     foreach(int i, beatIndicies)
     {

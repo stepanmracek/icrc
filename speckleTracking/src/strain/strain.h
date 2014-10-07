@@ -27,9 +27,9 @@ public:
 
     Strain(ShapeNormalizerBase *shapeNormalizer, int segmentsCount, int pointsPerSegment, QObject *parent = 0);
 
-    void serialize(const QString &path);
+    void serialize(cv::FileStorage &storage) const;
 
-    void deserialize(const QString &path);
+    void deserialize(cv::FileStorage &storage);
 
     ShapeNormalizerBase *getShapeNormalizer()
     {

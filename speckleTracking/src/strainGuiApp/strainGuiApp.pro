@@ -1,5 +1,5 @@
 QT += core gui widgets
-TARGET = speckleTracking-cli
+TARGET = strainGuiApp
 TEMPLATE = app
 
 QMAKE_CXXFLAGS+= -std=c++11
@@ -13,9 +13,5 @@ LIBS += -L../strainui -lstrainui
 
 INCLUDEPATH += ..
 
-HEADERS += \
-    batchstraintracker.h
-
 SOURCES += \
-    batchstraintracker.cpp \
     main.cpp

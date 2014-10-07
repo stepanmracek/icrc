@@ -208,7 +208,7 @@ void WindowAnotationManager::on_btnTrack_clicked()
 
     ShapeMap newShapes = tracker->track(ui->widgetStrainVideo->getClip(),
                                         beatStart, beatEnd,
-                                        ui->widgetStrainVideo->shapes[beatStart],
+                                        ui->widgetStrainVideo->shapes.value(beatStart),
                                         &progress);
 
     qDebug() << newShapes.keys();

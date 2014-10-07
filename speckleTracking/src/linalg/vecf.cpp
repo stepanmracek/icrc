@@ -2,6 +2,7 @@
 
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
 #include <vector>
 #include <cassert>
 
@@ -139,6 +140,27 @@ void VecF::toFile(VectorF &vector, const QString &path, bool append)
 
     out.flush();
     f.close();
+}
+
+VectorF VecF::fromFile(const QString &path)
+{
+    QFile f(path);
+    f.open(QIODevice::ReadOnly);
+    QTextStream in(&f);
+
+    VectorF result;
+    while (!in.atEnd())
+    {
+        float value;
+        in >> value;
+
+        if (in.status() == QTextStream::ReadPastEnd)
+            break;
+
+        result.push_back(value);
+    }
+
+    return result;
 }
 
 /*void VecF::toFileWithIndicies(MatF &vector, const QString &path, bool append)
