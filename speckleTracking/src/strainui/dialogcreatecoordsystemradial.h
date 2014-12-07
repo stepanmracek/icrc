@@ -7,12 +7,13 @@
 
 #include "linalg/common.h"
 #include "strain/coordsystem.h"
+#include "dialogcreatecoordsystem.h"
 
 namespace Ui {
 class DialogCreatCoordSystemRadial;
 }
 
-class DialogCreateCoordSystemRadial : public QDialog
+class DialogCreateCoordSystemRadial : public DialogCreateCoordSystem
 {
     Q_OBJECT
 

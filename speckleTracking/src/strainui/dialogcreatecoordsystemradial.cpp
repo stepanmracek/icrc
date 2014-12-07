@@ -8,7 +8,7 @@
 #include "uiutils.h"
 
 DialogCreateCoordSystemRadial::DialogCreateCoordSystemRadial(Mat8 &image, CoordSystemRadial *coordSystem, QWidget *parent):
-    QDialog(parent), coordSystem(coordSystem), ui(new Ui::DialogCreatCoordSystemRadial), loadCompleted(false)
+    DialogCreateCoordSystem(parent), coordSystem(coordSystem), ui(new Ui::DialogCreatCoordSystemRadial), loadCompleted(false)
 {
     image.copyTo(originalImage);
 
@@ -48,8 +48,8 @@ DialogCreateCoordSystemRadial::~DialogCreateCoordSystemRadial()
     if (event->button() == Qt::LeftButton)
     {
         QPointF scenePoint = mapToScene(event->pos());
-        double x = scenePoint.x();
-        double y = scenePoint.y();
+        float x = scenePoint.x();
+        float y = scenePoint.y();
 
         qDebug() << "CLICK" << x << y;
 
@@ -86,12 +86,12 @@ void DialogCreateCoordSystemRadial::intValueChanged(int /*arg1*/)
 
 bool DialogCreateCoordSystemRadial::check()
 {
-    /*double centerX = ui->dsbCenterX->value();
-    double centerY = ui->dsbCenterY->value();*/
-    double angleStart = ui->dsbAngleStart->value();
-    double angleEnd = ui->dsbAngleEnd->value();
-    double distanceStart = ui->dsbDistanceStart->value();
-    double distanceEnd = ui->dsbDistanceEnd->value();
+    /*float centerX = ui->dsbCenterX->value();
+    float centerY = ui->dsbCenterY->value();*/
+    float angleStart = ui->dsbAngleStart->value();
+    float angleEnd = ui->dsbAngleEnd->value();
+    float distanceStart = ui->dsbDistanceStart->value();
+    float distanceEnd = ui->dsbDistanceEnd->value();
     /*int rows = ui->sbResultRows->value();
     int cols = ui->sbResultCols->value();*/
 
@@ -111,17 +111,9 @@ void DialogCreateCoordSystemRadial::recalculate()
         return;
     }
 
-    //qDebug() << "Recalculating radial coord system...";
-    double centerX = ui->dsbCenterX->value();
-    double centerY = ui->dsbCenterY->value();
-    double angleStart = ui->dsbAngleStart->value();
-    double angleEnd = ui->dsbAngleEnd->value();
-    double distanceStart = ui->dsbDistanceStart->value();
-    double distanceEnd = ui->dsbDistanceEnd->value();
-    int rows = ui->sbResultRows->value();
-    int cols = ui->sbResultCols->value();
-    CoordSystemRadial newCoord(P(centerX, centerY), distanceStart, distanceEnd, angleStart, angleEnd, cols, rows);
-    drawResult(&newCoord);
+    CoordSystemRadial *c = getNewCoordSystem();
+    drawResult(c);
+    delete c;
 }
 
 void DialogCreateCoordSystemRadial::on_buttonBox_accepted()
@@ -138,12 +130,12 @@ void DialogCreateCoordSystemRadial::on_buttonBox_accepted()
 
 CoordSystemRadial *DialogCreateCoordSystemRadial::getNewCoordSystem()
 {
-    double centerX = ui->dsbCenterX->value();
-    double centerY = ui->dsbCenterY->value();
-    double angleStart = ui->dsbAngleStart->value();
-    double angleEnd = ui->dsbAngleEnd->value();
-    double distanceStart = ui->dsbDistanceStart->value();
-    double distanceEnd = ui->dsbDistanceEnd->value();
+    float centerX = ui->dsbCenterX->value();
+    float centerY = ui->dsbCenterY->value();
+    float angleStart = ui->dsbAngleStart->value();
+    float angleEnd = ui->dsbAngleEnd->value();
+    float distanceStart = ui->dsbDistanceStart->value();
+    float distanceEnd = ui->dsbDistanceEnd->value();
     int rows = ui->sbResultRows->value();
     int cols = ui->sbResultCols->value();
 

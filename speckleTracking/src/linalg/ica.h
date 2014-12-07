@@ -37,7 +37,7 @@ public:
      * @param debug set to true if you want to see debug output
      * @param parent parent object in Qt hierarchy
      */
-    ICA(std::vector<MatF> &vectors, int independentComponentCount = 0, double eps = 1e-10,
+    ICA(std::vector<MatF> &vectors, int independentComponentCount = 0, float eps = 1e-10,
         int maxIterations = 10000, bool debug = false, QObject *parent = 0);
 
     /**
@@ -59,7 +59,7 @@ public:
      * @param maxIterations maximum number of learning iterations
      * @param debug set to true if you want to see debug output
      */
-    void learn(const std::vector<MatF> &vectors, int independentComponentCount = 0, double eps = 1e-10, int maxIterations = 10000, bool debug = false);
+    void learn(const std::vector<MatF> &vectors, int independentComponentCount = 0, float eps = 1e-10, int maxIterations = 10000, bool debug = false);
 
     void learn(const std::vector<MatF> &vectors) { learn(vectors, 0, 1e-10, 10000, false); }
 

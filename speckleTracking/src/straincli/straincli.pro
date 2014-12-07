@@ -4,6 +4,8 @@ TEMPLATE = app
 
 QMAKE_CXXFLAGS+= -std=c++11
 
+DESTDIR = ../
+
 LIBS += `pkg-config --libs opencv`
 LIBS += -lqwt
 
@@ -14,8 +16,10 @@ LIBS += -L../strainui -lstrainui
 INCLUDEPATH += ..
 
 HEADERS += \
-    batchstraintracker.h
+    batchstraintracker.h \
+    createmodel.h
 
 SOURCES += \
     batchstraintracker.cpp \
-    main.cpp
+    main.cpp \
+    createmodel.cpp

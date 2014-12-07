@@ -45,30 +45,32 @@ MatF PCA::backProject(const MatF &in)
 
 void PCA::setModes(int modes)
 {
+    if (modes >= getModes()) return;
     cvPca.eigenvectors = cvPca.eigenvectors.rowRange(0, modes);
     cvPca.eigenvalues = cvPca.eigenvalues.rowRange(0, modes);
 }
 
 float PCA::getEigenVal(int mode)
 {
-    return cvPca.eigenvalues.at<float>(mode);
+    float v = cvPca.eigenvalues.at<float>(mode);
+    return v < 0 ? 0 : v;
 }
 
-void PCA::modesSelectionThreshold(double t)
+void PCA::modesSelectionThreshold(float t)
 {
 	if (t >= 1) return; // nothing to do here
 
-    double sum = 0.0;
+    float sum = 0.0;
     int r;
     for (r = 0; r < cvPca.eigenvalues.rows; r++)
     {
-        sum += cvPca.eigenvalues.at<double>(r);
+        sum += getEigenVal(r);
     }
 
-    double actualSum = 0.0;
+    float actualSum = 0.0;
     for (r = 0; r < cvPca.eigenvalues.rows; r++)
     {
-        actualSum += cvPca.eigenvalues.at<double>(r);
+        actualSum += getEigenVal(r);
 
         if (actualSum/sum > t)
             break;

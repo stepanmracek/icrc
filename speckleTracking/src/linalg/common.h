@@ -202,7 +202,7 @@ public:
         {
             for (int c = 0; c < cols; c++)
             {
-                double val = m(r,c);
+                float val = m(r,c);
                 if (val != val)
                 {
                     return true;
@@ -247,7 +247,7 @@ public:
         {
             for (int c = 0; c < cols; c++)
             {
-                double val = m(r,c);
+                float val = m(r,c);
                 if (val != val)
                     return false;
 

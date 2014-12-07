@@ -20,6 +20,7 @@
 #include "strain/pointtrackerneighbouropticalflow.h"
 #include "dialoganotation.h"
 #include "dialogcreatecoordsystemradial.h"
+#include "dialogcreatecoordsystemroi.h"
 #include "dialogvideodataclipmetadata.h"
 #include "dialogbeattobeat.h"
 #include "dialogimageprocessing.h"
@@ -227,10 +228,19 @@ void WindowAnotationManager::on_btnCoordSystem_clicked()
     if (!clip || clip->size() == 0) return;
 
     Mat8 frame = clip->frames[ui->widgetStrainVideo->getCurrentIndex()];
-    DialogCreateCoordSystemRadial dlg(frame, clip->getMetadata()->getCoordSystem() , this);
-    if (dlg.exec() == QDialog::Accepted)
+    CoordSystemBase::Types type = clip->getMetadata()->getCoordSystem()->type();
+    DialogCreateCoordSystem *dlg = 0;
+    if (type == CoordSystemBase::TypeRadial)
     {
-        clip->getMetadata()->getCoordSystem()->init(dlg.getNewCoordSystem());
+        dlg = new DialogCreateCoordSystemRadial(frame, (CoordSystemRadial*)clip->getMetadata()->getCoordSystem(), this);
+    }
+    if (type == CoordSystemBase::TypeROI)
+    {
+        dlg = new DialogCreateCoordSystemROI(frame, (CoordSystemROI*)clip->getMetadata()->getCoordSystem(), this);
+    }
+    if (dlg && dlg->exec() == QDialog::Accepted)
+    {
+        clip->getMetadata()->setCoordSystem(dlg->getNewCoordSystem());
         ui->widgetStrainVideo->display(ui->widgetStrainVideo->getCurrentIndex());
     }
 }

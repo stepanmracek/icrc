@@ -99,7 +99,7 @@ void VideoDataClip::getRange(int start, int end, VideoDataClip *outClip) const
         }
     }
 
-    outClip->getMetadata()->getCoordSystem()->init(metadata->getCoordSystem());
+    outClip->getMetadata()->setCoordSystem(metadata->getCoordSystem()->clone());
 }
 
 void VideoDataClip::getBeatRange(int currentIndex, int &beatStart, int &beatEnd) const
@@ -169,8 +169,15 @@ QString VideoDataClip::getSubClip(int index, QMap<int, Points> &shapes,
     return QString();
 }
 
+VideoDataClipMetadata::VideoDataClipMetadata(QObject *parent) : SerializableObject(parent)
+{
+    coordSystem = new CoordSystemROI(this);
+}
+
 void VideoDataClipMetadata::deserialize(cv::FileStorage &storage)
 {
+    if (!storage.isOpened()) return;
+
     cv::FileNode node = storage["beatIndicies"];
     for (cv::FileNodeIterator it = node.begin(); it != node.end(); ++it)
     {
@@ -201,23 +208,39 @@ void VideoDataClipMetadata::deserialize(cv::FileStorage &storage)
         index++;
     }
 
-    VectorF centerVec;
-    cv::FileNodeIterator it = storage["center"].begin();
-    cv::FileNodeIterator end = storage["center"].end();
-    for(; it != end; ++it)
+    CoordSystemBase::Types type = (CoordSystemBase::Types)(int)(storage["coordSystemType"]);
+    if (coordSystem) delete coordSystem;
+    if (type == CoordSystemBase::TypeRadial)
     {
-        float val = (float)(*it);
-        centerVec.push_back(val);
-    }
-    P center(centerVec[0], centerVec[1]);
+        VectorF centerVec;
+        cv::FileNodeIterator it = storage["center"].begin();
+        cv::FileNodeIterator end = storage["center"].end();
+        for(; it != end; ++it)
+        {
+            float val = (float)(*it);
+            centerVec.push_back(val);
+        }
+        P center(centerVec[0], centerVec[1]);
 
-    float startDistance = (float)storage["startDistance"];
-    float endDistance = (float)storage["endDistance"];
-    float angleStart = (float)storage["angleStart"];
-    float angleEnd = (float)storage["angleEnd"];
-    int resultMatCols = (int)storage["resultMatCols"];
-    int resultMatRows = (int)storage["resultMatRows"];
-    coordSystem->init(center, startDistance, endDistance, angleStart, angleEnd, resultMatCols, resultMatRows);
+        float startDistance = (float)storage["startDistance"];
+        float endDistance = (float)storage["endDistance"];
+        float angleStart = (float)storage["angleStart"];
+        float angleEnd = (float)storage["angleEnd"];
+        int resultMatCols = (int)storage["resultMatCols"];
+        int resultMatRows = (int)storage["resultMatRows"];
+
+        coordSystem = new CoordSystemRadial(center, startDistance, endDistance, angleStart, angleEnd,
+                                            resultMatCols, resultMatRows, this);
+    }
+    else if (type == CoordSystemBase::TypeROI)
+    {
+        int x = (int)storage["x"];
+        int y = (int)storage["y"];
+        int width = (int)storage["width"];
+        int height = (int)storage["height"];
+
+        coordSystem = new CoordSystemROI(cv::Rect(x, y, width, height), this);
+    }
 }
 
 void VideoDataClipMetadata::serialize(cv::FileStorage &storage) const
@@ -246,13 +269,38 @@ void VideoDataClipMetadata::serialize(cv::FileStorage &storage) const
     }
     storage << "]";
 
-    //void CoordSystemRadial::init(P center, float startDistance, float endDistance,
-    //  float angleStart, float angleEnd, int resultMatCols, int resultMatRows)
-    storage << "center" << coordSystem->center;
-    storage << "startDistance" << coordSystem->startDistance;
-    storage << "endDistance" << coordSystem->endDistance;
-    storage << "angleStart" << coordSystem->angleStart;
-    storage << "angleEnd" << coordSystem->angleEnd;
-    storage << "resultMatCols" << coordSystem->resultMatCols;
-    storage << "resultMatRows" << coordSystem->resultMatRows;
+    storage << "coordSystemType" << coordSystem->type();
+    switch(coordSystem->type())
+    {
+    case CoordSystemBase::TypeRadial:
+    {
+        CoordSystemRadial *cr = (CoordSystemRadial*)coordSystem;
+
+        storage << "center" << cr->center;
+        storage << "startDistance" << cr->startDistance;
+        storage << "endDistance" << cr->endDistance;
+        storage << "angleStart" << cr->angleStart;
+        storage << "angleEnd" << cr->angleEnd;
+        storage << "resultMatCols" << cr->resultMatCols;
+        storage << "resultMatRows" << cr->resultMatRows;
+        break;
+    }
+    case CoordSystemBase::TypeROI:
+    {
+        CoordSystemROI *roi = (CoordSystemROI*)coordSystem;
+
+        storage << "x" << roi->roi.x;
+        storage << "y" << roi->roi.y;
+        storage << "width" << roi->roi.width;
+        storage << "height" << roi->roi.height;
+        break;
+    }
+    }
+}
+
+void VideoDataClipMetadata::setCoordSystem(CoordSystemBase *coordSystem)
+{
+    if (this->coordSystem) delete this->coordSystem;
+    this->coordSystem = coordSystem;
+    this->coordSystem->setParent(this);
 }

@@ -17,19 +17,19 @@ Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, float
     return getRealShapePoints(controlPoints, shapeWidth, 0, 0);
 }
 
-Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, float shapeWidth, VectorF *modulationValues, VectorF *widthVector)
+Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, float shapeWidth, const VectorF *modulationValues, const VectorF *widthVector)
 {
     Points result;
     int n = controlPoints.size();
     if (n <= 1) return result;
 
-    Points uniformMidControlPoints = spline.uniformDistance(controlPoints, segmentsCount, false);
-    Points midPoints = spline.getSplinePoints(uniformMidControlPoints, pointsPerSegment);
+    Points midPoints = spline.uniformDistance(controlPoints, segmentsCount*pointsPerSegment + 1);
+
     if (modulationValues)
     {
         midPoints = FrequencyModulation::modulate(midPoints, *modulationValues);
     }
-    int midSize = midPoints.size();
+    unsigned int midSize = midPoints.size();
 
     if (widthVector)
     {
@@ -38,7 +38,7 @@ Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, float
 
     Points uniformInnerPoints;
     Points uniformOuterPoints;
-    for (int i = 0; i < midSize; i++)
+    for (unsigned int i = 0; i < midSize; i++)
     {
         if (widthVector)
         {
@@ -90,27 +90,27 @@ Points LongitudinalStrain::getRealShapePoints(const Points &controlPoints, float
     return getShapeNormalizer()->normalize(result, m);
 }
 
-QList<QGraphicsItem*> LongitudinalStrain::drawResult(QGraphicsScene *scene, Points &resultPoints)
+QList<QGraphicsItem*> LongitudinalStrain::drawResult(QGraphicsScene *scene, const Points &resultPoints)
 {
     QList<QGraphicsItem*> newItems;
 
-    int n = resultPoints.size();
+    unsigned int n = resultPoints.size();
     if (n < 3) return newItems;
 
     QPen linePen(QColor(255, 255, 255, 127));
-    for (int i = 3; i < n; i += 3)
+    for (unsigned int i = 3; i < n; i += 3)
     {
-        P &p = resultPoints[i-2];
-        P &n = resultPoints[i+1];
+        const P &p = resultPoints[i-2];
+        const P &n = resultPoints[i+1];
         QGraphicsItem *item = scene->addLine(p.x, p.y, n.x, n.y, linePen);
         newItems << item;
     }
 
-    for (int i = 0; i < n; i += 3*this->pointsPerSegment)
+    for (unsigned int i = 0; i < n; i += 3*this->pointsPerSegment)
     {
-        P &in = resultPoints[i];
-        P &mid = resultPoints[i+1];
-        P &out = resultPoints[i+2];
+        const P &in = resultPoints[i];
+        const P &mid = resultPoints[i+1];
+        const P &out = resultPoints[i+2];
         QGraphicsItem *item1 = scene->addLine(in.x, in.y, mid.x, mid.y, linePen);
         QGraphicsItem *item2 = scene->addLine(mid.x, mid.y, out.x, out.y, linePen);
         newItems << item1;
@@ -124,13 +124,14 @@ QList<QGraphicsItem*> LongitudinalStrain::drawResult(QGraphicsScene *scene, Poin
 
     QPen pen;
     QBrush brush(Qt::SolidPattern);
-    for (int i = 0; i < n; i++)
+    for (unsigned int i = 0; i < n; i++)
     {
         double hue = (double)i/n;
         pen.setColor(QColor::fromHsvF(hue, 1, 1));
         brush.setColor(QColor::fromHsvF(hue, 1, 1, 0.5));
 
-        P &p = resultPoints[i];
+        const P &p = resultPoints[i];
+        //qDebug() << i << p.x << p.y;
         QGraphicsItem *item = scene->addEllipse(p.x-3, p.y-3, 6, 6, pen, brush);
         newItems << item;
     }
@@ -138,12 +139,12 @@ QList<QGraphicsItem*> LongitudinalStrain::drawResult(QGraphicsScene *scene, Poin
     return newItems;
 }
 
-P LongitudinalStrain::getBasePoint(Points &realPoints)
+P LongitudinalStrain::getBasePoint(const Points &realPoints)
 {
     int n = realPoints.size();
 
-    P& first = realPoints[1];
-    P& last = realPoints[n-2];
+    const P& first = realPoints[1];
+    const P& last = realPoints[n-2];
 
     return P((first.x+last.x)/2, (first.y+last.y)/2);
 }
@@ -153,7 +154,7 @@ float len(const P& p)
     return sqrt(p.x*p.x + p.y*p.y);
 }
 
-P LongitudinalStrain::getApexPoint(Points &realPoints)
+P LongitudinalStrain::getApexPoint(const Points &realPoints)
 {
     //int n = realPoints.size();
     //return realPoints[n/2];

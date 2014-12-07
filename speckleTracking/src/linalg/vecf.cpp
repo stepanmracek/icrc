@@ -16,7 +16,7 @@
     VectorF data;
     while (!in.atEnd())
     {
-        double value;
+         float value;
         in >> value;
 
         if (in.status() == QTextStream::ReadPastEnd)
@@ -41,28 +41,28 @@
     return vector;
 }*/
 
-double VecF::sqrMagnitude(MatF &vector)
+float VecF::sqrMagnitude(MatF &vector)
 {
     int n = vector.rows;
-    double sum = 0;
+    float sum = 0;
     for (int i = 0; i < n; i++)
     {
-        double v = vector(i);
+        float v = vector(i);
         sum +=  (v * v);
     }
     return sum;
 }
 
-double VecF::magnitude(MatF &vector)
+float VecF::magnitude(MatF &vector)
 {
     return sqrt(sqrMagnitude(vector));
 }
 
-double VecF::dot(MatF &v1, MatF &v2)
+float VecF::dot(MatF &v1, MatF &v2)
 {
     int n = v1.rows;
     assert(n == v2.rows);
-    double sum = 0.0;
+    float sum = 0.0;
     for (int i = 0; i < n; i++)
     {
         sum += (v1(i) * v2(i));
@@ -74,10 +74,10 @@ MatF & VecF::normalize(MatF &vector)
 {
     int n = vector.rows;
 
-    double mag = magnitude(vector);
+    float mag = magnitude(vector);
     for (int i = 0; i < n; i++)
     {
-        double v = vector(i);
+        float v = vector(i);
         vector(i) = v/mag;
     }
 
@@ -87,24 +87,24 @@ MatF & VecF::normalize(MatF &vector)
 MatF VecF::normalized(MatF &vector)
 {
     int n = vector.rows;
-    double mag = magnitude(vector);
+    float mag = magnitude(vector);
     MatF newVector(vector.rows, vector.cols, CV_64F);
     for (int i = 0; i < n; i++)
     {
-        double v = vector(i);
+        float v = vector(i);
         newVector(i) = v/mag;
     }
 
     return newVector;
 }
 
-MatF & VecF::mul(MatF &vector, double value)
+MatF & VecF::mul(MatF &vector, float value)
 {
     int n = vector.rows;
 
     for (int i = 0; i < n; i++)
     {
-        double v = vector(i ,0);
+        float v = vector(i ,0);
         vector(i) = v*value;
     }
 
@@ -220,7 +220,7 @@ VectorF VecF::fromFile(const QString &path)
     bool isX = true;
     while (!in.atEnd())
     {
-        double value;
+        float value;
         in >> value;
 
         if (in.status() == QTextStream::ReadPastEnd)
@@ -257,13 +257,13 @@ VectorF VecF::fromFile(const QString &path)
 
 int VecF::maxIndex(MatF &vector)
 {
-    double max = -1e300;
+    float max = -1e300;
     int index = -1;
     int r = vector.rows;
     assert(r > 0);
     for (int i = 0; i < r; i++)
     {
-        double v = vector(i);
+        float v = vector(i);
         if (v > max)
         {
             index = i;
@@ -275,13 +275,13 @@ int VecF::maxIndex(MatF &vector)
 
 int VecF::maxIndex(VectorF &vector)
 {
-    double max = -1e300;
+    float max = -1e300;
     int index = -1;
     int r = vector.size();
     assert(r > 0);
     for (int i = 0; i < r; i++)
     {
-        double v = vector.at(i);
+        float v = vector.at(i);
         if (v > max)
         {
             index = i;
@@ -296,25 +296,25 @@ int VecF::maxIndex(VectorF &vector)
     return index;
 }
 
-double VecF::maxValue(MatF &vector)
+float VecF::maxValue(MatF &vector)
 {
     return vector(maxIndex(vector));
 }
 
-double VecF::maxValue(VectorF &vector)
+float VecF::maxValue(VectorF &vector)
 {
     return vector.at(maxIndex(vector));
 }
 
 int VecF::minIndex(MatF &vector)
 {
-    double min = 1e300;
+    float min = 1e300;
     int index = -1;
     int r = vector.rows;
     assert(r > 0);
     for (int i = 0; i < r; i++)
     {
-        double v = vector(i);
+        float v = vector(i);
         if (v < min)
         {
             min = v;
@@ -326,13 +326,13 @@ int VecF::minIndex(MatF &vector)
 
 int VecF::minIndex(VectorF &vector)
 {
-    double min = 1e300;
+    float min = 1e300;
     int index = -1;
     int r = vector.size();
     assert(r > 0);
     for (int i = 0; i < r; i++)
     {
-        double v = vector.at(i);
+        float v = vector.at(i);
         if (v < min)
         {
             min = v;
@@ -347,20 +347,20 @@ int VecF::minIndex(VectorF &vector)
     return index;
 }
 
-double VecF::minValue(MatF &vector)
+float VecF::minValue(MatF &vector)
 {
     return vector(minIndex(vector));
 }
 
-double VecF::minValue(VectorF &vector)
+float VecF::minValue(VectorF &vector)
 {
 	int i = minIndex(vector);
     return vector.at(i);
 }
 
-double VecF::meanValue(MatF &vector)
+float VecF::meanValue(MatF &vector)
 {
-    double sum = 0;
+    float sum = 0;
     int r = vector.rows;
     for (int i = 0; i < r; i++)
     {
@@ -370,9 +370,9 @@ double VecF::meanValue(MatF &vector)
     return sum/r;
 }
 
-double VecF::meanValue(const VectorF &vector)
+float VecF::meanValue(const VectorF &vector)
 {
-    double sum = 0;
+    float sum = 0;
     int r = vector.size();
     for (int i = 0; i < r; i++)
     {
@@ -382,10 +382,10 @@ double VecF::meanValue(const VectorF &vector)
     return sum/r;
 }
 
-double VecF::stdDeviation(MatF &vector)
+float VecF::stdDeviation(MatF &vector)
 {
-    double mean = meanValue(vector);
-    double sum = 0;
+    float mean = meanValue(vector);
+    float sum = 0;
     int r = vector.rows;
     for (int i = 0; i < r; i++)
     {
@@ -395,10 +395,10 @@ double VecF::stdDeviation(MatF &vector)
     return sqrt((1.0/(r - 1.0)) * sum);
 }
 
-double VecF::stdDeviation(VectorF &vector)
+float VecF::stdDeviation(VectorF &vector)
 {
-    double mean = meanValue(vector);
-    double sum = 0;
+    float mean = meanValue(vector);
+    float sum = 0;
     int r = vector.size();
     for (int i = 0; i < r; i++)
     {
@@ -433,7 +433,7 @@ MatF VecF::normalizeComponents(MatF &vector, VectorF &minValues, VectorF &maxVal
     MatF result = MatF::zeros(r, 1);
     for (int i = 0; i < r; i++)
     {
-        double val = vector(i);
+        float val = vector(i);
 
         if (fixedBounds)
         {
@@ -449,8 +449,8 @@ MatF VecF::normalizeComponents(MatF &vector, VectorF &minValues, VectorF &maxVal
 
 MatF VecF::normalizeComponents(MatF &vector)
 {
-    double min = minValue(vector);
-    double max = maxValue(vector);
+    float min = minValue(vector);
+    float max = maxValue(vector);
 
     MatF result = (vector-min)/(max-min);
     return result;
@@ -469,8 +469,12 @@ MatF VecF::meanVector(std::vector<MatF> &vectors)
 
 VectorF VecF::resample(const VectorF &vector, int samplesCount)
 {
-    VectorF result;
+    if (vector.size() == samplesCount)
+    {
+        return vector;
+    }
 
+    VectorF result;
     for (int i = 0; i < samplesCount; i++)
     {
         float indexF = (vector.size()-1) * i / ((float)(samplesCount));

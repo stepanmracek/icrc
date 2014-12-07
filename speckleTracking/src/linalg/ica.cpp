@@ -5,17 +5,17 @@
 #include "pca.h"
 #include "vecf.h"
 
-double g1(double u)
+float g1(float u)
 {
     return tanh(u);
 }
 
-double g2(double u)
+float g2(float u)
 {
     return u*exp(-(u*u)/2.0);
 }
 
-void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount, double eps, int maxIterations, bool debug)
+void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount, float eps, int maxIterations, bool debug)
 {
     qDebug() << "ICA learn; vectors:" << vectors.size();
 
@@ -51,7 +51,7 @@ void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount,
     MatF eVals = MatF::zeros(eValCount, eValCount);
     for (int i = 0; i < eValCount; i++)
     {
-        double eval = pca.getEigenVal(i);
+        float eval = pca.getEigenVal(i);
         if (eval < 1e-100) eval = 1e-100;
         eVals(i,i) = 1.0/sqrt(eval);
     }
@@ -68,8 +68,8 @@ void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount,
     W = MatF::eye(m, independentComponentCount);
     for (int p = 0; p < independentComponentCount; p++)
     {
-        double oldErr = 1.0;
-        double sameErrCount = 0;
+        float oldErr = 1.0;
+        float sameErrCount = 0;
 
         // initicalization
         MatF w = W.col(p); // Matrix::ones(m, 1, CV_64F);
@@ -81,11 +81,11 @@ void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount,
             // w <- E{x * g(w^T * x)} - E{g'(w^T * x)} * w
             // w <- w / |w|
             MatF expected1 = MatF::zeros(m, 1);
-            double expected2 = 0;
+            float expected2 = 0;
             for (int i = 0; i < n; i++)
             {
                 MatF wtxMat = w.t()*workingCopy[i];
-                double wtx = wtxMat(0);
+                float wtx = wtxMat(0);
                 expected1 += workingCopy[i] * g1(wtx);
                 expected2 += g2(wtx);
             }
@@ -109,7 +109,7 @@ void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount,
                 }
             }*/
 
-            double err = fabs(1-fabs(VecF::dot(w, wOld)));
+            float err = fabs(1-fabs(VecF::dot(w, wOld)));
             if (err == oldErr) sameErrCount++;
             if (err < eps || iteration > maxIterations || sameErrCount > 10)
             {
@@ -139,7 +139,7 @@ void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount,
     {
         W = 1.5*W - 0.5*W*W.t()*W;
         diffW = oldW-W;
-        double diff = Common::absSum(diffW);
+        float diff = Common::absSum(diffW);
 
         if (Common::matrixContainsNan(W))
         {
@@ -166,7 +166,7 @@ void ICA::learn(const std::vector<MatF> &vectors, int independentComponentCount,
         std::cout << "ICA done" << std::endl;
 }
 
-ICA::ICA(std::vector<MatF> &vectors, int independentComponentCount, double eps, int maxIterations, bool debug, QObject *parent) :
+ICA::ICA(std::vector<MatF> &vectors, int independentComponentCount, float eps, int maxIterations, bool debug, QObject *parent) :
     BackProjectionBase(parent)
 {
     learn(vectors, independentComponentCount, eps, maxIterations, debug);

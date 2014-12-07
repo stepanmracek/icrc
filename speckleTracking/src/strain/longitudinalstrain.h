@@ -17,15 +17,15 @@ public:
 
     Points getRealShapePoints(const Points &controlPoints, float shapeWidth);
 
-    Points getRealShapePoints(const Points &controlPoints, float shapeWidth, VectorF *modulationValues, VectorF *widthVector);
+    Points getRealShapePoints(const Points &controlPoints, float shapeWidth, const VectorF *modulationValues, const VectorF *widthVector);
 
     bool isValidShape(Points &/*realPoints*/) { return true; }
 
-    QList<QGraphicsItem*> drawResult(QGraphicsScene *scene, Points &resultPoints);
+    QList<QGraphicsItem*> drawResult(QGraphicsScene *scene, const Points &resultPoints);
 
-    P getBasePoint(Points &realPoints);
+    P getBasePoint(const Points &realPoints);
 
-    P getApexPoint(Points &realPoints);
+    P getApexPoint(const Points &realPoints);
 
     QString getInfo();
 };

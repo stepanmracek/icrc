@@ -17,7 +17,7 @@ class PCA : public BackProjectionBase
 
     friend class ICA; // ICA may see cvPCA struct
 
-private:
+public:
     cv::PCA cvPca;
 
 public:
@@ -62,7 +62,7 @@ public:
      * @brief Automatic mode selection
      * @param t Desired threshold
      */
-    void modesSelectionThreshold(double t = 0.98);
+    void modesSelectionThreshold(float t = 0.98);
 
     void learn(const std::vector<MatF> &vectors, int maxComponents = 0);
 

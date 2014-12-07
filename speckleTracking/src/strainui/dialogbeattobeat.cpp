@@ -55,9 +55,9 @@ void DialogBeatToBeat::on_comboBox_activated(const QString &text)
 
 void DialogBeatToBeat::addMainStrain()
 {
-    int n = beatsStats.count();
-    VectorF resampledBeats[n];
-    for (int i = 0; i < n; i++)
+    int beatCount = beatsStats.count();
+    VectorF resampledBeats[beatCount];
+    for (int i = 0; i < beatCount; i++)
     {
         const StrainStatistics &beat = beatsStats.at(i);
         resampledBeats[i] = VecF::resample(beat.strain, 100);
@@ -70,9 +70,9 @@ void DialogBeatToBeat::addMainStrain()
     for (int i = 0; i < 100; i++)
     {
         VectorF slice;
-        for (int j = 0; j < n; j++)
+        for (int beat = 0; beat < beatCount; beat++)
         {
-            slice.push_back(resampledBeats[j][i]);
+            slice.push_back(resampledBeats[beat][i]);
         }
 
         diff.push_back(VecF::stdDeviation(slice));

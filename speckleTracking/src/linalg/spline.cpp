@@ -26,18 +26,15 @@ void Spline::drawSpline(const Points &controlPoints, Mat8 &image, bool circle, u
               : getSplinePoints(controlPoints, 20);
 
 	int n = splinePoints.size();
-	for (int i = 0; i < n; i++)
+    for (int i = 1; i < n; i++)
     {
-        int x = splinePoints[i].x;
-        int y = splinePoints[i].y;
-        if (x >= 0 && x < image.cols && y >= 0 && y < image.rows)
-            image(y, x) = intensity;
+        cv::line(image, splinePoints[i-1], splinePoints[i], intensity, 1, CV_AA);
     }
 
     n = controlPoints.size();
 	for (int i = 0; i < n; i++)
 	{
-        cv::circle(image, controlPoints[i], i == 0 ? 5 : 3, cv::Scalar(intensity));
+        cv::circle(image, controlPoints[i], i == 0 ? 5 : 3, cv::Scalar(intensity), 1, CV_AA);
 	}        
 }
 
@@ -114,7 +111,7 @@ Points Spline::getSplinePoints(const P &p1, const P &p2, const P &p3, const P &p
 			p4.x, p4.y);
 	MatF MP = splineMatrix*Pmat;
 
-	double dt = 1.0f/pointsPerSegment;
+    float dt = 1.0f/pointsPerSegment;
     for (float t = 0; t < 1; t += dt)
 	{
 		float t2 = t*t;
@@ -128,47 +125,43 @@ Points Spline::getSplinePoints(const P &p1, const P &p2, const P &p3, const P &p
 	return out;
 }
 
-Points Spline::uniformDistance(const Points &in, int segments, bool circle)
-{
-	Points out;
-    Points allPointsOfSpline = circle ?
-                getCircleSplinePoints(in)
-              : getSplinePoints(in);
+//#include <QDebug>
+Points Spline::uniformDistance(const Points &controlPoints, int count)
+{    
+    Points rawPoints = getSplinePoints(controlPoints);
+    float curLen = 0;
+    float len = 0;
+    Points result;
+    result.push_back(rawPoints.front());
+    for (unsigned int i = 1; i < rawPoints.size(); i++)
+        len += Common::eucl(rawPoints[i-1], rawPoints[i]);
+    float lenStep = len/(count-1);
 
-    if (circle)
+    //qDebug() << "lenStep:" << lenStep;
+
+    for (unsigned int i = 1; i < rawPoints.size(); i++)
     {
-        // circle -> topmost point is a starting one
-        allPointsOfSpline = reorganizePoints(allPointsOfSpline);
+        curLen += Common::eucl(rawPoints[i-1], rawPoints[i]);
+        float diff = curLen - (result.size()*lenStep);
+        if (diff > 0)
+        {
+            //qDebug() << "Adding new point; diff:" << diff;
+            //qDebug() << i << curLen << (result.size()*lenStep);
+
+            float t = 1.0 - (diff/lenStep);
+            float x = rawPoints[i-1].x + t*(rawPoints[i].x - rawPoints[i-1].x);
+            float y = rawPoints[i-1].y + t*(rawPoints[i].y - rawPoints[i-1].y);
+            result.push_back(P(x, y));
+        }
+    }
+    if (result.size() < count)
+    {
+        //qDebug() << "Adding last points";
+        result.push_back(rawPoints.back());
     }
 
-    // calculate total length of a curve
-    int n = allPointsOfSpline.size();
-    float len = length(allPointsOfSpline);
-	float segmentLen = len/segments;
-    int segmentCounter = 1;
-	out.push_back(allPointsOfSpline[0]);
-	float cumulativeLen = 0.0;
-	for (int i = 1; i < n; i++)
-	{
-		// cumulative length of curve
-        float d = Common::eucl(allPointsOfSpline[i-1], allPointsOfSpline[i]);
-		cumulativeLen += d;
-
-		// new segment needed
-        if (cumulativeLen >= segmentCounter*segmentLen && segmentCounter < segments)
-		{
-            out.push_back(allPointsOfSpline[i-1]);
-			segmentCounter++;
-		}
-	}
-
-	// add last point
-    if (!circle && (int)out.size() <= segments)
-	{
-		out.push_back(allPointsOfSpline[n-1]);
-	}
-
-	return out;
+    //qDebug() << "result size:" << result.size() << "; should be:" << count;
+    return result;
 }
 
 Points Spline::reorganizePoints(Points &input)

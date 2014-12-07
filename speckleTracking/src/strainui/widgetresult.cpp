@@ -23,7 +23,7 @@ void WidgetResult::setImage(QPixmap pixmap)
 }
 
 
-void WidgetResult::setControlPoints(Points controlPoints, int shapeWidth, CoordSystemBase *coordSystem)
+void WidgetResult::setControlPoints(const Points &controlPoints, int shapeWidth, CoordSystemBase *coordSystem)
 {
     if (tracker == NULL)
     {
@@ -39,7 +39,7 @@ void WidgetResult::setControlPoints(Points controlPoints, int shapeWidth, CoordS
     setResultPoints(tracker->getStrain()->getRealShapePoints(controlPoints, shapeWidth), coordSystem);
 }
 
-void WidgetResult::setResultPoints(Points points, CoordSystemBase *coordSystem)
+void WidgetResult::setResultPoints(const Points &points, CoordSystemBase *coordSystem)
 {
     if (tracker == NULL)
     {

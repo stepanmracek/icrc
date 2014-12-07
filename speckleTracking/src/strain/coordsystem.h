@@ -92,11 +92,22 @@ public:
     }
 
     /**
-     * @brief Draws representation of coord sysrtem
+     * @brief Draws representation of coord system
      * @param scene Scene where new graphics items are added
      * @return List of added graphics items
      */
     virtual QList<QGraphicsItem*> draw(QGraphicsScene *scene) = 0;
+
+    enum Types
+    {
+        TypeRadial = 0,
+        TypePass = 1,
+        TypeROI = 2
+    };
+
+    virtual Types type() = 0;
+
+    virtual CoordSystemBase *clone() = 0;
 };
 
 /**
@@ -116,10 +127,10 @@ public:
 
     Mat8 transform(const Mat8 &input) { return input; }
     P transform(P input) { return input; }
-    P transform(float inputX, float inputY) { return P(inputX, inputY); }
     P backTransform(P input) { return input; }
-    P backTransform(float inputX, float inputY) { return P(inputX, inputY); }
     QList<QGraphicsItem*> draw(QGraphicsScene *) { return QList<QGraphicsItem*>(); }
+    Types type() { return TypePass; }
+    CoordSystemBase *clone() { return new CoordSystemPass(); }
 };
 
 /**
@@ -171,6 +182,12 @@ public:
                       int resultMatCols, int resultMatRows, QObject *parent = 0);
 
     /**
+     * @brief Copy constructor
+     * @param src Source
+     */
+    CoordSystemRadial(CoordSystemRadial *src);
+
+    /**
      * @brief Init from another radial coord system
      * @param src Source system
      */
@@ -201,14 +218,40 @@ public:
 
     Mat8 transform(const Mat8 &src);
     P transform(P input);
-    P transform(float inputX, float inputY);
-
     P backTransform(P input);
-    P backTransform(float inputX, float inputY);
 
     static void AnotateAngleDistance(Mat8 &src, P &center, P &arcStart, P &arcEnd);
 
     QList<QGraphicsItem*> draw(QGraphicsScene *scene);
+
+    Types type() { return TypeRadial; }
+
+    CoordSystemBase *clone();
+};
+
+/**
+ * @brief ROI-based coord system transformation
+ */
+class CoordSystemROI : public CoordSystemBase
+{
+    Q_OBJECT
+public:
+    cv::Rect roi;
+
+    /**
+     * @brief Constructor
+     * @param parent Parent object in Qt hierarchy
+     */
+    CoordSystemROI(QObject *parent = 0);
+    CoordSystemROI(const cv::Rect roi, QObject *parent = 0);
+    CoordSystemROI(CoordSystemROI *src);
+
+    Mat8 transform(const Mat8 &input);
+    P transform(P input);
+    P backTransform(P input);
+    QList<QGraphicsItem*> draw(QGraphicsScene * scene);
+    Types type() { return TypeROI; }
+    CoordSystemBase *clone() { return new CoordSystemROI(this); }
 };
 
 #endif // COORDSYSTEM_H

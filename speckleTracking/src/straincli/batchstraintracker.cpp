@@ -10,8 +10,9 @@
 #include "strain/strainstatistics.h"
 #include "strain/strainclassifier.h"
 
-void BatchStrainTracker::extractStrains(QString dirPath)
+void BatchStrainTracker::extractStrains(const QString &inputDirPath, const QString &outputDirPath)
 {
+    QDir().mkpath(outputDirPath);
     // params
     int samplesPerBeat = 50;
     QString strainPath = "/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10";
@@ -33,7 +34,7 @@ void BatchStrainTracker::extractStrains(QString dirPath)
 
     // load directory
     QStringList filter; filter << "*.mp4" << "*.avi" << "*.wmv";
-    QDir dir(dirPath);
+    QDir dir(inputDirPath);
     QFileInfoList fileInfos = dir.entryInfoList(filter, QDir::Files, QDir::SortFlags(QDir::Name | QDir::IgnoreCase));
 
     // for each video
@@ -43,6 +44,8 @@ void BatchStrainTracker::extractStrains(QString dirPath)
 
         VideoDataClip clip(info.absoluteFilePath(), info.absoluteFilePath() + "_metadata");
         VideoDataClipMetadata *metadata = clip.getMetadata();
+
+        QVector<VectorF> strains;
 
         // for each beat
         for(int i = 0; i < metadata->beatIndicies.count()-1; i++)
@@ -59,9 +62,53 @@ void BatchStrainTracker::extractStrains(QString dirPath)
             VectorF strainValues = VecF::resample(stats.strain, samplesPerBeat);
 
             // serialize
-            QString resultPath = info.baseName()+"-"+QString::number(i);
+            QString resultPath = outputDirPath + QDir::separator() + info.baseName() + "-" + QString::number(i);
             VecF::toFile(strainValues, resultPath);
+
+            strains << strainValues;
+
+            cv::FileStorage s(resultPath.toStdString()+".xml", cv::FileStorage::WRITE);
+            stats.serialize(s);
+            s.release();
+
+            /*cv::FileStorage s2(resultPath.toStdString()+".xml", cv::FileStorage::READ);
+            StrainStatistics stats2; stats2.deserialize(s2);
+
+            qDebug() << "b2b        " << StrainStatistics::beatToBeatVariance(stats, stats2, 50);
+            qDebug() << "b2b/segment" << QVector<float>::fromStdVector(StrainStatistics::beatToBeatVariancePerSegment(stats, stats2, 50));*/
         }
+
+
+        VectorF mean;
+        VectorF diff;
+        for (int i = 0; i < samplesPerBeat; i++)
+        {
+            VectorF slice;
+            for (int beat = 0; beat < strains.count(); beat++)
+            {
+                slice.push_back(strains[beat][i]);
+            }
+
+            diff.push_back(VecF::stdDeviation(slice));
+            mean.push_back(VecF::meanValue(slice));
+        }
+
+        VecF::toFile(mean, outputDirPath + QDir::separator() + info.baseName() + "-mean");
+        VecF::toFile(diff, outputDirPath + QDir::separator() + info.baseName() + "-std");
+    }
+}
+
+void BatchStrainTracker::stats(const QString &extractedStainsDirPath)
+{
+    QMultiMap<QString, StrainStatistics> map = loadDirectoryWithStrains(extractedStainsDirPath, ".xml");
+    QList<QString> persons = map.uniqueKeys();
+
+    foreach(const QString &person, persons)
+    {
+        QVector<StrainStatistics> strains = map.values(person).toVector();
+        //float variance = StrainStatistics::beatToBeatVariance(strains, 100);
+        //qDebug() << person; // << variance;
+        StrainStatistics::segmentStatistics(strains, 100);
     }
 }
 
@@ -74,7 +121,7 @@ ShapeTracker * BatchStrainTracker::learn()
     float freqEnd = 3.0;
     float freqStep = 1.0;
     float phaseSteps = 3.0;
-    double amplitude = 1.0;
+    float amplitude = 1.0;
     int pointsPerSegment = 10;
     int segments = 6;
 
@@ -185,11 +232,40 @@ QMultiMap<QString, VectorF> BatchStrainTracker::loadDirectoryWithStrains(const Q
     {
         QStringList items = info.baseName().split('-');
         QString key = items[0];
-        int beat = items[1].toInt();
+        bool ok;
+        int beat = items[1].toInt(&ok);
+        if (!ok) continue;
 
         VectorF strainValues = VecF::fromFile(info.absoluteFilePath());
         result.insert(key, strainValues);
-        qDebug() << " " << key << beat << strainValues.size();
+        //qDebug() << " " << info.fileName() << key << beat << strainValues.size();
+    }
+
+    return result;
+}
+
+QMultiMap<QString, StrainStatistics> BatchStrainTracker::loadDirectoryWithStrains(const QString &path, const QString &statsFileSuffix)
+{
+    QMultiMap<QString, StrainStatistics>  result;
+    QDir dir(path);
+    qDebug() << "loading files from:" << dir.absolutePath();
+    QStringList namefilters; namefilters << ("*" + statsFileSuffix);
+    QFileInfoList fileInfos = dir.entryInfoList(namefilters,
+                                                QDir::Filters(QDir::NoDotAndDotDot | QDir::Files),
+                                                QDir::SortFlags(QDir::Name | QDir::IgnoreCase));
+    foreach (const QFileInfo &info, fileInfos)
+    {
+        QStringList items = info.baseName().split('-');
+        QString key = items[0];
+        //bool ok;
+        //int beat = items[1].toInt(&ok);
+        //if (!ok) continue;
+
+        StrainStatistics stats;
+        cv::FileStorage storage(info.absoluteFilePath().toStdString(), cv::FileStorage::READ);
+        stats.deserialize(storage);
+        result.insert(key, stats);
+        //qDebug() << " " << info.fileName() << key << beat << strainValues.size();
     }
 
     return result;

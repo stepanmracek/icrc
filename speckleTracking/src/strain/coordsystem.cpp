@@ -30,6 +30,11 @@ CoordSystemRadial::CoordSystemRadial(P center, P arcStart, P arcEnd, float start
     init(center, arcStart, arcEnd, startDistance, resultMatCols, resultMatRows);
 }
 
+CoordSystemRadial::CoordSystemRadial(CoordSystemRadial *src)
+{
+    init(src);
+}
+
 void CoordSystemRadial::init(CoordSystemRadial *src)
 {
     init(src->center, src->startDistance, src->endDistance, src->angleStart, src->angleEnd, src->resultMatCols, src->resultMatRows);
@@ -133,11 +138,6 @@ P CoordSystemRadial::transform(P input)
     return P(resultMatCols - (angle-angleStart)/dAngle*resultMatCols - 1, (distance-startDistance)/dDistance*resultMatRows);
 }
 
-P CoordSystemRadial::transform(float inputX, float inputY)
-{
-    return transform(P(inputX, inputY));
-}
-
 P CoordSystemRadial::backTransform(P input)
 {
     float angle = angleStart + (resultMatCols - input.x - 1)/resultMatCols * dAngle;
@@ -146,11 +146,6 @@ P CoordSystemRadial::backTransform(P input)
     p.x += center.x;
     p.y += center.y;
     return p;
-}
-
-P CoordSystemRadial::backTransform(float inputX, float inputY)
-{
-    return backTransform(P(inputX, inputY));
 }
 
 struct CSAnotationData
@@ -229,3 +224,42 @@ QList<QGraphicsItem*> CoordSystemRadial::draw(QGraphicsScene *scene)
 
     return result;
 }
+
+CoordSystemBase *CoordSystemRadial::clone()
+{
+    return new CoordSystemRadial(this);
+}
+
+//----------------------------------------------------
+
+CoordSystemROI::CoordSystemROI(QObject *parent) : CoordSystemBase(parent), roi(260, 110, 345, 370) { }
+CoordSystemROI::CoordSystemROI(const cv::Rect roi, QObject *parent) : CoordSystemBase(parent), roi(roi) { }
+
+CoordSystemROI::CoordSystemROI(CoordSystemROI *src) : roi(src->roi) { }
+
+Mat8 CoordSystemROI::transform(const Mat8 &input)
+{
+    cv::Rect newRoi = roi & cv::Rect(0, 0, input.cols, input.rows);
+    return input(newRoi).clone();
+}
+
+P CoordSystemROI::transform(P input)
+{
+    return P(input.x - roi.x, input.y - roi.y);
+}
+
+P CoordSystemROI::backTransform(P input)
+{
+    return P(input.x + roi.x, input.y + roi.y);
+}
+
+QList<QGraphicsItem *> CoordSystemROI::draw(QGraphicsScene * scene)
+{
+    QList<QGraphicsItem*> result;
+    QPen pen(Qt::red);
+
+    result << scene->addRect(roi.x, roi.y, roi.width, roi.height, pen);
+
+    return result;
+}
+

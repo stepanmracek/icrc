@@ -37,9 +37,14 @@ void DialogShapeModel::drawShapeModel()
     for (int i = 0; i < modesCount; i++)
     {
         QSlider *slider = sliders[i];
-        float val = (slider->value() - 50.0f) / 100.0f * 3.0f * sqrt(backProjectionBase->getVariance(i));
+        float val = ((slider->value() - 50.0f) / 100.0f) * 3.0f * sqrt(backProjectionBase->getVariance(i));
         params(i) = val;
     }
+
+    /*std::cout << "Params: ";
+    for (int i = 0; i < params.rows; i++)
+        std::cout << params(i) << "; ";
+    std::cout << std::endl;*/
 
     MatF backProjected = backProjectionBase->backProject(params);
     int r = backProjected.rows;

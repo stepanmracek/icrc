@@ -16,18 +16,16 @@ class VideoDataClipMetadata : public SerializableObject
     Q_OBJECT
 
 private:
-    CoordSystemRadial *coordSystem;
+    CoordSystemBase *coordSystem;
 
 public:
-    VideoDataClipMetadata(QObject *parent) : SerializableObject(parent)
-    {
-        coordSystem = new CoordSystemRadial(this);
-    }
+    VideoDataClipMetadata(QObject *parent = 0);
 
     QVector<int> beatIndicies;
     ShapeMap rawShapes;
 
-    CoordSystemRadial *getCoordSystem() { return coordSystem; }
+    CoordSystemBase *getCoordSystem() { return coordSystem; }
+    void setCoordSystem(CoordSystemBase *coordSystem);
 
     void serialize(cv::FileStorage &storage) const;
     void deserialize(cv::FileStorage &storage);

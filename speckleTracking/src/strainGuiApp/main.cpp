@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     LongitudinalStrain *strain = new LongitudinalStrain(normalizer, 0, 0);
 
     cv::FileStorage strainStorage("/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10", cv::FileStorage::READ);
+    //cv::FileStorage strainStorage("potkani", cv::FileStorage::READ);
     strain->deserialize(strainStorage);
 
     ListOfImageProcessing processing;
@@ -34,6 +35,7 @@ int main(int argc, char *argv[])
 
     // create GUI
     QApplication app(argc, argv);
+    //WindowAnotationManager w("/mnt/data/strain/potkani", tracker);
     WindowAnotationManager w("/home/stepo/Dropbox/projekty/icrc/test3/", tracker);
     w.show();
     return app.exec();

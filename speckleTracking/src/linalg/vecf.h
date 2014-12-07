@@ -14,17 +14,17 @@ public:
 
     //static MatF fromFile(const QString &path);
 
-    static double sqrMagnitude(MatF &vector);
+    static float sqrMagnitude(MatF &vector);
 
-    static double magnitude(MatF &vector);
+    static float magnitude(MatF &vector);
 
-    static double dot(MatF &v1, MatF &v2);
+    static float dot(MatF &v1, MatF &v2);
 
     static MatF &normalize(MatF &vector);
 
     static MatF normalized(MatF &vector);
 
-    static MatF &mul(MatF &vector, double value);
+    static MatF &mul(MatF &vector, float value);
 
     static bool isZero(MatF &vector);
 
@@ -38,17 +38,17 @@ public:
 
     static MatF fromTwoColsFile(const QString &path);*/
 
-    static double maxValue(MatF &vector);
+    static float maxValue(MatF &vector);
 
     static int maxIndex(MatF &vector);
 
-    static double minValue(MatF &vector);
+    static float minValue(MatF &vector);
 
     static int minIndex(MatF &vector);
 
-    static double meanValue(MatF &vector);
+    static float meanValue(MatF &vector);
 
-    static double stdDeviation(MatF &vector);
+    static float stdDeviation(MatF &vector);
 
     static MatF fromVector(VectorF &vec);
 
@@ -62,15 +62,15 @@ public:
 
     static int minIndex(VectorF &vector);
 
-    static double maxValue(VectorF &vector);
+    static float maxValue(VectorF &vector);
 
-    static double minValue(VectorF &vector);
+    static float minValue(VectorF &vector);
 
-    static double meanValue(const VectorF &vector);
+    static float meanValue(const VectorF &vector);
 
     static MatF meanVector(std::vector<MatF> &vectors);
 
-    static double stdDeviation(VectorF &vector);
+    static float stdDeviation(VectorF &vector);
 
     static VectorF resample(const VectorF &vector, int samplesCount);
 };

@@ -31,7 +31,9 @@ HEADERS += \
     dialogshapemodel.h \
     graphicsviewwithevents.h \
     dialogsaveplot.h \
-    widgetrainbow.h
+    widgetrainbow.h \
+    dialogcreatecoordsystemroi.h \
+    dialogcreatecoordsystem.h
 
 SOURCES += \
     widgetspectrogram.cpp \
@@ -51,6 +53,7 @@ SOURCES += \
     widgetplot.cpp \
     dialogsaveplot.cpp \
     widgetrainbow.cpp \
+    dialogcreatecoordsystemroi.cpp
 
 FORMS += \
     widgetstrainvideo.ui \
@@ -63,7 +66,8 @@ FORMS += \
     dialogcreatetracker.ui \
     dialogimageprocessing.ui \
     dialogshapemodel.ui \
-    dialogsaveplot.ui
+    dialogsaveplot.ui \
+    dialogcreatecoordsystemroi.ui
 
 RESOURCES += \
     resources.qrc

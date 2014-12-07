@@ -41,12 +41,11 @@ public:
 
     /**
      * @brief Returns specific number of points among spline with uniform distance
-     * @param in Control points
-     * @param segments Desired number of segments/points
-     * @param circle In Circle?
+     * @param controlPoints Input control points of the spline
+     * @param count Count of the new spline points
      * @return Points among spline with uniform distance
      */
-    Points uniformDistance(const Points &in, int segments, bool circle);
+    Points uniformDistance(const Points &controlPoints, int count);
 
 private:
     P getPoint(Points &splinePoints, float t);
