@@ -15,7 +15,7 @@ class DialogBeatToBeat : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogBeatToBeat(Strain *strainModel, QVector<StrainStatistics> &beatsStats, QWidget *parent = 0);
+    explicit DialogBeatToBeat(const QVector<StrainStatistics> &beatsStats, QWidget *parent = 0);
     ~DialogBeatToBeat();
 
 private slots:
@@ -23,8 +23,9 @@ private slots:
 
 private:
     Ui::DialogBeatToBeat *ui;
-    Strain *strainModel;
-    QVector<StrainStatistics> &beatsStats;
+    int segmentCount;
+    const QVector<StrainStatistics> &beatsStats;
+    StrainStatistics meanBeatStats;
 
     void addMainStrain();
     void addAllSegments();

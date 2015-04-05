@@ -9,6 +9,7 @@
 #include "strain/videodataclip.h"
 #include "strain/strainstatistics.h"
 #include "strain/strainclassifier.h"
+#include "strainui/dialogbeattobeat.h"
 
 void BatchStrainTracker::extractStrains(const QString &inputDirPath, const QString &outputDirPath)
 {
@@ -102,13 +103,42 @@ void BatchStrainTracker::stats(const QString &extractedStainsDirPath)
 {
     QMultiMap<QString, StrainStatistics> map = loadDirectoryWithStrains(extractedStainsDirPath, ".xml");
     QList<QString> persons = map.uniqueKeys();
+    QVector<StrainStatistics::SegmentStatsResult> stats;
 
     foreach(const QString &person, persons)
     {
         QVector<StrainStatistics> strains = map.values(person).toVector();
-        //float variance = StrainStatistics::beatToBeatVariance(strains, 100);
-        //qDebug() << person; // << variance;
-        StrainStatistics::segmentStatistics(strains, 100);
+        if (strains.size() > 3) strains.resize(3);
+        if (strains.size() < 3) continue;
+
+        qDebug() << " " << person << ":" << strains.count() << "beats";
+        stats << StrainStatistics::segmentStatistics(strains, 100);
+
+        //DialogBeatToBeat dlgb2b(strains);
+        //dlgb2b.exec();
+    }
+
+    StrainStatistics::SegmentStatsResult mean = StrainStatistics::SegmentStatsResult::mean(stats);
+    qDebug() << "mean variance" << mean.meanVariance;
+    qDebug() << "mean correlation" << mean.meanCorrelation;
+    qDebug() << "segment variance" << mean.segmentVariance;
+    qDebug() << "segment correlationw" << mean.segmentCorrelation;
+}
+
+void BatchStrainTracker::exportValues(const QString &extractedStainsDirPath)
+{
+    QMultiMap<QString, StrainStatistics> map = loadDirectoryWithStrains(extractedStainsDirPath, ".xml");
+    QList<QString> persons = map.uniqueKeys();
+
+    foreach(const QString &person, persons)
+    {
+        QList<StrainStatistics> statsForPerson = map.values(person);
+        for (int statCounter = 0; statCounter < statsForPerson.size(); statCounter++)
+        {
+            const StrainStatistics &strain = statsForPerson[statCounter];
+
+            strain.saveValues(extractedStainsDirPath + QDir::separator() + person + "-" + QString::number(statCounter));
+        }
     }
 }
 

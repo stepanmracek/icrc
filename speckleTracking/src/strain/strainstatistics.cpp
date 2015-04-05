@@ -1,9 +1,30 @@
 #include "strainstatistics.h"
 
 #include <QDebug>
+#include <QFile>
+#include <QTextStream>
 #include <cassert>
 
 #include "linalg/vecf.h"
+#include "linalg/metrics.h"
+
+StrainStatistics::SegmentStatsResult StrainStatistics::SegmentStatsResult::mean(const QVector<SegmentStatsResult> &stats)
+{
+    StrainStatistics::SegmentStatsResult result;
+    foreach(const SegmentStatsResult &s, stats)
+    {
+        result.meanCorrelation += s.meanCorrelation;
+        result.meanVariance += s.meanVariance;
+        result.segmentCorrelation += s.segmentCorrelation;
+        result.segmentVariance += s.segmentVariance;
+    }
+    result.meanCorrelation /= stats.size();
+    result.meanVariance /= stats.size();
+    result.segmentCorrelation /= stats.size();
+    result.segmentVariance /= stats.size();
+
+    return result;
+}
 
 StrainStatistics::StrainStatistics(Strain *strainModel, const VectorOfShapes &shapes)
 {
@@ -92,6 +113,32 @@ void writeVecOfVec(const std::string &name, cv::FileStorage &storage, const std:
     storage << "]";
 }
 
+void StrainStatistics::saveValues(const QString &fileName) const
+{
+    QFile file(fileName);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream stream(&file);
+    for (float v : strain)
+    {
+        stream << v << "\n";
+    }
+    stream.flush();
+    file.close();
+
+    for (int segment = 0; segment < strainForSegments.size(); segment++)
+    {
+        QFile file(fileName + "-" + QString::number(segment));
+        file.open(QIODevice::WriteOnly | QIODevice::Text);
+        QTextStream stream(&file);
+        for (float v : strainForSegments[segment])
+        {
+            stream << v << "\n";
+        }
+        stream.flush();
+        file.close();
+    }
+}
+
 void StrainStatistics::serialize(cv::FileStorage &storage) const
 {
     storage << "strain" << strain;
@@ -136,39 +183,22 @@ void StrainStatistics::deserialize(cv::FileStorage &storage)
     readVecOfVec("strainRateForSegments", storage, strainRateForSegments);
 }
 
-float StrainStatistics::beatToBeatVariance(const VectorF &firstBeat, const VectorF &secondBeat, int samplesCount)
+float StrainStatistics::beatToBeatVariance(const VectorF &firstBeat, const VectorF &secondBeat, int samplesCount, const Metrics &metrics)
 {
     VectorF firstSampled = VecF::resample(firstBeat, samplesCount);
     VectorF secondSampled = VecF::resample(secondBeat, samplesCount);
 
     MatF firstMat = VecF::fromVector(firstSampled);
     MatF secondMat = VecF::fromVector(secondSampled);
-    MatF delta = firstMat - secondMat;
-    return VecF::stdDeviation(delta);
+    return metrics.distance(firstMat, secondMat);
 }
 
-float StrainStatistics::beatToBeatVariance(StrainStatistics &firstBeat, StrainStatistics &secondBeat, int samplesCount)
+float StrainStatistics::beatToBeatVariance(const StrainStatistics &firstBeat, const StrainStatistics &secondBeat, int samplesCount, const Metrics &metrics)
 {
-    return beatToBeatVariance(firstBeat.strain, secondBeat.strain, samplesCount);
+    return beatToBeatVariance(firstBeat.strain, secondBeat.strain, samplesCount, metrics);
 }
 
-float StrainStatistics::beatToBeatVariance(QVector<VectorF> &beats, int samplesCount)
-{
-    int n = beats.count();
-    float sum = 0.0f;
-    int count = 0;
-    for (int i = 0; i < (n-1); i++)
-    {
-        for (int j = i+1; j < n; j++)
-        {
-            sum += beatToBeatVariance(beats[i], beats[j], samplesCount);
-            count++;
-        }
-    }
-    return sum / count;
-}
-
-float StrainStatistics::beatToBeatVariance(QVector<StrainStatistics> &beats, int samplesCount)
+float StrainStatistics::beatToBeatVariance(const QVector<VectorF> &beats, int samplesCount, const Metrics &metrics)
 {
     int n = beats.count();
     float sum = 0.0f;
@@ -177,60 +207,29 @@ float StrainStatistics::beatToBeatVariance(QVector<StrainStatistics> &beats, int
     {
         for (int j = i+1; j < n; j++)
         {
-            sum += beatToBeatVariance(beats[i], beats[j], samplesCount);
+            sum += beatToBeatVariance(beats[i], beats[j], samplesCount, metrics);
             count++;
         }
     }
     return sum / count;
 }
 
-/*VectorF StrainStatistics::beatToBeatVariancePerSegment(StrainStatistics &firstBeat, StrainStatistics &secondBeat,
-                                                       int samplesCount)
-{
-    unsigned int n = firstBeat.strainForSegments.size();
-    assert(n == secondBeat.strainForSegments.size());
-
-    VectorF result;
-    for (unsigned int i = 0; i < n; i++)
-    {
-        VectorF firstSampled = VecF::resample(firstBeat.strainForSegments[i], samplesCount);
-        VectorF secondSampled = VecF::resample(secondBeat.strainForSegments[i], samplesCount);
-
-        MatF firstMat = VecF::fromVector(firstSampled);
-        MatF secondMat = VecF::fromVector(secondSampled);
-        MatF delta = firstMat - secondMat;
-        result.push_back(VecF::stdDeviation(delta));
-    }
-
-    return result;
-}
-
-VectorF StrainStatistics::beatToBeatVariancePerSegment(QVector<StrainStatistics> &beats, int samplesCount)
+float StrainStatistics::beatToBeatVariance(const QVector<StrainStatistics> &beats, int samplesCount, const Metrics &metrics)
 {
     int n = beats.count();
-    assert(beats.size() > 0);
-    int segments = beats[0].strainRateForSegments.size();
-    VectorF result(segments);
+    float sum = 0.0f;
     int count = 0;
     for (int i = 0; i < (n-1); i++)
     {
         for (int j = i+1; j < n; j++)
         {
-            VectorF partialResult = beatToBeatVariancePerSegment(beats[i], beats[j], samplesCount);
-            for (int k = 0; k < segments; k++)
-            {
-                result[k] += partialResult[k];
-            }
+            sum += beatToBeatVariance(beats[i], beats[j], samplesCount, metrics);
             count++;
         }
     }
+    return sum / count;
+}
 
-    for (int k = 0; k < segments; k++)
-    {
-        result[k] = result[k] / count;
-    }
-    return result;
-}*/
 
 StrainStatistics StrainStatistics::getOneBeatStats(const VideoDataClip *clip, Strain *strainModel,
                                                    int beatIndex, ShapeMap &shapesMap, bool *success)
@@ -334,18 +333,31 @@ StrainStatistics StrainStatistics::meanBeatStats(const QVector<StrainStatistics>
     return result;
 }
 
-void StrainStatistics::segmentStatistics(const QVector<StrainStatistics> &beats, int samplesCount)
+StrainStatistics::SegmentStatsResult StrainStatistics::segmentStatistics(const QVector<StrainStatistics> &beats, int samplesCount)
 {
+    SegmentStatsResult result;
+
     StrainStatistics mean = meanBeatStats(beats, samplesCount);
     int segmentCount = mean.strainForSegments.size();
-    float variance = 0.0f;
+
+    qDebug() << "    segment against mean";
     for (int segment = 0; segment < segmentCount; segment++)
     {
-        variance += beatToBeatVariance(mean.strain, mean.strainForSegments[segment], samplesCount);
+        result.segmentVariance += beatToBeatVariance(mean.strain, mean.strainForSegments[segment], samplesCount, StdDevOfDifferencesMetric());
+        result.segmentCorrelation += beatToBeatVariance(mean.strain, mean.strainForSegments[segment], samplesCount, CorrelationMetric());
     }
-    variance /= segmentCount;
+    result.segmentVariance /= segmentCount;
+    result.segmentCorrelation /= segmentCount;
+    qDebug() << "      variance:" << result.segmentVariance;
+    qDebug() << "      correlation:" << result.segmentCorrelation;
 
-    qDebug() << variance;
+    qDebug() << "    main strain variation";
+    result.meanVariance = beatToBeatVariance(beats, samplesCount, StdDevOfDifferencesMetric());
+    result.meanCorrelation = beatToBeatVariance(beats, samplesCount, CorrelationMetric());
+    qDebug() << "      variance:" << result.meanVariance;
+    qDebug() << "      correlation:" << result.meanCorrelation;
+
+    return result;
 }
 
 QVector<StrainStatistics> StrainStatistics::getAllBeatsStats(const VideoDataClip *clip, Strain *strainModel,

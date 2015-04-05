@@ -11,6 +11,7 @@ public:
 
     static void extractStrains(const QString &inputDirPath, const QString &outputDirPath);
     static void stats(const QString &extractedStainsDirPath);
+    static void exportValues(const QString &extractedStainsDirPath);
 
     static void evaluate(const QString &positives, const QString &negatives);
     static ShapeTracker *learn();

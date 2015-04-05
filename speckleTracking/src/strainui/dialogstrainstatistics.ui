@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Strain statistics</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>

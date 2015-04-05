@@ -5,15 +5,16 @@
 
 #include "linalg/vecf.h"
 
-DialogBeatToBeat::DialogBeatToBeat(Strain *strainModel, QVector<StrainStatistics> &beatsStats, QWidget *parent) :
-    QDialog(parent), ui(new Ui::DialogBeatToBeat), strainModel(strainModel), beatsStats(beatsStats)
+DialogBeatToBeat::DialogBeatToBeat(const QVector<StrainStatistics> &beatsStats, QWidget *parent) :
+    QDialog(parent), ui(new Ui::DialogBeatToBeat), beatsStats(beatsStats)
 {
     ui->setupUi(this);
-    int segCount = strainModel->segmentsCount;
+    segmentCount = beatsStats.first().strainForSegments.size();
+    meanBeatStats = StrainStatistics::meanBeatStats(beatsStats, 100);
 
     ui->comboBox->addItem("Main strain");
     ui->comboBox->addItem("All segments");
-    for (int i = 0; i < segCount; i++)
+    for (int i = 0; i < segmentCount; i++)
     {
         ui->comboBox->addItem("Segment " + QString::number(i+1));
     }
@@ -85,22 +86,26 @@ void DialogBeatToBeat::addMainStrain()
 
 void DialogBeatToBeat::addAllSegments()
 {
-    int segCount = strainModel->segmentsCount;
     for (int i = 0; i < beatsStats.count(); i++)
     {
         const StrainStatistics &beat = beatsStats.at(i);
 
-        for (int j = 0; j < segCount; j++)
+        for (int j = 0; j < segmentCount; j++)
         {
             VectorF curve = VecF::resample(beat.strainForSegments[j], 100);
-            ui->plotBeats->addData(curve, QString::number(i)+"-"+QString::number(j), QColor::fromHsvF((float)j/segCount, 1, 1));
+            ui->plotBeats->addData(curve, QString::number(i)+"-"+QString::number(j), QColor::fromHsvF((float)j/segmentCount, 1, 1));
         }
+    }
+
+    ui->plotMean->addData(meanBeatStats.strain, "mean", Qt::white);
+    for (int j = 0; j < segmentCount; j++)
+    {
+        ui->plotMean->addData(meanBeatStats.strainForSegments[j], "mean-"+QString::number(j), QColor::fromHsvF((float)j/segmentCount, 1, 1));
     }
 }
 
 void DialogBeatToBeat::addSegment(int index)
 {
-    int segCount = strainModel->segmentsCount;
     int n = beatsStats.count();
     VectorF resampledBeats[n];
     for (int i = 0; i < n; i++)
@@ -110,7 +115,7 @@ void DialogBeatToBeat::addSegment(int index)
 
         ui->plotBeats->addData(resampledBeats[i],
                                QString::number(i) + "-" + QString::number(index),
-                               QColor::fromHsvF((float)index/segCount, 1, 1));
+                               QColor::fromHsvF((float)index/segmentCount, 1, 1));
     }
 
     VectorF diff;
@@ -127,6 +132,6 @@ void DialogBeatToBeat::addSegment(int index)
         mean.push_back(VecF::meanValue(slice));
     }
 
-    ui->plotDiff->addData(diff, "diff", QColor::fromHsvF((float)index/segCount, 1, 1));
-    ui->plotMean->addData(mean, "mean", QColor::fromHsvF((float)index/segCount, 1, 1));
+    ui->plotDiff->addData(diff, "diff", QColor::fromHsvF((float)index/segmentCount, 1, 1));
+    ui->plotMean->addData(mean, "mean", QColor::fromHsvF((float)index/segmentCount, 1, 1));
 }

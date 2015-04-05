@@ -303,7 +303,7 @@ void WindowAnotationManager::on_btnBeatToBeat_clicked()
     QVector<StrainStatistics> allBeatsStats = StrainStatistics::getAllBeatsStats(clip, tracker->getStrain(),
                                                                                  ui->widgetStrainVideo->shapes);
 
-    DialogBeatToBeat dlg(tracker->getStrain(), allBeatsStats);
+    DialogBeatToBeat dlg(allBeatsStats);
     dlg.exec();
 }
 

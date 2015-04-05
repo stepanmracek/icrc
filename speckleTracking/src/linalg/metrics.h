@@ -30,7 +30,7 @@ public:
      * @param v2 Second vector (column matrix)
      * @return Returns the distance
      */
-    virtual float distance(MatF &v1, MatF &v2) = 0;
+    virtual float distance(MatF &v1, MatF &v2) const = 0;
 
     virtual ~Metrics() {}
 };
@@ -54,7 +54,7 @@ public:
      */
     MatF w;
 
-    virtual float distance(MatF&v1, MatF&v2) = 0;
+    virtual float distance(MatF&v1, MatF&v2) const = 0;
 
     /**
      * @brief Normalize weights, such that sum of the components is 1
@@ -81,7 +81,7 @@ public:
      */
     EuclideanMetric(QObject *parent = 0) : Metrics(parent) { }
 
-    virtual float distance(MatF &v1, MatF &v2)
+    virtual float distance(MatF &v1, MatF &v2) const
     {
         int n = v1.rows;
         assert(n == v2.rows);
@@ -113,7 +113,7 @@ public:
      */
     EuclideanWeightedMetric(QObject *parent) : WeightedMetric(parent) { }
 
-    virtual float distance(MatF &v1, MatF &v2)
+    virtual float distance(MatF &v1, MatF &v2) const
     {
         int n = v1.rows;
         assert(n == v2.rows);
@@ -146,7 +146,7 @@ public:
      */
     CityblockMetric(QObject *parent = 0) : Metrics(parent) { }
 
-    virtual float distance(MatF &v1, MatF &v2)
+    virtual float distance(MatF &v1, MatF &v2) const
     {
         int n = v1.rows;
         assert(n == v2.rows);
@@ -178,7 +178,7 @@ public:
      */
     CityblockWeightedMetric(QObject *parent = 0) : WeightedMetric(parent) { }
 
-    virtual float distance(MatF &v1, MatF &v2)
+    virtual float distance(MatF &v1, MatF &v2) const
     {
         int n = v1.rows;
         assert(n == v2.rows);
@@ -196,6 +196,21 @@ public:
     virtual ~CityblockWeightedMetric() {}
 };
 
+class StdDevOfDifferencesMetric : public Metrics
+{
+    Q_OBJECT
+
+public:
+
+    virtual float distance(MatF &v1, MatF &v2) const
+    {
+        MatF delta = v1 - v2;
+        return VecF::stdDeviation(delta);
+    }
+
+    virtual ~StdDevOfDifferencesMetric() {}
+};
+
 /**
  * @brief The CorrelationMetric class
  */
@@ -210,7 +225,7 @@ public:
      */
     CorrelationMetric(QObject *parent = 0) : Metrics(parent) { }
 
-    virtual float distance(MatF &v1, MatF &v2)
+    virtual float distance(MatF &v1, MatF &v2) const
     {
         return 1.0 - correlation(v1, v2);
     }
@@ -221,7 +236,7 @@ public:
      * @param v2 secons vector
      * @return  calculated correlation
      */
-    float correlation(MatF&v1, MatF&v2)
+    float correlation(MatF&v1, MatF&v2) const
     {
         int n = v1.rows;
         assert(n == v2.rows);
@@ -257,12 +272,12 @@ public:
      */
     CorrelationWeightedMetric(QObject *parent = 0) : WeightedMetric(parent) { }
 
-    virtual float distance(MatF &v1, MatF &v2)
+    virtual float distance(MatF &v1, MatF &v2) const
     {
         return 1.0 - correlation(v1, v2);
     }
 
-    float correlation(MatF&v1, MatF&v2)
+    float correlation(MatF&v1, MatF&v2) const
     {
         int n = v1.rows;
         assert(n == v2.rows);
@@ -302,7 +317,7 @@ public:
      */
     CosineMetric(QObject *parent = 0) : Metrics(parent) { }
 
-    virtual float distance(MatF &v1, MatF &v2)
+    virtual float distance(MatF &v1, MatF &v2) const
     {
         int n = v1.rows;
         assert(n == v2.rows);
@@ -337,7 +352,7 @@ public:
      */
     CosineWeightedMetric(QObject *parent = 0) : WeightedMetric(parent) { }
 
-    virtual float distance(MatF &v1, MatF &v2)
+    virtual float distance(MatF &v1, MatF &v2) const
     {
         int n = v1.rows;
         assert(n == v2.rows);
@@ -438,7 +453,7 @@ public:
      */
     SumOfSquareDifferences(QObject *parent = 0) : Metrics(parent) { }
 
-    float distance(MatF &v1, MatF &v2)
+    float distance(MatF &v1, MatF &v2) const
     {
         int n = v1.rows;
         assert(n == v2.rows);
