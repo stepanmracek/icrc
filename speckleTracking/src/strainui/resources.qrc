@@ -13,5 +13,8 @@
         <file>icons/pencil.png</file>
         <file>icons/resultset_first.png</file>
         <file>icons/resultset_last.png</file>
+        <file>icons/add.png</file>
+        <file>icons/delete.png</file>
+        <file>icons/star.png</file>
     </qresource>
 </RCC>
