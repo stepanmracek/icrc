@@ -37,7 +37,6 @@ public:
 
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole)
     {
-        if(role == Qt::EditRole)
         if(role != Qt::EditRole || index.column() != 0 || index.row() >= list.count())
             return false;
 
