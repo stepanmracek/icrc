@@ -92,6 +92,13 @@ public:
     }
 
     /**
+     * @brief Get equaly distanced points within the coord system area
+     * @param spacing Spacing between points
+     * @return Equaly spaced points
+     */
+    virtual Points getGrid(int spacing) const = 0;
+
+    /**
      * @brief Draws representation of coord system
      * @param scene Scene where new graphics items are added
      * @return List of added graphics items
@@ -131,6 +138,7 @@ public:
     QList<QGraphicsItem*> draw(QGraphicsScene *) { return QList<QGraphicsItem*>(); }
     Types type() { return TypePass; }
     CoordSystemBase *clone() { return new CoordSystemPass(); }
+    Points getGrid(int /*spacing*/) const { return Points(); }
 };
 
 /**
@@ -227,6 +235,8 @@ public:
     Types type() { return TypeRadial; }
 
     CoordSystemBase *clone();
+
+    Points getGrid(int spacing) const;
 };
 
 /**
@@ -252,6 +262,7 @@ public:
     QList<QGraphicsItem*> draw(QGraphicsScene * scene);
     Types type() { return TypeROI; }
     CoordSystemBase *clone() { return new CoordSystemROI(this); }
+    Points getGrid(int spacing) const;
 };
 
 #endif // COORDSYSTEM_H

@@ -3,12 +3,17 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 
-P AngleDistanceToPoint(float angle, float distance)
+namespace
+{
+
+P angleDistanceToPoint(float angle, float distance)
 {
     P p;
     p.y = sin(angle)*distance;
     p.x = cos(angle)*distance;
     return p;
+}
+
 }
 
 CoordSystemRadial::CoordSystemRadial(QObject *parent) : CoordSystemBase(parent)
@@ -115,7 +120,7 @@ Mat8 CoordSystemRadial::transform(const Mat8 &src)
         {
             float distance = r*distanceStep + startDistance;
 
-            P p = AngleDistanceToPoint(angle, distance);
+            P p = angleDistanceToPoint(angle, distance);
             //cv::circle(img, cv::Point(center.x+p.x, center.y+p.y), 1, 255);
             //std::cout << r << " " << c << " " << angle << " " << distance << " " << p.x << " " << p.y << std::endl ;
             result(r, resultMatCols - c - 1) = src(center.y+p.y, center.x+p.x);
@@ -142,7 +147,7 @@ P CoordSystemRadial::backTransform(P input)
 {
     float angle = angleStart + (resultMatCols - input.x - 1)/resultMatCols * dAngle;
     float distance = startDistance + input.y/resultMatRows * dDistance;
-    P p = AngleDistanceToPoint(angle, distance);
+    P p = angleDistanceToPoint(angle, distance);
     p.x += center.x;
     p.y += center.y;
     return p;
@@ -197,12 +202,12 @@ QList<QGraphicsItem*> CoordSystemRadial::draw(QGraphicsScene *scene)
     QList<QGraphicsItem*> result;
     QPen pen(Qt::red);
 
-    P p1 = AngleDistanceToPoint(angleStart, startDistance);
-    P p2 = AngleDistanceToPoint(angleStart, endDistance);
+    P p1 = angleDistanceToPoint(angleStart, startDistance);
+    P p2 = angleDistanceToPoint(angleStart, endDistance);
     result << scene->addLine(center.x + p1.x, center.y + p1.y, center.x + p2.x, center.y + p2.y, pen);
 
-    P p3 = AngleDistanceToPoint(angleEnd, startDistance);
-    P p4 = AngleDistanceToPoint(angleEnd, endDistance);
+    P p3 = angleDistanceToPoint(angleEnd, startDistance);
+    P p4 = angleDistanceToPoint(angleEnd, endDistance);
     result << scene->addLine(center.x + p3.x, center.y + p3.y, center.x + p4.x, center.y + p4.y, pen);
 
     QPainterPath painterPath;
@@ -228,6 +233,25 @@ QList<QGraphicsItem*> CoordSystemRadial::draw(QGraphicsScene *scene)
 CoordSystemBase *CoordSystemRadial::clone()
 {
     return new CoordSystemRadial(this);
+}
+
+Points CoordSystemRadial::getGrid(int spacing) const
+{
+    Points result;
+
+    float angleStep = (angleEnd - angleStart) / ((endDistance - startDistance) / spacing);
+    for (float  angle = angleStart + angleStep; angle <= angleEnd - angleStep; angle += angleStep)
+    {
+        for (float d = startDistance + spacing; d <= endDistance - spacing; d += spacing)
+        {
+            P p = angleDistanceToPoint(angle, d);
+            p.x += center.x;
+            p.y += center.y;
+            result.push_back(p);
+        }
+    }
+
+    return result;
 }
 
 //----------------------------------------------------
@@ -263,3 +287,15 @@ QList<QGraphicsItem *> CoordSystemROI::draw(QGraphicsScene * scene)
     return result;
 }
 
+Points CoordSystemROI::getGrid(int spacing) const
+{
+    Points result;
+    for (int x = roi.x; x <= roi.x + roi.width; x += spacing)
+    {
+        for (int y = roi.y; y <= roi.y + roi.height; y += spacing)
+        {
+            result.push_back(P(x, y));
+        }
+    }
+    return result;
+}
