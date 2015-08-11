@@ -29,7 +29,8 @@ HEADERS += \
     strain.h \
     longitudinalstrain.h \
     batchtestingold.h \
-    strainclassifier.h
+    strainclassifier.h \
+    beatdetector.h
 
 SOURCES += \
     statisticalshapemodel.cpp \
@@ -50,4 +51,5 @@ SOURCES += \
     longitudinalstrain.cpp \
     pointtrackerbase.cpp \
     batchtestingold.cpp \
-    strainclassifier.cpp
+    strainclassifier.cpp \
+    beatdetector.cpp

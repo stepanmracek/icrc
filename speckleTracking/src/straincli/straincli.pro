@@ -17,9 +17,11 @@ INCLUDEPATH += ..
 
 HEADERS += \
     batchstraintracker.h \
-    createmodel.h
+    createmodel.h \
+    testbeatdetection.h
 
 SOURCES += \
     batchstraintracker.cpp \
     main.cpp \
-    createmodel.cpp
+    createmodel.cpp \
+    testbeatdetection.cpp
