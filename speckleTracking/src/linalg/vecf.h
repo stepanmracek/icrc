@@ -73,6 +73,8 @@ public:
     static float stdDeviation(VectorF &vector);
 
     static VectorF resample(const VectorF &vector, int samplesCount);
+
+    static VectorF floatingAverage(const VectorF &input, int kernelSize);
 };
 
 #endif // VECF_H

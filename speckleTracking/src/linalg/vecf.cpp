@@ -6,41 +6,6 @@
 #include <vector>
 #include <cassert>
 
-/*MatF VecF::fromFile(const QString &path)
-{
-	assert(QFile::exists(path));
-    QFile f(path);
-    f.open(QIODevice::ReadOnly);
-    QTextStream in(&f);
-
-    VectorF data;
-    while (!in.atEnd())
-    {
-         float value;
-        in >> value;
-
-        if (in.status() == QTextStream::ReadPastEnd)
-            break;
-
-        data.append(value);
-    }
-
-    f.close();
-
-    int r = data.size();
-    MatF vector(r, 1, CV_64F);
-    for (int i = 0; i < r; i++)
-    {
-        vector(i) = data.at(i);
-    }
-
-    if(Common::MatFContainsNan(vector))
-    {
-    	qDebug() << path.toStdString().c_str() << "contains Nan";
-    }
-    return vector;
-}*/
-
 float VecF::sqrMagnitude(MatF &vector)
 {
     int n = vector.rows;
@@ -163,223 +128,64 @@ VectorF VecF::fromFile(const QString &path)
     return result;
 }
 
-/*void VecF::toFileWithIndicies(MatF &vector, const QString &path, bool append)
-{
-    QFile f(path);
-    if (append)
-        f.open(QIODevice::WriteOnly | QIODevice::Append);
-    else
-        f.open(QIODevice::WriteOnly);
-    QTextStream out(&f);
-
-    int n = vector.rows;
-    for (int i = 0; i < n; i++)
-    {
-        out << i << ' ' << vector(i) << '\n';
-    }
-    out << '\n';
-
-    out.flush();
-    f.close();
-}*/
-
-/*void VecF::toFileTwoCols(MatF &vector,const QString &path, bool append)
-{
-    int n = vector.rows;
-    assert(n % 2 == 0);
-    n = n/2;
-
-    QFile f(path);
-    if (append)
-        f.open(QIODevice::WriteOnly | QIODevice::Append);
-    else
-        f.open(QIODevice::WriteOnly);
-    QTextStream out(&f);
-
-    for (int i = 0; i < n; i++)
-    {
-        out <<vector(i) << ' ' <<  vector(i+n) << '\n';
-    }
-    out << '\n';
-
-    out.flush();
-    f.close();
-}*/
-
-/*MatF VecF::fromTwoColsFile(const QString &path)
-{
-	assert(QFile::exists(path));
-    QFile f(path);
-    bool opened = f.open(QIODevice::ReadOnly);
-    assert(opened);
-    QTextStream in(&f);
-
-    VectorF x;
-    VectorF y;
-
-    bool isX = true;
-    while (!in.atEnd())
-    {
-        float value;
-        in >> value;
-
-        if (in.status() == QTextStream::ReadPastEnd)
-            break;
-
-        if (isX)
-        {
-            x.append(value);
-        }
-        else
-        {
-            y.append(value);
-        }
-
-        isX = !isX;
-    }
-    assert(x.size() == y.size());
-    f.close();
-
-    int r = x.size() + y.size();
-    MatF vector(r, 1, CV_64F);
-
-    for (int i = 0; i < x.size(); i++)
-    {
-        vector(i) = x[i];
-    }
-    for (int i = 0; i < y.size(); i++)
-    {
-        vector(x.size()+i) = y[i];
-    }
-
-    return vector;
-}*/
-
 int VecF::maxIndex(MatF &vector)
 {
-    float max = -1e300;
-    int index = -1;
-    int r = vector.rows;
-    assert(r > 0);
-    for (int i = 0; i < r; i++)
-    {
-        float v = vector(i);
-        if (v > max)
-        {
-            index = i;
-            max = v;
-        }
-    }
-    return index;
+    double min, max;
+    int minIdx, maxIdx;
+    cv::minMaxIdx(vector, &min, &max, &minIdx, &maxIdx);
+    return maxIdx;
 }
 
 int VecF::maxIndex(VectorF &vector)
 {
-    float max = -1e300;
-    int index = -1;
-    int r = vector.size();
-    assert(r > 0);
-    for (int i = 0; i < r; i++)
-    {
-        float v = vector.at(i);
-        if (v > max)
-        {
-            index = i;
-            max = v;
-        }
-    }
-    assert(index != -1);
-    /*if (index == -1)
-    {
-    	std::cout << vector;
-    }*/
-    return index;
+    return std::max_element(vector.begin(), vector.end()) - vector.begin();
 }
 
 float VecF::maxValue(MatF &vector)
 {
-    return vector(maxIndex(vector));
+    double min, max;
+    cv::minMaxIdx(vector, &min, &max);
+    return max;
 }
 
 float VecF::maxValue(VectorF &vector)
 {
-    return vector.at(maxIndex(vector));
+    return *std::max_element(vector.begin(), vector.end());
 }
 
 int VecF::minIndex(MatF &vector)
 {
-    float min = 1e300;
-    int index = -1;
-    int r = vector.rows;
-    assert(r > 0);
-    for (int i = 0; i < r; i++)
-    {
-        float v = vector(i);
-        if (v < min)
-        {
-            min = v;
-            index = i;
-        }
-    }
-    return index;
+    double min, max;
+    int minIdx, maxIdx;
+    cv::minMaxIdx(vector, &min, &max, &minIdx, &maxIdx);
+    return minIdx;
 }
 
 int VecF::minIndex(VectorF &vector)
 {
-    float min = 1e300;
-    int index = -1;
-    int r = vector.size();
-    assert(r > 0);
-    for (int i = 0; i < r; i++)
-    {
-        float v = vector.at(i);
-        if (v < min)
-        {
-            min = v;
-            index = i;
-        }
-    }
-    assert(index != -1);
-    /*if (index == -1)
-    {
-    	std::cout << vector;
-    }*/
-    return index;
+    return std::min_element(vector.begin(), vector.end()) - vector.begin();
 }
 
 float VecF::minValue(MatF &vector)
 {
-    return vector(minIndex(vector));
+    double min, max;
+    cv::minMaxIdx(vector, &min, &max);
+    return min;
 }
 
 float VecF::minValue(VectorF &vector)
 {
-	int i = minIndex(vector);
-    return vector.at(i);
+    return *std::min_element(vector.begin(), vector.end());
 }
 
 float VecF::meanValue(MatF &vector)
 {
-    float sum = 0;
-    int r = vector.rows;
-    for (int i = 0; i < r; i++)
-    {
-        sum += vector(i);
-    }
-
-    return sum/r;
+    return cv::sum(vector)[0] / vector.rows;
 }
 
 float VecF::meanValue(const VectorF &vector)
 {
-    float sum = 0;
-    int r = vector.size();
-    for (int i = 0; i < r; i++)
-    {
-        sum += vector.at(i);
-    }
-
-    return sum/r;
+    return std::accumulate(vector.begin(), vector.end(), 0.0f) / vector.size();
 }
 
 float VecF::stdDeviation(MatF &vector)
@@ -489,6 +295,33 @@ VectorF VecF::resample(const VectorF &vector, int samplesCount)
         float interpolated = first + delta * (second - first);
 
         result.push_back(interpolated);
+    }
+
+    return result;
+}
+
+VectorF VecF::floatingAverage(const VectorF &input, int kernelSize)
+{
+    assert(kernelSize >= 1);
+    assert(kernelSize % 2 == 1);
+    int w = kernelSize/2;
+
+    size_t n = input.size();
+    VectorF result(n);
+    for (size_t i = 0; i < n; i++)
+    {
+        int min = i - w;
+        if (min < 0) min = 0;
+        size_t max = i + w;
+        if (max >= n) max = n - 1;
+        int count = 0;
+        float sum = 0.0f;
+        for (size_t j = min; j <= max; j++)
+        {
+           sum += input[j];
+           count++;
+        }
+        result[i] = sum/count;
     }
 
     return result;
