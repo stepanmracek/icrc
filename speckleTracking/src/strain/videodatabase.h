@@ -11,6 +11,7 @@ class VideoDataBase : public QObject
 public:
     VideoDataBase(QObject *parent = 0) : QObject(parent) { }
 
+    virtual int index() const = 0;
     virtual void setIndex(int index) = 0;
     virtual bool getNextFrame(Mat8 &frame) = 0;
     virtual bool getFrame(Mat8 &frame, int index) = 0;

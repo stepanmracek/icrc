@@ -54,6 +54,7 @@ public:
     QString getSubClip(int index, QMap<int, Points> &shapes,
                        VideoDataClip *outSubCLip, VectorOfShapes &outSubShapes, QMap<int, Points> &outSubShapesMap);
 
+    virtual int index() const;
     virtual void setIndex(int index);
     virtual bool getNextFrame(Mat8 &frame);
     virtual bool getFrame(Mat8 &frame, int index);

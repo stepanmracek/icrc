@@ -74,6 +74,11 @@ int VideoDataClip::size() const
     return frames.size();
 }
 
+int VideoDataClip::index() const
+{
+    return currentIndex;
+}
+
 void VideoDataClip::setIndex(int index)
 {
     currentIndex = index;
