@@ -82,6 +82,14 @@ private slots:
 
     void on_actionResProcNone_triggered();
 
+    void on_btnShiftBeatLeft_clicked();
+
+    void on_btnShiftBeatRight_clicked();
+
+    void onBeatSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+
+    void on_btnBeatDetect_clicked();
+
 private:
     void setTracker(ShapeTracker *tracker);
 

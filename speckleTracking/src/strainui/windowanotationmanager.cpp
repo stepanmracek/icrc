@@ -26,6 +26,7 @@
 #include "dialogimageprocessing.h"
 #include "dialogshapemodel.h"
 #include "strain/strainresultprocessing.h"
+#include "strain/beatdetector.h"
 
 WindowAnotationManager::WindowAnotationManager(const QString &path, ShapeTracker *tracker, QWidget *parent) :
     QMainWindow(parent), ui(new Ui::WindowAnotationManager)
@@ -33,6 +34,9 @@ WindowAnotationManager::WindowAnotationManager(const QString &path, ShapeTracker
     ui->setupUi(this);
     setTracker(tracker);
     setDirectory(path);
+
+
+    connect(ui->listViewBeats->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(onBeatSelectionChanged(QItemSelection, QItemSelection)));
 }
 
 WindowAnotationManager::~WindowAnotationManager()
@@ -436,6 +440,64 @@ void WindowAnotationManager::on_btnRemoveBeat_clicked()
     model->removeRow(modelIndex.row());
 }
 
+void WindowAnotationManager::on_btnShiftBeatLeft_clicked()
+{
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
+
+    QAbstractItemModel *model = ui->listViewBeats->model();
+    QModelIndex index = ui->listViewBeats->currentIndex();
+    int row = index.row();
+    if (row < 0) return;
+
+    int value = clip->getMetadata()->beatIndicies[row];
+    if (value > 0)
+    {
+        model->setData(index, value - 1);
+        ui->widgetStrainVideo->display(value - 1);
+    }
+}
+
+void WindowAnotationManager::on_btnShiftBeatRight_clicked()
+{
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
+
+    QAbstractItemModel *model = ui->listViewBeats->model();
+    QModelIndex index = ui->listViewBeats->currentIndex();
+    int row = index.row();
+    if (row < 0) return;
+
+    int value = clip->getMetadata()->beatIndicies[row];
+    if (value < clip->size() - 1)
+    {
+        model->setData(index, value + 1);
+        ui->widgetStrainVideo->display(value + 1);
+    }
+}
+
+void WindowAnotationManager::onBeatSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
+{
+    if (selected.empty()) return;
+    if (selected.first().indexes().empty()) return;
+
+    int selectedIndex = selected.first().indexes().first().row();
+    int index = ui->widgetStrainVideo->getClip()->getMetadata()->beatIndicies[selectedIndex];
+    qDebug() << "selected index" << index;
+    ui->widgetStrainVideo->display(index);
+}
+
+void WindowAnotationManager::on_btnBeatDetect_clicked()
+{
+    VideoDataClip *clip = ui->widgetStrainVideo->getClip();
+    if (!clip || clip->size() == 0) return;
+
+    BeatDetector detector;
+    clip->getMetadata()->beatIndicies = detector.detect(clip);
+    ui->listViewBeats->setModel(new ModelListOfInts(clip->getMetadata()->beatIndicies, this));
+
+}
+
 void WindowAnotationManager::on_actionWeights1_triggered()
 {
     VectorF weights;
@@ -483,3 +545,4 @@ void WindowAnotationManager::on_actionResProcNone_triggered()
     tracker->setResultProcessing(proc);
     updateTrackerInfo();
 }
+
