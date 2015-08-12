@@ -88,12 +88,6 @@ public:
 
     ShapeMap track(const VideoDataClip *clip, int startIndex, int endIndex, const Points &initialShape, QProgressDialog *progress = 0);
 
-    //static Points track(Mat8 &prevFrame, Points &prevPoints, Mat8 &nextFrame, Strain &strain, CoordSystemBase *coordSystem, ListOfImageProcessing &frameProcessing, PointTrackerBase &pointTracker);
-
-    /*static VectorOfShapes track(VideoDataBase &data, Strain &strain, ListOfProcessing &frameProcessing,
-                                PointTrackerBase &pointTracker, StrainResultProcessingBase &resultProcessing,
-                                Points &initialPoints, bool showVideo = false);*/
-
     static ShapeTracker *getDummyTracker();
 };
 
