@@ -22,17 +22,6 @@ WidgetStrainVideo::~WidgetStrainVideo()
 
 void WidgetStrainVideo::display(int index)
 {
-    Mat8 &frame = clip->frames[index];
-    QPixmap image = UIUtils::Mat8ToQPixmap(frame);
-    ui->widgetResult->setImage(image);
-    ui->lblIndex->setText(QString::number(index));
-    if (shapes.contains(index))
-        ui->widgetResult->setResultPoints(shapes[index], clip->getMetadata()->getCoordSystem());
-    emit displayIndexChanged(index);
-}
-
-void WidgetStrainVideo::setSliderValue(int index)
-{
     ui->horizontalSlider->setValue(index);
 }
 
@@ -82,14 +71,24 @@ void WidgetStrainVideo::on_btnNextBeat_clicked()
 
 void WidgetStrainVideo::on_horizontalSlider_valueChanged(int value)
 {
-    if (!clip) return;
-    if (clip->size() == 0) return;
-    if (value >= clip->size()) return;
+    if (!clip) {
+        qDebug() << "on_horizontalSlider_valueChanged: no clip";
+        return;
+    }
+    if (clip->size() == 0) {
+        qDebug() << "on_horizontalSlider_valueChanged: empty clip";
+        return;
+    }
+    if (value >= clip->size()) {
+        qDebug() << "on_horizontalSlider_valueChanged: requested value exceeds clip size";
+        return;
+    }
 
     Mat8 &frame = clip->frames[value];
     QPixmap image = UIUtils::Mat8ToQPixmap(frame);
     ui->widgetResult->setImage(image);
     currentIndex = value;
+    ui->lblIndex->setText(QString::number(value));
 
     if (shapes.contains(currentIndex))
     {
@@ -99,6 +98,8 @@ void WidgetStrainVideo::on_horizontalSlider_valueChanged(int value)
     {
         ui->widgetResult->setResultPoints(Points(), clip->getMetadata()->getCoordSystem());
     }
+
+    emit displayIndexChanged(value);
 }
 
 void WidgetStrainVideo::unload()

@@ -27,6 +27,7 @@
 #include "dialogshapemodel.h"
 #include "strain/strainresultprocessing.h"
 #include "strain/beatdetector.h"
+#include "dialogbeatdetector.h"
 
 WindowAnotationManager::WindowAnotationManager(const QString &path, ShapeTracker *tracker, QWidget *parent) :
     QMainWindow(parent), ui(new Ui::WindowAnotationManager)
@@ -34,9 +35,6 @@ WindowAnotationManager::WindowAnotationManager(const QString &path, ShapeTracker
     ui->setupUi(this);
     setTracker(tracker);
     setDirectory(path);
-
-
-    connect(ui->listViewBeats->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(onBeatSelectionChanged(QItemSelection, QItemSelection)));
 }
 
 WindowAnotationManager::~WindowAnotationManager()
@@ -131,7 +129,14 @@ void WindowAnotationManager::loadFile(QString fileName)
 
     qDebug() << "Loading" << fileName;
     ui->widgetStrainVideo->load(path, fileName);
+    updateBeatModel();
+}
+
+void WindowAnotationManager::updateBeatModel()
+{
+    ui->listViewBeats->selectionModel()->disconnect();
     ui->listViewBeats->setModel(new ModelListOfInts(ui->widgetStrainVideo->getClip()->getMetadata()->beatIndicies, this));
+    connect(ui->listViewBeats->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), SLOT(onBeatSelectionChanged(QItemSelection, QItemSelection)));
 }
 
 void WindowAnotationManager::on_btnAnotate_clicked()
@@ -492,10 +497,16 @@ void WindowAnotationManager::on_btnBeatDetect_clicked()
     VideoDataClip *clip = ui->widgetStrainVideo->getClip();
     if (!clip || clip->size() == 0) return;
 
-    BeatDetector detector;
-    clip->getMetadata()->beatIndicies = detector.detect(clip);
-    ui->listViewBeats->setModel(new ModelListOfInts(clip->getMetadata()->beatIndicies, this));
+    DialogBeatDetector dlg(this);
+    if (dlg.exec() != QDialog::Accepted) return;
 
+    QProgressDialog progress("Processing...", QString(), 0, clip->size());
+    progress.setModal(Qt::WindowModal);
+    progress.setMinimumDuration(0);
+
+    BeatDetector detector(dlg.getSettings());
+    clip->getMetadata()->beatIndicies = detector.detect(clip, false, &progress);
+    updateBeatModel();
 }
 
 void WindowAnotationManager::on_actionWeights1_triggered()

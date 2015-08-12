@@ -91,6 +91,8 @@ private slots:
     void on_btnBeatDetect_clicked();
 
 private:
+    void updateBeatModel();
+
     void setTracker(ShapeTracker *tracker);
 
     void updateTrackerInfo();

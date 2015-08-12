@@ -45,7 +45,7 @@ void DialogStrainStatistics::timerTick()
 {
     int i = ui->strainVideoWidget->getCurrentIndex();
     int n = ui->strainVideoWidget->getClip()->size();
-    ui->strainVideoWidget->setSliderValue((i+1) % n);
+    ui->strainVideoWidget->display((i+1) % n);
 }
 
 void DialogStrainStatistics::on_playSlider_valueChanged(int value)
