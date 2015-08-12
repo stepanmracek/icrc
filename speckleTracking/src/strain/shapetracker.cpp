@@ -10,10 +10,6 @@
 
 void drawAllPoints(Mat8 &image, Points &points)
 {
-    //int n = points.size();
-    //if (n == 0) return;
-    //for (int i = 0; i < n; i++)
-    //    cv::circle(image, points.at(i), 3, cv::Scalar(255));
     Spline spline;
     spline.drawSpline(points, image, true);
 }
@@ -139,88 +135,6 @@ ShapeMap ShapeTracker::track(const VideoDataClip *clip, int startIndex, int endI
 
     return resultProcessing->process(resultShapes, startIndex, endIndex, clip);
 }
-
-/*VectorOfShapes ShapeTracker::track(VideoDataBase &data, Strain &strain, ListOfProcessing &frameProcessing,
-                                   PointTrackerBase &pointTracker, StrainResultProcessingBase &resultProcessing,
-                                   Points &initialPoints, bool showVideo)
-{
-    VectorOfShapes result;
-
-    data.setIndex(0);
-    Mat8 firstframe;
-    data.getNextFrame(firstframe);
-
-    int pointCount = strain.shapeNormalizer.getNumberOfPoints();
-
-    // make uniform distance between initial points
-    //Spline spline;
-    Points uniformPointsInOriginalCoorSystem = spline.uniformDistance(initialPoints, pointCount, true);
-    result.push_back(uniformPointsInOriginalCoorSystem);
-
-    // transform point to desired coord system
-    Points uniformPoints = strain.coordSystem.transformPoints(uniformPointsInOriginalCoorSystem);
-
-    if (showVideo)
-    {
-        Mat8 firstFrameWithUniformPoints = strain.coordSystem.transform(firstframe);
-        drawAllPoints(firstFrameWithUniformPoints, uniformPoints);
-
-        cv::imshow("transformed anotation", firstFrameWithUniformPoints);
-        cv::waitKey(0);
-    }
-
-    // create video window
-    const char *winName = "video";
-    if (showVideo)
-        cv::namedWindow(winName);
-    Mat8 prevFrame = firstframe.clone();
-    Mat8 transformedPrevFrame = strain.coordSystem.transform(prevFrame);
-    applyProcessing(transformedPrevFrame, frameProcessing);
-    Mat8 nextFrame, transformedNextFrame;
-
-    // initiate point tracking
-    Points prevPoints = uniformPoints;
-    Points nextPoints = uniformPoints;
-    Points nextPointsInOriginalSpace;
-    int counter = 1;
-    while (data.getNextFrame(nextFrame))
-    {
-        std::cout << "frame: " << (counter++) << std::endl;
-
-        // transform and aplly processing filters
-        transformedNextFrame = strain.coordSystem.transform(nextFrame);
-        applyProcessing(transformedNextFrame, frameProcessing);
-
-        // track
-        pointTracker.track(transformedPrevFrame, transformedNextFrame, prevPoints, nextPoints);
-
-        // normalize points
-        nextPoints = strain.shapeNormalizer.normalize(nextPoints, transformedNextFrame);
-
-        // append to result
-        nextPointsInOriginalSpace = strain.coordSystem.backTransformPoints(nextPoints);
-
-        // draw?
-        if (showVideo)
-        {
-            drawAllPoints(transformedNextFrame, nextPoints);
-            cv::imshow(winName, transformedNextFrame);
-
-            drawAllPoints(nextFrame, nextPointsInOriginalSpace);
-            cv::imshow("original", nextFrame);
-
-            if (cv::waitKey(50) >= 0) break;
-        }
-
-        // copy current frame as previous one for the next iteration
-        prevFrame = nextFrame.clone();
-        transformedPrevFrame = transformedNextFrame.clone();
-        prevPoints = nextPoints;
-    }
-
-    VectorOfShapes processedResult = resultProcessing.process(result, data);
-    return processedResult;
-}*/
 
 ShapeTracker *ShapeTracker::getDummyTracker()
 {
