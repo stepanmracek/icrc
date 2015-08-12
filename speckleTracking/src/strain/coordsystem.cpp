@@ -159,7 +159,8 @@ struct CSAnotationData
     Points points;
 };
 
-void onCSMouse(int event, int x, int y, int /*flags*/, void* param)
+namespace {
+void onMouseEvent(int event, int x, int y, int /*flags*/, void* param)
 {
     CSAnotationData *data = (CSAnotationData*)param;
 
@@ -172,6 +173,7 @@ void onCSMouse(int event, int x, int y, int /*flags*/, void* param)
         cv::imshow("image", data->image);
     }
 }
+}
 
 void CoordSystemRadial::AnotateAngleDistance(Mat8 &src, P &center, P &arcStart, P &arcEnd)
 {
@@ -180,7 +182,7 @@ void CoordSystemRadial::AnotateAngleDistance(Mat8 &src, P &center, P &arcStart, 
     CSAnotationData anotationData;
     anotationData.image = src.clone();
 
-    cv::setMouseCallback("image", onCSMouse, &anotationData);
+    cv::setMouseCallback("image", onMouseEvent, &anotationData);
     cv::waitKey(0);
 
     if (anotationData.points.size() < 3) return;
