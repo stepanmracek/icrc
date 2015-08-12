@@ -28,25 +28,21 @@ VideoDataClip::VideoDataClip(const QString &path, const QString &metadataPath, Q
     frames.reserve(frameCount);
 
     cv::Mat rawFrame;
-    //int frameIndex = 0;
-    //while (capture.read(rawFrame))
     for (int frameIndex = 0; frameIndex < frameCount; frameIndex++)
     {
         capture.read(rawFrame);
-        //qDebug() << frameIndex;
+        if (rawFrame.rows == 0 || rawFrame.cols == 0) continue;
+
         Mat8 frame;
         cv::cvtColor(rawFrame, frame, cv::COLOR_BGR2GRAY);
         frames.push_back(frame);
 
         if (progressDlg) progressDlg->setValue(frameIndex);
-        //frameIndex++;
     }
     if (progressDlg) progressDlg->setValue(frameCount);
-    //qDebug() << "video loaded";
 
     cv::FileStorage metadataStorage(metadataPath.toStdString(), cv::FileStorage::READ);
     metadata->deserialize(metadataStorage);
-    //qDebug() << "metadata loaded";
 }
 
 VideoDataClip::VideoDataClip(QObject *parent) : VideoDataBase(parent)
