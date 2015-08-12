@@ -32,7 +32,7 @@ private:
 public:
     explicit BeatDetector(const Settings &settings = Settings(), QObject *parent = 0);
 
-    QVector<int> detect(VideoDataClip *clip, bool debug = false);
+    QVector<int> detect(VideoDataClip *clip, bool debug = false, QProgressDialog *progress = 0);
 };
 
 #endif // BEATDETECTOR_H

@@ -1,5 +1,6 @@
 #include "beatdetector.h"
 
+#include <QProgressDialog>
 #include <iomanip>
 
 #include "linalg/vecf.h"
@@ -10,7 +11,7 @@ BeatDetector::BeatDetector(const Settings &settings, QObject *parent) :
 
 }
 
-QVector<int> BeatDetector::detect(VideoDataClip *clip, bool debug)
+QVector<int> BeatDetector::detect(VideoDataClip *clip, bool debug, QProgressDialog *progress)
 {
     auto printIndicies = [] (const QVector<int> &indicies) -> void
     {
@@ -47,6 +48,8 @@ QVector<int> BeatDetector::detect(VideoDataClip *clip, bool debug)
     P center(tPrevFrame.cols/2, tPrevFrame.rows/2);
     while (clip->getNextFrame(nextFrame))
     {
+        if (progress) progress->setValue(clip->index());
+
         Mat8 tNextFrame = coord->transform(nextFrame);
         cv::calcOpticalFlowPyrLK(tPrevFrame, tNextFrame, tPoints, tNextPoints, status, err);
 
