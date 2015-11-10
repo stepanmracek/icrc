@@ -1,8 +1,8 @@
 #include <QString>
 #include <QDebug>
 #include <QApplication>
-#include <vector>
-#include <opencv2/core/core.hpp>
+#include <QFileDialog>
+#include <QCommandLineParser>
 
 #include "linalg/common.h"
 #include "linalg/serialization.h"
@@ -16,12 +16,32 @@
 
 int main(int argc, char *argv[])
 {
+    QApplication app(argc, argv);
+    QCommandLineParser parser;
+    parser.addOption(QCommandLineOption("directory", "Directory containing video files", "directory"));
+    parser.addOption(QCommandLineOption("model", "Left Vebtricle model file", "model"));
+    parser.addHelpOption();
+    parser.process(app);
+    
+    QString directory, model;
+    if (!parser.isSet("directory"))
+        directory = QFileDialog::getExistingDirectory(0, "Select directory containing videos");
+    else
+        directory = parser.value("directory");
+    
+    if (!parser.isSet("model"))
+        model = QFileDialog::getOpenFileName(0, "Select model");
+    else
+        model = parser.value("model");
+    
+    if (directory.isEmpty() || directory.isNull() || model.isEmpty() || model.isNull()) return 0;
+    
     PCA *pca = new PCA();
     StatisticalShapeModel *shapeModel = new StatisticalShapeModel(pca);
     ShapeNormalizerBase *normalizer = new ShapeNormalizerIterativeStatisticalShape(shapeModel);
     LongitudinalStrain *strain = new LongitudinalStrain(normalizer, 0, 0);
 
-    cv::FileStorage strainStorage("/home/stepo/Dropbox/projekty/icrc/dataDir/longstrain-fm-6-10", cv::FileStorage::READ);
+    cv::FileStorage strainStorage(model.toStdString(), cv::FileStorage::READ);
     //cv::FileStorage strainStorage("potkani", cv::FileStorage::READ);
     strain->deserialize(strainStorage);
 
@@ -34,9 +54,7 @@ int main(int argc, char *argv[])
     qDebug() << "Tracker initializated";
 
     // create GUI
-    QApplication app(argc, argv);
-    //WindowAnotationManager w("/mnt/data/strain/potkani", tracker);
-    WindowAnotationManager w("/home/stepo/Dropbox/projekty/icrc/test3/", tracker);
+    WindowAnotationManager w(directory, tracker);
     w.show();
     return app.exec();
 }

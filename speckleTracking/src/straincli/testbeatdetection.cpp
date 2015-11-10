@@ -9,11 +9,12 @@
 
 void TestBeatDetection::test()
 {
-    BeatDetector::Settings settings(20, 15, BeatDetector::DetectionSource::Angle, BeatDetector::PrevFramePolicy::Prev);
+    BeatDetector::Settings settings(20, 15, BeatDetector::DetectionSource::CenterDirection, BeatDetector::PrevFramePolicy::Prev);
     BeatDetector detector(settings);
 
-    QString path = "/home/stepo/Dropbox/projekty/icrc/test3/";
-    QDir dir(path, "*.mp4");
+    QString path = "/home/stepo/Dropbox/projekty/icrc/test1/";
+    QDir dir(path);
+    dir.setNameFilters(QStringList() << "*.mp4" << "*.wmv");
     QFileInfoList infolist = dir.entryInfoList();
     for (QFileInfo &i : infolist)
     {

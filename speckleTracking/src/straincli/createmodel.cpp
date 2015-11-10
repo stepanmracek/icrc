@@ -2,6 +2,7 @@
 
 #include <QDir>
 #include <QDebug>
+#include <vector>
 
 #include "linalg/pca.h"
 #include "linalg/frequencymodulation.h"
@@ -10,6 +11,62 @@
 #include "strain/longitudinalstrain.h"
 #include "strain/shapenormalizer.h"
 
+QList<QCommandLineOption> CreateModel::Settings::getCommandLineOptions()
+{
+    QList<QCommandLineOption> result;
+    
+    result << QCommandLineOption("freqStart", "Frequency start", "freqStart", "1.0");
+    result << QCommandLineOption("freqEnd", "Frequency end", "freqEnd", "3.0");
+    result << QCommandLineOption("freqStep", "Frequency step", "freqStep", "1.0");
+    result << QCommandLineOption("phaseSteps", "Phase steps", "phaseSteps", "3.0");
+    result << QCommandLineOption("amplitude", "Amplitude", "amplitude", "1.0");
+    result << QCommandLineOption("pointsPerSegment", "Points per segment", "pointsPerSegment", "10");
+    result << QCommandLineOption("segments", "Segments", "segments", "6");
+    result << QCommandLineOption("widths", "Widths", "widths", "15;20;25");
+    
+    return result;
+}
+
+CreateModel::Settings CreateModel::Settings::get(const QCommandLineParser &parser)
+{
+    CreateModel::Settings result;
+    result.freqStart = parser.value("freqStart").toFloat();
+    result.freqEnd = parser.value("freqEnd").toFloat();
+    result.freqStep = parser.value("freqStep").toFloat();
+    result.phaseSteps = parser.value("phaseSteps").toFloat();
+    result.amplitude = parser.value("amplitude").toFloat();
+    result.pointsPerSegment = parser.value("pointsPerSegment").toInt();
+    result.segments = parser.value("segments").toInt();
+    
+    result.widths.clear();
+    QString widthsS = parser.value("widths");
+    QStringList widthsList = widthsS.split(";", QString::SkipEmptyParts);
+    for (const QString &w : widthsList) {
+        result.widths.push_back(w.toInt());
+    }
+    
+    return result;
+}
+
+void CreateModel::Settings::print() const
+{
+    QTextStream  s(stdout);
+    s << "freqStart: " << freqStart << "\n";
+    s << "freqEnd: " << freqEnd << "\n";
+    s << "phaseSteps: " << phaseSteps << "\n";
+    s << "amplitude: " << amplitude << "\n";
+    s << "pointsPerSegment: " << pointsPerSegment << "\n";
+    s << "segments: " << segments << "\n";
+    
+    s << "widths: ";
+    for (const float &f: widths)
+    {
+        s << f << ";";
+    }
+    s << "\n";
+}
+
+namespace {
 bool checkMatrix(const cv::Mat &mat)
 {
     for (int r = 0; r < mat.rows; r++)
@@ -27,7 +84,7 @@ bool checkMatrix(const cv::Mat &mat)
     return true;
 }
 
-#include <vector>
+
 
 void minMax(const Points &points, float &minX, float &maxX, float &minY, float &maxY)
 {
@@ -68,43 +125,41 @@ void preview(const Points &rawPoints, const Points &allPoints)
     cv::imshow("shape", img);
     cv::waitKey(0);
 }
+}
 
-void CreateModel::create(const QString &dirPath, const QString &modelName)
+void CreateModel::create(const QString &dirPath, const QString &modelName, const Settings &s)
 {
-    float freqStart = 1.0;
-    float freqEnd = 3.0;
-    float freqStep = 1.0;
-    float phaseSteps = 3.0;
-    float amplitude = 1.0;
-    int pointsPerSegment = 10;
-    int segments = 6;
-
+    s.print();
+    
+    QTextStream out(stdout);
+    
+    out << "Generating modulation values" << endl;
     std::vector<VectorF> modValuesVector =
-            FrequencyModulation::generateModulationValues(segments*pointsPerSegment + 1,
-                                                          freqStart, freqEnd, freqStep, phaseSteps, amplitude);
-
-    VectorF widths; widths.push_back(15); widths.push_back(20); widths.push_back(25);
+            FrequencyModulation::generateModulationValues(s.segments*s.pointsPerSegment + 1,
+                                                          s.freqStart, s.freqEnd, s.freqStep, s.phaseSteps, s.amplitude);
 
     QString nameFilter = "*_metadata";
     QDir dir(dirPath, nameFilter);
 
     VectorOfShapes shapes;
-    LongitudinalStrain dummyStrain(new ShapeNormalizerPass(), segments, pointsPerSegment);
+    LongitudinalStrain dummyStrain(new ShapeNormalizerPass(), s.segments, s.pointsPerSegment);
 
+    out << "Loading metadata files from " << dirPath << endl;
     QFileInfoList files = dir.entryInfoList();
+    out << "Loaded " << files.length() << " files" << endl;
     foreach (const QFileInfo &fInfo, files)
     {
         cv::FileStorage mdStorage(fInfo.absoluteFilePath().toStdString(), cv::FileStorage::READ);
         VideoDataClipMetadata metaData(0);
         metaData.deserialize(mdStorage);
-        qDebug() << fInfo.fileName() << ":" << metaData.rawShapes.count();
+        out << fInfo.fileName() << ": " << metaData.rawShapes.count() << endl;
 
         foreach (const Points &rawShape, metaData.rawShapes.values())
         {
             //Points previewPoints = dummyStrain.getRealShapePoints(rawShape, 20);
             //preview(rawShape, previewPoints);
 
-            for (float width : widths)
+            for (float width : s.widths)
             {
                 for (const VectorF &modValues : modValuesVector)
                 {
@@ -118,18 +173,18 @@ void CreateModel::create(const QString &dirPath, const QString &modelName)
     StatisticalShapeModel *model = new StatisticalShapeModel(pca, shapes);
 
 
-    qDebug() << "PCA modes before selection:" << pca->getModes();
+    out << "PCA modes before selection: " << pca->getModes() << endl;
     pca->modesSelectionThreshold(0.99);
-    qDebug() << "PCA modes after selection:" << pca->getModes();
+    out << "PCA modes after selection:" << pca->getModes() << endl;
 
     // check pca
-    qDebug() << "PCA mean      OK:" << checkMatrix(pca->cvPca.mean);
-    qDebug() << "PCA eigenvecs OK:" << checkMatrix(pca->cvPca.eigenvectors);
-    qDebug() << "PCA eigenvals OK:" << checkMatrix(pca->cvPca.eigenvalues);
+    out << "PCA mean      OK: " << checkMatrix(pca->cvPca.mean) << endl;
+    out << "PCA eigenvecs OK: " << checkMatrix(pca->cvPca.eigenvectors) << endl;
+    out << "PCA eigenvals OK: " << checkMatrix(pca->cvPca.eigenvalues) << endl;
 
 
     ShapeNormalizerIterativeStatisticalShape *normalizer = new ShapeNormalizerIterativeStatisticalShape(model);
-    LongitudinalStrain strain(normalizer, segments, pointsPerSegment);
+    LongitudinalStrain strain(normalizer, s.segments, s.pointsPerSegment);
 
     cv::FileStorage resultStorage(modelName.toStdString(), cv::FileStorage::WRITE);
     strain.serialize(resultStorage);
